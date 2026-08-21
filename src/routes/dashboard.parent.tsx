@@ -39,8 +39,8 @@ function ParentDashboard() {
           <CardHeader><div className="flex items-center gap-2"><ShieldCheck className="size-5 text-primary" /><CardTitle>Family controls</CardTitle></div></CardHeader>
           <CardContent className="space-y-3">
             <Button asChild variant="outline" className="w-full"><Link to="/dashboard/ai-controls"><BrainCircuit className="mr-2 size-4" />AI controls</Link></Button>
-            <Button variant="outline" className="w-full" disabled>Publishing approvals</Button>
-            <Button variant="outline" className="w-full" disabled>Privacy & consent</Button>
+            <Button asChild variant="outline" className="w-full"><Link to="/dashboard/family-permissions">Publishing & participation approvals</Link></Button>
+            <Button asChild variant="outline" className="w-full"><Link to="/dashboard/privacy">Privacy & consent</Link></Button>
           </CardContent>
         </Card>
       </section>
