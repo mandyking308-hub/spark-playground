@@ -24,11 +24,12 @@ describe("live Teacher to Passport verification", () => {
     expect(normalized).toContain("tca.ends_at is null or tca.ends_at > now()");
   });
 
-  test("child can submit only their own project into their own open cohort brief", () => {
+  test("child can submit only their own editable project into their own open cohort brief", () => {
     expect(normalized).toContain("child_profile_id = public.current_profile_id()");
     expect(normalized).toContain("lb.state = 'open'");
     expect(normalized).toContain("cm.profile_id = public.current_profile_id()");
     expect(normalized).toContain("p.owner_profile_id = public.current_profile_id()");
+    expect(normalized).toContain("p.state in ('draft', 'rejected')");
   });
 
   test("browser cannot write Passport achievements or verification events", () => {
@@ -61,6 +62,14 @@ describe("live Teacher to Passport verification", () => {
       expect(normalized).toMatch(new RegExp(`revoke all on function public\\.${fn}[^;]+from public, anon, authenticated`));
       expect(normalized).toMatch(new RegExp(`grant execute on function public\\.${fn}[^;]+to service_role`));
     }
+  });
+
+  test("SECURITY INVOKER workflows receive explicit narrow service-role table privileges", () => {
+    expect(normalized).toContain("grant select, update on public.learning_brief_submissions to service_role");
+    expect(normalized).toContain("grant select, insert, update on public.passport_achievements to service_role");
+    expect(normalized).toContain("grant insert on public.passport_verification_events to service_role");
+    expect(normalized).toContain("grant insert on public.audit_log to service_role");
+    expect(server.toLowerCase()).not.toMatch(/grant\s+(insert|update|delete)[^;]+to authenticated/);
   });
 
   test("verification rechecks teacher assignment and evidence ownership", () => {
