@@ -9,7 +9,7 @@ export interface LivePermissionRequest {
   childProfileId: EntityId;
   requestType: "publish_external" | "join_club" | "enter_challenge" | "share_portfolio" | "alumni_transfer";
   resourceKind: "project" | "club" | "challenge" | "passport_item" | "alumni_transition";
-  resourceId?: EntityId;
+  resourceId?: EntityId | undefined;
   state: "pending" | "approved" | "denied" | "withdrawn" | "expired";
   requestedAt: string;
 }
@@ -191,11 +191,11 @@ export function createLiveCoreAdapter(options: LiveCoreAdapterOptions) {
     if (input.title !== undefined) {
       const title = input.title.trim();
       if (!title || title.length > 160) throw new Error("Project title must be between 1 and 160 characters");
-      patch.title = title;
+      patch["title"] = title;
     }
     if (input.summary !== undefined) {
       if (input.summary.length > 4000) throw new Error("Project summary is too long");
-      patch.summary = input.summary;
+      patch["summary"] = input.summary;
     }
     if (Object.keys(patch).length === 0) throw new Error("No safe project fields supplied");
 

@@ -1,7 +1,7 @@
 export interface PublicRuntimeConfig {
-  supabaseUrl?: string;
-  supabasePublishableKey?: string;
-  supabaseProjectRef?: string;
+  supabaseUrl?: string | undefined;
+  supabasePublishableKey?: string | undefined;
+  supabaseProjectRef?: string | undefined;
   backendConnected: boolean;
 }
 
@@ -27,9 +27,9 @@ export function resolvePublicRuntimeConfig(
     }
   }
 
-  const supabaseUrl = env.VITE_SUPABASE_URL?.trim() || undefined;
-  const supabasePublishableKey = env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() || undefined;
-  const supabaseProjectRef = env.VITE_SUPABASE_PROJECT_REF?.trim() || undefined;
+  const supabaseUrl = env["VITE_SUPABASE_URL"]?.trim() || undefined;
+  const supabasePublishableKey = env["VITE_SUPABASE_PUBLISHABLE_KEY"]?.trim() || undefined;
+  const supabaseProjectRef = env["VITE_SUPABASE_PROJECT_REF"]?.trim() || undefined;
 
   const supplied = [supabaseUrl, supabasePublishableKey, supabaseProjectRef].filter(Boolean).length;
   if (supplied !== 0 && supplied !== 3) {
