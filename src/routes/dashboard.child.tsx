@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { BookOpen, Mic2, Share2, ShieldCheck, Trophy, UsersRound } from "lucide-react";
+import { BookOpen, MessageCircleHeart, Mic2, Share2, ShieldCheck, Trophy, UsersRound } from "lucide-react";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +22,7 @@ const destinations = [
   { title: "Clubs", description: "Join verified communities around interests and projects.", to: "/dashboard/clubs", icon: UsersRound },
   { title: "My Passport", description: "See projects, awards, certificates, skills and milestones.", to: "/dashboard/passport", icon: BookOpen },
   { title: "Sharing", description: "Ask to share work or join approved programmes, and see what is waiting for approval.", to: "/dashboard/sharing", icon: Share2 },
+  { title: "Feedback", description: "See constructive encouragement from verified learning spaces without public popularity scores.", to: "/dashboard/feedback", icon: MessageCircleHeart },
 ] as const;
 
 function ChildDashboard() {

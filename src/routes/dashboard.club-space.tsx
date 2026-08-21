@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { MessageSquareText, ShieldCheck, UsersRound, Wrench } from "lucide-react";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { MessageCircleHeart, MessageSquareText, ShieldCheck, UsersRound, Wrench } from "lucide-react";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -45,7 +45,10 @@ function ClubSpace() {
               <p className="font-medium">Team brief</p>
               <p className="mt-1 text-muted-foreground">Choose materials, divide tasks and submit one shared project through the challenge workflow.</p>
             </div>
-            <Button disabled>Open shared project</Button>
+            <div className="flex flex-wrap gap-2">
+              <Button disabled>Open shared project</Button>
+              <Button asChild variant="outline"><Link to="/dashboard/feedback-send"><MessageCircleHeart className="mr-2 size-4" />Encourage shared work</Link></Button>
+            </div>
           </CardContent>
         </Card>
 
@@ -87,7 +90,7 @@ function ClubSpace() {
           <div className="flex items-center gap-2"><ShieldCheck className="size-5 text-primary" /><CardTitle>Collaboration boundary</CardTitle></div>
         </CardHeader>
         <CardContent className="text-sm text-muted-foreground">
-          Club posts, project comments and team updates are allowed inside the verified programme. Private messages, personal phone/email sharing and communication outside the club record are not.
+          Club posts, project comments and team updates are allowed inside the verified programme. Constructive peer reactions use preset prompts; private messages, personal phone/email sharing and communication outside the club record are not.
         </CardContent>
       </Card>
     </div>
