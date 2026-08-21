@@ -26,7 +26,7 @@ function OrganisationSpaces() {
         description="Approved museums, universities, charities and companies can contribute challenges, masterclasses, competitions and educational content without receiving a directory of children or private child contact channels."
         crumbs={[{ label: "Dashboards", to: "/dashboard" }, { label: "Organisation Spaces" }]}
       />
-      <div className="flex flex-wrap gap-2"><Button asChild><Link to="/dashboard/organisation-publisher">Partner Publisher</Link></Button><Button asChild variant="outline"><Link to="/dashboard/organisation-admin">Partner administration</Link></Button></div>
+      <div className="flex flex-wrap gap-2"><Button asChild><Link to="/dashboard/organisation-publisher">Partner Publisher</Link></Button><Button asChild variant="outline"><Link to="/dashboard/organisation-admin">Partner administration</Link></Button><Button asChild variant="outline"><Link to="/dashboard/partner-safety">Partner safety boundaries</Link></Button></div>
       <div className="grid gap-4 md:grid-cols-3">
         {spaces.map((space) => (
           <Card key={space.title}>
@@ -36,8 +36,8 @@ function OrganisationSpaces() {
         ))}
       </div>
       <section className="grid gap-4 lg:grid-cols-2">
-        <Card><CardHeader><div className="flex items-center gap-2"><Building2 className="size-5 text-primary" /><CardTitle>What partners can do</CardTitle></div></CardHeader><CardContent className="space-y-2 text-sm text-muted-foreground"><p>Create approved educational content and challenges</p><p>Offer events, competitions and masterclasses</p><p>Provide age-appropriate careers inspiration</p><p>Receive aggregated programme reporting</p></CardContent></Card>
-        <Card><CardHeader><div className="flex items-center gap-2"><ShieldCheck className="size-5 text-primary" /><CardTitle>What partners cannot do</CardTitle></div></CardHeader><CardContent className="space-y-3 text-sm"><p className="rounded-lg bg-muted/40 p-3">✕ Browse a public directory of children</p><p className="rounded-lg bg-muted/40 p-3">✕ Export children's private contact details or behavioural profiles</p><p className="rounded-lg bg-muted/40 p-3">✕ Privately message children outside an approved moderated programme</p><Badge variant="secondary">Institutional access, not child access</Badge></CardContent></Card>
+        <Card><CardHeader><div className="flex items-center gap-2"><Building2 className="size-5 text-primary" /><CardTitle>What partners can do</CardTitle></div></CardHeader><CardContent className="space-y-2 text-sm text-muted-foreground"><p>Create approved educational content and challenges</p><p>Offer events, competitions and masterclasses</p><p>Provide age-appropriate careers inspiration</p><p>Receive aggregated programme reporting above the minimum cohort threshold</p></CardContent></Card>
+        <Card><CardHeader><div className="flex items-center gap-2"><ShieldCheck className="size-5 text-primary" /><CardTitle>What partners cannot do</CardTitle></div></CardHeader><CardContent className="space-y-3 text-sm"><p className="rounded-lg bg-muted/40 p-3">✕ Browse a public directory of children</p><p className="rounded-lg bg-muted/40 p-3">✕ Export children's private contact details, precise location or behavioural profiles</p><p className="rounded-lg bg-muted/40 p-3">✕ Privately message children or deliver unmoderated free-text feedback</p><Badge variant="secondary">Institutional access, not child access</Badge></CardContent></Card>
       </section>
     </div>
   );
