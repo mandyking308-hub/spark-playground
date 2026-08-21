@@ -73,6 +73,7 @@ function CreatorStudio() {
 
       <div className="flex flex-wrap items-center gap-2">
         <Badge variant="secondary">Private by default</Badge>
+        <Badge variant="outline">Quarantined uploads</Badge>
         <Badge variant="outline">No follower counts</Badge>
         <Badge variant="outline">No open adult DMs</Badge>
         <Badge variant="outline">Bounded AI</Badge>
@@ -108,7 +109,7 @@ function CreatorStudio() {
               <ShieldCheck className="size-5 text-primary" />
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-4">
             <ol className="grid gap-3 sm:grid-cols-5">
               {["Draft", "Safety scan", "Parent approval", "Moderation", "Published"].map(
                 (step, index) => (
@@ -119,6 +120,7 @@ function CreatorStudio() {
                 ),
               )}
             </ol>
+            <Button asChild variant="outline"><Link to="/dashboard/upload-safety">See how uploads are protected</Link></Button>
           </CardContent>
         </Card>
 
