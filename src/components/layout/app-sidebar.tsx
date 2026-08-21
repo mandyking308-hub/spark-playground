@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 
-import { dashboardNav, roles } from "@/config/navigation";
+import { dashboardNav, platformModules, roles } from "@/config/navigation";
 import {
   Sidebar,
   SidebarContent,
@@ -31,6 +31,28 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Core modules</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {platformModules.map((module) => (
+                <SidebarMenuItem key={module.key}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname === module.to}
+                    tooltip={`${module.label} · ${module.audience}`}
+                  >
+                    <Link to={module.to}>
+                      <module.icon />
+                      <span>{module.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
         <SidebarGroup>
           <SidebarGroupLabel>Workspaces</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -71,7 +93,7 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="px-3 py-4 text-xs text-muted-foreground group-data-[collapsible=icon]:hidden">
-        Shell preview — no live data yet.
+        Protected child world · verified adult communities
       </SidebarFooter>
     </Sidebar>
   );
