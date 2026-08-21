@@ -44,7 +44,10 @@ function AuditPage() {
         crumbs={[{ label: "Dashboards", to: "/dashboard" }, { label: "Audit & compliance" }]}
       />
 
-      <div className="flex flex-wrap gap-2"><Button asChild variant="outline"><Link to="/dashboard/incident-response">Incident response</Link></Button></div>
+      <div className="flex flex-wrap gap-2">
+        <Button asChild variant="outline"><Link to="/dashboard/incident-response">Incident response</Link></Button>
+        <Button asChild variant="outline"><Link to="/dashboard/resilience">Backup & recovery</Link></Button>
+      </div>
 
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
