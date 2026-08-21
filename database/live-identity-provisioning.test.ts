@@ -24,11 +24,7 @@ describe("invitation-first live identity provisioning", () => {
   });
 
   test("browser roles cannot execute provisioning RPCs", () => {
-    for (const fn of [
-      "server_issue_account_invitation",
-      "server_claim_account_invitation",
-      "server_revoke_account_invitation",
-    ]) {
+    for (const fn of ["server_issue_account_invitation", "server_claim_account_invitation", "server_revoke_account_invitation"]) {
       expect(normalized).toMatch(new RegExp(`revoke all on function public\\.${fn}[^;]+from public, anon, authenticated`));
       expect(normalized).toMatch(new RegExp(`grant execute on function public\\.${fn}[^;]+to service_role`));
     }
@@ -38,6 +34,11 @@ describe("invitation-first live identity provisioning", () => {
     expect(normalized).toContain("v_invitation.intended_role");
     expect(normalized).toContain("v_invitation.intended_age_band");
     expect(normalized).not.toMatch(/p_(role|age_band)/);
+  });
+
+  test("platform admins can issue only ordinary pilot roles, not platform admin or historical roles", () => {
+    expect(normalized).toContain("p_intended_role not in ('parent', 'child', 'teacher', 'school_admin', 'group_admin')");
+    expect(normalized).toContain("role requires separate verified transition");
   });
 
   test("parents may issue child invitations only", () => {
@@ -51,6 +52,11 @@ describe("invitation-first live identity provisioning", () => {
     expect(normalized).toContain("sm.school_id = p_school_id");
     expect(normalized).toContain("sm.role = 'school_admin'");
     expect(normalized).toContain("sm.status = 'active'");
+  });
+
+  test("every child invite has a verified parent or school sponsor", () => {
+    expect(normalized).toContain("p_intended_role = 'child' and v_guardian_sponsor is null and p_school_id is null");
+    expect(normalized).toContain("child invitation requires verified parent or school sponsor");
   });
 
   test("child claims require under-16 age bands and adult roles require adult", () => {
@@ -68,13 +74,7 @@ describe("invitation-first live identity provisioning", () => {
 
   test("a parent-sponsored child claim creates only the exact guardian relationship", () => {
     expect(normalized).toContain("v_invitation.guardian_sponsor_profile_id");
-    expect(normalized).toContain("parent_profile_id,");
-    expect(normalized).toContain("child_profile_id,");
-    expect(normalized).toContain("'verified'");
-  });
-
-  test("historical and organisation roles are not bootstrapped through generic invitations", () => {
-    expect(normalized).toContain("p_intended_role in ('parent_alumni', 'alumni', 'mentor', 'organisation_admin')");
-    expect(normalized).toContain("role requires separate verified transition");
+    expect(normalized).toContain("parent_profile_id, child_profile_id");
+    expect(normalized).toContain("'guardian', 'verified'");
   });
 });
