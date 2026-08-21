@@ -10,33 +10,120 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardChildRouteImport } from './routes/dashboard.child'
+import { Route as DashboardGroupRouteImport } from './routes/dashboard.group'
+import { Route as DashboardParentRouteImport } from './routes/dashboard.parent'
+import { Route as DashboardSchoolRouteImport } from './routes/dashboard.school'
+import { Route as DashboardTeacherRouteImport } from './routes/dashboard.teacher'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardChildRoute = DashboardChildRouteImport.update({
+  id: '/child',
+  path: '/child',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardGroupRoute = DashboardGroupRouteImport.update({
+  id: '/group',
+  path: '/group',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardParentRoute = DashboardParentRouteImport.update({
+  id: '/parent',
+  path: '/parent',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSchoolRoute = DashboardSchoolRouteImport.update({
+  id: '/school',
+  path: '/school',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardTeacherRoute = DashboardTeacherRouteImport.update({
+  id: '/teacher',
+  path: '/teacher',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard/child': typeof DashboardChildRoute
+  '/dashboard/group': typeof DashboardGroupRoute
+  '/dashboard/parent': typeof DashboardParentRoute
+  '/dashboard/school': typeof DashboardSchoolRoute
+  '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard/child': typeof DashboardChildRoute
+  '/dashboard/group': typeof DashboardGroupRoute
+  '/dashboard/parent': typeof DashboardParentRoute
+  '/dashboard/school': typeof DashboardSchoolRoute
+  '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard/child': typeof DashboardChildRoute
+  '/dashboard/group': typeof DashboardGroupRoute
+  '/dashboard/parent': typeof DashboardParentRoute
+  '/dashboard/school': typeof DashboardSchoolRoute
+  '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/dashboard/child'
+    | '/dashboard/group'
+    | '/dashboard/parent'
+    | '/dashboard/school'
+    | '/dashboard/teacher'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/dashboard/child'
+    | '/dashboard/group'
+    | '/dashboard/parent'
+    | '/dashboard/school'
+    | '/dashboard/teacher'
+    | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/dashboard/child'
+    | '/dashboard/group'
+    | '/dashboard/parent'
+    | '/dashboard/school'
+    | '/dashboard/teacher'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +135,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/child': {
+      id: '/dashboard/child'
+      path: '/child'
+      fullPath: '/dashboard/child'
+      preLoaderRoute: typeof DashboardChildRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/group': {
+      id: '/dashboard/group'
+      path: '/group'
+      fullPath: '/dashboard/group'
+      preLoaderRoute: typeof DashboardGroupRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/parent': {
+      id: '/dashboard/parent'
+      path: '/parent'
+      fullPath: '/dashboard/parent'
+      preLoaderRoute: typeof DashboardParentRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/school': {
+      id: '/dashboard/school'
+      path: '/school'
+      fullPath: '/dashboard/school'
+      preLoaderRoute: typeof DashboardSchoolRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/teacher': {
+      id: '/dashboard/teacher'
+      path: '/teacher'
+      fullPath: '/dashboard/teacher'
+      preLoaderRoute: typeof DashboardTeacherRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
+interface DashboardRouteChildren {
+  DashboardChildRoute: typeof DashboardChildRoute
+  DashboardGroupRoute: typeof DashboardGroupRoute
+  DashboardParentRoute: typeof DashboardParentRoute
+  DashboardSchoolRoute: typeof DashboardSchoolRoute
+  DashboardTeacherRoute: typeof DashboardTeacherRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardChildRoute: DashboardChildRoute,
+  DashboardGroupRoute: DashboardGroupRoute,
+  DashboardParentRoute: DashboardParentRoute,
+  DashboardSchoolRoute: DashboardSchoolRoute,
+  DashboardTeacherRoute: DashboardTeacherRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
