@@ -2,6 +2,7 @@ import type { PlatformRole } from "./access-control";
 
 export type CoreModule =
   | "creator_studio"
+  | "discovery"
   | "achievement_passport"
   | "challenges"
   | "clubs"
@@ -17,6 +18,7 @@ export type CoreModule =
 
 const rolesByModule: Record<CoreModule, ReadonlySet<PlatformRole>> = {
   creator_studio: new Set(["child"]),
+  discovery: new Set(["child"]),
   achievement_passport: new Set(["child"]),
   challenges: new Set(["child", "teacher", "school_admin", "group_admin", "organisation_admin"]),
   clubs: new Set(["child", "teacher", "school_admin", "group_admin"]),
@@ -56,7 +58,7 @@ export function canAccessCoreModule(role: PlatformRole, module: CoreModule): boo
 export function coreModuleAudience(
   module: CoreModule,
 ): "protected_child" | "verified_adult" | "staff" | "mixed_curated" {
-  if (["creator_studio", "achievement_passport", "challenges", "clubs"].includes(module)) {
+  if (["creator_studio", "discovery", "achievement_passport", "challenges", "clubs"].includes(module)) {
     return "protected_child";
   }
   if (["parent_community", "parent_alumni_network", "ai_controls", "privacy_controls"].includes(module)) {
