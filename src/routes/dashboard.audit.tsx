@@ -1,8 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { ClipboardList, KeyRound, ShieldCheck, UserCog } from "lucide-react";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const Route = createFileRoute("/dashboard/audit")({
@@ -42,6 +43,8 @@ function AuditPage() {
         description="Reviewable records for privileged access, consent, publishing, safeguarding and administrative changes."
         crumbs={[{ label: "Dashboards", to: "/dashboard" }, { label: "Audit & compliance" }]}
       />
+
+      <div className="flex flex-wrap gap-2"><Button asChild variant="outline"><Link to="/dashboard/incident-response">Incident response</Link></Button></div>
 
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
