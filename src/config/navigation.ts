@@ -19,6 +19,7 @@ import {
   Mic2,
   IdCard,
   UsersRound,
+  Flag,
 } from "lucide-react";
 
 export type RoleKey = "child" | "parent" | "parent_alumni" | "teacher" | "school" | "group";
@@ -118,38 +119,19 @@ export const roleByKey = Object.fromEntries(roles.map((r) => [r.key, r])) as Rec
 >;
 
 export const platformModules = [
-  {
-    key: "creator",
-    label: "Creator Studio",
-    to: "/dashboard/creator",
-    icon: Mic2,
-    audience: "Under-16",
-  },
-  {
-    key: "passport",
-    label: "Achievement Passport",
-    to: "/dashboard/passport",
-    icon: IdCard,
-    audience: "Under-16",
-  },
-  {
-    key: "parent-community",
-    label: "Parent Community",
-    to: "/dashboard/parent-community",
-    icon: UsersRound,
-    audience: "Adults",
-  },
-  {
-    key: "parent-alumni-community",
-    label: "Parent Alumni Network",
-    to: "/dashboard/parent-alumni-community",
-    icon: UserRoundCheck,
-    audience: "Adults",
-  },
+  { key: "creator", label: "Creator Studio", to: "/dashboard/creator", icon: Mic2, audience: "Under-16" },
+  { key: "passport", label: "Achievement Passport", to: "/dashboard/passport", icon: IdCard, audience: "Under-16" },
+  { key: "challenges", label: "Challenges", to: "/dashboard/challenges", icon: Trophy, audience: "Under-16" },
+  { key: "clubs", label: "Clubs", to: "/dashboard/clubs", icon: UsersRound, audience: "Under-16" },
+  { key: "parent-community", label: "Parent Community", to: "/dashboard/parent-community", icon: UsersRound, audience: "Adults" },
+  { key: "parent-alumni-community", label: "Parent Alumni Network", to: "/dashboard/parent-alumni-community", icon: UserRoundCheck, audience: "Adults" },
+  { key: "safeguarding", label: "Safeguarding Centre", to: "/dashboard/safeguarding", icon: ShieldCheck, audience: "Staff" },
+  { key: "organisations", label: "Organisation Spaces", to: "/dashboard/organisations", icon: Building2, audience: "Partners" },
 ] as const;
 
 export const dashboardNav = {
   overviewIcon: LayoutDashboard,
+  reportIcon: Flag,
   alumni: {
     label: "Alumni (16+)",
     to: "/alumni",
