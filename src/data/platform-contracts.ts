@@ -44,6 +44,18 @@ export interface AchievementSummary {
   awardedAt: string;
 }
 
+export interface GuardianApprovalSummary {
+  permissionRequestId: EntityId;
+  childProfileId: EntityId;
+  childDisplayName: string;
+  action: "publish_project" | "join_club" | "enter_challenge" | "external_share" | "alumni_transfer";
+  resourceType: "project" | "club" | "challenge" | "passport_item";
+  resourceId: EntityId;
+  resourceLabel: string;
+  status: "pending" | "approved" | "denied" | "withdrawn" | "expired";
+  createdAt: string;
+}
+
 export interface ChallengeSummary {
   id: EntityId;
   title: string;
@@ -79,37 +91,41 @@ export interface AlumniOpportunitySummary {
 export interface PlatformRepository {
   getSessionActor(): Promise<SessionActor | null>;
 
-  getLinkedChildren(parentProfileId: EntityId): Promise<ChildSummary[]>;
-  getChildProjects(childProfileId: EntityId): Promise<ProjectSummary[]>;
-  getChildAchievements(childProfileId: EntityId): Promise<AchievementSummary[]>;
+  getLinkedChildren(): Promise<ChildSummary[]>;
+  getOwnProjects(): Promise<ProjectSummary[]>;
+  getOwnAchievements(): Promise<AchievementSummary[]>;
+  getGuardianApprovalQueue(): Promise<GuardianApprovalSummary[]>;
 
   getAvailableChallenges(actor: SessionActor): Promise<ChallengeSummary[]>;
   getCommunities(actor: SessionActor): Promise<CommunitySummary[]>;
   getModerationQueue(actor: SessionActor): Promise<ModerationQueueItem[]>;
-  getAlumniOpportunities(alumniProfileId: EntityId): Promise<AlumniOpportunitySummary[]>;
+  getAlumniOpportunities(): Promise<AlumniOpportunitySummary[]>;
 }
 
 export interface ProjectWriteRepository {
   createProject(input: {
-    ownerProfileId: EntityId;
     title: string;
     kind: ProjectSummary["kind"];
+    schoolId?: EntityId;
   }): Promise<ProjectSummary>;
 
-  submitProjectForPublication(projectId: EntityId): Promise<ProjectSummary>;
+  updateProject(input: {
+    projectId: EntityId;
+    title?: string;
+    summary?: string;
+  }): Promise<ProjectSummary>;
+
+  requestProjectPublication(projectId: EntityId): Promise<GuardianApprovalSummary>;
 }
 
 export interface GuardianControlRepository {
   setAiEnabled(input: {
-    parentProfileId: EntityId;
     childProfileId: EntityId;
     enabled: boolean;
   }): Promise<void>;
 
-  recordPublishingDecision(input: {
-    parentProfileId: EntityId;
-    childProfileId: EntityId;
-    projectId: EntityId;
+  recordPermissionDecision(input: {
+    permissionRequestId: EntityId;
     approved: boolean;
   }): Promise<void>;
 }
