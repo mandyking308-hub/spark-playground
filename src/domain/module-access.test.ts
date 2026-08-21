@@ -3,8 +3,9 @@ import { describe, expect, test } from "bun:test";
 import { canAccessCoreModule, coreModuleAudience } from "./module-access";
 
 describe("core module audience boundaries", () => {
-  test("children can access creation, passport, challenge and club modules", () => {
+  test("children can access creation, discovery, passport, challenge and club modules", () => {
     expect(canAccessCoreModule("child", "creator_studio")).toBe(true);
+    expect(canAccessCoreModule("child", "discovery")).toBe(true);
     expect(canAccessCoreModule("child", "achievement_passport")).toBe(true);
     expect(canAccessCoreModule("child", "challenges")).toBe(true);
     expect(canAccessCoreModule("child", "clubs")).toBe(true);
@@ -18,6 +19,13 @@ describe("core module audience boundaries", () => {
     expect(canAccessCoreModule("child", "safeguarding_centre")).toBe(false);
     expect(canAccessCoreModule("child", "licensing")).toBe(false);
     expect(canAccessCoreModule("child", "audit")).toBe(false);
+  });
+
+  test("adults cannot enter the protected child discovery module", () => {
+    expect(canAccessCoreModule("parent", "discovery")).toBe(false);
+    expect(canAccessCoreModule("parent_alumni", "discovery")).toBe(false);
+    expect(canAccessCoreModule("organisation_admin", "discovery")).toBe(false);
+    expect(canAccessCoreModule("alumni", "discovery")).toBe(false);
   });
 
   test("current parents can access parent community, AI and privacy controls", () => {
@@ -81,6 +89,7 @@ describe("core module audience boundaries", () => {
 
   test("modules expose their security audience explicitly", () => {
     expect(coreModuleAudience("creator_studio")).toBe("protected_child");
+    expect(coreModuleAudience("discovery")).toBe("protected_child");
     expect(coreModuleAudience("challenges")).toBe("protected_child");
     expect(coreModuleAudience("parent_community")).toBe("verified_adult");
     expect(coreModuleAudience("ai_controls")).toBe("verified_adult");
