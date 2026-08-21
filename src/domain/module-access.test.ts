@@ -10,11 +10,13 @@ describe("core module audience boundaries", () => {
     expect(canAccessCoreModule("child", "clubs")).toBe(true);
   });
 
-  test("children cannot access adult parent, AI or safeguarding controls", () => {
+  test("children cannot access adult parent, AI, safeguarding, licensing or audit controls", () => {
     expect(canAccessCoreModule("child", "parent_community")).toBe(false);
     expect(canAccessCoreModule("child", "parent_alumni_network")).toBe(false);
     expect(canAccessCoreModule("child", "ai_controls")).toBe(false);
     expect(canAccessCoreModule("child", "safeguarding_centre")).toBe(false);
+    expect(canAccessCoreModule("child", "licensing")).toBe(false);
+    expect(canAccessCoreModule("child", "audit")).toBe(false);
   });
 
   test("current parents can access parent community and AI controls", () => {
@@ -23,12 +25,14 @@ describe("core module audience boundaries", () => {
     expect(canAccessCoreModule("parent", "ai_controls")).toBe(true);
   });
 
-  test("parent alumni cannot enter protected child, AI or safeguarding modules", () => {
+  test("parent alumni cannot enter protected child, AI, safeguarding or enterprise admin modules", () => {
     expect(canAccessCoreModule("parent_alumni", "creator_studio")).toBe(false);
     expect(canAccessCoreModule("parent_alumni", "achievement_passport")).toBe(false);
     expect(canAccessCoreModule("parent_alumni", "clubs")).toBe(false);
     expect(canAccessCoreModule("parent_alumni", "ai_controls")).toBe(false);
     expect(canAccessCoreModule("parent_alumni", "safeguarding_centre")).toBe(false);
+    expect(canAccessCoreModule("parent_alumni", "licensing")).toBe(false);
+    expect(canAccessCoreModule("parent_alumni", "audit")).toBe(false);
     expect(canAccessCoreModule("parent_alumni", "parent_alumni_network")).toBe(true);
   });
 
@@ -45,6 +49,24 @@ describe("core module audience boundaries", () => {
     expect(canAccessCoreModule("organisation_admin", "safeguarding_centre")).toBe(false);
   });
 
+  test("licensing and audit are limited to enterprise administrators", () => {
+    expect(canAccessCoreModule("school_admin", "licensing")).toBe(true);
+    expect(canAccessCoreModule("group_admin", "licensing")).toBe(true);
+    expect(canAccessCoreModule("school_admin", "audit")).toBe(true);
+    expect(canAccessCoreModule("group_admin", "audit")).toBe(true);
+    expect(canAccessCoreModule("teacher", "licensing")).toBe(false);
+    expect(canAccessCoreModule("parent", "audit")).toBe(false);
+    expect(canAccessCoreModule("organisation_admin", "audit")).toBe(false);
+  });
+
+  test("notifications are available across legitimate member roles", () => {
+    expect(canAccessCoreModule("child", "notifications")).toBe(true);
+    expect(canAccessCoreModule("parent", "notifications")).toBe(true);
+    expect(canAccessCoreModule("parent_alumni", "notifications")).toBe(true);
+    expect(canAccessCoreModule("teacher", "notifications")).toBe(true);
+    expect(canAccessCoreModule("alumni", "notifications")).toBe(true);
+  });
+
   test("approved organisation space is curated for users but not parent alumni by default", () => {
     expect(canAccessCoreModule("child", "organisation_spaces")).toBe(true);
     expect(canAccessCoreModule("organisation_admin", "organisation_spaces")).toBe(true);
@@ -57,6 +79,9 @@ describe("core module audience boundaries", () => {
     expect(coreModuleAudience("parent_community")).toBe("verified_adult");
     expect(coreModuleAudience("ai_controls")).toBe("verified_adult");
     expect(coreModuleAudience("safeguarding_centre")).toBe("staff");
+    expect(coreModuleAudience("licensing")).toBe("staff");
+    expect(coreModuleAudience("audit")).toBe("staff");
+    expect(coreModuleAudience("notifications")).toBe("mixed_curated");
     expect(coreModuleAudience("organisation_spaces")).toBe("mixed_curated");
   });
 });

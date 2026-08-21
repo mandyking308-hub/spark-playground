@@ -9,7 +9,10 @@ export type CoreModule =
   | "parent_alumni_network"
   | "ai_controls"
   | "safeguarding_centre"
-  | "organisation_spaces";
+  | "organisation_spaces"
+  | "notifications"
+  | "licensing"
+  | "audit";
 
 const rolesByModule: Record<CoreModule, ReadonlySet<PlatformRole>> = {
   creator_studio: new Set(["child"]),
@@ -28,6 +31,19 @@ const rolesByModule: Record<CoreModule, ReadonlySet<PlatformRole>> = {
     "group_admin",
     "organisation_admin",
   ]),
+  notifications: new Set([
+    "child",
+    "parent",
+    "parent_alumni",
+    "teacher",
+    "school_admin",
+    "group_admin",
+    "organisation_admin",
+    "alumni",
+    "mentor",
+  ]),
+  licensing: new Set(["school_admin", "group_admin"]),
+  audit: new Set(["school_admin", "group_admin"]),
 };
 
 export function canAccessCoreModule(role: PlatformRole, module: CoreModule): boolean {
@@ -44,6 +60,6 @@ export function coreModuleAudience(
   if (["parent_community", "parent_alumni_network", "ai_controls"].includes(module)) {
     return "verified_adult";
   }
-  if (module === "safeguarding_centre") return "staff";
+  if (["safeguarding_centre", "licensing", "audit"].includes(module)) return "staff";
   return "mixed_curated";
 }
