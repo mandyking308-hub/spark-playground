@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { BriefcaseBusiness, Globe2, Lightbulb, ShieldCheck, UsersRound } from "lucide-react";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { BriefcaseBusiness, Globe2, Lightbulb, ShieldCheck, UserRoundCheck, UsersRound } from "lucide-react";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -35,10 +35,21 @@ function AlumniCommunity() {
           </Card>
         ))}
       </section>
-      <Card>
-        <CardHeader><div className="flex items-center gap-2"><ShieldCheck className="size-5 text-primary" /><CardTitle>Adult community, hard child boundary</CardTitle></div><CardDescription>Alumni may later become approved speakers or mentors, but participation with children must use school/platform-controlled programme workflows. Adult networking credentials never become a child-access permission.</CardDescription></CardHeader>
-        <CardContent><Badge variant="outline"><UsersRound className="mr-1 size-3" /> Alumni-to-alumni connections</Badge></CardContent>
-      </Card>
+      <section className="grid gap-4 lg:grid-cols-[1.2fr_1fr]">
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-2"><UserRoundCheck className="size-5 text-primary" /><CardTitle>Alumni mentoring</CardTitle></div>
+            <CardDescription>Opt-in adult-to-adult mentoring around university, careers, professional skills and entrepreneurship.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button asChild variant="outline"><Link to="/alumni/mentoring">Find a mentor</Link></Button>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader><div className="flex items-center gap-2"><ShieldCheck className="size-5 text-primary" /><CardTitle>Adult community, hard child boundary</CardTitle></div><CardDescription>Alumni may later become approved speakers or mentors, but participation with children must use school/platform-controlled programme workflows. Adult networking credentials never become a child-access permission.</CardDescription></CardHeader>
+          <CardContent><Badge variant="outline"><UsersRound className="mr-1 size-3" /> Alumni-to-alumni connections</Badge></CardContent>
+        </Card>
+      </section>
     </div>
   );
 }
