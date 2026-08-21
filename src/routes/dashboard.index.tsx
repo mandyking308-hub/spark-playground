@@ -1,4 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { Languages } from "lucide-react";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { roles } from "@/config/navigation";
@@ -21,7 +22,7 @@ function DashboardIndex() {
     <div className="space-y-8">
       <PageHeader
         title="Choose a workspace"
-        description="Each role has its own dashboard. These are empty shells for now."
+        description="Each role has a deliberately separated workspace with permissions matched to what that role actually needs."
         crumbs={[{ label: "Home", to: "/" }, { label: "Dashboards" }]}
       />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -38,6 +39,15 @@ function DashboardIndex() {
             </Card>
           </Link>
         ))}
+        <Link to="/dashboard/accessibility" className="group">
+          <Card className="h-full border-border/70 shadow-none transition-colors group-hover:border-primary/40">
+            <CardHeader className="gap-2">
+              <span className="flex size-9 items-center justify-center rounded-md bg-accent text-accent-foreground"><Languages className="size-4" /></span>
+              <CardTitle className="text-base font-medium">Language & accessibility</CardTitle>
+              <CardDescription>Presentation, reading, motion, captions and global language foundations.</CardDescription>
+            </CardHeader>
+          </Card>
+        </Link>
       </div>
     </div>
   );

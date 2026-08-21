@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { DEFAULT_LOCALE, directionForLocale } from "../config/locales";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -114,11 +115,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang={DEFAULT_LOCALE} dir={directionForLocale(DEFAULT_LOCALE)}>
       <head>
         <HeadContent />
       </head>
       <body>
+        <a href="#main-content" className="a11y-skip-link">Skip to main content</a>
         {children}
         <Scripts />
       </body>
@@ -131,8 +133,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div id="main-content" tabIndex={-1}>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </div>
     </QueryClientProvider>
   );
 }
