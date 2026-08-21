@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { BookOpen, Mic2, ShieldCheck, Trophy, UsersRound } from "lucide-react";
+import { BookOpen, Mic2, Share2, ShieldCheck, Trophy, UsersRound } from "lucide-react";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +21,7 @@ const destinations = [
   { title: "Challenges", description: "Make something for a school, group or approved partner challenge.", to: "/dashboard/challenges", icon: Trophy },
   { title: "Clubs", description: "Join verified communities around interests and projects.", to: "/dashboard/clubs", icon: UsersRound },
   { title: "My Passport", description: "See projects, awards, certificates, skills and milestones.", to: "/dashboard/passport", icon: BookOpen },
+  { title: "Sharing", description: "Ask to share work or join approved programmes, and see what is waiting for approval.", to: "/dashboard/sharing", icon: Share2 },
 ] as const;
 
 function ChildDashboard() {
@@ -42,7 +43,7 @@ function ChildDashboard() {
         ))}
       </section>
       <Card>
-        <CardHeader><div className="flex items-center gap-2"><ShieldCheck className="size-5 text-primary" /><CardTitle>How sharing works</CardTitle></div><CardDescription>Work begins privately. Wider publication can require safety scanning, parent approval and moderation depending on age and context.</CardDescription></CardHeader>
+        <CardHeader><div className="flex items-center gap-2"><ShieldCheck className="size-5 text-primary" /><CardTitle>How sharing works</CardTitle></div><CardDescription>Work begins privately. You choose when to request wider sharing; safety scanning, parent approval and moderation can then be required depending on age and context.</CardDescription></CardHeader>
       </Card>
     </div>
   );
