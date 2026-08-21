@@ -2,7 +2,7 @@
 -- Apply after schema-draft.sql + privacy-schema-extension.sql + family-permissions-extension.sql.
 
 -- Resolve the current authenticated profile inline in policies. Authorization
--- never reads user_metadata or other browser-editable JWT fields.
+-- never reads browser-editable JWT metadata fields.
 
 -- ---------------------------------------------------------------------------
 -- permission_requests
