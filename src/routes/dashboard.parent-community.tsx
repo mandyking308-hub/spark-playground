@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { BriefcaseBusiness, CalendarDays, HeartHandshake, MapPin, ShieldCheck, UsersRound } from "lucide-react";
 
 import { PageHeader } from "@/components/layout/page-header";
@@ -10,10 +10,7 @@ export const Route = createFileRoute("/dashboard/parent-community")({
   head: () => ({
     meta: [
       { title: "Parent Community — Aurelia" },
-      {
-        name: "description",
-        content: "A verified adult-only community for current parents across schools and education groups.",
-      },
+      { name: "description", content: "A verified adult-only community for current parents across schools and education groups." },
     ],
   }),
   component: ParentCommunity,
@@ -38,39 +35,34 @@ function ParentCommunity() {
         eyebrow="Verified adult community"
         title="Parent Community"
         description="Current parents can build useful relationships around school, location, interests, professions, events and volunteering. This adult network is deliberately separated from the protected child environment."
-        crumbs={[
-          { label: "Home", to: "/" },
-          { label: "Dashboards", to: "/dashboard" },
-          { label: "Parent Community" },
-        ]}
+        crumbs={[{ label: "Home", to: "/" }, { label: "Dashboards", to: "/dashboard" }, { label: "Parent Community" }]}
       />
 
       <div className="flex flex-wrap gap-2">
         <Badge variant="secondary">Verified adults only</Badge>
         <Badge variant="outline">Parent-to-parent connections</Badge>
-        <Badge variant="outline">School + group communities</Badge>
+        <Badge variant="outline">Current + alumni community</Badge>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        <Button asChild><Link to="/dashboard/parent-directory">Browse verified adults</Link></Button>
+        <Button asChild variant="outline"><Link to="/dashboard/parent-circle">Open professional circle</Link></Button>
+        <Button asChild variant="outline"><Link to="/dashboard/parent-event">View community event</Link></Button>
       </div>
 
       <section className="grid gap-4 lg:grid-cols-[1.35fr_1fr]">
         <Card>
           <CardHeader>
-            <div className="flex items-center gap-2">
-              <UsersRound className="size-5 text-primary" />
-              <CardTitle>Communities</CardTitle>
-            </div>
-            <CardDescription>Preview groups demonstrate how a large education group can connect families beyond a single class WhatsApp chat.</CardDescription>
+            <div className="flex items-center gap-2"><UsersRound className="size-5 text-primary" /><CardTitle>Communities</CardTitle></div>
+            <CardDescription>Groups connect verified adults beyond a single class chat and can continue after a child leaves.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3 md:grid-cols-3">
             {groups.map((group) => (
               <div key={group.name} className="rounded-xl border p-4">
-                <div className="mb-3 flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <group.icon className="size-4" />
-                </div>
+                <div className="mb-3 flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary"><group.icon className="size-4" /></div>
                 <p className="font-medium">{group.name}</p>
                 <p className="mt-1 text-sm text-muted-foreground">{group.members}</p>
-                <Button variant="outline" size="sm" className="mt-4 w-full" disabled>
-                  View group
-                </Button>
+                <Button asChild variant="outline" size="sm" className="mt-4 w-full"><Link to="/dashboard/parent-circle">View group</Link></Button>
               </div>
             ))}
           </CardContent>
@@ -78,15 +70,12 @@ function ParentCommunity() {
 
         <Card>
           <CardHeader>
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="size-5 text-primary" />
-              <CardTitle>Child boundary</CardTitle>
-            </div>
+            <div className="flex items-center gap-2"><ShieldCheck className="size-5 text-primary" /><CardTitle>Child boundary</CardTitle></div>
             <CardDescription>Adult community membership never expands permissions over children.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3 text-sm">
-            <p className="rounded-lg bg-muted/40 p-3">✓ Parents can connect and message verified parents.</p>
-            <p className="rounded-lg bg-muted/40 p-3">✓ Parents can volunteer through school-controlled programmes.</p>
+            <p className="rounded-lg bg-muted/40 p-3">✓ Parents can connect and message verified adults.</p>
+            <p className="rounded-lg bg-muted/40 p-3">✓ Current and alumni parents can share circles and events.</p>
             <p className="rounded-lg bg-muted/40 p-3">✕ No browsing unrelated child profiles or portfolios.</p>
             <p className="rounded-lg bg-muted/40 p-3">✕ No generic adult-to-child direct messaging.</p>
           </CardContent>
@@ -95,10 +84,7 @@ function ParentCommunity() {
 
       <Card>
         <CardHeader>
-          <div className="flex items-center gap-2">
-            <CalendarDays className="size-5 text-primary" />
-            <CardTitle>Upcoming community events</CardTitle>
-          </div>
+          <div className="flex items-center gap-2"><CalendarDays className="size-5 text-primary" /><CardTitle>Upcoming community events</CardTitle></div>
           <CardDescription>Events can be scoped to one school, a city, or the entire education group.</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-3 md:grid-cols-3">
@@ -106,7 +92,7 @@ function ParentCommunity() {
             <div key={event.title} className="rounded-xl border p-4">
               <p className="font-medium">{event.title}</p>
               <p className="mt-2 text-sm text-muted-foreground">{event.meta}</p>
-              <Badge variant="outline" className="mt-3">Preview event</Badge>
+              <Button asChild variant="outline" size="sm" className="mt-3"><Link to="/dashboard/parent-event">View event</Link></Button>
             </div>
           ))}
         </CardContent>
