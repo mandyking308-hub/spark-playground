@@ -64,9 +64,10 @@ describe("phase-one live Supabase adapter", () => {
 
     await adapter.getOwnProjects();
     expect(calls).toHaveLength(1);
-    expect(calls[0].headers.get("apikey")).toBe("sb_publishable_test_only");
-    expect(calls[0].headers.get("Authorization")).toBe("Bearer private-user-access-token");
-    expect([...calls[0].headers.keys()].join(" ").toLowerCase()).not.toMatch(/service|secret/);
+    const call = calls[0]!;
+    expect(call.headers.get("apikey")).toBe("sb_publishable_test_only");
+    expect(call.headers.get("Authorization")).toBe("Bearer private-user-access-token");
+    expect([...call.headers.keys()].join(" ").toLowerCase()).not.toMatch(/service|secret/);
   });
 
   test("project creation never submits owner, state, publication or moderation fields", async () => {
@@ -117,7 +118,7 @@ describe("phase-one live Supabase adapter", () => {
   });
 
   test("publication and guardian mutations use the Edge workflow, never permission REST writes", async () => {
-    const calls: Array<{ url: string; method?: string; body?: string }> = [];
+    const calls: Array<{ url: string; method?: string | undefined; body?: string | undefined }> = [];
     const adapter = adapterWith(async (input, init) => {
       calls.push({ url: String(input), method: init?.method, body: String(init?.body ?? "") });
       return jsonResponse({ data: { state: "pending" } });
@@ -133,9 +134,9 @@ describe("phase-one live Supabase adapter", () => {
       expect(call.method).toBe("POST");
       expect(call.url).not.toContain("/rest/v1/permission_");
     }
-    expect(JSON.parse(calls[0].body ?? "{}")).toEqual({ action: "request_publication", projectId });
-    expect(JSON.parse(calls[1].body ?? "{}")).toEqual({ action: "withdraw_request", requestId });
-    expect(JSON.parse(calls[2].body ?? "{}")).toEqual({
+    expect(JSON.parse(calls[0]!.body ?? "{}")).toEqual({ action: "request_publication", projectId });
+    expect(JSON.parse(calls[1]!.body ?? "{}")).toEqual({ action: "withdraw_request", requestId });
+    expect(JSON.parse(calls[2]!.body ?? "{}")).toEqual({
       action: "guardian_decision",
       requestId,
       approved: true,
