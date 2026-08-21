@@ -16,6 +16,9 @@ import {
   CalendarDays,
   HeartHandshake,
   UserRoundCheck,
+  Mic2,
+  IdCard,
+  UsersRound,
 } from "lucide-react";
 
 export type RoleKey = "child" | "parent" | "parent_alumni" | "teacher" | "school" | "group";
@@ -113,6 +116,37 @@ export const roleByKey = Object.fromEntries(roles.map((r) => [r.key, r])) as Rec
   RoleKey,
   RoleDefinition
 >;
+
+export const platformModules = [
+  {
+    key: "creator",
+    label: "Creator Studio",
+    to: "/creator",
+    icon: Mic2,
+    audience: "Under-16",
+  },
+  {
+    key: "passport",
+    label: "Achievement Passport",
+    to: "/passport",
+    icon: IdCard,
+    audience: "Under-16",
+  },
+  {
+    key: "parent-community",
+    label: "Parent Community",
+    to: "/parent-community",
+    icon: UsersRound,
+    audience: "Adults",
+  },
+  {
+    key: "parent-alumni-community",
+    label: "Parent Alumni Network",
+    to: "/parent-alumni-community",
+    icon: UserRoundCheck,
+    audience: "Adults",
+  },
+] as const;
 
 export const dashboardNav = {
   overviewIcon: LayoutDashboard,
