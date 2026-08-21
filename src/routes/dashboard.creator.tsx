@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { BookOpen, Film, Gamepad2, Image, Mic2, ShieldCheck, Sparkles } from "lucide-react";
 
 import { PageHeader } from "@/components/layout/page-header";
@@ -25,30 +25,35 @@ const creationTypes = [
     description: "Record or upload an episode, add a transcript and publish through the safety workflow.",
     icon: Mic2,
     action: "Start a podcast",
+    to: "/dashboard/creator-podcast" as const,
   },
   {
     title: "Story or book",
     description: "Write, illustrate and build a multi-page story while keeping the child's authorship clear.",
     icon: BookOpen,
     action: "Start writing",
+    to: "/dashboard/creator-project" as const,
   },
   {
     title: "Art",
     description: "Upload artwork or use bounded creative assistance with clear AI attribution.",
     icon: Image,
     action: "Create artwork",
+    to: "/dashboard/creator-project" as const,
   },
   {
     title: "Video",
     description: "Build pre-recorded video projects with captions and moderated publishing.",
     icon: Film,
     action: "Create a video",
+    to: "/dashboard/creator-project" as const,
   },
   {
     title: "Game or project",
     description: "Document a game, coding project, invention, experiment or team creation.",
     icon: Gamepad2,
     action: "Start a project",
+    to: "/dashboard/creator-project" as const,
   },
 ];
 
@@ -84,10 +89,9 @@ function CreatorStudio() {
               <CardDescription className="leading-relaxed">{item.description}</CardDescription>
             </CardHeader>
             <CardContent className="mt-auto">
-              <Button className="w-full" disabled>
-                {item.action}
+              <Button className="w-full" asChild>
+                <Link to={item.to}>{item.action}</Link>
               </Button>
-              <p className="mt-2 text-center text-xs text-muted-foreground">Data connection comes next.</p>
             </CardContent>
           </Card>
         ))}
