@@ -1,8 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Globe2, LockKeyhole, MapPinOff, ShieldCheck, Users } from "lucide-react";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { DatabaseZap, Globe2, LockKeyhole, MapPinOff, ShieldCheck, Users } from "lucide-react";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const Route = createFileRoute("/dashboard/privacy")({
@@ -58,6 +59,18 @@ function PrivacyPage() {
               <p>AI consent is separate from account consent.</p>
               <p>Portfolio transition into Alumni requires explicit approval.</p>
               <p>Withdrawal is recorded rather than silently erasing the audit trail.</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-base">
+                <DatabaseZap className="size-4" /> Data lifecycle
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 text-sm text-muted-foreground">
+              <p>Export, account deletion and selective 16+ Alumni transfer are separate auditable workflows.</p>
+              <Button asChild variant="outline"><Link to="/dashboard/data-rights">Open data rights</Link></Button>
             </CardContent>
           </Card>
         </div>
