@@ -52,8 +52,9 @@ describe("live Teacher to Passport verification", () => {
   });
 
   test("server workflows use SECURITY INVOKER and are browser-inaccessible", () => {
-    expect(server.toLowerCase()).not.toContain("security definer");
-    expect((server.toLowerCase().match(/security invoker/g) ?? []).length).toBe(3);
+    const serverNormalized = server.replace(/\s+/g, " ").toLowerCase();
+    expect(serverNormalized).not.toContain("security definer");
+    expect((serverNormalized.match(/language plpgsql security invoker/g) ?? []).length).toBe(3);
     for (const fn of [
       "server_set_submission_review_state",
       "server_issue_passport_achievement",
