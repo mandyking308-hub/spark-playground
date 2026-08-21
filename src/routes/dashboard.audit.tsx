@@ -47,6 +47,7 @@ function AuditPage() {
       <div className="flex flex-wrap gap-2">
         <Button asChild variant="outline"><Link to="/dashboard/incident-response">Incident response</Link></Button>
         <Button asChild variant="outline"><Link to="/dashboard/resilience">Backup & recovery</Link></Button>
+        <Button asChild variant="outline"><Link to="/dashboard/observability">Privacy-safe observability</Link></Button>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
