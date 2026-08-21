@@ -49,6 +49,7 @@ function AuditPage() {
         <Button asChild variant="outline"><Link to="/dashboard/resilience">Backup & recovery</Link></Button>
         <Button asChild variant="outline"><Link to="/dashboard/observability">Privacy-safe observability</Link></Button>
         <Button asChild variant="outline"><Link to="/dashboard/configuration-security">Secrets & configuration</Link></Button>
+        <Button asChild variant="outline"><Link to="/dashboard/supply-chain">Supply-chain security</Link></Button>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
