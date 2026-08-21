@@ -2,6 +2,7 @@ import { Outlet, Link, createFileRoute } from "@tanstack/react-router";
 
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { RoleSwitcher } from "@/components/layout/role-switcher";
+import { BackendStatus } from "@/components/system/backend-status";
 import { Button } from "@/components/ui/button";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
@@ -19,6 +20,7 @@ function DashboardLayout() {
             <SidebarTrigger />
             <span className="text-sm text-muted-foreground">Dashboards</span>
             <div className="ml-auto flex items-center gap-2">
+              <BackendStatus />
               <RoleSwitcher />
               <Button asChild variant="ghost" size="sm">
                 <Link to="/auth/sign-in">Sign in</Link>
