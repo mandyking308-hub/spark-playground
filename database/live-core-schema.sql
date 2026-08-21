@@ -1,11 +1,8 @@
 -- Aurelia CORE LIVE SCHEMA — phase 1
 -- Target: a NEW dedicated Aurelia Supabase project only.
--- Purpose: activate the smallest safe identity/tenant/family/project/permission
--- surface before broader community, staff, partner and alumni domains go live.
---
--- This is intentionally NOT the old schema-draft.sql. It incorporates the
--- security corrections discovered during backend activation so unsafe draft
--- policies never need to exist in the new project.
+-- Activates the smallest safe identity/tenant/family/project surface first.
+-- Permission decisions remain server-written so request + policy + audit changes
+-- can be committed atomically by an authenticated backend workflow.
 
 begin;
 
@@ -16,16 +13,8 @@ create extension if not exists pgcrypto;
 -- ---------------------------------------------------------------------------
 
 create type public.platform_role as enum (
-  'child',
-  'parent',
-  'parent_alumni',
-  'teacher',
-  'school_admin',
-  'group_admin',
-  'organisation_admin',
-  'alumni',
-  'mentor',
-  'platform_admin'
+  'child', 'parent', 'parent_alumni', 'teacher', 'school_admin', 'group_admin',
+  'organisation_admin', 'alumni', 'mentor', 'platform_admin'
 );
 
 create type public.age_band as enum ('under_9', 'age_9_12', 'age_13_15', 'age_16_plus', 'adult');
@@ -33,23 +22,18 @@ create type public.membership_status as enum ('pending', 'active', 'suspended', 
 create type public.guardian_link_status as enum ('pending', 'verified', 'revoked');
 create type public.project_kind as enum ('podcast', 'story', 'book', 'art', 'video', 'game', 'general');
 create type public.content_state as enum (
-  'draft',
-  'scan_pending',
-  'approval_pending',
-  'moderation_pending',
-  'published',
-  'rejected',
-  'removed'
+  'draft', 'scan_pending', 'approval_pending', 'moderation_pending',
+  'published', 'rejected', 'removed'
 );
 
 -- ---------------------------------------------------------------------------
--- Identity / tenancy
+-- Identity and tenancy
 -- ---------------------------------------------------------------------------
 
 create table public.profiles (
   id uuid primary key default gen_random_uuid(),
   auth_user_id uuid not null unique references auth.users(id) on delete cascade,
-  display_name text not null,
+  display_name text not null check (char_length(display_name) between 1 and 120),
   primary_role public.platform_role not null,
   age_band public.age_band not null,
   country_code text,
@@ -99,7 +83,8 @@ create table public.school_memberships (
   ends_at timestamptz,
   created_at timestamptz not null default now(),
   unique (profile_id, school_id, role),
-  check (role in ('child', 'teacher', 'school_admin'))
+  check (role in ('child', 'teacher', 'school_admin')),
+  check (ends_at is null or starts_at is null or ends_at > starts_at)
 );
 
 create table public.group_memberships (
@@ -123,7 +108,7 @@ create table public.cohort_memberships (
 );
 
 -- ---------------------------------------------------------------------------
--- Family relationships
+-- Family
 -- ---------------------------------------------------------------------------
 
 create table public.guardian_links (
@@ -137,13 +122,15 @@ create table public.guardian_links (
   created_at timestamptz not null default now(),
   unique (parent_profile_id, child_profile_id),
   check (parent_profile_id <> child_profile_id),
-  check ((status = 'verified' and verified_at is not null and revoked_at is null)
+  check (
+    (status = 'pending' and verified_at is null and revoked_at is null)
+    or (status = 'verified' and verified_at is not null and revoked_at is null)
     or (status = 'revoked' and revoked_at is not null)
-    or status = 'pending')
+  )
 );
 
 -- ---------------------------------------------------------------------------
--- Jurisdiction / privacy configuration
+-- Jurisdiction and privacy defaults
 -- ---------------------------------------------------------------------------
 
 create table public.jurisdiction_policy_versions (
@@ -172,8 +159,7 @@ create table public.privacy_preferences (
 );
 
 -- ---------------------------------------------------------------------------
--- Safe current-identity helpers
--- SECURITY INVOKER is deliberate: these helpers do not bypass RLS.
+-- Current identity helper. SECURITY INVOKER is deliberate.
 -- ---------------------------------------------------------------------------
 
 create function public.current_profile_id()
@@ -194,12 +180,13 @@ revoke all on function public.current_profile_id() from public;
 grant execute on function public.current_profile_id() to authenticated;
 
 -- ---------------------------------------------------------------------------
--- Child projects — identity is DB-derived, not browser-provided.
+-- Child projects. Ownership is database-derived from auth.uid().
 -- ---------------------------------------------------------------------------
 
 create table public.projects (
   id uuid primary key default gen_random_uuid(),
-  owner_profile_id uuid not null default public.current_profile_id() references public.profiles(id) on delete cascade,
+  owner_profile_id uuid not null default public.current_profile_id()
+    references public.profiles(id) on delete cascade,
   school_id uuid references public.schools(id) on delete set null,
   kind public.project_kind not null,
   title text not null check (char_length(title) between 1 and 160),
@@ -212,13 +199,14 @@ create table public.projects (
 );
 
 -- ---------------------------------------------------------------------------
--- Child-initiated, resource-specific permission workflow
+-- Child-initiated permission state. Browser clients can READ their relevant
+-- records but all writes are performed by an authenticated server workflow.
 -- ---------------------------------------------------------------------------
 
 create table public.permission_requests (
   id uuid primary key default gen_random_uuid(),
-  child_profile_id uuid not null default public.current_profile_id() references public.profiles(id) on delete cascade,
-  requested_by_profile_id uuid not null default public.current_profile_id() references public.profiles(id) on delete cascade,
+  child_profile_id uuid not null references public.profiles(id) on delete cascade,
+  requested_by_profile_id uuid not null references public.profiles(id) on delete cascade,
   request_type text not null check (
     request_type in ('publish_external', 'join_club', 'enter_challenge', 'share_portfolio', 'alumni_transfer')
   ),
@@ -249,14 +237,16 @@ create table public.permission_decisions (
   request_id uuid not null references public.permission_requests(id) on delete cascade,
   decision_role text not null check (decision_role in ('guardian', 'school', 'safety')),
   decision text not null check (decision in ('approved', 'denied')),
-  decision_by_profile_id uuid not null default public.current_profile_id() references public.profiles(id) on delete restrict,
+  decision_by_profile_id uuid not null references public.profiles(id) on delete restrict,
   guardian_link_id uuid references public.guardian_links(id) on delete restrict,
   policy_version text not null,
   decision_note text check (decision_note is null or char_length(decision_note) <= 2000),
   decided_at timestamptz not null default now(),
   unique (request_id, decision_role),
-  check ((decision_role = 'guardian' and guardian_link_id is not null)
-    or (decision_role <> 'guardian' and guardian_link_id is null))
+  check (
+    (decision_role = 'guardian' and guardian_link_id is not null)
+    or (decision_role <> 'guardian' and guardian_link_id is null)
+  )
 );
 
 create table public.permission_events (
@@ -270,36 +260,8 @@ create table public.permission_events (
   occurred_at timestamptz not null default now()
 );
 
--- Browser-created guardian decisions derive actor + policy version in DB.
-create function public.set_guardian_decision_context()
-returns trigger
-language plpgsql
-security invoker
-set search_path = ''
-as $$
-begin
-  new.decision_by_profile_id := public.current_profile_id();
-  select pr.policy_version into new.policy_version
-  from public.permission_requirements pr
-  where pr.request_id = new.request_id;
-
-  if new.policy_version is null then
-    raise exception 'Permission requirements are not available for this request';
-  end if;
-
-  return new;
-end;
-$$;
-
-revoke all on function public.set_guardian_decision_context() from public;
-grant execute on function public.set_guardian_decision_context() to authenticated;
-
-create trigger permission_decision_context_before_insert
-before insert on public.permission_decisions
-for each row execute function public.set_guardian_decision_context();
-
 -- ---------------------------------------------------------------------------
--- Minimal audit anchor — privileged/server writes only.
+-- Privileged audit anchor. No ordinary browser policy/grant.
 -- ---------------------------------------------------------------------------
 
 create table public.audit_log (
@@ -331,7 +293,7 @@ create index idx_permission_events_request on public.permission_events(request_i
 create index idx_jurisdiction_policy_code on public.jurisdiction_policy_versions(jurisdiction_code, effective_from desc);
 
 -- ---------------------------------------------------------------------------
--- RLS activation
+-- RLS on every public table
 -- ---------------------------------------------------------------------------
 
 alter table public.profiles enable row level security;
@@ -352,7 +314,7 @@ alter table public.permission_events enable row level security;
 alter table public.audit_log enable row level security;
 
 -- ---------------------------------------------------------------------------
--- RLS: identity and self-scoped tenant membership
+-- Identity and membership policies
 -- ---------------------------------------------------------------------------
 
 create policy profiles_self_select
@@ -380,7 +342,8 @@ create policy schools_member_select
 on public.schools for select to authenticated
 using (
   id in (
-    select sm.school_id from public.school_memberships sm
+    select sm.school_id
+    from public.school_memberships sm
     where sm.profile_id = public.current_profile_id() and sm.status = 'active'
   )
 );
@@ -389,7 +352,8 @@ create policy groups_member_select
 on public.education_groups for select to authenticated
 using (
   id in (
-    select gm.education_group_id from public.group_memberships gm
+    select gm.education_group_id
+    from public.group_memberships gm
     where gm.profile_id = public.current_profile_id() and gm.status = 'active'
   )
   or id in (
@@ -406,11 +370,13 @@ create policy cohorts_member_select
 on public.cohorts for select to authenticated
 using (
   id in (
-    select cm.cohort_id from public.cohort_memberships cm
+    select cm.cohort_id
+    from public.cohort_memberships cm
     where cm.profile_id = public.current_profile_id() and cm.status = 'active'
   )
   or school_id in (
-    select sm.school_id from public.school_memberships sm
+    select sm.school_id
+    from public.school_memberships sm
     where sm.profile_id = public.current_profile_id()
       and sm.status = 'active'
       and sm.role in ('teacher', 'school_admin')
@@ -418,7 +384,7 @@ using (
 );
 
 -- ---------------------------------------------------------------------------
--- RLS: guardian relationships — relationship visibility, NOT draft access.
+-- Guardian/privacy read boundaries. Verified guardian != draft access.
 -- ---------------------------------------------------------------------------
 
 create policy guardian_links_subject_select
@@ -428,43 +394,48 @@ using (
   or child_profile_id = public.current_profile_id()
 );
 
--- ---------------------------------------------------------------------------
--- RLS: privacy preferences — subject + currently verified guardian read only.
--- ---------------------------------------------------------------------------
-
 create policy privacy_preferences_subject_guardian_select
 on public.privacy_preferences for select to authenticated
 using (
   subject_profile_id = public.current_profile_id()
   or exists (
-    select 1 from public.guardian_links gl
+    select 1
+    from public.guardian_links gl
     where gl.parent_profile_id = public.current_profile_id()
       and gl.child_profile_id = privacy_preferences.subject_profile_id
       and gl.status = 'verified'
   )
 );
 
--- Jurisdiction policy versions are server-managed. A verified active record may
--- be exposed later through a purpose-specific security-invoker view/RPC.
+-- jurisdiction_policy_versions stays server-managed/non-Data-API in phase 1.
 
 -- ---------------------------------------------------------------------------
--- RLS: projects — owner only in phase 1.
+-- Project policies. Only an active under-16 child profile can create/edit.
 -- ---------------------------------------------------------------------------
 
 create policy projects_owner_select
 on public.projects for select to authenticated
 using (owner_profile_id = public.current_profile_id());
 
-create policy projects_owner_insert
+create policy projects_child_insert
 on public.projects for insert to authenticated
 with check (
   owner_profile_id = public.current_profile_id()
   and state = 'draft'
   and published_at is null
+  and exists (
+    select 1
+    from public.profiles p
+    where p.id = public.current_profile_id()
+      and p.primary_role = 'child'
+      and p.age_band in ('under_9', 'age_9_12', 'age_13_15')
+      and p.disabled_at is null
+  )
   and (
     school_id is null
     or school_id in (
-      select sm.school_id from public.school_memberships sm
+      select sm.school_id
+      from public.school_memberships sm
       where sm.profile_id = public.current_profile_id()
         and sm.status = 'active'
         and sm.role = 'child'
@@ -472,11 +443,18 @@ with check (
   )
 );
 
-create policy projects_owner_update_draft
+create policy projects_child_update_draft
 on public.projects for update to authenticated
 using (
   owner_profile_id = public.current_profile_id()
   and state in ('draft', 'rejected')
+  and exists (
+    select 1 from public.profiles p
+    where p.id = public.current_profile_id()
+      and p.primary_role = 'child'
+      and p.age_band in ('under_9', 'age_9_12', 'age_13_15')
+      and p.disabled_at is null
+  )
 )
 with check (
   owner_profile_id = public.current_profile_id()
@@ -484,7 +462,7 @@ with check (
   and published_at is null
 );
 
-create policy projects_owner_delete_unpublished
+create policy projects_child_delete_unpublished
 on public.projects for delete to authenticated
 using (
   owner_profile_id = public.current_profile_id()
@@ -492,10 +470,11 @@ using (
   and published_at is null
 );
 
--- No generic parent/teacher/organisation/alumni project policy exists here.
+-- Intentionally no generic parent/teacher/organisation/alumni project policy.
 
 -- ---------------------------------------------------------------------------
--- RLS: child-initiated permission requests
+-- Permission records are read-scoped. Writes happen in authenticated server
+-- workflows so request + requirements + decision/event audit are atomic.
 -- ---------------------------------------------------------------------------
 
 create policy permission_requests_subject_guardian_select
@@ -503,36 +482,26 @@ on public.permission_requests for select to authenticated
 using (
   child_profile_id = public.current_profile_id()
   or exists (
-    select 1 from public.guardian_links gl
+    select 1
+    from public.guardian_links gl
     where gl.parent_profile_id = public.current_profile_id()
       and gl.child_profile_id = permission_requests.child_profile_id
       and gl.status = 'verified'
   )
 );
 
-create policy permission_requests_child_insert
-on public.permission_requests for insert to authenticated
-with check (
-  child_profile_id = public.current_profile_id()
-  and requested_by_profile_id = public.current_profile_id()
-  and state = 'pending'
-);
-
-create policy permission_requests_child_withdraw
-on public.permission_requests for update to authenticated
-using (child_profile_id = public.current_profile_id() and state = 'pending')
-with check (child_profile_id = public.current_profile_id() and state = 'withdrawn');
-
 create policy permission_requirements_subject_guardian_select
 on public.permission_requirements for select to authenticated
 using (
   exists (
-    select 1 from public.permission_requests req
+    select 1
+    from public.permission_requests req
     where req.id = permission_requirements.request_id
       and (
         req.child_profile_id = public.current_profile_id()
         or exists (
-          select 1 from public.guardian_links gl
+          select 1
+          from public.guardian_links gl
           where gl.parent_profile_id = public.current_profile_id()
             and gl.child_profile_id = req.child_profile_id
             and gl.status = 'verified'
@@ -545,12 +514,14 @@ create policy permission_decisions_subject_guardian_select
 on public.permission_decisions for select to authenticated
 using (
   exists (
-    select 1 from public.permission_requests req
+    select 1
+    from public.permission_requests req
     where req.id = permission_decisions.request_id
       and (
         req.child_profile_id = public.current_profile_id()
         or exists (
-          select 1 from public.guardian_links gl
+          select 1
+          from public.guardian_links gl
           where gl.parent_profile_id = public.current_profile_id()
             and gl.child_profile_id = req.child_profile_id
             and gl.status = 'verified'
@@ -559,33 +530,18 @@ using (
   )
 );
 
-create policy permission_decisions_verified_guardian_insert
-on public.permission_decisions for insert to authenticated
-with check (
-  decision_role = 'guardian'
-  and decision_by_profile_id = public.current_profile_id()
-  and exists (
-    select 1
-    from public.guardian_links gl
-    join public.permission_requests req on req.child_profile_id = gl.child_profile_id
-    where gl.id = guardian_link_id
-      and req.id = request_id
-      and gl.parent_profile_id = public.current_profile_id()
-      and gl.status = 'verified'
-      and req.state = 'pending'
-  )
-);
-
 create policy permission_events_subject_guardian_select
 on public.permission_events for select to authenticated
 using (
   exists (
-    select 1 from public.permission_requests req
+    select 1
+    from public.permission_requests req
     where req.id = permission_events.request_id
       and (
         req.child_profile_id = public.current_profile_id()
         or exists (
-          select 1 from public.guardian_links gl
+          select 1
+          from public.guardian_links gl
           where gl.parent_profile_id = public.current_profile_id()
             and gl.child_profile_id = req.child_profile_id
             and gl.status = 'verified'
@@ -595,7 +551,7 @@ using (
 );
 
 -- ---------------------------------------------------------------------------
--- Data API privileges: explicit least privilege.
+-- Explicit Data API grants. Start from zero.
 -- ---------------------------------------------------------------------------
 
 revoke all privileges on all tables in schema public from anon;
@@ -623,20 +579,13 @@ grant update (title, summary) on public.projects to authenticated;
 grant delete on public.projects to authenticated;
 
 grant select on public.permission_requests to authenticated;
-grant insert (request_type, resource_kind, resource_id, expires_at) on public.permission_requests to authenticated;
-grant update (state) on public.permission_requests to authenticated;
 grant select on public.permission_requirements to authenticated;
 grant select on public.permission_decisions to authenticated;
-grant insert (request_id, decision_role, decision, guardian_link_id, decision_note) on public.permission_decisions to authenticated;
 grant select on public.permission_events to authenticated;
 
--- No ordinary browser grants on:
--- * jurisdiction_policy_versions writes/reads
--- * guardian verification writes
--- * staff/tenant provisioning writes
--- * permission requirements/events writes
--- * audit_log
--- * project moderation/publication state
--- * any future safeguarding/partner/security operational tables
+-- Deliberately absent from ordinary browser grants:
+-- role/age/auth profile mutation; tenant provisioning; guardian verification;
+-- jurisdiction-policy mutation/read; permission writes; audit log; project
+-- moderation/publication state; safeguarding/partner/security operational data.
 
 commit;
