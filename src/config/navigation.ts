@@ -123,6 +123,7 @@ export const roleByKey = Object.fromEntries(roles.map((r) => [r.key, r])) as Rec
 
 export const platformModules = [
   { key: "creator", label: "Creator Studio", to: "/dashboard/creator", icon: Mic2, audience: "Under-16" },
+  { key: "discover", label: "Discover", to: "/dashboard/discover", icon: Compass, audience: "Under-16" },
   { key: "passport", label: "Achievement Passport", to: "/dashboard/passport", icon: IdCard, audience: "Under-16" },
   { key: "challenges", label: "Challenges", to: "/dashboard/challenges", icon: Trophy, audience: "Under-16" },
   { key: "clubs", label: "Clubs", to: "/dashboard/clubs", icon: UsersRound, audience: "Under-16" },
