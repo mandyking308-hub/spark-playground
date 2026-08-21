@@ -89,13 +89,10 @@ alter table public.learning_brief_submissions enable row level security;
 alter table public.passport_achievements enable row level security;
 alter table public.passport_verification_events enable row level security;
 
--- Teacher can see only their current assignment records.
 create policy teacher_assignments_self_select
 on public.teacher_cohort_assignments for select to authenticated
 using (teacher_profile_id = public.current_profile_id());
 
--- Teacher brief visibility is assignment-scoped; children see only open briefs
--- for cohorts in which they are currently active members.
 create policy learning_briefs_teacher_select
 on public.learning_briefs for select to authenticated
 using (
@@ -148,9 +145,6 @@ using (
 )
 with check (created_by_profile_id = public.current_profile_id());
 
--- A child submits only their own draft/rejected project to an open brief in
--- their own active cohort. Projects in publication/moderation flow cannot be
--- reused as classroom submission evidence until they return to an editable state.
 create policy brief_submissions_child_select
 on public.learning_brief_submissions for select to authenticated
 using (child_profile_id = public.current_profile_id());
@@ -179,8 +173,6 @@ with check (
   )
 );
 
--- Assigned teachers may read submissions in their cohorts, but browser writes
--- cannot mark work verified; verification is an atomic server workflow.
 create policy brief_submissions_teacher_select
 on public.learning_brief_submissions for select to authenticated
 using (
@@ -195,8 +187,6 @@ using (
   )
 );
 
--- Passport records are private by default. Child and verified guardian may read
--- active records; no parent access to underlying private project is implied.
 create policy passport_child_guardian_select
 on public.passport_achievements for select to authenticated
 using (
@@ -217,8 +207,6 @@ create policy passport_issuer_select
 on public.passport_achievements for select to authenticated
 using (issuer_profile_id = public.current_profile_id());
 
--- Verification event history is visible to the child and issuer only; parent
--- sees the verified Passport record rather than privileged operational audit.
 create policy passport_events_subject_issuer_select
 on public.passport_verification_events for select to authenticated
 using (
@@ -229,7 +217,6 @@ using (
   )
 );
 
--- Start this domain from zero Data API privileges.
 revoke all privileges on public.teacher_cohort_assignments from anon, authenticated;
 revoke all privileges on public.learning_briefs from anon, authenticated;
 revoke all privileges on public.learning_brief_submissions from anon, authenticated;
@@ -240,14 +227,12 @@ grant select on public.teacher_cohort_assignments to authenticated;
 grant select on public.learning_briefs to authenticated;
 grant insert (school_id, cohort_id, title, instructions, skills, due_at) on public.learning_briefs to authenticated;
 grant update (title, instructions, skills, due_at, state) on public.learning_briefs to authenticated;
-
 grant select on public.learning_brief_submissions to authenticated;
 grant insert (brief_id, project_id, school_id) on public.learning_brief_submissions to authenticated;
-
 grant select on public.passport_achievements to authenticated;
 grant select on public.passport_verification_events to authenticated;
 
--- No browser insert/update/delete grant exists for Passport achievements or
--- verification events. No leaderboard, likes, follower or popularity fields.
+-- No browser mutation grant exists for Passport achievement or verification records.
+-- The model contains no public engagement or comparative-scoring fields.
 
 commit;
