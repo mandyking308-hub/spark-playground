@@ -1,10 +1,21 @@
 export interface PublicRuntimeConfig {
   supabaseUrl?: string;
   supabasePublishableKey?: string;
+  supabaseProjectRef?: string;
   backendConnected: boolean;
 }
 
 const forbiddenClientKeyFragments = ["SERVICE_ROLE", "SECRET_KEY", "SUPABASE_SECRET"] as const;
+
+function projectRefFromSupabaseUrl(url: string): string | undefined {
+  try {
+    const parsed = new URL(url);
+    const match = parsed.hostname.match(/^([a-z0-9]+)\.supabase\.co$/i);
+    return match?.[1];
+  } catch {
+    return undefined;
+  }
+}
 
 export function resolvePublicRuntimeConfig(
   env: Record<string, string | undefined>,
@@ -18,15 +29,27 @@ export function resolvePublicRuntimeConfig(
 
   const supabaseUrl = env.VITE_SUPABASE_URL?.trim() || undefined;
   const supabasePublishableKey = env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() || undefined;
+  const supabaseProjectRef = env.VITE_SUPABASE_PROJECT_REF?.trim() || undefined;
 
-  if ((supabaseUrl && !supabasePublishableKey) || (!supabaseUrl && supabasePublishableKey)) {
-    throw new Error("Supabase public runtime configuration must include both URL and publishable key.");
+  const supplied = [supabaseUrl, supabasePublishableKey, supabaseProjectRef].filter(Boolean).length;
+  if (supplied !== 0 && supplied !== 3) {
+    throw new Error(
+      "Supabase public runtime configuration must include URL, publishable key and the expected dedicated project ref.",
+    );
+  }
+
+  if (supabaseUrl && supabaseProjectRef) {
+    const urlProjectRef = projectRefFromSupabaseUrl(supabaseUrl);
+    if (!urlProjectRef || urlProjectRef !== supabaseProjectRef) {
+      throw new Error("Supabase URL does not match the explicitly approved dedicated project ref.");
+    }
   }
 
   return {
     supabaseUrl,
     supabasePublishableKey,
-    backendConnected: Boolean(supabaseUrl && supabasePublishableKey),
+    supabaseProjectRef,
+    backendConnected: Boolean(supabaseUrl && supabasePublishableKey && supabaseProjectRef),
   };
 }
 
