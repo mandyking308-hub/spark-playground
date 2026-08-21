@@ -32,6 +32,12 @@ export function AuthForm({
             <CardDescription>{description}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
+            {isSignUp && (
+              <Button asChild variant="outline" className="w-full">
+                <Link to="/auth/join">Choose your verified join path</Link>
+              </Button>
+            )}
+
             <form
               className="space-y-4"
               onSubmit={(event) => {
@@ -58,7 +64,7 @@ export function AuthForm({
             </form>
 
             <p className="rounded-md border border-dashed border-border px-3 py-2 text-xs leading-relaxed text-muted-foreground">
-              Placeholder only — authentication is not connected yet. Explore the{" "}
+              Authentication is not connected yet. Role requests, guardian links and school/group memberships will be verified in the backend rather than trusted from editable profile fields. Explore the{" "}
               <Link to="/dashboard" className="underline underline-offset-2 hover:text-foreground">
                 dashboards
               </Link>{" "}
