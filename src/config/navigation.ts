@@ -20,6 +20,9 @@ import {
   IdCard,
   UsersRound,
   Flag,
+  Bell,
+  CreditCard,
+  ClipboardList,
 } from "lucide-react";
 
 export type RoleKey = "child" | "parent" | "parent_alumni" | "teacher" | "school" | "group";
@@ -126,8 +129,11 @@ export const platformModules = [
   { key: "parent-community", label: "Parent Community", to: "/dashboard/parent-community", icon: UsersRound, audience: "Adults" },
   { key: "parent-alumni-community", label: "Parent Alumni Network", to: "/dashboard/parent-alumni-community", icon: UserRoundCheck, audience: "Adults" },
   { key: "ai-controls", label: "AI Controls", to: "/dashboard/ai-controls", icon: ShieldCheck, audience: "Parents & staff" },
+  { key: "notifications", label: "Notifications", to: "/dashboard/notifications", icon: Bell, audience: "Members" },
   { key: "safeguarding", label: "Safeguarding Centre", to: "/dashboard/safeguarding", icon: ShieldCheck, audience: "Staff" },
   { key: "organisations", label: "Organisation Spaces", to: "/dashboard/organisations", icon: Building2, audience: "Partners" },
+  { key: "licensing", label: "Licensing & Billing", to: "/dashboard/licensing", icon: CreditCard, audience: "Enterprise" },
+  { key: "audit", label: "Audit & Compliance", to: "/dashboard/audit", icon: ClipboardList, audience: "Enterprise" },
 ] as const;
 
 export const dashboardNav = {
