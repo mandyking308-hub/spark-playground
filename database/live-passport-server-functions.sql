@@ -3,6 +3,18 @@
 
 begin;
 
+-- SECURITY INVOKER is deliberate: grant only the table operations required by
+-- the three reviewed server workflows. Ordinary browser roles remain excluded.
+grant select on public.profiles to service_role;
+grant select on public.projects to service_role;
+grant select on public.school_memberships to service_role;
+grant select on public.teacher_cohort_assignments to service_role;
+grant select on public.learning_briefs to service_role;
+grant select, update on public.learning_brief_submissions to service_role;
+grant select, insert, update on public.passport_achievements to service_role;
+grant insert on public.passport_verification_events to service_role;
+grant insert on public.audit_log to service_role;
+
 create function public.server_set_submission_review_state(
   p_auth_user_id uuid,
   p_submission_id uuid,
