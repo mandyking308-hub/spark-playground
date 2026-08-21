@@ -7,7 +7,7 @@ const normalized = sql.replace(/\s+/g, " ").toLowerCase();
 describe("server-only permission workflow SQL", () => {
   test("all workflow functions are SECURITY INVOKER", () => {
     expect(normalized).not.toContain("security definer");
-    expect((normalized.match(/security invoker/g) ?? []).length).toBe(3);
+    expect((normalized.match(/security invoker/g) ?? []).length).toBe(4);
   });
 
   test("browser roles cannot execute workflow RPCs", () => {
