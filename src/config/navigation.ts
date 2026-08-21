@@ -125,6 +125,7 @@ export const platformModules = [
   { key: "clubs", label: "Clubs", to: "/dashboard/clubs", icon: UsersRound, audience: "Under-16" },
   { key: "parent-community", label: "Parent Community", to: "/dashboard/parent-community", icon: UsersRound, audience: "Adults" },
   { key: "parent-alumni-community", label: "Parent Alumni Network", to: "/dashboard/parent-alumni-community", icon: UserRoundCheck, audience: "Adults" },
+  { key: "ai-controls", label: "AI Controls", to: "/dashboard/ai-controls", icon: ShieldCheck, audience: "Parents & staff" },
   { key: "safeguarding", label: "Safeguarding Centre", to: "/dashboard/safeguarding", icon: ShieldCheck, audience: "Staff" },
   { key: "organisations", label: "Organisation Spaces", to: "/dashboard/organisations", icon: Building2, audience: "Partners" },
 ] as const;
