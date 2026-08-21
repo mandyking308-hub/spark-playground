@@ -148,7 +148,9 @@ using (
 )
 with check (created_by_profile_id = public.current_profile_id());
 
--- A child submits only their own project to an open brief in their own cohort.
+-- A child submits only their own draft/rejected project to an open brief in
+-- their own active cohort. Projects in publication/moderation flow cannot be
+-- reused as classroom submission evidence until they return to an editable state.
 create policy brief_submissions_child_select
 on public.learning_brief_submissions for select to authenticated
 using (child_profile_id = public.current_profile_id());
@@ -172,7 +174,7 @@ with check (
       and cm.profile_id = public.current_profile_id()
       and cm.status = 'active'
       and p.owner_profile_id = public.current_profile_id()
-      and p.state not in ('removed', 'published')
+      and p.state in ('draft', 'rejected')
       and (p.school_id is null or p.school_id = lb.school_id)
   )
 );
