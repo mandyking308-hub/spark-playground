@@ -7,6 +7,7 @@ export type CoreModule =
   | "clubs"
   | "parent_community"
   | "parent_alumni_network"
+  | "ai_controls"
   | "safeguarding_centre"
   | "organisation_spaces";
 
@@ -17,6 +18,7 @@ const rolesByModule: Record<CoreModule, ReadonlySet<PlatformRole>> = {
   clubs: new Set(["child", "teacher", "school_admin", "group_admin"]),
   parent_community: new Set(["parent"]),
   parent_alumni_network: new Set(["parent", "parent_alumni"]),
+  ai_controls: new Set(["parent", "school_admin", "group_admin"]),
   safeguarding_centre: new Set(["teacher", "school_admin", "group_admin"]),
   organisation_spaces: new Set([
     "child",
@@ -39,7 +41,9 @@ export function coreModuleAudience(
   if (["creator_studio", "achievement_passport", "challenges", "clubs"].includes(module)) {
     return "protected_child";
   }
-  if (["parent_community", "parent_alumni_network"].includes(module)) return "verified_adult";
+  if (["parent_community", "parent_alumni_network", "ai_controls"].includes(module)) {
+    return "verified_adult";
+  }
   if (module === "safeguarding_centre") return "staff";
   return "mixed_curated";
 }
