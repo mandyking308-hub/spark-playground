@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,6 +39,11 @@ export function AuthForm({
               </Button>
             )}
 
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="secondary">Identity first</Badge>
+              <Badge variant="outline">Role resolved server-side</Badge>
+            </div>
+
             <form
               className="space-y-4"
               onSubmit={(event) => {
@@ -64,7 +70,7 @@ export function AuthForm({
             </form>
 
             <p className="rounded-md border border-dashed border-border px-3 py-2 text-xs leading-relaxed text-muted-foreground">
-              Authentication is not connected yet. Role requests, guardian links and school/group memberships will be verified in the backend rather than trusted from editable profile fields. Explore the{" "}
+              Authentication is not connected yet. After identity verification, the backend will resolve allowed workspaces from verified age/lifecycle, guardian links and active school/group/organisation memberships. A URL, editable profile field or browser setting cannot grant a role. Explore the{" "}
               <Link to="/dashboard" className="underline underline-offset-2 hover:text-foreground">
                 dashboards
               </Link>{" "}

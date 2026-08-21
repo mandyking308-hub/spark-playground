@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { Languages } from "lucide-react";
+import { Languages, ShieldCheck } from "lucide-react";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { roles } from "@/config/navigation";
@@ -45,6 +45,15 @@ function DashboardIndex() {
               <span className="flex size-9 items-center justify-center rounded-md bg-accent text-accent-foreground"><Languages className="size-4" /></span>
               <CardTitle className="text-base font-medium">Language & accessibility</CardTitle>
               <CardDescription>Presentation, reading, motion, captions and global language foundations.</CardDescription>
+            </CardHeader>
+          </Card>
+        </Link>
+        <Link to="/dashboard/security" className="group">
+          <Card className="h-full border-border/70 shadow-none transition-colors group-hover:border-primary/40">
+            <CardHeader className="gap-2">
+              <span className="flex size-9 items-center justify-center rounded-md bg-accent text-accent-foreground"><ShieldCheck className="size-4" /></span>
+              <CardTitle className="text-base font-medium">Account & session security</CardTitle>
+              <CardDescription>Server-bound roles, session expiry, revocation and step-up authentication foundations.</CardDescription>
             </CardHeader>
           </Card>
         </Link>
