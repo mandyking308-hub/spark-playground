@@ -13,14 +13,75 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlumniRouteImport } from './routes/alumni'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AlumniIndexRouteImport } from './routes/alumni.index'
+import { Route as AlumniApplicationRouteImport } from './routes/alumni.application'
+import { Route as AlumniCommunityRouteImport } from './routes/alumni.community'
+import { Route as AlumniMentoringRouteImport } from './routes/alumni.mentoring'
+import { Route as AlumniOpportunitiesRouteImport } from './routes/alumni.opportunities'
+import { Route as AlumniPortfolioRouteImport } from './routes/alumni.portfolio'
+import { Route as AuthGuardianLinkRouteImport } from './routes/auth.guardian-link'
+import { Route as AuthJoinRouteImport } from './routes/auth.join'
 import { Route as AuthSignInRouteImport } from './routes/auth.sign-in'
 import { Route as AuthSignUpRouteImport } from './routes/auth.sign-up'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardAbuseProtectionRouteImport } from './routes/dashboard.abuse-protection'
+import { Route as DashboardAccessibilityRouteImport } from './routes/dashboard.accessibility'
+import { Route as DashboardAchievementIssuerRouteImport } from './routes/dashboard.achievement-issuer'
+import { Route as DashboardAiControlsRouteImport } from './routes/dashboard.ai-controls'
+import { Route as DashboardAuditRouteImport } from './routes/dashboard.audit'
+import { Route as DashboardChallengeBuilderRouteImport } from './routes/dashboard.challenge-builder'
+import { Route as DashboardChallengeSubmitRouteImport } from './routes/dashboard.challenge-submit'
+import { Route as DashboardChallengesRouteImport } from './routes/dashboard.challenges'
 import { Route as DashboardChildRouteImport } from './routes/dashboard.child'
+import { Route as DashboardClubBuilderRouteImport } from './routes/dashboard.club-builder'
+import { Route as DashboardClubSpaceRouteImport } from './routes/dashboard.club-space'
+import { Route as DashboardClubsRouteImport } from './routes/dashboard.clubs'
+import { Route as DashboardConfigurationSecurityRouteImport } from './routes/dashboard.configuration-security'
+import { Route as DashboardCreatorRouteImport } from './routes/dashboard.creator'
+import { Route as DashboardCreatorPodcastRouteImport } from './routes/dashboard.creator-podcast'
+import { Route as DashboardCreatorProjectRouteImport } from './routes/dashboard.creator-project'
+import { Route as DashboardDataRightsRouteImport } from './routes/dashboard.data-rights'
+import { Route as DashboardDiscoverRouteImport } from './routes/dashboard.discover'
+import { Route as DashboardFamilyPermissionsRouteImport } from './routes/dashboard.family-permissions'
+import { Route as DashboardFeedbackRouteImport } from './routes/dashboard.feedback'
+import { Route as DashboardFeedbackSendRouteImport } from './routes/dashboard.feedback-send'
 import { Route as DashboardGroupRouteImport } from './routes/dashboard.group'
+import { Route as DashboardGroupSchoolsRouteImport } from './routes/dashboard.group-schools'
+import { Route as DashboardIncidentResponseRouteImport } from './routes/dashboard.incident-response'
+import { Route as DashboardLicensingRouteImport } from './routes/dashboard.licensing'
+import { Route as DashboardNotificationsRouteImport } from './routes/dashboard.notifications'
+import { Route as DashboardObservabilityRouteImport } from './routes/dashboard.observability'
+import { Route as DashboardOrganisationAdminRouteImport } from './routes/dashboard.organisation-admin'
+import { Route as DashboardOrganisationPublisherRouteImport } from './routes/dashboard.organisation-publisher'
+import { Route as DashboardOrganisationsRouteImport } from './routes/dashboard.organisations'
 import { Route as DashboardParentRouteImport } from './routes/dashboard.parent'
+import { Route as DashboardParentAlumniRouteImport } from './routes/dashboard.parent-alumni'
+import { Route as DashboardParentAlumniCommunityRouteImport } from './routes/dashboard.parent-alumni-community'
+import { Route as DashboardParentCircleRouteImport } from './routes/dashboard.parent-circle'
+import { Route as DashboardParentCommunityRouteImport } from './routes/dashboard.parent-community'
+import { Route as DashboardParentDirectoryRouteImport } from './routes/dashboard.parent-directory'
+import { Route as DashboardParentEventRouteImport } from './routes/dashboard.parent-event'
+import { Route as DashboardPartnerSafetyRouteImport } from './routes/dashboard.partner-safety'
+import { Route as DashboardPassportRouteImport } from './routes/dashboard.passport'
+import { Route as DashboardPrivacyRouteImport } from './routes/dashboard.privacy'
+import { Route as DashboardProviderGovernanceRouteImport } from './routes/dashboard.provider-governance'
+import { Route as DashboardReleaseGovernanceRouteImport } from './routes/dashboard.release-governance'
+import { Route as DashboardReportRouteImport } from './routes/dashboard.report'
+import { Route as DashboardResilienceRouteImport } from './routes/dashboard.resilience'
+import { Route as DashboardSafeguardingRouteImport } from './routes/dashboard.safeguarding'
+import { Route as DashboardSafeguardingCaseRouteImport } from './routes/dashboard.safeguarding-case'
 import { Route as DashboardSchoolRouteImport } from './routes/dashboard.school'
+import { Route as DashboardSchoolPeopleRouteImport } from './routes/dashboard.school-people'
+import { Route as DashboardSecurityRouteImport } from './routes/dashboard.security'
+import { Route as DashboardSharingRouteImport } from './routes/dashboard.sharing'
+import { Route as DashboardShowBuilderRouteImport } from './routes/dashboard.show-builder'
+import { Route as DashboardShowsRouteImport } from './routes/dashboard.shows'
+import { Route as DashboardStaffRolesRouteImport } from './routes/dashboard.staff-roles'
+import { Route as DashboardSupplyChainRouteImport } from './routes/dashboard.supply-chain'
 import { Route as DashboardTeacherRouteImport } from './routes/dashboard.teacher'
+import { Route as DashboardTeacherBriefRouteImport } from './routes/dashboard.teacher-brief'
+import { Route as DashboardTeacherReviewRouteImport } from './routes/dashboard.teacher-review'
+import { Route as DashboardUploadSafetyRouteImport } from './routes/dashboard.upload-safety'
+import { Route as DashboardWebSecurityRouteImport } from './routes/dashboard.web-security'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -42,6 +103,41 @@ const AlumniIndexRoute = AlumniIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AlumniRoute,
 } as any)
+const AlumniApplicationRoute = AlumniApplicationRouteImport.update({
+  id: '/application',
+  path: '/application',
+  getParentRoute: () => AlumniRoute,
+} as any)
+const AlumniCommunityRoute = AlumniCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => AlumniRoute,
+} as any)
+const AlumniMentoringRoute = AlumniMentoringRouteImport.update({
+  id: '/mentoring',
+  path: '/mentoring',
+  getParentRoute: () => AlumniRoute,
+} as any)
+const AlumniOpportunitiesRoute = AlumniOpportunitiesRouteImport.update({
+  id: '/opportunities',
+  path: '/opportunities',
+  getParentRoute: () => AlumniRoute,
+} as any)
+const AlumniPortfolioRoute = AlumniPortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => AlumniRoute,
+} as any)
+const AuthGuardianLinkRoute = AuthGuardianLinkRouteImport.update({
+  id: '/auth/guardian-link',
+  path: '/auth/guardian-link',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthJoinRoute = AuthJoinRouteImport.update({
+  id: '/auth/join',
+  path: '/auth/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthSignInRoute = AuthSignInRouteImport.update({
   id: '/auth/sign-in',
   path: '/auth/sign-in',
@@ -57,9 +153,115 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardAbuseProtectionRoute =
+  DashboardAbuseProtectionRouteImport.update({
+    id: '/abuse-protection',
+    path: '/abuse-protection',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardAccessibilityRoute = DashboardAccessibilityRouteImport.update({
+  id: '/accessibility',
+  path: '/accessibility',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAchievementIssuerRoute =
+  DashboardAchievementIssuerRouteImport.update({
+    id: '/achievement-issuer',
+    path: '/achievement-issuer',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardAiControlsRoute = DashboardAiControlsRouteImport.update({
+  id: '/ai-controls',
+  path: '/ai-controls',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAuditRoute = DashboardAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardChallengeBuilderRoute =
+  DashboardChallengeBuilderRouteImport.update({
+    id: '/challenge-builder',
+    path: '/challenge-builder',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardChallengeSubmitRoute =
+  DashboardChallengeSubmitRouteImport.update({
+    id: '/challenge-submit',
+    path: '/challenge-submit',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardChallengesRoute = DashboardChallengesRouteImport.update({
+  id: '/challenges',
+  path: '/challenges',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardChildRoute = DashboardChildRouteImport.update({
   id: '/child',
   path: '/child',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardClubBuilderRoute = DashboardClubBuilderRouteImport.update({
+  id: '/club-builder',
+  path: '/club-builder',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardClubSpaceRoute = DashboardClubSpaceRouteImport.update({
+  id: '/club-space',
+  path: '/club-space',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardClubsRoute = DashboardClubsRouteImport.update({
+  id: '/clubs',
+  path: '/clubs',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardConfigurationSecurityRoute =
+  DashboardConfigurationSecurityRouteImport.update({
+    id: '/configuration-security',
+    path: '/configuration-security',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardCreatorRoute = DashboardCreatorRouteImport.update({
+  id: '/creator',
+  path: '/creator',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardCreatorPodcastRoute = DashboardCreatorPodcastRouteImport.update({
+  id: '/creator-podcast',
+  path: '/creator-podcast',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardCreatorProjectRoute = DashboardCreatorProjectRouteImport.update({
+  id: '/creator-project',
+  path: '/creator-project',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardDataRightsRoute = DashboardDataRightsRouteImport.update({
+  id: '/data-rights',
+  path: '/data-rights',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardDiscoverRoute = DashboardDiscoverRouteImport.update({
+  id: '/discover',
+  path: '/discover',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardFamilyPermissionsRoute =
+  DashboardFamilyPermissionsRouteImport.update({
+    id: '/family-permissions',
+    path: '/family-permissions',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardFeedbackRoute = DashboardFeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardFeedbackSendRoute = DashboardFeedbackSendRouteImport.update({
+  id: '/feedback-send',
+  path: '/feedback-send',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardGroupRoute = DashboardGroupRouteImport.update({
@@ -67,14 +269,173 @@ const DashboardGroupRoute = DashboardGroupRouteImport.update({
   path: '/group',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardGroupSchoolsRoute = DashboardGroupSchoolsRouteImport.update({
+  id: '/group-schools',
+  path: '/group-schools',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardIncidentResponseRoute =
+  DashboardIncidentResponseRouteImport.update({
+    id: '/incident-response',
+    path: '/incident-response',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardLicensingRoute = DashboardLicensingRouteImport.update({
+  id: '/licensing',
+  path: '/licensing',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardNotificationsRoute = DashboardNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardObservabilityRoute = DashboardObservabilityRouteImport.update({
+  id: '/observability',
+  path: '/observability',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardOrganisationAdminRoute =
+  DashboardOrganisationAdminRouteImport.update({
+    id: '/organisation-admin',
+    path: '/organisation-admin',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardOrganisationPublisherRoute =
+  DashboardOrganisationPublisherRouteImport.update({
+    id: '/organisation-publisher',
+    path: '/organisation-publisher',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardOrganisationsRoute = DashboardOrganisationsRouteImport.update({
+  id: '/organisations',
+  path: '/organisations',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardParentRoute = DashboardParentRouteImport.update({
   id: '/parent',
   path: '/parent',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardParentAlumniRoute = DashboardParentAlumniRouteImport.update({
+  id: '/parent-alumni',
+  path: '/parent-alumni',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardParentAlumniCommunityRoute =
+  DashboardParentAlumniCommunityRouteImport.update({
+    id: '/parent-alumni-community',
+    path: '/parent-alumni-community',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardParentCircleRoute = DashboardParentCircleRouteImport.update({
+  id: '/parent-circle',
+  path: '/parent-circle',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardParentCommunityRoute =
+  DashboardParentCommunityRouteImport.update({
+    id: '/parent-community',
+    path: '/parent-community',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardParentDirectoryRoute =
+  DashboardParentDirectoryRouteImport.update({
+    id: '/parent-directory',
+    path: '/parent-directory',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardParentEventRoute = DashboardParentEventRouteImport.update({
+  id: '/parent-event',
+  path: '/parent-event',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardPartnerSafetyRoute = DashboardPartnerSafetyRouteImport.update({
+  id: '/partner-safety',
+  path: '/partner-safety',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardPassportRoute = DashboardPassportRouteImport.update({
+  id: '/passport',
+  path: '/passport',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardPrivacyRoute = DashboardPrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardProviderGovernanceRoute =
+  DashboardProviderGovernanceRouteImport.update({
+    id: '/provider-governance',
+    path: '/provider-governance',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardReleaseGovernanceRoute =
+  DashboardReleaseGovernanceRouteImport.update({
+    id: '/release-governance',
+    path: '/release-governance',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+const DashboardReportRoute = DashboardReportRouteImport.update({
+  id: '/report',
+  path: '/report',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardResilienceRoute = DashboardResilienceRouteImport.update({
+  id: '/resilience',
+  path: '/resilience',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSafeguardingRoute = DashboardSafeguardingRouteImport.update({
+  id: '/safeguarding',
+  path: '/safeguarding',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSafeguardingCaseRoute =
+  DashboardSafeguardingCaseRouteImport.update({
+    id: '/safeguarding-case',
+    path: '/safeguarding-case',
+    getParentRoute: () => DashboardRoute,
+  } as any)
 const DashboardSchoolRoute = DashboardSchoolRouteImport.update({
   id: '/school',
   path: '/school',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSchoolPeopleRoute = DashboardSchoolPeopleRouteImport.update({
+  id: '/school-people',
+  path: '/school-people',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSecurityRoute = DashboardSecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSharingRoute = DashboardSharingRouteImport.update({
+  id: '/sharing',
+  path: '/sharing',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardShowBuilderRoute = DashboardShowBuilderRouteImport.update({
+  id: '/show-builder',
+  path: '/show-builder',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardShowsRoute = DashboardShowsRouteImport.update({
+  id: '/shows',
+  path: '/shows',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardStaffRolesRoute = DashboardStaffRolesRouteImport.update({
+  id: '/staff-roles',
+  path: '/staff-roles',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSupplyChainRoute = DashboardSupplyChainRouteImport.update({
+  id: '/supply-chain',
+  path: '/supply-chain',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardTeacherRoute = DashboardTeacherRouteImport.update({
@@ -82,30 +443,172 @@ const DashboardTeacherRoute = DashboardTeacherRouteImport.update({
   path: '/teacher',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardTeacherBriefRoute = DashboardTeacherBriefRouteImport.update({
+  id: '/teacher-brief',
+  path: '/teacher-brief',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardTeacherReviewRoute = DashboardTeacherReviewRouteImport.update({
+  id: '/teacher-review',
+  path: '/teacher-review',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardUploadSafetyRoute = DashboardUploadSafetyRouteImport.update({
+  id: '/upload-safety',
+  path: '/upload-safety',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardWebSecurityRoute = DashboardWebSecurityRouteImport.update({
+  id: '/web-security',
+  path: '/web-security',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alumni': typeof AlumniRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
+  '/alumni/application': typeof AlumniApplicationRoute
+  '/alumni/community': typeof AlumniCommunityRoute
+  '/alumni/mentoring': typeof AlumniMentoringRoute
+  '/alumni/opportunities': typeof AlumniOpportunitiesRoute
+  '/alumni/portfolio': typeof AlumniPortfolioRoute
+  '/auth/guardian-link': typeof AuthGuardianLinkRoute
+  '/auth/join': typeof AuthJoinRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/dashboard/abuse-protection': typeof DashboardAbuseProtectionRoute
+  '/dashboard/accessibility': typeof DashboardAccessibilityRoute
+  '/dashboard/achievement-issuer': typeof DashboardAchievementIssuerRoute
+  '/dashboard/ai-controls': typeof DashboardAiControlsRoute
+  '/dashboard/audit': typeof DashboardAuditRoute
+  '/dashboard/challenge-builder': typeof DashboardChallengeBuilderRoute
+  '/dashboard/challenge-submit': typeof DashboardChallengeSubmitRoute
+  '/dashboard/challenges': typeof DashboardChallengesRoute
   '/dashboard/child': typeof DashboardChildRoute
+  '/dashboard/club-builder': typeof DashboardClubBuilderRoute
+  '/dashboard/club-space': typeof DashboardClubSpaceRoute
+  '/dashboard/clubs': typeof DashboardClubsRoute
+  '/dashboard/configuration-security': typeof DashboardConfigurationSecurityRoute
+  '/dashboard/creator': typeof DashboardCreatorRoute
+  '/dashboard/creator-podcast': typeof DashboardCreatorPodcastRoute
+  '/dashboard/creator-project': typeof DashboardCreatorProjectRoute
+  '/dashboard/data-rights': typeof DashboardDataRightsRoute
+  '/dashboard/discover': typeof DashboardDiscoverRoute
+  '/dashboard/family-permissions': typeof DashboardFamilyPermissionsRoute
+  '/dashboard/feedback': typeof DashboardFeedbackRoute
+  '/dashboard/feedback-send': typeof DashboardFeedbackSendRoute
   '/dashboard/group': typeof DashboardGroupRoute
+  '/dashboard/group-schools': typeof DashboardGroupSchoolsRoute
+  '/dashboard/incident-response': typeof DashboardIncidentResponseRoute
+  '/dashboard/licensing': typeof DashboardLicensingRoute
+  '/dashboard/notifications': typeof DashboardNotificationsRoute
+  '/dashboard/observability': typeof DashboardObservabilityRoute
+  '/dashboard/organisation-admin': typeof DashboardOrganisationAdminRoute
+  '/dashboard/organisation-publisher': typeof DashboardOrganisationPublisherRoute
+  '/dashboard/organisations': typeof DashboardOrganisationsRoute
   '/dashboard/parent': typeof DashboardParentRoute
+  '/dashboard/parent-alumni': typeof DashboardParentAlumniRoute
+  '/dashboard/parent-alumni-community': typeof DashboardParentAlumniCommunityRoute
+  '/dashboard/parent-circle': typeof DashboardParentCircleRoute
+  '/dashboard/parent-community': typeof DashboardParentCommunityRoute
+  '/dashboard/parent-directory': typeof DashboardParentDirectoryRoute
+  '/dashboard/parent-event': typeof DashboardParentEventRoute
+  '/dashboard/partner-safety': typeof DashboardPartnerSafetyRoute
+  '/dashboard/passport': typeof DashboardPassportRoute
+  '/dashboard/privacy': typeof DashboardPrivacyRoute
+  '/dashboard/provider-governance': typeof DashboardProviderGovernanceRoute
+  '/dashboard/release-governance': typeof DashboardReleaseGovernanceRoute
+  '/dashboard/report': typeof DashboardReportRoute
+  '/dashboard/resilience': typeof DashboardResilienceRoute
+  '/dashboard/safeguarding': typeof DashboardSafeguardingRoute
+  '/dashboard/safeguarding-case': typeof DashboardSafeguardingCaseRoute
   '/dashboard/school': typeof DashboardSchoolRoute
+  '/dashboard/school-people': typeof DashboardSchoolPeopleRoute
+  '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard/sharing': typeof DashboardSharingRoute
+  '/dashboard/show-builder': typeof DashboardShowBuilderRoute
+  '/dashboard/shows': typeof DashboardShowsRoute
+  '/dashboard/staff-roles': typeof DashboardStaffRolesRoute
+  '/dashboard/supply-chain': typeof DashboardSupplyChainRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/dashboard/teacher-brief': typeof DashboardTeacherBriefRoute
+  '/dashboard/teacher-review': typeof DashboardTeacherReviewRoute
+  '/dashboard/upload-safety': typeof DashboardUploadSafetyRoute
+  '/dashboard/web-security': typeof DashboardWebSecurityRoute
   '/alumni/': typeof AlumniIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alumni/application': typeof AlumniApplicationRoute
+  '/alumni/community': typeof AlumniCommunityRoute
+  '/alumni/mentoring': typeof AlumniMentoringRoute
+  '/alumni/opportunities': typeof AlumniOpportunitiesRoute
+  '/alumni/portfolio': typeof AlumniPortfolioRoute
+  '/auth/guardian-link': typeof AuthGuardianLinkRoute
+  '/auth/join': typeof AuthJoinRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/dashboard/abuse-protection': typeof DashboardAbuseProtectionRoute
+  '/dashboard/accessibility': typeof DashboardAccessibilityRoute
+  '/dashboard/achievement-issuer': typeof DashboardAchievementIssuerRoute
+  '/dashboard/ai-controls': typeof DashboardAiControlsRoute
+  '/dashboard/audit': typeof DashboardAuditRoute
+  '/dashboard/challenge-builder': typeof DashboardChallengeBuilderRoute
+  '/dashboard/challenge-submit': typeof DashboardChallengeSubmitRoute
+  '/dashboard/challenges': typeof DashboardChallengesRoute
   '/dashboard/child': typeof DashboardChildRoute
+  '/dashboard/club-builder': typeof DashboardClubBuilderRoute
+  '/dashboard/club-space': typeof DashboardClubSpaceRoute
+  '/dashboard/clubs': typeof DashboardClubsRoute
+  '/dashboard/configuration-security': typeof DashboardConfigurationSecurityRoute
+  '/dashboard/creator': typeof DashboardCreatorRoute
+  '/dashboard/creator-podcast': typeof DashboardCreatorPodcastRoute
+  '/dashboard/creator-project': typeof DashboardCreatorProjectRoute
+  '/dashboard/data-rights': typeof DashboardDataRightsRoute
+  '/dashboard/discover': typeof DashboardDiscoverRoute
+  '/dashboard/family-permissions': typeof DashboardFamilyPermissionsRoute
+  '/dashboard/feedback': typeof DashboardFeedbackRoute
+  '/dashboard/feedback-send': typeof DashboardFeedbackSendRoute
   '/dashboard/group': typeof DashboardGroupRoute
+  '/dashboard/group-schools': typeof DashboardGroupSchoolsRoute
+  '/dashboard/incident-response': typeof DashboardIncidentResponseRoute
+  '/dashboard/licensing': typeof DashboardLicensingRoute
+  '/dashboard/notifications': typeof DashboardNotificationsRoute
+  '/dashboard/observability': typeof DashboardObservabilityRoute
+  '/dashboard/organisation-admin': typeof DashboardOrganisationAdminRoute
+  '/dashboard/organisation-publisher': typeof DashboardOrganisationPublisherRoute
+  '/dashboard/organisations': typeof DashboardOrganisationsRoute
   '/dashboard/parent': typeof DashboardParentRoute
+  '/dashboard/parent-alumni': typeof DashboardParentAlumniRoute
+  '/dashboard/parent-alumni-community': typeof DashboardParentAlumniCommunityRoute
+  '/dashboard/parent-circle': typeof DashboardParentCircleRoute
+  '/dashboard/parent-community': typeof DashboardParentCommunityRoute
+  '/dashboard/parent-directory': typeof DashboardParentDirectoryRoute
+  '/dashboard/parent-event': typeof DashboardParentEventRoute
+  '/dashboard/partner-safety': typeof DashboardPartnerSafetyRoute
+  '/dashboard/passport': typeof DashboardPassportRoute
+  '/dashboard/privacy': typeof DashboardPrivacyRoute
+  '/dashboard/provider-governance': typeof DashboardProviderGovernanceRoute
+  '/dashboard/release-governance': typeof DashboardReleaseGovernanceRoute
+  '/dashboard/report': typeof DashboardReportRoute
+  '/dashboard/resilience': typeof DashboardResilienceRoute
+  '/dashboard/safeguarding': typeof DashboardSafeguardingRoute
+  '/dashboard/safeguarding-case': typeof DashboardSafeguardingCaseRoute
   '/dashboard/school': typeof DashboardSchoolRoute
+  '/dashboard/school-people': typeof DashboardSchoolPeopleRoute
+  '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard/sharing': typeof DashboardSharingRoute
+  '/dashboard/show-builder': typeof DashboardShowBuilderRoute
+  '/dashboard/shows': typeof DashboardShowsRoute
+  '/dashboard/staff-roles': typeof DashboardStaffRolesRoute
+  '/dashboard/supply-chain': typeof DashboardSupplyChainRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/dashboard/teacher-brief': typeof DashboardTeacherBriefRoute
+  '/dashboard/teacher-review': typeof DashboardTeacherReviewRoute
+  '/dashboard/upload-safety': typeof DashboardUploadSafetyRoute
+  '/dashboard/web-security': typeof DashboardWebSecurityRoute
   '/alumni': typeof AlumniIndexRoute
   '/dashboard': typeof DashboardIndexRoute
 }
@@ -114,13 +617,74 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/alumni': typeof AlumniRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
+  '/alumni/application': typeof AlumniApplicationRoute
+  '/alumni/community': typeof AlumniCommunityRoute
+  '/alumni/mentoring': typeof AlumniMentoringRoute
+  '/alumni/opportunities': typeof AlumniOpportunitiesRoute
+  '/alumni/portfolio': typeof AlumniPortfolioRoute
+  '/auth/guardian-link': typeof AuthGuardianLinkRoute
+  '/auth/join': typeof AuthJoinRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/dashboard/abuse-protection': typeof DashboardAbuseProtectionRoute
+  '/dashboard/accessibility': typeof DashboardAccessibilityRoute
+  '/dashboard/achievement-issuer': typeof DashboardAchievementIssuerRoute
+  '/dashboard/ai-controls': typeof DashboardAiControlsRoute
+  '/dashboard/audit': typeof DashboardAuditRoute
+  '/dashboard/challenge-builder': typeof DashboardChallengeBuilderRoute
+  '/dashboard/challenge-submit': typeof DashboardChallengeSubmitRoute
+  '/dashboard/challenges': typeof DashboardChallengesRoute
   '/dashboard/child': typeof DashboardChildRoute
+  '/dashboard/club-builder': typeof DashboardClubBuilderRoute
+  '/dashboard/club-space': typeof DashboardClubSpaceRoute
+  '/dashboard/clubs': typeof DashboardClubsRoute
+  '/dashboard/configuration-security': typeof DashboardConfigurationSecurityRoute
+  '/dashboard/creator': typeof DashboardCreatorRoute
+  '/dashboard/creator-podcast': typeof DashboardCreatorPodcastRoute
+  '/dashboard/creator-project': typeof DashboardCreatorProjectRoute
+  '/dashboard/data-rights': typeof DashboardDataRightsRoute
+  '/dashboard/discover': typeof DashboardDiscoverRoute
+  '/dashboard/family-permissions': typeof DashboardFamilyPermissionsRoute
+  '/dashboard/feedback': typeof DashboardFeedbackRoute
+  '/dashboard/feedback-send': typeof DashboardFeedbackSendRoute
   '/dashboard/group': typeof DashboardGroupRoute
+  '/dashboard/group-schools': typeof DashboardGroupSchoolsRoute
+  '/dashboard/incident-response': typeof DashboardIncidentResponseRoute
+  '/dashboard/licensing': typeof DashboardLicensingRoute
+  '/dashboard/notifications': typeof DashboardNotificationsRoute
+  '/dashboard/observability': typeof DashboardObservabilityRoute
+  '/dashboard/organisation-admin': typeof DashboardOrganisationAdminRoute
+  '/dashboard/organisation-publisher': typeof DashboardOrganisationPublisherRoute
+  '/dashboard/organisations': typeof DashboardOrganisationsRoute
   '/dashboard/parent': typeof DashboardParentRoute
+  '/dashboard/parent-alumni': typeof DashboardParentAlumniRoute
+  '/dashboard/parent-alumni-community': typeof DashboardParentAlumniCommunityRoute
+  '/dashboard/parent-circle': typeof DashboardParentCircleRoute
+  '/dashboard/parent-community': typeof DashboardParentCommunityRoute
+  '/dashboard/parent-directory': typeof DashboardParentDirectoryRoute
+  '/dashboard/parent-event': typeof DashboardParentEventRoute
+  '/dashboard/partner-safety': typeof DashboardPartnerSafetyRoute
+  '/dashboard/passport': typeof DashboardPassportRoute
+  '/dashboard/privacy': typeof DashboardPrivacyRoute
+  '/dashboard/provider-governance': typeof DashboardProviderGovernanceRoute
+  '/dashboard/release-governance': typeof DashboardReleaseGovernanceRoute
+  '/dashboard/report': typeof DashboardReportRoute
+  '/dashboard/resilience': typeof DashboardResilienceRoute
+  '/dashboard/safeguarding': typeof DashboardSafeguardingRoute
+  '/dashboard/safeguarding-case': typeof DashboardSafeguardingCaseRoute
   '/dashboard/school': typeof DashboardSchoolRoute
+  '/dashboard/school-people': typeof DashboardSchoolPeopleRoute
+  '/dashboard/security': typeof DashboardSecurityRoute
+  '/dashboard/sharing': typeof DashboardSharingRoute
+  '/dashboard/show-builder': typeof DashboardShowBuilderRoute
+  '/dashboard/shows': typeof DashboardShowsRoute
+  '/dashboard/staff-roles': typeof DashboardStaffRolesRoute
+  '/dashboard/supply-chain': typeof DashboardSupplyChainRoute
   '/dashboard/teacher': typeof DashboardTeacherRoute
+  '/dashboard/teacher-brief': typeof DashboardTeacherBriefRoute
+  '/dashboard/teacher-review': typeof DashboardTeacherReviewRoute
+  '/dashboard/upload-safety': typeof DashboardUploadSafetyRoute
+  '/dashboard/web-security': typeof DashboardWebSecurityRoute
   '/alumni/': typeof AlumniIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -130,25 +694,147 @@ export interface FileRouteTypes {
     | '/'
     | '/alumni'
     | '/dashboard'
+    | '/alumni/application'
+    | '/alumni/community'
+    | '/alumni/mentoring'
+    | '/alumni/opportunities'
+    | '/alumni/portfolio'
+    | '/auth/guardian-link'
+    | '/auth/join'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/dashboard/abuse-protection'
+    | '/dashboard/accessibility'
+    | '/dashboard/achievement-issuer'
+    | '/dashboard/ai-controls'
+    | '/dashboard/audit'
+    | '/dashboard/challenge-builder'
+    | '/dashboard/challenge-submit'
+    | '/dashboard/challenges'
     | '/dashboard/child'
+    | '/dashboard/club-builder'
+    | '/dashboard/club-space'
+    | '/dashboard/clubs'
+    | '/dashboard/configuration-security'
+    | '/dashboard/creator'
+    | '/dashboard/creator-podcast'
+    | '/dashboard/creator-project'
+    | '/dashboard/data-rights'
+    | '/dashboard/discover'
+    | '/dashboard/family-permissions'
+    | '/dashboard/feedback'
+    | '/dashboard/feedback-send'
     | '/dashboard/group'
+    | '/dashboard/group-schools'
+    | '/dashboard/incident-response'
+    | '/dashboard/licensing'
+    | '/dashboard/notifications'
+    | '/dashboard/observability'
+    | '/dashboard/organisation-admin'
+    | '/dashboard/organisation-publisher'
+    | '/dashboard/organisations'
     | '/dashboard/parent'
+    | '/dashboard/parent-alumni'
+    | '/dashboard/parent-alumni-community'
+    | '/dashboard/parent-circle'
+    | '/dashboard/parent-community'
+    | '/dashboard/parent-directory'
+    | '/dashboard/parent-event'
+    | '/dashboard/partner-safety'
+    | '/dashboard/passport'
+    | '/dashboard/privacy'
+    | '/dashboard/provider-governance'
+    | '/dashboard/release-governance'
+    | '/dashboard/report'
+    | '/dashboard/resilience'
+    | '/dashboard/safeguarding'
+    | '/dashboard/safeguarding-case'
     | '/dashboard/school'
+    | '/dashboard/school-people'
+    | '/dashboard/security'
+    | '/dashboard/sharing'
+    | '/dashboard/show-builder'
+    | '/dashboard/shows'
+    | '/dashboard/staff-roles'
+    | '/dashboard/supply-chain'
     | '/dashboard/teacher'
+    | '/dashboard/teacher-brief'
+    | '/dashboard/teacher-review'
+    | '/dashboard/upload-safety'
+    | '/dashboard/web-security'
     | '/alumni/'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/alumni/application'
+    | '/alumni/community'
+    | '/alumni/mentoring'
+    | '/alumni/opportunities'
+    | '/alumni/portfolio'
+    | '/auth/guardian-link'
+    | '/auth/join'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/dashboard/abuse-protection'
+    | '/dashboard/accessibility'
+    | '/dashboard/achievement-issuer'
+    | '/dashboard/ai-controls'
+    | '/dashboard/audit'
+    | '/dashboard/challenge-builder'
+    | '/dashboard/challenge-submit'
+    | '/dashboard/challenges'
     | '/dashboard/child'
+    | '/dashboard/club-builder'
+    | '/dashboard/club-space'
+    | '/dashboard/clubs'
+    | '/dashboard/configuration-security'
+    | '/dashboard/creator'
+    | '/dashboard/creator-podcast'
+    | '/dashboard/creator-project'
+    | '/dashboard/data-rights'
+    | '/dashboard/discover'
+    | '/dashboard/family-permissions'
+    | '/dashboard/feedback'
+    | '/dashboard/feedback-send'
     | '/dashboard/group'
+    | '/dashboard/group-schools'
+    | '/dashboard/incident-response'
+    | '/dashboard/licensing'
+    | '/dashboard/notifications'
+    | '/dashboard/observability'
+    | '/dashboard/organisation-admin'
+    | '/dashboard/organisation-publisher'
+    | '/dashboard/organisations'
     | '/dashboard/parent'
+    | '/dashboard/parent-alumni'
+    | '/dashboard/parent-alumni-community'
+    | '/dashboard/parent-circle'
+    | '/dashboard/parent-community'
+    | '/dashboard/parent-directory'
+    | '/dashboard/parent-event'
+    | '/dashboard/partner-safety'
+    | '/dashboard/passport'
+    | '/dashboard/privacy'
+    | '/dashboard/provider-governance'
+    | '/dashboard/release-governance'
+    | '/dashboard/report'
+    | '/dashboard/resilience'
+    | '/dashboard/safeguarding'
+    | '/dashboard/safeguarding-case'
     | '/dashboard/school'
+    | '/dashboard/school-people'
+    | '/dashboard/security'
+    | '/dashboard/sharing'
+    | '/dashboard/show-builder'
+    | '/dashboard/shows'
+    | '/dashboard/staff-roles'
+    | '/dashboard/supply-chain'
     | '/dashboard/teacher'
+    | '/dashboard/teacher-brief'
+    | '/dashboard/teacher-review'
+    | '/dashboard/upload-safety'
+    | '/dashboard/web-security'
     | '/alumni'
     | '/dashboard'
   id:
@@ -156,13 +842,74 @@ export interface FileRouteTypes {
     | '/'
     | '/alumni'
     | '/dashboard'
+    | '/alumni/application'
+    | '/alumni/community'
+    | '/alumni/mentoring'
+    | '/alumni/opportunities'
+    | '/alumni/portfolio'
+    | '/auth/guardian-link'
+    | '/auth/join'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/dashboard/abuse-protection'
+    | '/dashboard/accessibility'
+    | '/dashboard/achievement-issuer'
+    | '/dashboard/ai-controls'
+    | '/dashboard/audit'
+    | '/dashboard/challenge-builder'
+    | '/dashboard/challenge-submit'
+    | '/dashboard/challenges'
     | '/dashboard/child'
+    | '/dashboard/club-builder'
+    | '/dashboard/club-space'
+    | '/dashboard/clubs'
+    | '/dashboard/configuration-security'
+    | '/dashboard/creator'
+    | '/dashboard/creator-podcast'
+    | '/dashboard/creator-project'
+    | '/dashboard/data-rights'
+    | '/dashboard/discover'
+    | '/dashboard/family-permissions'
+    | '/dashboard/feedback'
+    | '/dashboard/feedback-send'
     | '/dashboard/group'
+    | '/dashboard/group-schools'
+    | '/dashboard/incident-response'
+    | '/dashboard/licensing'
+    | '/dashboard/notifications'
+    | '/dashboard/observability'
+    | '/dashboard/organisation-admin'
+    | '/dashboard/organisation-publisher'
+    | '/dashboard/organisations'
     | '/dashboard/parent'
+    | '/dashboard/parent-alumni'
+    | '/dashboard/parent-alumni-community'
+    | '/dashboard/parent-circle'
+    | '/dashboard/parent-community'
+    | '/dashboard/parent-directory'
+    | '/dashboard/parent-event'
+    | '/dashboard/partner-safety'
+    | '/dashboard/passport'
+    | '/dashboard/privacy'
+    | '/dashboard/provider-governance'
+    | '/dashboard/release-governance'
+    | '/dashboard/report'
+    | '/dashboard/resilience'
+    | '/dashboard/safeguarding'
+    | '/dashboard/safeguarding-case'
     | '/dashboard/school'
+    | '/dashboard/school-people'
+    | '/dashboard/security'
+    | '/dashboard/sharing'
+    | '/dashboard/show-builder'
+    | '/dashboard/shows'
+    | '/dashboard/staff-roles'
+    | '/dashboard/supply-chain'
     | '/dashboard/teacher'
+    | '/dashboard/teacher-brief'
+    | '/dashboard/teacher-review'
+    | '/dashboard/upload-safety'
+    | '/dashboard/web-security'
     | '/alumni/'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
@@ -171,6 +918,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AlumniRoute: typeof AlumniRouteWithChildren
   DashboardRoute: typeof DashboardRouteWithChildren
+  AuthGuardianLinkRoute: typeof AuthGuardianLinkRoute
+  AuthJoinRoute: typeof AuthJoinRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
 }
@@ -205,6 +954,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlumniIndexRouteImport
       parentRoute: typeof AlumniRoute
     }
+    '/alumni/application': {
+      id: '/alumni/application'
+      path: '/application'
+      fullPath: '/alumni/application'
+      preLoaderRoute: typeof AlumniApplicationRouteImport
+      parentRoute: typeof AlumniRoute
+    }
+    '/alumni/community': {
+      id: '/alumni/community'
+      path: '/community'
+      fullPath: '/alumni/community'
+      preLoaderRoute: typeof AlumniCommunityRouteImport
+      parentRoute: typeof AlumniRoute
+    }
+    '/alumni/mentoring': {
+      id: '/alumni/mentoring'
+      path: '/mentoring'
+      fullPath: '/alumni/mentoring'
+      preLoaderRoute: typeof AlumniMentoringRouteImport
+      parentRoute: typeof AlumniRoute
+    }
+    '/alumni/opportunities': {
+      id: '/alumni/opportunities'
+      path: '/opportunities'
+      fullPath: '/alumni/opportunities'
+      preLoaderRoute: typeof AlumniOpportunitiesRouteImport
+      parentRoute: typeof AlumniRoute
+    }
+    '/alumni/portfolio': {
+      id: '/alumni/portfolio'
+      path: '/portfolio'
+      fullPath: '/alumni/portfolio'
+      preLoaderRoute: typeof AlumniPortfolioRouteImport
+      parentRoute: typeof AlumniRoute
+    }
+    '/auth/guardian-link': {
+      id: '/auth/guardian-link'
+      path: '/auth/guardian-link'
+      fullPath: '/auth/guardian-link'
+      preLoaderRoute: typeof AuthGuardianLinkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/join': {
+      id: '/auth/join'
+      path: '/auth/join'
+      fullPath: '/auth/join'
+      preLoaderRoute: typeof AuthJoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/sign-in': {
       id: '/auth/sign-in'
       path: '/auth/sign-in'
@@ -226,11 +1024,151 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/abuse-protection': {
+      id: '/dashboard/abuse-protection'
+      path: '/abuse-protection'
+      fullPath: '/dashboard/abuse-protection'
+      preLoaderRoute: typeof DashboardAbuseProtectionRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/accessibility': {
+      id: '/dashboard/accessibility'
+      path: '/accessibility'
+      fullPath: '/dashboard/accessibility'
+      preLoaderRoute: typeof DashboardAccessibilityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/achievement-issuer': {
+      id: '/dashboard/achievement-issuer'
+      path: '/achievement-issuer'
+      fullPath: '/dashboard/achievement-issuer'
+      preLoaderRoute: typeof DashboardAchievementIssuerRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/ai-controls': {
+      id: '/dashboard/ai-controls'
+      path: '/ai-controls'
+      fullPath: '/dashboard/ai-controls'
+      preLoaderRoute: typeof DashboardAiControlsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/audit': {
+      id: '/dashboard/audit'
+      path: '/audit'
+      fullPath: '/dashboard/audit'
+      preLoaderRoute: typeof DashboardAuditRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/challenge-builder': {
+      id: '/dashboard/challenge-builder'
+      path: '/challenge-builder'
+      fullPath: '/dashboard/challenge-builder'
+      preLoaderRoute: typeof DashboardChallengeBuilderRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/challenge-submit': {
+      id: '/dashboard/challenge-submit'
+      path: '/challenge-submit'
+      fullPath: '/dashboard/challenge-submit'
+      preLoaderRoute: typeof DashboardChallengeSubmitRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/challenges': {
+      id: '/dashboard/challenges'
+      path: '/challenges'
+      fullPath: '/dashboard/challenges'
+      preLoaderRoute: typeof DashboardChallengesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/child': {
       id: '/dashboard/child'
       path: '/child'
       fullPath: '/dashboard/child'
       preLoaderRoute: typeof DashboardChildRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/club-builder': {
+      id: '/dashboard/club-builder'
+      path: '/club-builder'
+      fullPath: '/dashboard/club-builder'
+      preLoaderRoute: typeof DashboardClubBuilderRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/club-space': {
+      id: '/dashboard/club-space'
+      path: '/club-space'
+      fullPath: '/dashboard/club-space'
+      preLoaderRoute: typeof DashboardClubSpaceRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/clubs': {
+      id: '/dashboard/clubs'
+      path: '/clubs'
+      fullPath: '/dashboard/clubs'
+      preLoaderRoute: typeof DashboardClubsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/configuration-security': {
+      id: '/dashboard/configuration-security'
+      path: '/configuration-security'
+      fullPath: '/dashboard/configuration-security'
+      preLoaderRoute: typeof DashboardConfigurationSecurityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/creator': {
+      id: '/dashboard/creator'
+      path: '/creator'
+      fullPath: '/dashboard/creator'
+      preLoaderRoute: typeof DashboardCreatorRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/creator-podcast': {
+      id: '/dashboard/creator-podcast'
+      path: '/creator-podcast'
+      fullPath: '/dashboard/creator-podcast'
+      preLoaderRoute: typeof DashboardCreatorPodcastRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/creator-project': {
+      id: '/dashboard/creator-project'
+      path: '/creator-project'
+      fullPath: '/dashboard/creator-project'
+      preLoaderRoute: typeof DashboardCreatorProjectRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/data-rights': {
+      id: '/dashboard/data-rights'
+      path: '/data-rights'
+      fullPath: '/dashboard/data-rights'
+      preLoaderRoute: typeof DashboardDataRightsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/discover': {
+      id: '/dashboard/discover'
+      path: '/discover'
+      fullPath: '/dashboard/discover'
+      preLoaderRoute: typeof DashboardDiscoverRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/family-permissions': {
+      id: '/dashboard/family-permissions'
+      path: '/family-permissions'
+      fullPath: '/dashboard/family-permissions'
+      preLoaderRoute: typeof DashboardFamilyPermissionsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/feedback': {
+      id: '/dashboard/feedback'
+      path: '/feedback'
+      fullPath: '/dashboard/feedback'
+      preLoaderRoute: typeof DashboardFeedbackRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/feedback-send': {
+      id: '/dashboard/feedback-send'
+      path: '/feedback-send'
+      fullPath: '/dashboard/feedback-send'
+      preLoaderRoute: typeof DashboardFeedbackSendRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/group': {
@@ -240,11 +1178,172 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardGroupRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/group-schools': {
+      id: '/dashboard/group-schools'
+      path: '/group-schools'
+      fullPath: '/dashboard/group-schools'
+      preLoaderRoute: typeof DashboardGroupSchoolsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/incident-response': {
+      id: '/dashboard/incident-response'
+      path: '/incident-response'
+      fullPath: '/dashboard/incident-response'
+      preLoaderRoute: typeof DashboardIncidentResponseRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/licensing': {
+      id: '/dashboard/licensing'
+      path: '/licensing'
+      fullPath: '/dashboard/licensing'
+      preLoaderRoute: typeof DashboardLicensingRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/notifications': {
+      id: '/dashboard/notifications'
+      path: '/notifications'
+      fullPath: '/dashboard/notifications'
+      preLoaderRoute: typeof DashboardNotificationsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/observability': {
+      id: '/dashboard/observability'
+      path: '/observability'
+      fullPath: '/dashboard/observability'
+      preLoaderRoute: typeof DashboardObservabilityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/organisation-admin': {
+      id: '/dashboard/organisation-admin'
+      path: '/organisation-admin'
+      fullPath: '/dashboard/organisation-admin'
+      preLoaderRoute: typeof DashboardOrganisationAdminRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/organisation-publisher': {
+      id: '/dashboard/organisation-publisher'
+      path: '/organisation-publisher'
+      fullPath: '/dashboard/organisation-publisher'
+      preLoaderRoute: typeof DashboardOrganisationPublisherRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/organisations': {
+      id: '/dashboard/organisations'
+      path: '/organisations'
+      fullPath: '/dashboard/organisations'
+      preLoaderRoute: typeof DashboardOrganisationsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/parent': {
       id: '/dashboard/parent'
       path: '/parent'
       fullPath: '/dashboard/parent'
       preLoaderRoute: typeof DashboardParentRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/parent-alumni': {
+      id: '/dashboard/parent-alumni'
+      path: '/parent-alumni'
+      fullPath: '/dashboard/parent-alumni'
+      preLoaderRoute: typeof DashboardParentAlumniRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/parent-alumni-community': {
+      id: '/dashboard/parent-alumni-community'
+      path: '/parent-alumni-community'
+      fullPath: '/dashboard/parent-alumni-community'
+      preLoaderRoute: typeof DashboardParentAlumniCommunityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/parent-circle': {
+      id: '/dashboard/parent-circle'
+      path: '/parent-circle'
+      fullPath: '/dashboard/parent-circle'
+      preLoaderRoute: typeof DashboardParentCircleRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/parent-community': {
+      id: '/dashboard/parent-community'
+      path: '/parent-community'
+      fullPath: '/dashboard/parent-community'
+      preLoaderRoute: typeof DashboardParentCommunityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/parent-directory': {
+      id: '/dashboard/parent-directory'
+      path: '/parent-directory'
+      fullPath: '/dashboard/parent-directory'
+      preLoaderRoute: typeof DashboardParentDirectoryRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/parent-event': {
+      id: '/dashboard/parent-event'
+      path: '/parent-event'
+      fullPath: '/dashboard/parent-event'
+      preLoaderRoute: typeof DashboardParentEventRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/partner-safety': {
+      id: '/dashboard/partner-safety'
+      path: '/partner-safety'
+      fullPath: '/dashboard/partner-safety'
+      preLoaderRoute: typeof DashboardPartnerSafetyRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/passport': {
+      id: '/dashboard/passport'
+      path: '/passport'
+      fullPath: '/dashboard/passport'
+      preLoaderRoute: typeof DashboardPassportRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/privacy': {
+      id: '/dashboard/privacy'
+      path: '/privacy'
+      fullPath: '/dashboard/privacy'
+      preLoaderRoute: typeof DashboardPrivacyRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/provider-governance': {
+      id: '/dashboard/provider-governance'
+      path: '/provider-governance'
+      fullPath: '/dashboard/provider-governance'
+      preLoaderRoute: typeof DashboardProviderGovernanceRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/release-governance': {
+      id: '/dashboard/release-governance'
+      path: '/release-governance'
+      fullPath: '/dashboard/release-governance'
+      preLoaderRoute: typeof DashboardReleaseGovernanceRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/report': {
+      id: '/dashboard/report'
+      path: '/report'
+      fullPath: '/dashboard/report'
+      preLoaderRoute: typeof DashboardReportRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/resilience': {
+      id: '/dashboard/resilience'
+      path: '/resilience'
+      fullPath: '/dashboard/resilience'
+      preLoaderRoute: typeof DashboardResilienceRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/safeguarding': {
+      id: '/dashboard/safeguarding'
+      path: '/safeguarding'
+      fullPath: '/dashboard/safeguarding'
+      preLoaderRoute: typeof DashboardSafeguardingRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/safeguarding-case': {
+      id: '/dashboard/safeguarding-case'
+      path: '/safeguarding-case'
+      fullPath: '/dashboard/safeguarding-case'
+      preLoaderRoute: typeof DashboardSafeguardingCaseRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/school': {
@@ -254,6 +1353,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSchoolRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/school-people': {
+      id: '/dashboard/school-people'
+      path: '/school-people'
+      fullPath: '/dashboard/school-people'
+      preLoaderRoute: typeof DashboardSchoolPeopleRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/security': {
+      id: '/dashboard/security'
+      path: '/security'
+      fullPath: '/dashboard/security'
+      preLoaderRoute: typeof DashboardSecurityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/sharing': {
+      id: '/dashboard/sharing'
+      path: '/sharing'
+      fullPath: '/dashboard/sharing'
+      preLoaderRoute: typeof DashboardSharingRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/show-builder': {
+      id: '/dashboard/show-builder'
+      path: '/show-builder'
+      fullPath: '/dashboard/show-builder'
+      preLoaderRoute: typeof DashboardShowBuilderRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/shows': {
+      id: '/dashboard/shows'
+      path: '/shows'
+      fullPath: '/dashboard/shows'
+      preLoaderRoute: typeof DashboardShowsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/staff-roles': {
+      id: '/dashboard/staff-roles'
+      path: '/staff-roles'
+      fullPath: '/dashboard/staff-roles'
+      preLoaderRoute: typeof DashboardStaffRolesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/supply-chain': {
+      id: '/dashboard/supply-chain'
+      path: '/supply-chain'
+      fullPath: '/dashboard/supply-chain'
+      preLoaderRoute: typeof DashboardSupplyChainRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/teacher': {
       id: '/dashboard/teacher'
       path: '/teacher'
@@ -261,14 +1409,52 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardTeacherRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/teacher-brief': {
+      id: '/dashboard/teacher-brief'
+      path: '/teacher-brief'
+      fullPath: '/dashboard/teacher-brief'
+      preLoaderRoute: typeof DashboardTeacherBriefRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/teacher-review': {
+      id: '/dashboard/teacher-review'
+      path: '/teacher-review'
+      fullPath: '/dashboard/teacher-review'
+      preLoaderRoute: typeof DashboardTeacherReviewRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/upload-safety': {
+      id: '/dashboard/upload-safety'
+      path: '/upload-safety'
+      fullPath: '/dashboard/upload-safety'
+      preLoaderRoute: typeof DashboardUploadSafetyRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/web-security': {
+      id: '/dashboard/web-security'
+      path: '/web-security'
+      fullPath: '/dashboard/web-security'
+      preLoaderRoute: typeof DashboardWebSecurityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
   }
 }
 
 interface AlumniRouteChildren {
+  AlumniApplicationRoute: typeof AlumniApplicationRoute
+  AlumniCommunityRoute: typeof AlumniCommunityRoute
+  AlumniMentoringRoute: typeof AlumniMentoringRoute
+  AlumniOpportunitiesRoute: typeof AlumniOpportunitiesRoute
+  AlumniPortfolioRoute: typeof AlumniPortfolioRoute
   AlumniIndexRoute: typeof AlumniIndexRoute
 }
 
 const AlumniRouteChildren: AlumniRouteChildren = {
+  AlumniApplicationRoute: AlumniApplicationRoute,
+  AlumniCommunityRoute: AlumniCommunityRoute,
+  AlumniMentoringRoute: AlumniMentoringRoute,
+  AlumniOpportunitiesRoute: AlumniOpportunitiesRoute,
+  AlumniPortfolioRoute: AlumniPortfolioRoute,
   AlumniIndexRoute: AlumniIndexRoute,
 }
 
@@ -276,20 +1462,128 @@ const AlumniRouteWithChildren =
   AlumniRoute._addFileChildren(AlumniRouteChildren)
 
 interface DashboardRouteChildren {
+  DashboardAbuseProtectionRoute: typeof DashboardAbuseProtectionRoute
+  DashboardAccessibilityRoute: typeof DashboardAccessibilityRoute
+  DashboardAchievementIssuerRoute: typeof DashboardAchievementIssuerRoute
+  DashboardAiControlsRoute: typeof DashboardAiControlsRoute
+  DashboardAuditRoute: typeof DashboardAuditRoute
+  DashboardChallengeBuilderRoute: typeof DashboardChallengeBuilderRoute
+  DashboardChallengeSubmitRoute: typeof DashboardChallengeSubmitRoute
+  DashboardChallengesRoute: typeof DashboardChallengesRoute
   DashboardChildRoute: typeof DashboardChildRoute
+  DashboardClubBuilderRoute: typeof DashboardClubBuilderRoute
+  DashboardClubSpaceRoute: typeof DashboardClubSpaceRoute
+  DashboardClubsRoute: typeof DashboardClubsRoute
+  DashboardConfigurationSecurityRoute: typeof DashboardConfigurationSecurityRoute
+  DashboardCreatorRoute: typeof DashboardCreatorRoute
+  DashboardCreatorPodcastRoute: typeof DashboardCreatorPodcastRoute
+  DashboardCreatorProjectRoute: typeof DashboardCreatorProjectRoute
+  DashboardDataRightsRoute: typeof DashboardDataRightsRoute
+  DashboardDiscoverRoute: typeof DashboardDiscoverRoute
+  DashboardFamilyPermissionsRoute: typeof DashboardFamilyPermissionsRoute
+  DashboardFeedbackRoute: typeof DashboardFeedbackRoute
+  DashboardFeedbackSendRoute: typeof DashboardFeedbackSendRoute
   DashboardGroupRoute: typeof DashboardGroupRoute
+  DashboardGroupSchoolsRoute: typeof DashboardGroupSchoolsRoute
+  DashboardIncidentResponseRoute: typeof DashboardIncidentResponseRoute
+  DashboardLicensingRoute: typeof DashboardLicensingRoute
+  DashboardNotificationsRoute: typeof DashboardNotificationsRoute
+  DashboardObservabilityRoute: typeof DashboardObservabilityRoute
+  DashboardOrganisationAdminRoute: typeof DashboardOrganisationAdminRoute
+  DashboardOrganisationPublisherRoute: typeof DashboardOrganisationPublisherRoute
+  DashboardOrganisationsRoute: typeof DashboardOrganisationsRoute
   DashboardParentRoute: typeof DashboardParentRoute
+  DashboardParentAlumniRoute: typeof DashboardParentAlumniRoute
+  DashboardParentAlumniCommunityRoute: typeof DashboardParentAlumniCommunityRoute
+  DashboardParentCircleRoute: typeof DashboardParentCircleRoute
+  DashboardParentCommunityRoute: typeof DashboardParentCommunityRoute
+  DashboardParentDirectoryRoute: typeof DashboardParentDirectoryRoute
+  DashboardParentEventRoute: typeof DashboardParentEventRoute
+  DashboardPartnerSafetyRoute: typeof DashboardPartnerSafetyRoute
+  DashboardPassportRoute: typeof DashboardPassportRoute
+  DashboardPrivacyRoute: typeof DashboardPrivacyRoute
+  DashboardProviderGovernanceRoute: typeof DashboardProviderGovernanceRoute
+  DashboardReleaseGovernanceRoute: typeof DashboardReleaseGovernanceRoute
+  DashboardReportRoute: typeof DashboardReportRoute
+  DashboardResilienceRoute: typeof DashboardResilienceRoute
+  DashboardSafeguardingRoute: typeof DashboardSafeguardingRoute
+  DashboardSafeguardingCaseRoute: typeof DashboardSafeguardingCaseRoute
   DashboardSchoolRoute: typeof DashboardSchoolRoute
+  DashboardSchoolPeopleRoute: typeof DashboardSchoolPeopleRoute
+  DashboardSecurityRoute: typeof DashboardSecurityRoute
+  DashboardSharingRoute: typeof DashboardSharingRoute
+  DashboardShowBuilderRoute: typeof DashboardShowBuilderRoute
+  DashboardShowsRoute: typeof DashboardShowsRoute
+  DashboardStaffRolesRoute: typeof DashboardStaffRolesRoute
+  DashboardSupplyChainRoute: typeof DashboardSupplyChainRoute
   DashboardTeacherRoute: typeof DashboardTeacherRoute
+  DashboardTeacherBriefRoute: typeof DashboardTeacherBriefRoute
+  DashboardTeacherReviewRoute: typeof DashboardTeacherReviewRoute
+  DashboardUploadSafetyRoute: typeof DashboardUploadSafetyRoute
+  DashboardWebSecurityRoute: typeof DashboardWebSecurityRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAbuseProtectionRoute: DashboardAbuseProtectionRoute,
+  DashboardAccessibilityRoute: DashboardAccessibilityRoute,
+  DashboardAchievementIssuerRoute: DashboardAchievementIssuerRoute,
+  DashboardAiControlsRoute: DashboardAiControlsRoute,
+  DashboardAuditRoute: DashboardAuditRoute,
+  DashboardChallengeBuilderRoute: DashboardChallengeBuilderRoute,
+  DashboardChallengeSubmitRoute: DashboardChallengeSubmitRoute,
+  DashboardChallengesRoute: DashboardChallengesRoute,
   DashboardChildRoute: DashboardChildRoute,
+  DashboardClubBuilderRoute: DashboardClubBuilderRoute,
+  DashboardClubSpaceRoute: DashboardClubSpaceRoute,
+  DashboardClubsRoute: DashboardClubsRoute,
+  DashboardConfigurationSecurityRoute: DashboardConfigurationSecurityRoute,
+  DashboardCreatorRoute: DashboardCreatorRoute,
+  DashboardCreatorPodcastRoute: DashboardCreatorPodcastRoute,
+  DashboardCreatorProjectRoute: DashboardCreatorProjectRoute,
+  DashboardDataRightsRoute: DashboardDataRightsRoute,
+  DashboardDiscoverRoute: DashboardDiscoverRoute,
+  DashboardFamilyPermissionsRoute: DashboardFamilyPermissionsRoute,
+  DashboardFeedbackRoute: DashboardFeedbackRoute,
+  DashboardFeedbackSendRoute: DashboardFeedbackSendRoute,
   DashboardGroupRoute: DashboardGroupRoute,
+  DashboardGroupSchoolsRoute: DashboardGroupSchoolsRoute,
+  DashboardIncidentResponseRoute: DashboardIncidentResponseRoute,
+  DashboardLicensingRoute: DashboardLicensingRoute,
+  DashboardNotificationsRoute: DashboardNotificationsRoute,
+  DashboardObservabilityRoute: DashboardObservabilityRoute,
+  DashboardOrganisationAdminRoute: DashboardOrganisationAdminRoute,
+  DashboardOrganisationPublisherRoute: DashboardOrganisationPublisherRoute,
+  DashboardOrganisationsRoute: DashboardOrganisationsRoute,
   DashboardParentRoute: DashboardParentRoute,
+  DashboardParentAlumniRoute: DashboardParentAlumniRoute,
+  DashboardParentAlumniCommunityRoute: DashboardParentAlumniCommunityRoute,
+  DashboardParentCircleRoute: DashboardParentCircleRoute,
+  DashboardParentCommunityRoute: DashboardParentCommunityRoute,
+  DashboardParentDirectoryRoute: DashboardParentDirectoryRoute,
+  DashboardParentEventRoute: DashboardParentEventRoute,
+  DashboardPartnerSafetyRoute: DashboardPartnerSafetyRoute,
+  DashboardPassportRoute: DashboardPassportRoute,
+  DashboardPrivacyRoute: DashboardPrivacyRoute,
+  DashboardProviderGovernanceRoute: DashboardProviderGovernanceRoute,
+  DashboardReleaseGovernanceRoute: DashboardReleaseGovernanceRoute,
+  DashboardReportRoute: DashboardReportRoute,
+  DashboardResilienceRoute: DashboardResilienceRoute,
+  DashboardSafeguardingRoute: DashboardSafeguardingRoute,
+  DashboardSafeguardingCaseRoute: DashboardSafeguardingCaseRoute,
   DashboardSchoolRoute: DashboardSchoolRoute,
+  DashboardSchoolPeopleRoute: DashboardSchoolPeopleRoute,
+  DashboardSecurityRoute: DashboardSecurityRoute,
+  DashboardSharingRoute: DashboardSharingRoute,
+  DashboardShowBuilderRoute: DashboardShowBuilderRoute,
+  DashboardShowsRoute: DashboardShowsRoute,
+  DashboardStaffRolesRoute: DashboardStaffRolesRoute,
+  DashboardSupplyChainRoute: DashboardSupplyChainRoute,
   DashboardTeacherRoute: DashboardTeacherRoute,
+  DashboardTeacherBriefRoute: DashboardTeacherBriefRoute,
+  DashboardTeacherReviewRoute: DashboardTeacherReviewRoute,
+  DashboardUploadSafetyRoute: DashboardUploadSafetyRoute,
+  DashboardWebSecurityRoute: DashboardWebSecurityRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
@@ -301,6 +1595,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlumniRoute: AlumniRouteWithChildren,
   DashboardRoute: DashboardRouteWithChildren,
+  AuthGuardianLinkRoute: AuthGuardianLinkRoute,
+  AuthJoinRoute: AuthJoinRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
 }

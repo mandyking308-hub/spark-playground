@@ -28,7 +28,7 @@ export function findSupportedLocale(code: string | null | undefined): SupportedL
 }
 
 export function resolveLocale(code: string | null | undefined): SupportedLocale {
-  return findSupportedLocale(code) ?? SUPPORTED_LOCALES[0];
+  return findSupportedLocale(code) ?? SUPPORTED_LOCALES[0]!;
 }
 
 export function directionForLocale(code: string | null | undefined): TextDirection {

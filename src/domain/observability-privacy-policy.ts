@@ -50,7 +50,7 @@ export function telemetryMayStoreFullIpAddress(): false {
 }
 
 export function safeRouteDimension(path: string): string {
-  const pathOnly = path.split("?")[0];
+  const pathOnly = path.split("?")[0] ?? "";
   return pathOnly
     .replace(/[0-9a-f]{8}-[0-9a-f-]{27,}/gi, ":id")
     .replace(/\/\d+(?=\/|$)/g, "/:id");
