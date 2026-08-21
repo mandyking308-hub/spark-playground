@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { BookOpen, Code2, Leaf, Languages, ShieldCheck, UsersRound } from "lucide-react";
 
 import { PageHeader } from "@/components/layout/page-header";
@@ -27,6 +27,12 @@ function Clubs() {
         description="Children join age-appropriate, verified communities around interests and projects. Membership comes through schools, cohorts and approved programmes rather than open stranger discovery."
         crumbs={[{ label: "Dashboards", to: "/dashboard" }, { label: "Clubs" }]}
       />
+
+      <div className="flex flex-wrap gap-2">
+        <Button asChild><Link to="/dashboard/club-space">Open example club</Link></Button>
+        <Button asChild variant="outline"><Link to="/dashboard/club-builder">Staff: create club</Link></Button>
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {clubs.map((club) => (
           <Card key={club.name}>
@@ -35,7 +41,7 @@ function Clubs() {
               <CardTitle>{club.name}</CardTitle>
               <CardDescription>{club.scope}</CardDescription>
             </CardHeader>
-            <CardContent><Button variant="outline" className="w-full" disabled>Open club</Button></CardContent>
+            <CardContent><Button asChild variant="outline" className="w-full"><Link to="/dashboard/club-space">Open club</Link></Button></CardContent>
           </Card>
         ))}
       </div>
@@ -48,6 +54,7 @@ function Clubs() {
           <Badge variant="secondary"><UsersRound className="mr-1 size-3" /> Verified members</Badge>
           <Badge variant="outline">Moderated spaces</Badge>
           <Badge variant="outline">Age-banded access</Badge>
+          <Badge variant="outline">No contact sharing</Badge>
         </CardContent>
       </Card>
     </div>
