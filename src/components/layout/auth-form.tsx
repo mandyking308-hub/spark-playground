@@ -10,7 +10,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AureliaLogo } from "@/components/brand/aurelia-logo";
 import { signInFn } from "@/functions/auth";
 
-
 export function AuthForm({
   mode,
   title,
@@ -33,7 +32,6 @@ export function AuthForm({
         </Link>
 
         <Card className="brand-card border-border/70">
-
           <CardHeader>
             <CardTitle className="font-display text-2xl tracking-tight">{title}</CardTitle>
             <CardDescription>{description}</CardDescription>
@@ -47,7 +45,7 @@ export function AuthForm({
             {isSignUp ? (
               <div className="space-y-4">
                 <p className="rounded-md border border-border bg-muted/30 px-3 py-3 text-sm leading-relaxed text-muted-foreground">
-                  Aurelia does not use open self-registration. Child, parent, staff and organisation accounts enter through verified invitation and safeguarding workflows.
+                  Aurelia does not use open self-registration. Under-16 accounts are sponsored through a verified parent/guardian or school invitation; other roles use their own verified onboarding path.
                 </p>
                 <Button asChild className="w-full">
                   <Link to="/auth/join">Use a verified invitation</Link>
