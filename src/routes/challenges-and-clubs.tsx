@@ -19,7 +19,6 @@ import { PublicPage } from "@/components/public/public-page";
 import {
   CheckList,
   CtaBand,
-  Eyebrow,
   FeatureCard,
   PageHero,
   Section,
