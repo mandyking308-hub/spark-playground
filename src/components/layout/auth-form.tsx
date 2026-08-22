@@ -35,9 +35,9 @@ export function AuthForm({
         <Card className="brand-card border-border/70">
 
           <CardHeader>
-            <CardTitle asChild>
-              <h1 className="font-display text-2xl tracking-tight">{title}</h1>
-            </CardTitle>
+            <h1 className="font-display text-2xl leading-none font-semibold tracking-tight">
+              {title}
+            </h1>
             <CardDescription>{description}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
