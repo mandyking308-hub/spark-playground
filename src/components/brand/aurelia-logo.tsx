@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Aurelia World brand mark.
+ * Aurelia brand mark.
  *
  * A stylised "A" formed by two rising rays, a dawn spark at the apex and a
  * horizon arc as the crossbar. Designed to stay legible at 16px.
@@ -73,7 +73,7 @@ export function AureliaLogo({
       <AureliaMark tone={tone} title="Aurelia World" className="size-8 shrink-0" />
       {showWordmark ? (
         <span className="flex flex-col leading-none">
-          <span className="font-display text-lg tracking-tight">Aurelia World</span>
+          <span className="whitespace-nowrap font-display text-lg tracking-tight">Aurelia World</span>
           {tagline ? (
             <span className="mt-1 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-muted-foreground">
               {tagline}
