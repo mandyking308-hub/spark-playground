@@ -182,13 +182,44 @@ function AlumniWorld() {
         </div>
       </Section>
 
+      {/* Verified opportunity providers */}
       <Section tone="muted">
         <SectionHeading
-          eyebrow="Community and mentoring"
-          title="Adult community, adult moderation"
-          description="The Alumni community operates under moderation appropriate to its members' age — more open discussion, direct connection between peers, and mentoring relationships with vetted adults — while still holding to Aurelia's standards of conduct and respect."
+          eyebrow="Opportunities"
+          title="Every opportunity provider is verified before it can post"
+          description="Universities, employers, apprenticeship providers and programme organisers are verified as institutions before an opportunity reaches a single Alumni member. What appears here is checked, not scraped or syndicated."
         />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {providers.map((item) => (
+            <FeatureCard key={item.title} icon={item.icon} title={item.title}>
+              {item.text}
+            </FeatureCard>
+          ))}
+        </div>
+        <p className="mt-8 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          Opportunity providers operate in the 16+ environment only. Verification as a provider
+          gives an organisation no visibility of, or route to, any under-16 member of Aurelia.
+        </p>
       </Section>
+
+      <Section>
+        <SectionHeading
+          eyebrow="Community and mentoring"
+          title="Adult community, adult-to-adult mentoring"
+          description="The Alumni community operates under moderation appropriate to its members' age — open discussion, direct connection between verified peers, and mentoring between adults — while still holding to Aurelia's standards of conduct and respect."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          <FeatureCard icon={UserRoundSearch} title="Mentoring is adult to adult">
+            Mentors are verified adults working with members aged 16 and over. There is no
+            mentoring relationship between an adult and an under-16 member anywhere on Aurelia.
+          </FeatureCard>
+          <FeatureCard icon={Lock} title="Alumni status unlocks nothing below 16">
+            Being an Alumni member — or a mentor, or an opportunity provider within it — never
+            grants any access to the under-16 environment or to a child's work.
+          </FeatureCard>
+        </div>
+      </Section>
+
 
       <Section>
         <SectionHeading
