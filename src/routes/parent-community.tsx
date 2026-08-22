@@ -30,7 +30,7 @@ export const Route = createFileRoute("/parent-community")({
       {
         name: "description",
         content:
-          "Aurelia's verified adult-only parent community: circles, events and a directory, kept entirely separate from the child world, with Parent Alumni continuity at 16.",
+          "Aurelia's verified adult-only parent community: live circles, events and an opt-in directory, kept entirely separate from the child world, with Parent Alumni continuity at 16.",
       },
       { property: "og:title", content: "Parent Community — Aurelia" },
       {
@@ -47,16 +47,16 @@ export const Route = createFileRoute("/parent-community")({
 });
 
 const features = [
-  { icon: Users, title: "Circles", text: "Small groups of adults organised around a school, a club or a shared interest, giving parents a place to compare notes and support one another." },
-  { icon: CalendarDays, title: "Events", text: "School and community events that parents can see, discuss and organise attendance around, kept separate from anything a child would see." },
+  { icon: Users, title: "Circles", text: "Create and join small groups of verified adults around professions, places, interests or community projects, with discussion contained inside the adult space." },
+  { icon: CalendarDays, title: "Events", text: "Create adult community events, see upcoming dates and RSVP inside Aurelia, kept separate from anything a child would see." },
   { icon: Contact, title: "Directory", text: "An opt-in directory of verified adults, with visibility controlled entirely by the parent who is listed — and no child named anywhere in it." },
 ];
 
 const cardShows = [
-  "The adult's own display name and, if they choose it, a photograph of themselves.",
+  "The adult's own display name.",
+  "An optional professional headline.",
   "A short self-written introduction.",
-  "Broad interests or the circles they take part in.",
-  "A general area or the school community they've chosen to associate with.",
+  "A general area they choose to share.",
 ];
 
 const cardNeverShows = [
@@ -70,12 +70,11 @@ const boundaries = [
   "No parent can browse, search or view another family's child through the parent community.",
   "No child identifiers appear in the adult directory or on community cards — the community describes adults only.",
   "The parent community has no view into a specific child's work, private drafts or Achievement Passport beyond what that child's own guardian shares.",
-  "Children cannot see, join, message or be added to the parent community at any age.",
-  "Membership requires the same identity verification as any adult account on Aurelia.",
+  "Children cannot see, join, post in or be added to the parent community at any age.",
+  "Adult community access is restricted to eligible parent and Parent Alumni accounts.",
   "Parent Alumni status is an adult community status only — it never grants access to any child, including a member's own now-adult child's account.",
-  "Circles, events and the directory operate under their own moderation, distinct from moderation of child-facing spaces.",
+  "Adult circles, connections and events use their own data tables with no child-content foreign keys.",
 ];
-
 
 function ParentCommunity() {
   return (
@@ -131,14 +130,13 @@ function ParentCommunity() {
             </FeatureCard>
           ))}
         </div>
-        <p className="mt-6 rounded-xl border border-dashed border-border bg-muted/40 p-4 text-xs leading-relaxed text-muted-foreground">
-          Circles, events and the directory describe product direction for the parent community and
-          are being rolled out to verified adult members — they are not all live today. The guardian
-          controls over your own child's account, described on the families page, are part of the
-          live platform.
+        <p className="mt-6 rounded-xl border border-gold/35 bg-gold-soft/35 p-4 text-xs leading-relaxed text-muted-foreground">
+          The adult directory, connection requests, parent circles, circle posts, adult events and
+          RSVPs are now backed by Aurelia's live protected database. They remain available only to
+          eligible signed-in parent accounts; an empty community shows an honest empty state rather
+          than invented members or activity.
         </p>
       </Section>
-
 
       <Section tone="muted">
         <SplitFeature
@@ -153,29 +151,28 @@ function ParentCommunity() {
                 label="Verified adults"
               />
               <PaperNote tone="lined">
-                Verification happens once, at account level, and applies across every community
-                feature. There is no separate signup that skips the check.
+                Adult community access is tied to the member's account role. There is no separate
+                community signup that bypasses the platform's access controls.
               </PaperNote>
             </div>
           }
         >
           <SectionHeading
             eyebrow="Verified adults only"
-            title="Membership is verified, not open"
-            description="Every member of the parent community has been through the same identity verification required of any guardian account, so the space stays trustworthy."
+            title="Membership is controlled, not open"
+            description="The parent community sits behind Aurelia's authenticated adult account boundary, so its social layer cannot become an open route into the child world."
           />
           <CheckList
             className="mt-6"
             items={[
-              "Verification happens once, at account level, and applies across every community feature.",
-              "Parents choose what to share in the directory and can withdraw at any time.",
-              "Moderation staff can act on reports within the community independently of child-side moderation.",
+              "Only eligible parent and Parent Alumni accounts can load the adult community.",
+              "Parents choose what to share in the directory and can hide their profile at any time.",
+              "Connection requests, circle membership and event RSVPs remain adult-to-adult records.",
             ]}
           />
         </SplitFeature>
       </Section>
 
-      {/* Adults only, on the card itself */}
       <Section>
         <SectionHeading
           eyebrow="A community of adults"
@@ -189,10 +186,7 @@ function ParentCommunity() {
             <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-muted-foreground">
               {cardShows.map((item) => (
                 <li key={item} className="flex gap-2.5">
-                  <span
-                    aria-hidden="true"
-                    className="mt-2 size-1.5 shrink-0 rounded-full bg-accent-foreground"
-                  />
+                  <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-accent-foreground" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -204,10 +198,7 @@ function ParentCommunity() {
             <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-muted-foreground">
               {cardNeverShows.map((item) => (
                 <li key={item} className="flex gap-2.5">
-                  <span
-                    aria-hidden="true"
-                    className="mt-[0.6rem] h-px w-3 shrink-0 bg-muted-foreground/60"
-                  />
+                  <span aria-hidden="true" className="mt-[0.6rem] h-px w-3 shrink-0 bg-muted-foreground/60" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -220,7 +211,6 @@ function ParentCommunity() {
           work comes only through the guardian controls on their own account.
         </p>
       </Section>
-
 
       <Section>
         <SectionHeading
@@ -254,21 +244,21 @@ function ParentCommunity() {
         <SectionHeading
           eyebrow="Safety"
           title="The same standards, a different audience"
-          description="The parent community is held to the same safeguarding and conduct standards as the rest of Aurelia — reports are taken seriously and handled through a clear route."
+          description="The adult community remains subject to Aurelia's conduct and reporting standards, while its database boundary stays separate from child records and child-facing spaces."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           <FeatureCard icon={ShieldCheck} title="Reportable at any time">
-            Any parent can raise a concern about conduct within the community through the same trusted reporting channel used platform-wide.
+            A parent can use Aurelia's trusted reporting route if conduct in the community raises a concern.
           </FeatureCard>
-          <FeatureCard icon={Contact} title="Independent moderation">
-            Community moderation decisions are made by staff responsible for the adult spaces, distinct from those overseeing child safeguarding cases.
+          <FeatureCard icon={Contact} title="Adult-only data model">
+            Directory profiles, connections, circles, posts, events and RSVPs are stored as adult-community records with no child-content relationship.
           </FeatureCard>
         </div>
       </Section>
 
       <CtaBand
         title="Join the parent community"
-        description="Verified parents and guardians can request access to circles, events and the directory alongside their family account."
+        description="Eligible verified parents and Parent Alumni can use the live directory, circles and events alongside their family account."
       />
     </PublicPage>
   );
