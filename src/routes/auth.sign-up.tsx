@@ -16,7 +16,7 @@ export const Route = createFileRoute("/auth/sign-up")({
     <AuthForm
       mode="sign-up"
       title="Verified access"
-      description="Aurelia accounts are provisioned through verified invitation and onboarding workflows."
+      description="Use the verified onboarding route supplied by your family or institution."
     />
   ),
 });
