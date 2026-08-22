@@ -77,14 +77,16 @@ export default {
       return badRequest();
     }
 
-    const authUserId = ctx.userClaims?.sub;
+    const authUserId = (ctx.userClaims as { sub?: string } | undefined)?.sub;
     if (typeof authUserId !== "string" || !uuidPattern.test(authUserId)) {
       return Response.json({ error: "Authentication required" }, { status: 401 });
     }
 
+    const admin = ctx.supabaseAdmin as unknown as AdminClient;
+
     try {
       if (body.action === "list_invitations") {
-        const { data: actor, error: actorError } = await ctx.supabaseAdmin
+        const { data: actor, error: actorError } = await admin
           .from("profiles")
           .select("id")
           .eq("auth_user_id", authUserId)
@@ -92,12 +94,13 @@ export default {
           .maybeSingle();
         if (actorError || !actor) throw actorError ?? new Error("actor_not_found");
 
-        const { data, error } = await ctx.supabaseAdmin
+        const { data, error } = await admin
           .from("account_invitations")
           .select("id,intended_role,intended_age_band,school_id,cohort_id,education_group_id,state,expires_at,created_at")
-          .eq("issued_by_profile_id", actor.id)
+          .eq("issued_by_profile_id", actor["id"])
           .order("created_at", { ascending: false })
           .limit(50);
+
         if (error) throw error;
 
         return Response.json({ data: data ?? [] });
