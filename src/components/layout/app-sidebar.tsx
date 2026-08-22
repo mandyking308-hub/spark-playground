@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 
-import { AureliaMark } from "@/components/brand/aurelia-logo";
+import { AureliaLogo } from "@/components/brand/aurelia-logo";
 import { dashboardNav, platformModules, roles } from "@/config/navigation";
 
 import type { PlatformRole } from "@/domain/access-control";
@@ -27,17 +27,10 @@ export function AppSidebar({ role }: { role: PlatformRole }) {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="px-3 py-4">
-        <Link to="/" className="flex items-center gap-2.5" aria-label="Aurelia home">
-          <AureliaMark tone="brand" className="size-7 shrink-0" />
-          <span className="flex flex-col leading-none group-data-[collapsible=icon]:hidden">
-            <span className="font-display text-sm tracking-tight">Aurelia</span>
-            <span className="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-              Create · Learn · Achieve
-            </span>
-          </span>
+        <Link to="/" className="flex min-h-10 items-center rounded-lg px-1" aria-label="Aurelia home">
+          <AureliaLogo className="group-data-[collapsible=icon]:[&>span:last-child]:hidden" tagline="Create · Learn · Achieve" />
         </Link>
       </SidebarHeader>
-
 
       <SidebarContent>
         {visibleModules.length > 0 ? (
