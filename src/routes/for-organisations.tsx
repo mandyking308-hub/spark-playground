@@ -19,7 +19,7 @@ import {
   Section,
   SectionHeading,
 } from "@/components/public/sections";
-import { Figure, GoldRule, SplitFeature } from "@/components/public/editorial";
+import { DetailCard, Figure, GoldRule, SplitFeature } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
 
 import challengeBrief from "@/assets/challenge-brief.jpg";
@@ -50,20 +50,64 @@ export const Route = createFileRoute("/for-organisations")({
 });
 
 const neverList = [
-  { icon: UserRoundX, title: "No child accounts", text: "An organisation cannot create, hold or manage an account for any child, under any circumstance." },
-  { icon: Ban, title: "No child directory", text: "There is no list of children an organisation can browse, search or select from — children are never visible to an organisation as individuals." },
-  { icon: MegaphoneOff, title: "No private contact with children", text: "An organisation never messages, emails or otherwise contacts a child directly. All interaction happens through published challenges reviewed by Aurelia staff." },
-  { icon: ShieldCheck, title: "No behavioural profiling", text: "Organisations cannot build behavioural profiles of children, or target, segment or recommend content to an individual child based on engagement or profile data." },
-  { icon: Ban, title: "No data export", text: "Organisations cannot export child contact details or private child data. Only what a judging process genuinely needs is shared, and only with guardian consent." },
-  { icon: EyeOff, title: "No mentoring under-16s", text: "There is no direct mentoring, coaching or one-to-one relationship between an organisation and an under-16 member. Adult-to-adult mentoring exists only in the separate 16+ Alumni environment." },
+  {
+    icon: UserRoundX,
+    title: "No child accounts",
+    text: "An organisation cannot create, hold or manage an account for any child, under any circumstance.",
+  },
+  {
+    icon: Ban,
+    title: "No child directory",
+    text: "There is no list of children an organisation can browse, search or select from — children are never visible to an organisation as individuals.",
+  },
+  {
+    icon: MegaphoneOff,
+    title: "No private contact with children",
+    text: "An organisation never messages, emails or otherwise contacts a child directly. All interaction happens through published challenges reviewed by Aurelia staff.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "No behavioural profiling",
+    text: "Organisations cannot build behavioural profiles of children, or target, segment or recommend content to an individual child based on engagement or profile data.",
+  },
+  {
+    icon: Ban,
+    title: "No data export",
+    text: "Organisations cannot export child contact details or private child data. Only what a judging process genuinely needs is shared, and only with guardian consent.",
+  },
+  {
+    icon: EyeOff,
+    title: "No mentoring under-16s",
+    text: "There is no direct mentoring, coaching or one-to-one relationship between an organisation and an under-16 member. Adult-to-adult mentoring exists only in the separate 16+ Alumni environment.",
+  },
 ];
 
 const process = [
-  { step: "01", title: "Verify the organisation", text: "Identity, purpose and safeguarding awareness are checked before an organisation can propose anything at all." },
-  { step: "02", title: "Approve the programme", text: "Aurelia staff review the proposed programme, challenge or content for age-appropriateness, safeguarding risk and compliance with platform boundaries." },
-  { step: "03", title: "Publish the challenge or content", text: "Only once approved does the brief reach schools and families, who decide for themselves whether their children take part." },
-  { step: "04", title: "Moderated submissions, only if shared", text: "Entries arrive moderated and sanitised, and only where a child specifically requested to share the work and the required adult approvals were given." },
-  { step: "05", title: "Aggregate outcomes", text: "Reporting comes back as aggregate and approved programme outcomes — participation levels, formats, themes and impact — never as identifiable child records." },
+  {
+    step: "01",
+    title: "Verify the organisation",
+    text: "Identity, purpose and safeguarding awareness are checked before an organisation can propose anything at all.",
+  },
+  {
+    step: "02",
+    title: "Approve the programme",
+    text: "Aurelia staff review the proposed programme, challenge or content for age-appropriateness, safeguarding risk and compliance with platform boundaries.",
+  },
+  {
+    step: "03",
+    title: "Publish the challenge or content",
+    text: "Only once approved does the brief reach schools and families, who decide for themselves whether their children take part.",
+  },
+  {
+    step: "04",
+    title: "Moderated submissions, only if shared",
+    text: "Entries arrive moderated and sanitised, and only where a child specifically requested to share the work and the required adult approvals were given.",
+  },
+  {
+    step: "05",
+    title: "Aggregate outcomes",
+    text: "Reporting comes back as aggregate and approved programme outcomes — participation levels, formats, themes and impact — never as identifiable child records.",
+  },
 ];
 
 const reporting = [
@@ -72,8 +116,6 @@ const reporting = [
   "Outcome summaries suitable for a funder, trustee board or impact report.",
   "Approved, guardian-consented example work where a family and school specifically agreed to it.",
 ];
-
-
 
 function ForOrganisations() {
   return (
@@ -93,34 +135,47 @@ function ForOrganisations() {
           </>
         }
       >
-        <div className="mt-12 grid gap-5 sm:grid-cols-3">
-          <Figure
-            src={challengeBrief}
-            alt="A printed challenge brief with a gold seal, pinned notes and a project label"
-            width={1280}
-            height={960}
-            label="Illustrative · Brief"
-            priority
-          />
-          <Figure
-            src={designDesk}
-            alt="Hands sketching a poster design with markers, swatches and tape"
-            width={1280}
-            height={960}
-            label="Illustrative · Response"
-          />
-          <Figure
-            src={inventionPrototype}
-            alt="A cardboard and electronics prototype beside annotated design sketches"
-            width={1024}
-            height={1024}
-            label="Illustrative · Outcome"
-          />
+        <div className="mt-12">
+          <div className="grid gap-5 sm:grid-cols-3">
+            <Figure
+              src={challengeBrief}
+              alt="A printed challenge brief with a gold seal, pinned notes and a project label"
+              width={1280}
+              height={960}
+              label="Illustrative · Brief"
+              priority
+            />
+            <Figure
+              src={designDesk}
+              alt="Hands sketching a poster design with markers, swatches and tape"
+              width={1280}
+              height={960}
+              label="Illustrative · Response"
+            />
+            <Figure
+              src={inventionPrototype}
+              alt="A cardboard and electronics prototype beside annotated design sketches"
+              width={1024}
+              height={1024}
+              label="Illustrative · Outcome"
+            />
+          </div>
+          <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+            <p className="max-w-2xl text-xs text-muted-foreground">
+              Images are illustrative examples of the kind of project work a brief can inspire. They
+              are not member work and depict no identifiable people or direct contact with children.
+            </p>
+            <DetailCard
+              glyph="prototype"
+              label="Partnership model"
+              title="Brief → review → aggregate outcomes"
+              className="max-w-[18rem] lg:-mt-10"
+            >
+              Every step is institutional. There is no side channel and no individual child data
+              flows back to the partner.
+            </DetailCard>
+          </div>
         </div>
-        <p className="mt-4 text-xs text-muted-foreground">
-          Images are illustrative examples of the kind of project work a brief can inspire. They
-          are not member work and depict no identifiable people or direct contact with children.
-        </p>
       </PageHero>
 
       <Section>
@@ -144,13 +199,16 @@ function ForOrganisations() {
         </SplitFeature>
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           <FeatureCard icon={Trophy} title="Set a real challenge">
-            Define a task with a clear brief, age band and judging criteria, aligned with what young creators can genuinely produce.
+            Define a task with a clear brief, age band and judging criteria, aligned with what young
+            creators can genuinely produce.
           </FeatureCard>
           <FeatureCard icon={BadgeCheck} title="Offer genuine recognition">
-            Successful entries can feed into a young person's Achievement Passport once a verified teacher confirms the work.
+            Successful entries can feed into a young person's Achievement Passport once a verified
+            teacher confirms the work.
           </FeatureCard>
           <FeatureCard icon={Handshake} title="Work through the platform">
-            All communication, submission and feedback happens through Aurelia's reviewed workflow, never through a side channel.
+            All communication, submission and feedback happens through Aurelia's reviewed workflow,
+            never through a side channel.
           </FeatureCard>
         </div>
       </Section>
@@ -182,9 +240,17 @@ function ForOrganisations() {
           description="Five steps, in order, from verifying an organisation to reporting on what a programme achieved. There is no shortcut between any two of them."
         />
         <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {process.map((item) => (
-            <li key={item.step} className="rounded-2xl border border-border/70 bg-card p-6">
-              <span className="font-display text-sm tracking-[0.2em] text-accent-foreground">{item.step}</span>
+          {process.map((item, index) => (
+            <li key={item.step} className="relative rounded-2xl border border-border/70 bg-card p-6">
+              {index < process.length - 1 ? (
+                <span
+                  aria-hidden="true"
+                  className="absolute -right-2 top-8 hidden h-px w-4 bg-border lg:block"
+                />
+              ) : null}
+              <span className="font-display text-sm tracking-[0.2em] text-accent-foreground">
+                {item.step}
+              </span>
               <h3 className="mt-3 font-display text-lg tracking-tight">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
             </li>
@@ -216,7 +282,6 @@ function ForOrganisations() {
           </div>
         </div>
       </Section>
-
 
       <Section tone="muted">
         <SectionHeading

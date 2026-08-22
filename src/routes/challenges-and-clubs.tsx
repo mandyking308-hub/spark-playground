@@ -24,13 +24,21 @@ import {
   Section,
   SectionHeading,
 } from "@/components/public/sections";
-import { Figure, GoldRule, PaperNote, SplitFeature } from "@/components/public/editorial";
+import {
+  DetailCard,
+  Figure,
+  GoldRule,
+  MarkerUnderline,
+  ObjectGlyph,
+  PaperNote,
+  SplitFeature,
+} from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
 
 import clubCollaboration from "@/assets/club-collaboration.jpg";
 import challengeBrief from "@/assets/challenge-brief.jpg";
 import classroomMaking from "@/assets/classroom-making.jpg";
-
+import makingFilm from "@/assets/making-film.jpg";
 
 export const Route = createFileRoute("/challenges-and-clubs")({
   head: () => ({
@@ -56,17 +64,49 @@ export const Route = createFileRoute("/challenges-and-clubs")({
 });
 
 const challengeFlow = [
-  { step: "01", title: "A brief is set", text: "A verified school, education group or organisation publishes a challenge with a clear brief and deadline." },
-  { step: "02", title: "Children respond", text: "Interested children work on a response in the Creator Studio, using drafting and feedback as normal." },
-  { step: "03", title: "Guardian approves the entry", text: "As with any shared work, a guardian must approve the submission before it is entered." },
-  { step: "04", title: "Named reviewers assess it", text: "Entries are reviewed by identified adults connected to the challenge, not by public voting." },
+  {
+    step: "01",
+    title: "A brief is set",
+    text: "A verified school, education group or organisation publishes a challenge with a clear brief and deadline.",
+  },
+  {
+    step: "02",
+    title: "Children respond",
+    text: "Interested children work on a response in the Creator Studio, using drafting and feedback as normal.",
+  },
+  {
+    step: "03",
+    title: "Guardian approves the entry",
+    text: "As with any shared work, a guardian must approve the submission before it is entered.",
+  },
+  {
+    step: "04",
+    title: "Named reviewers assess it",
+    text: "Entries are reviewed by identified adults connected to the challenge, not by public voting.",
+  },
 ];
 
 const examplePrompts = [
-  { title: "\"Tell a one-minute story about your street\"", format: "Film or audio" },
-  { title: "\"Design a poster for a cause you care about\"", format: "Art & design" },
-  { title: "\"Invent something that fixes one small annoyance\"", format: "Invention" },
-  { title: "\"Build a game with exactly one rule\"", format: "Game" },
+  {
+    title: "\"Tell a one-minute story about your street\"",
+    format: "Film or audio",
+    glyph: "camera" as const,
+  },
+  {
+    title: "\"Design a poster for a cause you care about\"",
+    format: "Art & design",
+    glyph: "pencil" as const,
+  },
+  {
+    title: "\"Invent something that fixes one small annoyance\"",
+    format: "Invention",
+    glyph: "prototype" as const,
+  },
+  {
+    title: "\"Build a game with exactly one rule\"",
+    format: "Game",
+    glyph: "controller" as const,
+  },
 ];
 
 const clubBoundaries = [
@@ -92,8 +132,6 @@ const judgeNeverSees = [
   "A browsable list of the other children who entered.",
 ];
 
-
-
 function ChallengesAndClubsPage() {
   return (
     <PublicPage>
@@ -112,15 +150,48 @@ function ChallengesAndClubsPage() {
           </>
         }
       >
-        <div className="mt-12 max-w-lg">
-          <Figure
-            src={challengeBrief}
-            alt="A printed challenge brief with a gold seal, pinned notes and a project label"
-            width={1280}
-            height={960}
-            label="Illustrative example"
-            ratio="landscape"
-          />
+        <div className="mt-12 grid gap-4 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+          <div className="relative">
+            <Figure
+              src={challengeBrief}
+              alt="A printed challenge brief with a gold seal, pinned notes and a project label"
+              width={1280}
+              height={960}
+              label="Illustrative example"
+              ratio="landscape"
+            />
+            <DetailCard
+              glyph="notebook"
+              label="Brief"
+              title="Clear task, fair deadline, named reviewers"
+              className="absolute -bottom-6 -right-4 hidden max-w-[16rem] lg:block"
+            >
+              Every challenge states what is being asked, who can enter, and how entries will be
+              reviewed before a child sees it.
+            </DetailCard>
+          </div>
+          <div className="hidden flex-col gap-4 lg:flex">
+            <Figure
+              src={makingFilm}
+              alt="A young filmmaker's hands holding a phone on a simple cardboard rig"
+              width={1280}
+              height={960}
+              label="Illustrative · Making a response"
+              ratio="square"
+            />
+            <PaperNote tone="lined" className="border-dashed">
+              <span className="flex items-center gap-2 text-accent-foreground">
+                <ObjectGlyph name="camera" className="size-4" />
+                <span className="text-[0.65rem] font-semibold uppercase tracking-[0.16em]">
+                  Example prompt
+                </span>
+              </span>
+              <p className="mt-2 font-display text-base leading-snug tracking-tight text-foreground">
+                &ldquo;Tell a one-minute story about your street&rdquo;
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">Film or audio · illustrative</p>
+            </PaperNote>
+          </div>
         </div>
       </PageHero>
 
@@ -156,7 +227,8 @@ function ChallengesAndClubsPage() {
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           {examplePrompts.map((p) => (
             <PaperNote key={p.title} tone="paper">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent-foreground">
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-accent-foreground">
+                <ObjectGlyph name={p.glyph} className="size-4" />
                 {p.format} · illustrative
               </p>
               <p className="mt-2 font-display text-base leading-snug tracking-tight text-foreground">
@@ -164,6 +236,14 @@ function ChallengesAndClubsPage() {
               </p>
             </PaperNote>
           ))}
+        </div>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Button asChild variant="outline">
+            <Link to="/ideas-and-resources">Browse project starters</Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link to="/creator-studio">See the Creator Studio</Link>
+          </Button>
         </div>
       </Section>
 
@@ -174,8 +254,14 @@ function ChallengesAndClubsPage() {
           description="A challenge submission follows the same safety rules as any other piece of shared work in Aurelia — nothing skips guardian approval, even under a deadline."
         />
         <ol className="mt-12 grid gap-4 md:grid-cols-4">
-          {challengeFlow.map((item) => (
-            <li key={item.step} className="rounded-2xl border border-border/70 bg-card p-6">
+          {challengeFlow.map((item, index) => (
+            <li key={item.step} className="relative rounded-2xl border border-border/70 bg-card p-6">
+              {index < challengeFlow.length - 1 ? (
+                <span
+                  aria-hidden="true"
+                  className="absolute -right-3 top-8 hidden h-px w-6 bg-border md:block"
+                />
+              ) : null}
               <span className="font-display text-sm tracking-[0.2em] text-accent-foreground">
                 {item.step}
               </span>
@@ -291,6 +377,7 @@ function ChallengesAndClubsPage() {
               description="When an entry reaches a challenge reviewer, it arrives stripped of anything that identifies the young person behind it. Judging is an assessment of a piece of work against a brief — it is never an introduction."
             />
             <GoldRule className="mt-6 w-16" />
+            <MarkerUnderline className="mt-4 max-w-[12rem]" />
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild variant="outline">
                 <Link to="/ideas-and-resources">Ideas &amp; Resources</Link>
@@ -336,7 +423,6 @@ function ChallengesAndClubsPage() {
         </div>
       </Section>
 
-
       <Section tone="muted">
         <SectionHeading
           eyebrow="The organisation boundary"
@@ -373,7 +459,6 @@ function ChallengesAndClubsPage() {
           </Button>
         </div>
       </Section>
-
 
       <CtaBand
         title="Bring a challenge or club to Aurelia"
