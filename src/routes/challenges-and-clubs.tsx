@@ -77,6 +77,24 @@ const clubBoundaries = [
   "No public follower counts, friend lists or popularity metrics inside a club.",
 ];
 
+const judgeSees = [
+  "The submitted piece of work itself, as approved for entry.",
+  "The project label — the format and the brief it was answering.",
+  "The age band the entry was submitted under, so it can be judged fairly against its peers.",
+  "The child's chosen display name for the entry, or an anonymous entry reference.",
+  "Any notes the child chose to include about how they made it.",
+];
+
+const judgeNeverSees = [
+  "A real name, email address, phone number or home address.",
+  "A school name, class or town that could locate the child.",
+  "Any route to message, follow or contact the child who entered.",
+  "Private drafts, earlier versions or anything else in the child's studio.",
+  "A browsable list of the other children who entered.",
+];
+
+
+
 function ChallengesAndClubsPage() {
   return (
     <PublicPage>
