@@ -21,6 +21,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ContactEnquiryRouteImport } from './routes/contact-enquiry'
 import { Route as CreatorStudioRouteImport } from './routes/creator-studio'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DashboardDemosRouteImport } from './routes/dashboard-demos'
 import { Route as ForEducationGroupsRouteImport } from './routes/for-education-groups'
 import { Route as ForFamiliesRouteImport } from './routes/for-families'
 import { Route as ForOrganisationsRouteImport } from './routes/for-organisations'
@@ -165,6 +166,11 @@ const CreatorStudioRoute = CreatorStudioRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardDemosRoute = DashboardDemosRouteImport.update({
+  id: '/dashboard-demos',
+  path: '/dashboard-demos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForEducationGroupsRoute = ForEducationGroupsRouteImport.update({
@@ -622,6 +628,7 @@ export interface FileRoutesByFullPath {
   '/contact-enquiry': typeof ContactEnquiryRoute
   '/creator-studio': typeof CreatorStudioRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard-demos': typeof DashboardDemosRoute
   '/for-education-groups': typeof ForEducationGroupsRoute
   '/for-families': typeof ForFamiliesRoute
   '/for-organisations': typeof ForOrganisationsRoute
@@ -719,6 +726,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/contact-enquiry': typeof ContactEnquiryRoute
   '/creator-studio': typeof CreatorStudioRoute
+  '/dashboard-demos': typeof DashboardDemosRoute
   '/for-education-groups': typeof ForEducationGroupsRoute
   '/for-families': typeof ForFamiliesRoute
   '/for-organisations': typeof ForOrganisationsRoute
@@ -819,6 +827,7 @@ export interface FileRoutesById {
   '/contact-enquiry': typeof ContactEnquiryRoute
   '/creator-studio': typeof CreatorStudioRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard-demos': typeof DashboardDemosRoute
   '/for-education-groups': typeof ForEducationGroupsRoute
   '/for-families': typeof ForFamiliesRoute
   '/for-organisations': typeof ForOrganisationsRoute
@@ -920,6 +929,7 @@ export interface FileRouteTypes {
     | '/contact-enquiry'
     | '/creator-studio'
     | '/dashboard'
+    | '/dashboard-demos'
     | '/for-education-groups'
     | '/for-families'
     | '/for-organisations'
@@ -1017,6 +1027,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/contact-enquiry'
     | '/creator-studio'
+    | '/dashboard-demos'
     | '/for-education-groups'
     | '/for-families'
     | '/for-organisations'
@@ -1116,6 +1127,7 @@ export interface FileRouteTypes {
     | '/contact-enquiry'
     | '/creator-studio'
     | '/dashboard'
+    | '/dashboard-demos'
     | '/for-education-groups'
     | '/for-families'
     | '/for-organisations'
@@ -1216,6 +1228,7 @@ export interface RootRouteChildren {
   ContactEnquiryRoute: typeof ContactEnquiryRoute
   CreatorStudioRoute: typeof CreatorStudioRoute
   DashboardRoute: typeof DashboardRouteWithChildren
+  DashboardDemosRoute: typeof DashboardDemosRoute
   ForEducationGroupsRoute: typeof ForEducationGroupsRoute
   ForFamiliesRoute: typeof ForFamiliesRoute
   ForOrganisationsRoute: typeof ForOrganisationsRoute
@@ -1319,6 +1332,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard-demos': {
+      id: '/dashboard-demos'
+      path: '/dashboard-demos'
+      fullPath: '/dashboard-demos'
+      preLoaderRoute: typeof DashboardDemosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/for-education-groups': {
@@ -2087,6 +2107,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactEnquiryRoute: ContactEnquiryRoute,
   CreatorStudioRoute: CreatorStudioRoute,
   DashboardRoute: DashboardRouteWithChildren,
+  DashboardDemosRoute: DashboardDemosRoute,
   ForEducationGroupsRoute: ForEducationGroupsRoute,
   ForFamiliesRoute: ForFamiliesRoute,
   ForOrganisationsRoute: ForOrganisationsRoute,

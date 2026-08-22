@@ -5,7 +5,9 @@ export interface PublicLink {
 }
 
 export const productLinks: PublicLink[] = [
+  { label: "See the dashboards", to: "/dashboard-demos", description: "Demo workspaces for every role, from child to education group." },
   { label: "Ideas & Resources", to: "/ideas-and-resources", description: "Project starters, family guides and educator brief templates." },
+
   { label: "Creator Studio", to: "/creator-studio", description: "Podcasts, shows, stories, art, film, games and inventions." },
   { label: "Challenges & Clubs", to: "/challenges-and-clubs", description: "Purposeful challenges and small, supervised clubs." },
   { label: "Achievement Passport", to: "/achievement-passport", description: "Verified evidence of skills, leadership and contribution." },
