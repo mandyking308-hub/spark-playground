@@ -219,7 +219,7 @@ export function PublicGTranslate({ children }: { children: ReactNode }) {
       removeTranslationChrome();
       delete window.gtranslateSettings;
     };
-  }, [excluded, pathname]);
+  }, [excluded]);
 
   return (
     <>
