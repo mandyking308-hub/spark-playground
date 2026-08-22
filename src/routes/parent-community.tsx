@@ -174,6 +174,53 @@ function ParentCommunity() {
         </SplitFeature>
       </Section>
 
+      {/* Adults only, on the card itself */}
+      <Section>
+        <SectionHeading
+          eyebrow="A community of adults"
+          title="A community card describes a grown-up, and only a grown-up"
+          description="It would be easy to build a parent community that quietly becomes a directory of children. Aurelia does not. A member's card carries their own identity — never their child's."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-border/70 bg-card p-6">
+            <UserRoundCheck className="size-5 text-accent-foreground" aria-hidden="true" />
+            <h3 className="mt-4 font-display text-lg tracking-tight">What a card can show</h3>
+            <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-muted-foreground">
+              {cardShows.map((item) => (
+                <li key={item} className="flex gap-2.5">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 size-1.5 shrink-0 rounded-full bg-accent-foreground"
+                  />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-dashed border-border bg-muted/40 p-6">
+            <EyeOff className="size-5 text-muted-foreground" aria-hidden="true" />
+            <h3 className="mt-4 font-display text-lg tracking-tight">What never appears</h3>
+            <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-muted-foreground">
+              {cardNeverShows.map((item) => (
+                <li key={item} className="flex gap-2.5">
+                  <span
+                    aria-hidden="true"
+                    className="mt-[0.6rem] h-px w-3 shrink-0 bg-muted-foreground/60"
+                  />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          Circles and events are conversations between adults. They carry no messaging route to a
+          child and no window into a child's private drafts — a parent's sight of their own child's
+          work comes only through the guardian controls on their own account.
+        </p>
+      </Section>
+
+
       <Section>
         <SectionHeading
           eyebrow="Boundaries"
