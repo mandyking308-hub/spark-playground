@@ -25,15 +25,17 @@ export function AppSidebar({ role }: { role: PlatformRole }) {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="px-3 py-4">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-primary text-xs font-semibold text-primary-foreground">
-            A
-          </span>
-          <span className="font-display text-sm tracking-tight group-data-[collapsible=icon]:hidden">
-            Aurelia
+        <Link to="/" className="flex items-center gap-2.5" aria-label="Aurelia home">
+          <AureliaMark tone="brand" className="size-7 shrink-0" />
+          <span className="flex flex-col leading-none group-data-[collapsible=icon]:hidden">
+            <span className="font-display text-sm tracking-tight">Aurelia</span>
+            <span className="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.2em] text-muted-foreground">
+              Create · Learn · Achieve
+            </span>
           </span>
         </Link>
       </SidebarHeader>
+
 
       <SidebarContent>
         {visibleModules.length > 0 ? (
