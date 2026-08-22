@@ -29,7 +29,23 @@ Observed as already registered/owned as of the sweep:
 - `aurelia-world.com` — has prior/other web use.
 - `joinaurelia.com` — appears in a newly registered .COM list dated 12 August 2026.
 
-Therefore the obvious defensive domain set is not freely available.
+### Live registrar availability check — 22 August 2026
+
+A live Wix Domains API check was run before handoff.
+
+- `aureliaworld.com` — **TAKEN**.
+- `theaureliaworld.com` — **AVAILABLE**, non-premium at time of check.
+- `myaureliaworld.com` — **AVAILABLE**, non-premium at time of check.
+- `enteraurelia.com` — **AVAILABLE**, non-premium at time of check.
+- `aureliaworldapp.com` — **AVAILABLE**, non-premium at time of check.
+- `aureliaworldhq.com` — **AVAILABLE**, non-premium at time of check.
+- `weareaureliaworld.com` — **AVAILABLE**, non-premium at time of check.
+- `aureliacreate.com` — **AVAILABLE**, non-premium at time of check.
+- `aureliaone.com` — **TAKEN**.
+
+Preferred available domain if the compound brand **Aurelia World** is legally cleared: **`theaureliaworld.com`**. It reads as an intentional brand address rather than a technical fallback.
+
+Domain availability is time-sensitive. Re-check at checkout immediately before purchase.
 
 ## Current product position
 
