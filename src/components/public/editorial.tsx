@@ -235,3 +235,128 @@ export function Stat({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
+
+/* --- Hero collage primitives (presentation only, local shapes + local assets) --- */
+
+type GlyphName = "microphone" | "camera" | "pencil" | "notebook" | "prototype" | "controller";
+
+/** Decorative line-drawn object glyph used in editorial collages. */
+export function ObjectGlyph({
+  name,
+  className,
+}: {
+  name: GlyphName;
+  className?: string;
+}) {
+  const paths: Record<GlyphName, ReactNode> = {
+    microphone: (
+      <>
+        <rect x="9" y="2.5" width="6" height="11" rx="3" />
+        <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0" />
+        <path d="M12 18v3.5M8.5 21.5h7" />
+      </>
+    ),
+    camera: (
+      <>
+        <path d="M3 7.5h4l1.5-2.5h7L17 7.5h4v12H3z" />
+        <circle cx="12" cy="13" r="3.5" />
+      </>
+    ),
+    pencil: (
+      <>
+        <path d="M4 20.5l1-4L16.5 5a2.1 2.1 0 0 1 3 3L8 19.5z" />
+        <path d="M14.5 7L17.5 10" />
+      </>
+    ),
+    notebook: (
+      <>
+        <path d="M6 3h13v18H6z" />
+        <path d="M6 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2" />
+        <path d="M9.5 8.5h6M9.5 12h6M9.5 15.5h3.5" />
+      </>
+    ),
+    prototype: (
+      <>
+        <path d="M4 8.5L12 4l8 4.5v7L12 20l-8-4.5z" />
+        <path d="M4 8.5L12 13l8-4.5M12 13v7" />
+      </>
+    ),
+    controller: (
+      <>
+        <path d="M7.5 8h9a5 5 0 0 1 5 5.4l-.3 3a2.6 2.6 0 0 1-4.6 1.4L15 16H9l-1.6 1.8a2.6 2.6 0 0 1-4.6-1.4l-.3-3A5 5 0 0 1 7.5 8z" />
+        <path d="M7 11.5v3M5.5 13h3M15.5 12h.01M17.5 14h.01" />
+      </>
+    ),
+  };
+
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      className={cn("size-5", className)}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {paths[name]}
+    </svg>
+  );
+}
+
+/** Hand-drawn style gold marker underline. */
+export function MarkerUnderline({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 220 12"
+      aria-hidden="true"
+      focusable="false"
+      preserveAspectRatio="none"
+      className={cn("block h-2.5 w-full text-gold", className)}
+    >
+      <path
+        d="M3 8.5C48 3.5 108 2.5 217 5.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeLinecap="round"
+        opacity="0.55"
+      />
+    </svg>
+  );
+}
+
+/** A small pinned object detail card used inside the hero collage. */
+export function DetailCard({
+  glyph,
+  label,
+  title,
+  children,
+  className,
+}: {
+  glyph: GlyphName;
+  label: string;
+  title: string;
+  children?: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "brand-card rounded-2xl border border-border/70 bg-card/95 p-4 backdrop-blur",
+        className,
+      )}
+    >
+      <span className="flex items-center gap-2 text-[0.62rem] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+        <ObjectGlyph name={glyph} className="size-4 text-accent-foreground" />
+        {label}
+      </span>
+      <p className="mt-2 font-display text-sm leading-snug tracking-tight">{title}</p>
+      {children ? (
+        <div className="mt-2 text-xs leading-relaxed text-muted-foreground">{children}</div>
+      ) : null}
+    </div>
+  );
+}

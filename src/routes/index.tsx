@@ -18,13 +18,17 @@ import {
   SectionHeading,
 } from "@/components/public/sections";
 import {
+  DetailCard,
   EditorialImage,
   Figure,
   GoldRule,
+  MarkerUnderline,
+  ObjectGlyph,
   PaperNote,
   SplitFeature,
   WaveformStrip,
 } from "@/components/public/editorial";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -80,11 +84,27 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+const heroCrafts = [
+  { label: "Podcast", glyph: "microphone" as const },
+  { label: "Short film", glyph: "camera" as const },
+  { label: "Story", glyph: "pencil" as const },
+  { label: "Invention", glyph: "prototype" as const },
+  { label: "Game", glyph: "controller" as const },
+];
+
 const mosaic = [
+  {
+    src: heroPodcast,
+    alt: "A young person at a podcast microphone with a handwritten episode plan on the desk",
+    label: "Illustrative example · Podcast",
+    title: "A three-episode series about their neighbourhood",
+    width: 1536,
+    height: 1024,
+  },
   {
     src: makingFilm,
     alt: "Two young people filming a small stop-motion set with a phone on a tripod",
-    label: "Example · Short film",
+    label: "Illustrative example · Short film",
     title: "A one-minute film about their street",
     width: 1280,
     height: 960,
@@ -92,31 +112,31 @@ const mosaic = [
   {
     src: storyArt,
     alt: "An illustrated storybook spread with hand lettering and coloured pencils",
-    label: "Example · Story",
+    label: "Illustrative example · Story / book",
     title: "A picture book written for a younger sibling",
     width: 1024,
     height: 1024,
   },
   {
+    src: designDesk,
+    alt: "Hands painting and sketching artwork with markers, swatches and tape on a desk",
+    label: "Illustrative example · Artwork",
+    title: "A painted series about somewhere they love",
+    width: 1280,
+    height: 960,
+  },
+  {
     src: inventionPrototype,
     alt: "A cardboard and electronics prototype beside annotated design sketches",
-    label: "Example · Invention",
+    label: "Illustrative example · Invention / prototype",
     title: "A prototype that fixes one annoying thing",
     width: 1024,
     height: 1024,
   },
   {
-    src: designDesk,
-    alt: "Hands sketching a poster design with markers, swatches and tape",
-    label: "Example · Design",
-    title: "A poster for a cause they chose themselves",
-    width: 1280,
-    height: 960,
-  },
-  {
     src: codingGame,
     alt: "A young person coding a simple platform game beside pixel sketches on graph paper",
-    label: "Example · Game",
+    label: "Illustrative example · Coding / game",
     title: "A game built around exactly one rule",
     width: 1280,
     height: 960,
@@ -124,15 +144,15 @@ const mosaic = [
   {
     src: challengeBrief,
     alt: "A printed challenge brief with a gold seal, pinned notes and a project label",
-    label: "Example · Challenge entry",
-    title: "An answer to a brief set by a verified partner",
+    label: "Illustrative example · Social-impact challenge",
+    title: "An answer to a brief about their own community",
     width: 1280,
     height: 960,
   },
 ];
 
 const interestPaths = [
-  { title: "Create", text: "Podcasts, shows, films and everything that starts with making something." },
+  { title: "Making & creating", text: "Podcasts, shows, films and everything that starts with making something." },
   { title: "Science & invention", text: "Prototypes, experiments and the failures that come first." },
   { title: "Storytelling", text: "Writing, illustration, audio and the shape of a good idea." },
   { title: "Design", text: "Type, colour, posters, objects and the craft of making it clear." },
@@ -140,6 +160,7 @@ const interestPaths = [
   { title: "World & culture", text: "Places, languages, history and the world beyond the classroom." },
   { title: "Enterprise & ideas", text: "Local problems, real audiences and work that is useful to someone." },
 ];
+
 
 const journey = [
   { step: "01", title: "An idea", text: "Something they actually want to make, not an assignment they endure." },
@@ -203,23 +224,40 @@ function Home() {
   return (
     <PublicPage>
       {/* 1 — Hero */}
-      <section className="brand-dawn border-b border-border/70">
-        <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-8 sm:py-24">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
+      <section className="brand-dawn relative overflow-hidden border-b border-border/70">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute -end-24 -top-24 size-72 rounded-full bg-gold/15 blur-3xl"
+        />
+        <div className="relative mx-auto w-full max-w-6xl px-4 py-16 sm:px-8 sm:py-24">
+          <div className="grid items-center gap-14 lg:grid-cols-[1.02fr_0.98fr]">
             <div>
               <Badge variant="secondary" className="mb-5 rounded-full px-3 py-1">
                 Invitation-only · Built for under-16s
               </Badge>
               <h1 className="font-display text-4xl leading-[1.04] tracking-tight sm:text-6xl">
                 Create. Learn. Achieve.{" "}
-                <span className="text-accent-foreground">Safely.</span>
+                <span className="relative inline-block text-accent-foreground">
+                  Safely.
+                  <MarkerUnderline className="absolute inset-x-0 -bottom-1" />
+                </span>
               </h1>
-              <GoldRule className="mt-6 w-24" />
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
                 Somewhere a young person can make something real — a podcast, a film, a story, an
                 invention — and be recognised for it by adults who actually watched them do it. No
                 followers. No scores. No strangers.
               </p>
+              <ul className="mt-7 flex flex-wrap gap-2" aria-label="Kinds of work made in Aurelia">
+                {heroCrafts.map((craft) => (
+                  <li
+                    key={craft.label}
+                    className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/80 px-3 py-1.5 text-xs font-medium text-muted-foreground"
+                  >
+                    <ObjectGlyph name={craft.glyph} className="size-4 text-accent-foreground" />
+                    {craft.label}
+                  </li>
+                ))}
+              </ul>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button asChild size="lg">
                   <Link to="/auth/join">Join with an invitation</Link>
@@ -240,29 +278,51 @@ function Home() {
               </p>
             </div>
 
-            <div className="relative">
-              <EditorialImage
-                src={heroPodcast}
-                alt="A young person setting up a podcast microphone beside a handwritten episode plan"
-                width={1536}
-                height={1024}
-                ratio="landscape"
-                priority
-                className="brand-frame rounded-3xl"
-              />
-              <div className="brand-card absolute -bottom-6 start-4 hidden max-w-xs rounded-2xl border border-border/70 bg-card p-5 sm:block">
-                <WaveformStrip className="mb-3" />
-                <p className="font-display text-base leading-snug tracking-tight">
-                  “Episode 3: Finding Voice.”
-                </p>
-                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                  Illustrative example of the kind of work made in the Creator Studio.
-                </p>
+            <div className="relative pb-16 sm:pb-24 lg:pb-10">
+              <div className="relative rotate-[-1.2deg]">
+                <EditorialImage
+                  src={heroPodcast}
+                  alt="A young person setting up a podcast microphone beside a handwritten episode plan"
+                  width={1536}
+                  height={1024}
+                  ratio="landscape"
+                  priority
+                  className="brand-frame rounded-3xl"
+                />
+                <span aria-hidden="true" className="brand-tape" />
+              </div>
+
+              <div className="absolute -bottom-2 start-0 w-[62%] max-w-xs sm:-bottom-6 sm:start-4 lg:-bottom-2">
+                <DetailCard
+                  glyph="microphone"
+                  label="Illustrative example"
+                  title="“Episode 3: Finding Voice.”"
+                >
+                  <WaveformStrip className="mb-2 h-6" bars={28} />
+                  Recorded, edited and finished — then shared only after a guardian said yes.
+                </DetailCard>
+              </div>
+
+              <div className="absolute -end-1 -top-6 hidden w-44 rotate-[2.5deg] sm:block">
+                <DetailCard
+                  glyph="notebook"
+                  label="Working notebook"
+                  title="Draft two: cut the intro, keep the pause."
+                />
+              </div>
+
+              <div className="absolute -end-2 bottom-6 hidden w-40 -rotate-[2deg] lg:block">
+                <DetailCard
+                  glyph="prototype"
+                  label="Next up"
+                  title="A prototype that fixes one annoying thing."
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* 2 — What children actually make */}
       <Section className="pt-20">
@@ -348,21 +408,27 @@ function Home() {
             title="From a half-formed idea to something that counts"
             description="Every project in Aurelia travels the same route. Nothing skips a step, and nothing is published because it was popular."
           />
-          <ol className="mt-8 space-y-4">
+          <ol className="relative mt-8 space-y-5 ps-8">
+            <span
+              aria-hidden="true"
+              className="absolute bottom-3 start-[0.68rem] top-3 w-px bg-gradient-to-b from-gold via-gold/50 to-transparent"
+            />
             {journey.map((item) => (
-              <li key={item.step} className="flex gap-4">
-                <span className="mt-1 font-display text-sm tracking-[0.2em] text-accent-foreground">
+              <li key={item.step} className="relative">
+                <span
+                  aria-hidden="true"
+                  className="absolute -start-8 top-1 flex size-6 items-center justify-center rounded-full border border-gold/60 bg-card text-[0.6rem] font-semibold tracking-tight text-accent-foreground"
+                >
                   {item.step}
                 </span>
-                <span>
-                  <span className="block font-medium">{item.title}</span>
-                  <span className="mt-0.5 block text-sm leading-relaxed text-muted-foreground">
-                    {item.text}
-                  </span>
+                <span className="block font-medium">{item.title}</span>
+                <span className="mt-0.5 block text-sm leading-relaxed text-muted-foreground">
+                  {item.text}
                 </span>
               </li>
             ))}
           </ol>
+
           <div className="mt-8">
             <Button asChild variant="outline">
               <Link to="/achievement-passport">See the Achievement Passport</Link>
