@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 
 import { Button } from "@/components/ui/button";
-import { signOutFn } from "@/server/auth";
+import { signOutFn } from "@/functions/auth";
 
 export function SignOutButton() {
   const signOut = useServerFn(signOutFn);
