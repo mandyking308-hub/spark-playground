@@ -77,7 +77,7 @@ export default {
           return badRequest("Decision note is too long");
         }
 
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_record_guardian_decision", {
+        const { data, error } = await (ctx.supabaseAdmin as unknown as AdminClient).rpc("server_record_guardian_decision", {
           p_auth_user_id: authUserId,
           p_request_id: body.requestId,
           p_approved: body.approved,
