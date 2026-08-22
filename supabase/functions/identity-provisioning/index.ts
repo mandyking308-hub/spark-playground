@@ -97,7 +97,7 @@ export default {
         const { data, error } = await admin
           .from("account_invitations")
           .select("id,intended_role,intended_age_band,school_id,cohort_id,education_group_id,state,expires_at,created_at")
-          .eq("issued_by_profile_id", actor["id"])
+          .eq("issued_by_profile_id", actor.id)
           .order("created_at", { ascending: false })
           .limit(50);
 
