@@ -47,7 +47,7 @@ export function AuthForm({
             {isSignUp ? (
               <div className="space-y-4">
                 <p className="rounded-md border border-border bg-muted/30 px-3 py-3 text-sm leading-relaxed text-muted-foreground">
-                  Aurelia does not use open self-registration. Child, parent, staff and organisation accounts enter through verified invitation and safeguarding workflows.
+                  Aurelia has no open self-registration. An under-16 account is sponsored through a verified parent/guardian or a verified school. Parents, staff and institution roles use their own verified onboarding paths.
                 </p>
                 <Button asChild className="w-full">
                   <Link to="/auth/join">Use a verified invitation</Link>

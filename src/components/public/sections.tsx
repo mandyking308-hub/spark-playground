@@ -123,7 +123,7 @@ export function CtaBand({
   title,
   description,
   primary = { label: "Join with invitation", to: "/auth/join" },
-  secondary = { label: "Talk to our team", to: "/contact" },
+  secondary = { label: "Send an enquiry", to: "/contact-enquiry" },
 }: {
   title: string;
   description: string;

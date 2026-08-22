@@ -23,7 +23,7 @@ export function SiteFooter() {
             </p>
             <p className="mt-4 text-sm">
               <Link
-                to="/safeguarding-and-reporting"
+                to="/report-concern"
                 className="font-medium text-foreground underline underline-offset-4"
               >
                 Report a concern
