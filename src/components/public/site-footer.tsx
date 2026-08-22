@@ -21,6 +21,9 @@ export function SiteFooter() {
               A protected global creation, learning and achievement world for under-16s — and a
               separate environment for members aged 16 and over.
             </p>
+            <p className="mt-3 max-w-xs text-xs leading-relaxed text-muted-foreground">
+              Aurelia World is operated by <strong className="font-medium text-foreground">Global Solutions Management LLC</strong>, a Delaware limited liability company.
+            </p>
             <p className="mt-4 text-sm">
               <Link
                 to="/report-concern"
@@ -55,13 +58,9 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} Aurelia World, operated by Global Solutions Management
-            LLC. All rights reserved.
-          </p>
+          <p>© {new Date().getFullYear()} Global Solutions Management LLC. Aurelia World. All rights reserved.</p>
           <p className="max-w-xl">
-            Aurelia is designed for child safety and privacy by design. Published policies are
-            drafts pending review by qualified legal counsel before public launch.
+            Child safety and privacy are designed into the service. Legal and regulatory documents are maintained for qualified counsel review and jurisdiction-specific launch requirements.
           </p>
         </div>
       </div>
