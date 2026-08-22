@@ -29,6 +29,16 @@ const signInInput = z.object({
   password: z.string().min(8).max(128),
 });
 
+const invitationTokenPattern = /^[A-Za-z0-9_-]{40,80}$/;
+
+const joinInput = z.object({
+  invitationToken: z.string().regex(invitationTokenPattern),
+  email: z.string().trim().email().max(254),
+  password: z.string().min(10).max(128),
+  displayName: z.string().trim().min(1).max(120),
+  countryCode: z.string().trim().regex(/^[A-Za-z]{2}$/).optional(),
+});
+
 type SupabaseServerClient = ReturnType<typeof getSupabaseServerClient>;
 
 async function loadAuthenticatedActor(
@@ -66,6 +76,34 @@ async function loadAuthenticatedActor(
   };
 }
 
+async function invitationIsClaimable(
+  supabase: SupabaseServerClient,
+  invitationToken: string,
+): Promise<boolean> {
+  const { data, error } = await supabase.functions.invoke("invitation-preflight", {
+    body: { invitationToken },
+  });
+
+  if (error) return false;
+  return data?.data?.valid === true;
+}
+
+async function claimInvitation(
+  supabase: SupabaseServerClient,
+  input: z.infer<typeof joinInput>,
+): Promise<boolean> {
+  const { data, error } = await supabase.functions.invoke("identity-provisioning", {
+    body: {
+      action: "claim_invitation",
+      invitationToken: input.invitationToken,
+      displayName: input.displayName,
+      countryCode: input.countryCode?.toUpperCase(),
+    },
+  });
+
+  return !error && Boolean(data?.data?.profile_id);
+}
+
 export const getCurrentActorFn = createServerFn({ method: "GET" }).handler(async () => {
   const supabase = getSupabaseServerClient();
   const {
@@ -97,6 +135,65 @@ export const signInFn = createServerFn({ method: "POST" })
     if (!actor) {
       await supabase.auth.signOut();
       return { ok: false, error: "This account has not been provisioned for Aurelia." };
+    }
+
+    return { ok: true, redirectTo: authenticatedHomeForRole(actor.role) };
+  });
+
+export const joinWithInvitationFn = createServerFn({ method: "POST" })
+  .validator((input: unknown) => joinInput.parse(input))
+  .handler(async ({ data }): Promise<
+    | { ok: true; redirectTo: AuthenticatedHomeRoute }
+    | { ok: false; confirmationRequired?: boolean; error: string }
+  > => {
+    const supabase = getSupabaseServerClient();
+
+    // Validate only the opaque bearer token before creating an Auth record.
+    // The preflight deliberately returns no role, tenant, sponsor or child data.
+    if (!(await invitationIsClaimable(supabase, data.invitationToken))) {
+      return { ok: false, error: "That invitation is invalid or has expired." };
+    }
+
+    // A confirmed account may be returning to finish claiming its invitation.
+    // The same generic form is used for new and returning users to avoid account enumeration.
+    let user = null as { id: string; email?: string | null } | null;
+    const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (!signInError && signInData.user) {
+      user = signInData.user;
+    } else {
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+      });
+
+      if (signUpError || !signUpData.user) {
+        return { ok: false, error: "We couldn't create or continue that account." };
+      }
+
+      if (!signUpData.session) {
+        return {
+          ok: false,
+          confirmationRequired: true,
+          error: "Check your email to confirm the address, then return here with the same invitation and sign-in details to finish joining Aurelia.",
+        };
+      }
+
+      user = signUpData.user;
+    }
+
+    if (!(await claimInvitation(supabase, data))) {
+      await supabase.auth.signOut();
+      return { ok: false, error: "That invitation could not be claimed." };
+    }
+
+    const actor = await loadAuthenticatedActor(supabase, user);
+    if (!actor) {
+      await supabase.auth.signOut();
+      return { ok: false, error: "Your Aurelia workspace could not be resolved." };
     }
 
     return { ok: true, redirectTo: authenticatedHomeForRole(actor.role) };
