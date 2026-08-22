@@ -18,13 +18,17 @@ import {
   SectionHeading,
 } from "@/components/public/sections";
 import {
+  DetailCard,
   EditorialImage,
   Figure,
   GoldRule,
+  MarkerUnderline,
+  ObjectGlyph,
   PaperNote,
   SplitFeature,
   WaveformStrip,
 } from "@/components/public/editorial";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
