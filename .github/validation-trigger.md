@@ -1,0 +1,1 @@
+Validation branch for the GitHub-first Aurelia product and parent-community pass. This file is not intended for main.
