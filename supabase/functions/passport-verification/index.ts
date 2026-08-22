@@ -1,5 +1,15 @@
 import { withSupabase } from "@supabase/server";
 
+// This deployment targets an external Aurelia database without generated types,
+// so the admin client is narrowed to the minimal untyped surface used here.
+type AdminClient = {
+  rpc: (fn: string, args: Record<string, unknown>) => Promise<{
+    data: Record<string, unknown>[] | null;
+    error: unknown;
+  }>;
+};
+
+
 type Action = "set_review_state" | "issue_achievement" | "revoke_achievement";
 type ReviewState = "in_review" | "revision_requested" | "closed";
 type AchievementKind = "project" | "certificate" | "skill" | "leadership" | "volunteering" | "award";
