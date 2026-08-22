@@ -7,7 +7,7 @@ export const ageBands = ["Under 9", "9–12", "13–15"] as const;
 export type AgeBand = (typeof ageBands)[number];
 
 export const interests = [
-  "Create",
+  "Making & creating",
   "Science & invention",
   "Storytelling",
   "Design",
@@ -81,7 +81,7 @@ export const projectStarters: ProjectStarter[] = [
     id: "story-picture-book",
     title: "A picture book for someone smaller",
     format: "Story",
-    interest: "Create",
+    interest: "Making & creating",
     ages: ["Under 9", "9–12"],
     summary:
       "Make an eight-page picture book written specifically for a younger child you know.",
@@ -97,7 +97,7 @@ export const projectStarters: ProjectStarter[] = [
     id: "film-sixty-seconds",
     title: "Sixty seconds, one place",
     format: "Film",
-    interest: "Create",
+    interest: "Making & creating",
     ages: ["9–12", "13–15"],
     summary:
       "Film a one-minute portrait of a single place using no more than eight shots.",
@@ -223,9 +223,19 @@ export const projectStarters: ProjectStarter[] = [
   },
 ];
 
+export const resourceTypes = [
+  "Project starters",
+  "Family guides",
+  "Educator briefs",
+  "Constructive feedback",
+  "Digital wellbeing",
+] as const;
+export type ResourceType = (typeof resourceTypes)[number];
+
 export interface ResourceCard {
   id: string;
   title: string;
+  type: ResourceType;
   audience: "Families" | "Educators" | "Both";
   summary: string;
   points: string[];
@@ -234,6 +244,7 @@ export interface ResourceCard {
 export const resourceCards: ResourceCard[] = [
   {
     id: "wellbeing-guide",
+    type: "Digital wellbeing",
     title: "Creation over consumption: a family guide",
     audience: "Families",
     summary:
@@ -247,6 +258,7 @@ export const resourceCards: ResourceCard[] = [
   },
   {
     id: "feedback-guide",
+    type: "Constructive feedback",
     title: "How to give constructive feedback to a young maker",
     audience: "Both",
     summary:
@@ -260,6 +272,7 @@ export const resourceCards: ResourceCard[] = [
   },
   {
     id: "approval-guide",
+    type: "Family guides",
     title: "What guardian approval actually involves",
     audience: "Families",
     summary:
@@ -273,6 +286,7 @@ export const resourceCards: ResourceCard[] = [
   },
   {
     id: "brief-template",
+    type: "Educator briefs",
     title: "Educator brief template: making with evidence",
     audience: "Educators",
     summary:
@@ -286,6 +300,7 @@ export const resourceCards: ResourceCard[] = [
   },
   {
     id: "brief-template-impact",
+    type: "Educator briefs",
     title: "Educator brief template: local impact project",
     audience: "Educators",
     summary:
@@ -299,6 +314,7 @@ export const resourceCards: ResourceCard[] = [
   },
   {
     id: "portfolio-guide",
+    type: "Family guides",
     title: "Building a portfolio a young person is proud of",
     audience: "Both",
     summary:
@@ -308,6 +324,36 @@ export const resourceCards: ResourceCard[] = [
       "Keep the draft that shows the turning point.",
       "Write one line on what was hard.",
       "Let the young person make the final selection.",
+    ],
+  },
+  {
+    id: "planning-worksheet",
+    type: "Project starters",
+    title: "The one-page project planning worksheet",
+    audience: "Both",
+    summary:
+      "A worksheet concept a young maker can fill in on paper before they start, so the project has a finish line from day one. Example resource — nothing is submitted anywhere.",
+    points: [
+      "The thing I am making, in one sentence.",
+      "Who it is for, and why they would care.",
+      "Three steps, and which one I do first.",
+      "How I will know it is finished.",
+      "The drafts I will keep as evidence.",
+    ],
+  },
+  {
+    id: "safe-ai-prompts",
+    type: "Digital wellbeing",
+    title: "Using AI safely alongside a young maker",
+    audience: "Both",
+    summary:
+      "How to use assistance without handing over authorship, and the kinds of prompts that help a child think rather than think for them.",
+    points: [
+      "Ask for questions about the work, not a finished version of it.",
+      "Ask it to explain a technique, then do the technique yourself.",
+      "Never share a real name, school, address or photograph in a prompt.",
+      "Say out loud which parts were assisted — Aurelia labels authorship for the same reason.",
+      "If the answer sounds certain, check it against a second source.",
     ],
   },
 ];

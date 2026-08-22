@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { AureliaLogo } from "@/components/brand/aurelia-logo";
 import { signInFn } from "@/functions/auth";
 
@@ -35,7 +35,9 @@ export function AuthForm({
         <Card className="brand-card border-border/70">
 
           <CardHeader>
-            <CardTitle className="font-display text-2xl tracking-tight">{title}</CardTitle>
+            <h1 className="font-display text-2xl leading-none font-semibold tracking-tight">
+              {title}
+            </h1>
             <CardDescription>{description}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-5">
