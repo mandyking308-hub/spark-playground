@@ -63,7 +63,7 @@ export default {
       if (body.action === "withdraw_request") {
         if (!validUuid(body.requestId)) return badRequest();
 
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_withdraw_permission_request", {
+        const { data, error } = await (ctx.supabaseAdmin as unknown as AdminClient).rpc("server_withdraw_permission_request", {
           p_auth_user_id: authUserId,
           p_request_id: body.requestId,
         });
