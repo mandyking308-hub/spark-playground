@@ -52,16 +52,27 @@ const neverList = [
   { icon: UserRoundX, title: "No child accounts", text: "An organisation cannot create, hold or manage an account for any child, under any circumstance." },
   { icon: Ban, title: "No child directory", text: "There is no list of children an organisation can browse, search or select from — children are never visible to an organisation as individuals." },
   { icon: MegaphoneOff, title: "No private contact with children", text: "An organisation never messages, emails or otherwise contacts a child directly. All interaction happens through published challenges reviewed by Aurelia staff." },
-  { icon: ShieldCheck, title: "No behavioural targeting", text: "Organisations cannot target, segment or recommend content to individual children based on behaviour, engagement or profile data." },
-  { icon: Ban, title: "No data harvesting", text: "Organisations do not receive personal data about the children who take part. Only what a judging process genuinely needs is shared, and only with guardian consent." },
+  { icon: ShieldCheck, title: "No behavioural profiling", text: "Organisations cannot build behavioural profiles of children, or target, segment or recommend content to an individual child based on engagement or profile data." },
+  { icon: Ban, title: "No data export", text: "Organisations cannot export child contact details or private child data. Only what a judging process genuinely needs is shared, and only with guardian consent." },
+  { icon: EyeOff, title: "No mentoring under-16s", text: "There is no direct mentoring, coaching or one-to-one relationship between an organisation and an under-16 member. Adult-to-adult mentoring exists only in the separate 16+ Alumni environment." },
 ];
 
 const process = [
-  { step: "01", title: "Verification", text: "An organisation is verified before it can propose anything — identity, purpose and safeguarding awareness are all checked first." },
-  { step: "02", title: "Proposal", text: "The organisation submits a challenge or opportunity brief, describing the task, audience age band and any recognition on offer." },
-  { step: "03", title: "Review", text: "Aurelia staff review the brief for age-appropriateness, safeguarding risk and compliance with platform boundaries before approval." },
-  { step: "04", title: "Publication", text: "Only once approved does the challenge reach schools and families, who can choose whether their children take part at all." },
+  { step: "01", title: "Verify the organisation", text: "Identity, purpose and safeguarding awareness are checked before an organisation can propose anything at all." },
+  { step: "02", title: "Approve the programme", text: "Aurelia staff review the proposed programme, challenge or content for age-appropriateness, safeguarding risk and compliance with platform boundaries." },
+  { step: "03", title: "Publish the challenge or content", text: "Only once approved does the brief reach schools and families, who decide for themselves whether their children take part." },
+  { step: "04", title: "Moderated submissions, only if shared", text: "Entries arrive moderated and sanitised, and only where a child specifically requested to share the work and the required adult approvals were given." },
+  { step: "05", title: "Aggregate outcomes", text: "Reporting comes back as aggregate and approved programme outcomes — participation levels, formats, themes and impact — never as identifiable child records." },
 ];
+
+const reporting = [
+  "Aggregate participation by age band, region or programme, with no individual child identified.",
+  "Themes, formats and approved highlights from the work the programme inspired.",
+  "Outcome summaries suitable for a funder, trustee board or impact report.",
+  "Approved, guardian-consented example work where a family and school specifically agreed to it.",
+];
+
+
 
 function ForOrganisations() {
   return (
