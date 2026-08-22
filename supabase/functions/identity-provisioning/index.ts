@@ -119,7 +119,7 @@ export default {
         const tokenHash = await sha256Hex(rawToken);
         const expiresAt = new Date(Date.now() + ttlHours * 60 * 60 * 1000).toISOString();
 
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_issue_account_invitation", {
+        const { data, error } = await admin.rpc("server_issue_account_invitation", {
           p_auth_user_id: authUserId,
           p_token_hash: tokenHash,
           p_intended_role: body.intendedRole,
@@ -149,7 +149,7 @@ export default {
         if (countryCode !== undefined && !/^[A-Z]{2}$/.test(countryCode)) return badRequest("Invalid country code");
 
         const tokenHash = await sha256Hex(body.invitationToken);
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_claim_account_invitation", {
+        const { data, error } = await admin.rpc("server_claim_account_invitation", {
           p_auth_user_id: authUserId,
           p_token_hash: tokenHash,
           p_display_name: displayName,
@@ -161,7 +161,7 @@ export default {
 
       if (body.action === "revoke_invitation") {
         if (typeof body.invitationId !== "string" || !uuidPattern.test(body.invitationId)) return badRequest();
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_revoke_account_invitation", {
+        const { data, error } = await admin.rpc("server_revoke_account_invitation", {
           p_auth_user_id: authUserId,
           p_invitation_id: body.invitationId,
         });

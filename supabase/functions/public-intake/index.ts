@@ -1,5 +1,19 @@
 import { withSupabase } from "@supabase/server";
 
+// This deployment targets an external Aurelia database without generated types,
+// so the admin client is narrowed to the minimal untyped surface used here.
+type AdminClient = {
+  rpc: (fn: string, args: Record<string, unknown>) => Promise<{ data: unknown; error: unknown }>;
+  from: (table: string) => {
+    insert: (values: Record<string, unknown>) => {
+      select: (columns: string) => {
+        single: () => Promise<{ data: { id?: string } | null; error: unknown }>;
+      };
+    };
+  };
+};
+
+
 type IntakeKind = "enquiry" | "safeguarding";
 type IntakeAudience = "family" | "school" | "education_group" | "organisation" | "press" | "general";
 
