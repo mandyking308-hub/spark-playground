@@ -26,9 +26,9 @@ const eventRsvpInput = z.object({
 export interface AdultDirectoryProfile {
   profileId: string;
   displayName: string;
-  headline?: string;
-  region?: string;
-  bio?: string;
+  headline?: string | undefined;
+  region?: string | undefined;
+  bio?: string | undefined;
   visible: boolean;
   updatedAt: string;
 }
@@ -39,13 +39,13 @@ export interface AdultConnection {
   addresseeProfileId: string;
   status: "pending" | "accepted" | "declined" | "blocked";
   createdAt: string;
-  respondedAt?: string;
+  respondedAt?: string | undefined;
 }
 
 export interface AdultCommunity {
   id: string;
   name: string;
-  description?: string;
+  description?: string | undefined;
   communityType: "interest" | "profession" | "location" | "school" | "alumni" | "volunteering";
   status: "active" | "archived";
   createdAt: string;
@@ -69,12 +69,12 @@ export interface AdultCommunityPost {
 
 export interface AdultEvent {
   id: string;
-  communityId?: string;
+  communityId?: string | undefined;
   title: string;
-  description?: string;
+  description?: string | undefined;
   startsAt: string;
-  endsAt?: string;
-  locationText?: string;
+  endsAt?: string | undefined;
+  locationText?: string | undefined;
   audience: "parents" | "parent_alumni" | "parents_and_alumni";
   status: "draft" | "active" | "cancelled" | "completed";
 }
@@ -254,16 +254,26 @@ export const joinAdultCommunityFn = createServerFn({ method: "POST" })
   .handler(async ({ data }): Promise<{ ok: true }> => {
     const supabase = await requireAuthenticatedClient();
     await currentProfile(supabase);
-    const { data: existing } = await supabase
+    const { data: existing, error: lookupError } = await supabase
       .from("adult_community_memberships")
       .select("id")
       .eq("community_id", data.communityId)
       .maybeSingle();
-    const operation = existing?.id
-      ? supabase.from("adult_community_memberships").update({ status: "active", updated_at: new Date().toISOString() }).eq("id", existing.id)
-      : supabase.from("adult_community_memberships").insert({ community_id: data.communityId, status: "active", member_role: "member" });
-    const { error } = await operation;
-    if (error) throw new Error("Community could not be joined");
+    if (lookupError) throw new Error("Community membership could not be checked");
+
+    if (existing?.id) {
+      const { error } = await supabase
+        .from("adult_community_memberships")
+        .update({ status: "active", updated_at: new Date().toISOString() })
+        .eq("id", existing.id);
+      if (error) throw new Error("Community could not be rejoined");
+    } else {
+      const { error } = await supabase
+        .from("adult_community_memberships")
+        .insert({ community_id: data.communityId, status: "active", member_role: "member" });
+      if (error) throw new Error("Community could not be joined");
+    }
+
     return { ok: true };
   });
 
@@ -351,15 +361,25 @@ export const setAdultEventRsvpFn = createServerFn({ method: "POST" })
   .handler(async ({ data }): Promise<{ ok: true }> => {
     const supabase = await requireAuthenticatedClient();
     await currentProfile(supabase);
-    const { data: existing } = await supabase
+    const { data: existing, error: lookupError } = await supabase
       .from("adult_event_rsvps")
       .select("id")
       .eq("event_id", data.eventId)
       .maybeSingle();
-    const operation = existing?.id
-      ? supabase.from("adult_event_rsvps").update({ response: data.response, updated_at: new Date().toISOString() }).eq("id", existing.id)
-      : supabase.from("adult_event_rsvps").insert({ event_id: data.eventId, response: data.response });
-    const { error } = await operation;
-    if (error) throw new Error("RSVP could not be saved");
+    if (lookupError) throw new Error("RSVP could not be checked");
+
+    if (existing?.id) {
+      const { error } = await supabase
+        .from("adult_event_rsvps")
+        .update({ response: data.response, updated_at: new Date().toISOString() })
+        .eq("id", existing.id);
+      if (error) throw new Error("RSVP could not be updated");
+    } else {
+      const { error } = await supabase
+        .from("adult_event_rsvps")
+        .insert({ event_id: data.eventId, response: data.response });
+      if (error) throw new Error("RSVP could not be saved");
+    }
+
     return { ok: true };
   });
