@@ -1,35 +1,28 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
-  Award,
-  Baby,
-  Bot,
-  Building2,
-  GraduationCap,
-  Users,
-  Mic,
+  ArrowRight,
+  BookOpenText,
+  BriefcaseBusiness,
+  CheckCircle2,
+  Film,
+  Gamepad2,
+  HeartHandshake,
+  Lightbulb,
+  LockKeyhole,
+  Mic2,
   Palette,
-  Puzzle,
+  School,
   ShieldCheck,
   Sparkles,
   Trophy,
-  Wand2,
-  Globe2,
-  Lock,
-  ScrollText,
+  Users,
+  Wrench,
+  type LucideIcon,
 } from "lucide-react";
 
-import { AureliaMark } from "@/components/brand/aurelia-logo";
 import { PublicPage } from "@/components/public/public-page";
-import {
-  CheckList,
-  CtaBand,
-  Eyebrow,
-  FeatureCard,
-  Section,
-  SectionHeading,
-} from "@/components/public/sections";
+import { CtaBand, Section, SectionHeading } from "@/components/public/sections";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,7 +31,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Aurelia is a protected global world where under-16s create, learn and earn verified achievements — with guardian approval, school verification and a separate 16+ alumni environment.",
+          "A protected global world where young people create real work, develop real skills and build verified achievements without being turned into followers, metrics or products.",
       },
       { property: "og:title", content: "Aurelia — Create. Learn. Achieve. Safely." },
       {
@@ -46,350 +39,258 @@ export const Route = createFileRoute("/")({
         content:
           "A protected global creation, learning and achievement world for under-16s, with a separate 16+ alumni environment.",
       },
-      { property: "og:url", content: "/" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: "Aurelia",
-          url: "/",
-          description:
-            "A protected global creation, learning and achievement world for under-16s, with a separate 16+ alumni environment.",
-        }),
-      },
     ],
   }),
-  component: Home,
+  component: HomePage,
 });
 
-const pillars = [
-  { icon: Sparkles, title: "Create", text: "Make podcasts, shows, films, art, writing, games and inventions in a studio built for young makers." },
-  { icon: GraduationCap, title: "Learn", text: "Structured pathways and school briefs that connect creativity to real curriculum outcomes." },
-  { icon: Wand2, title: "Make", text: "Turn ideas into finished work with drafting, iteration and constructive feedback built in." },
-  { icon: Globe2, title: "Discover", text: "Explore curated work from peers worldwide inside age-appropriate, moderated spaces." },
-  { icon: Trophy, title: "Achieve", text: "Earn recognition that is verified by adults who actually witnessed the work." },
+const interests = [
+  { icon: Palette, label: "Create & design", detail: "Art, visual ideas, making and creative experiments" },
+  { icon: Lightbulb, label: "Science & invention", detail: "Prototype, test, explain and improve" },
+  { icon: BookOpenText, label: "Stories & words", detail: "Stories, books, scripts, journalism and ideas" },
+  { icon: Mic2, label: "Podcast & voice", detail: "Record, interview, explain and tell a story" },
+  { icon: Gamepad2, label: "Coding & games", detail: "Build interactive ideas and digital projects" },
+  { icon: Film, label: "Film & media", detail: "Plan, shoot, edit and present" },
+  { icon: BriefcaseBusiness, label: "Enterprise & ideas", detail: "Pitch, solve problems and build something useful" },
 ];
 
-const studio = [
-  { icon: Mic, title: "Podcasts & shows", text: "Record, structure and publish audio and video with approval before anything leaves the family." },
-  { icon: Palette, title: "Art, writing & film", text: "Creative projects with drafts, revisions and evidence of the thinking behind the outcome." },
-  { icon: Puzzle, title: "Games & inventions", text: "Build, prototype and document inventions, then submit them to challenges and clubs." },
-];
+const journey = [
+  ["01", "Idea", "Start with a question, passion or challenge."],
+  ["02", "Draft", "Make privately, experiment and change your mind."],
+  ["03", "Create", "Turn the idea into something real."],
+  ["04", "Feedback", "Receive constructive responses inside verified contexts."],
+  ["05", "Approval", "Guardian or school approval protects wider sharing."],
+  ["06", "Verify", "A teacher or authorised adult can verify the evidence."],
+  ["07", "Passport", "Keep the achievement with its provenance."],
+] as const;
 
-const safety = [
-  "Invitation-only onboarding — there is no open self-registration for children.",
-  "Guardian approval is required before a child's work can be published or shared.",
-  "Row-level security enforces every permission in the database, not in the browser.",
-  "Under-16 and 16+ environments are separated by design, with no shared social surface.",
-  "Every sensitive action is written to an auditable safeguarding trail.",
-  "AI assistance is bounded, age-banded and always labelled as assisted authorship.",
-];
-
-const audiences = [
-  { icon: Baby, title: "Children", text: "A protected place to make things that matter and build a record of it.", to: "/for-families" },
-  { icon: Users, title: "Parents & guardians", text: "Real control over publication, sharing, contact and data.", to: "/for-families" },
-  { icon: GraduationCap, title: "Teachers", text: "Set briefs, review work and verify genuine achievement.", to: "/for-schools" },
-  { icon: Building2, title: "Schools & groups", text: "Safeguarding, oversight and reporting across classes and sites.", to: "/for-education-groups" },
-  { icon: Award, title: "Organisations", text: "Reach young creators through verified, bounded challenges.", to: "/for-organisations" },
-  { icon: ScrollText, title: "16+ Alumni", text: "A separate adult world for portfolio, work and mentoring.", to: "/alumni-world" },
-];
-
-const passportSteps = [
-  { step: "01", title: "The child creates", text: "Work is produced inside Aurelia with drafts and evidence attached." },
-  { step: "02", title: "A guardian approves", text: "Nothing is shared beyond the family without explicit guardian consent." },
-  { step: "03", title: "A teacher verifies", text: "A verified educator confirms the skill, effort or contribution demonstrated." },
-  { step: "04", title: "The passport records it", text: "The achievement becomes durable, portable evidence the young person keeps." },
-];
-
-const trustSignals = [
-  { icon: Lock, title: "Privacy by design", text: "Minimal data, purpose limits and enforced retention windows." },
-  { icon: ShieldCheck, title: "Safeguarding first", text: "Clear reporting routes, case handling and escalation paths." },
-  { icon: Bot, title: "Bounded AI", text: "Assistance that supports thinking rather than replacing authorship." },
-];
-
-function Home() {
+function HomePage() {
   return (
     <PublicPage>
-      {/* 1 — Hero */}
-      <section className="brand-dawn border-b border-border/70">
-        <div className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-8 sm:py-28">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_0.85fr]">
-            <div>
-              <Badge variant="secondary" className="mb-5 rounded-full px-3 py-1">
-                Invitation-only · Built for under-16s
-              </Badge>
-              <h1 className="max-w-3xl font-display text-4xl leading-[1.06] tracking-tight sm:text-6xl">
-                Create. Learn. Achieve.{" "}
-                <span className="text-accent-foreground">Safely.</span>
-              </h1>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                Aurelia is a protected global world where young people under 16 make real work,
-                develop real skills and earn achievements that adults have genuinely verified — with
-                a separate environment for members aged 16 and over.
-              </p>
-              <div className="mt-9 flex flex-wrap gap-3">
-                <Button asChild size="lg">
-                  <Link to="/auth/join">Join with an invitation</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline">
-                  <Link to="/safety-and-trust">See how safety works</Link>
-                </Button>
-              </div>
-              <p className="mt-6 text-sm text-muted-foreground">
-                Children join through a verified parent/guardian or school invitation.{" "}
-                <Link to="/for-schools" className="font-medium text-foreground underline underline-offset-4">
-                  Schools start here
-                </Link>
-                .
-              </p>
+      <section className="overflow-hidden border-b border-border/70 bg-background">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:py-14">
+          <div className="relative z-10 flex flex-col justify-center lg:pr-12">
+            <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-gold/35 bg-gold-soft/60 px-3 py-1.5 text-xs font-semibold text-gold-foreground">
+              <Sparkles className="size-3.5" aria-hidden="true" />
+              Invitation-only · built for childhood
             </div>
+            <h1 className="max-w-3xl font-display text-5xl leading-[0.98] tracking-[-0.04em] text-foreground sm:text-6xl lg:text-7xl">
+              Create. Learn. Achieve. <span className="text-gold-foreground">Safely.</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+              Aurelia is a protected global world where young people under 16 make real things, develop real skills and build achievements that trusted adults have genuinely verified.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg">
+                <Link to="/auth/join">Join with an invitation <ArrowRight className="ml-2 size-4" /></Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link to="/ideas-and-resources">Explore ideas & resources</Link>
+              </Button>
+            </div>
+            <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+              Children join through a verified parent/guardian or school invitation. <Link to="/for-schools" className="font-medium text-foreground underline underline-offset-4">Schools start here</Link>.
+            </p>
+            <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-3">
+              {[
+                [ShieldCheck, "Child-first by design"],
+                [LockKeyhole, "Private by default"],
+                [HeartHandshake, "Human-led safety"],
+              ].map(([Icon, label]) => {
+                const IconComponent = Icon as LucideIcon;
+                return (
+                  <div key={String(label)} className="flex items-center gap-2 rounded-xl border border-border/70 bg-card/80 px-3 py-2 text-sm font-medium">
+                    <IconComponent className="size-4 text-accent-foreground" aria-hidden="true" />
+                    <span>{String(label)}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
-            <div className="brand-card relative rounded-3xl border border-border/70 bg-card p-8">
-              <AureliaMark className="size-14" title="Aurelia" />
-              <p className="mt-6 font-display text-xl leading-snug tracking-tight">
-                A child's achievement should be witnessed, verified and theirs to keep.
-              </p>
-              <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-border pt-6">
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Ages</dt>
-                  <dd className="mt-1 font-display text-2xl tracking-tight">Under 16</dd>
-                </div>
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Alumni</dt>
-                  <dd className="mt-1 font-display text-2xl tracking-tight">16+</dd>
-                </div>
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Onboarding</dt>
-                  <dd className="mt-1 text-sm text-muted-foreground">Verified invitation only</dd>
-                </div>
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.16em] text-muted-foreground">Publication</dt>
-                  <dd className="mt-1 text-sm text-muted-foreground">Guardian approved</dd>
-                </div>
-              </dl>
+          <div className="relative min-h-[430px] overflow-hidden rounded-[2rem] border border-border/70 bg-muted sm:min-h-[500px] lg:min-h-[590px]">
+            <img
+              src="/assets/editorial/aurelia-hero.jpg"
+              alt="Illustrative young creator drawing at a desk in a warm creative studio"
+              className="absolute inset-0 h-full w-full object-cover"
+              fetchPriority="high"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent p-6 pt-28 text-ink-foreground sm:p-8">
+              <div className="max-w-md rounded-2xl border border-white/15 bg-ink/72 p-5 backdrop-blur-sm">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">The principle</p>
+                <p className="mt-2 font-display text-2xl leading-tight">A child&apos;s work should feel worth making before anyone else sees it.</p>
+                <p className="mt-3 text-sm leading-relaxed text-ink-foreground/75">Private making first. Constructive feedback second. Wider sharing only when the right adults have approved it.</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2 — Pillars */}
       <Section>
         <SectionHeading
-          eyebrow="The five pillars"
-          title="Create. Learn. Make. Discover. Achieve."
-          description="Every part of Aurelia serves one of five things a young person is here to do — and each one is protected by the same safety architecture."
+          eyebrow="What children actually make here"
+          title="Not content for a feed. Work with a beginning, a middle and an outcome."
+          description="Illustrative examples of the kinds of projects Aurelia is built to support — not customer work, rankings or popularity content."
         />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {pillars.map((pillar) => (
-            <FeatureCard key={pillar.title} icon={pillar.icon} title={pillar.title}>
-              {pillar.text}
-            </FeatureCard>
-          ))}
+        <div className="mt-10 grid gap-4 md:grid-cols-12">
+          <ExampleCard className="md:col-span-5 md:row-span-2" icon={Mic2} title="A five-minute podcast" text="Plan a question, interview someone, edit the audio and publish only when approved." accent="Podcast" />
+          <ExampleCard className="md:col-span-3" icon={BookOpenText} title="A short story" text="Draft, rewrite, illustrate and keep the finished work in a private portfolio." accent="Story" />
+          <ExampleCard className="md:col-span-4" icon={Wrench} title="A working prototype" text="Show the problem, the first attempt, what failed and what changed." accent="Invention" />
+          <ExampleCard className="md:col-span-4" icon={Film} title="A tiny documentary" text="Research, script, film, edit and add a reflection on what was learned." accent="Film" />
+          <ExampleCard className="md:col-span-3" icon={Gamepad2} title="A playable idea" text="Build a simple game or interactive project and explain how it works." accent="Code" />
+          <ExampleCard className="md:col-span-5" icon={Trophy} title="A challenge response" text="Solve a real brief, submit evidence and receive moderated, constructive feedback." accent="Challenge" />
         </div>
       </Section>
 
-      {/* 3 — Safety promise */}
-      <Section tone="muted">
-        <div className="grid gap-12 lg:grid-cols-2">
-          <SectionHeading
-            eyebrow="Safety promise"
-            title="Protection is the architecture, not a policy page."
-            description="Aurelia was built child-safe from the first table upwards. Permissions live in the database, publication requires guardian consent, and the adult and child worlds never merge."
-          />
-          <CheckList items={safety} />
-        </div>
-        <div className="mt-10">
-          <Button asChild variant="outline">
-            <Link to="/safety-and-trust">Read the full safety model</Link>
-          </Button>
-        </div>
-      </Section>
-
-      {/* 4 — Creator studio */}
-      <Section>
-        <SectionHeading
-          eyebrow="Creator Studio"
-          title="A studio built for young makers"
-          description="Real creative tools with age-appropriate guardrails, so the work is genuinely the child's own."
-        />
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {studio.map((item) => (
-            <FeatureCard key={item.title} icon={item.icon} title={item.title}>
-              {item.text}
-            </FeatureCard>
-          ))}
-        </div>
-        <div className="mt-8">
-          <Button asChild variant="ghost">
-            <Link to="/creator-studio">Explore the Creator Studio →</Link>
-          </Button>
-        </div>
-      </Section>
-
-      {/* 5 — Achievement Passport */}
       <Section tone="muted">
         <SectionHeading
-          eyebrow="Achievement Passport"
-          title="Recognition that someone actually stands behind"
-          description="Achievements in Aurelia are not automatic badges. They are verified by adults who witnessed the work, and they belong to the young person."
+          eyebrow="Start with what they love"
+          title="Discovery without a behavioural feed"
+          description="Aurelia can help a young person find a starting point by interest, age band and format — without building a behavioural profile around what keeps them scrolling."
         />
-        <ol className="mt-12 grid gap-4 md:grid-cols-4">
-          {passportSteps.map((item) => (
-            <li
-              key={item.step}
-              className="rounded-2xl border border-border/70 bg-card p-6"
-            >
-              <span className="font-display text-sm tracking-[0.2em] text-accent-foreground">
-                {item.step}
-              </span>
-              <h3 className="mt-3 font-display text-lg tracking-tight">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-8">
-          <Button asChild variant="outline">
-            <Link to="/achievement-passport">How verification works</Link>
-          </Button>
-        </div>
-      </Section>
-
-      {/* 6 — Audiences */}
-      <Section>
-        <SectionHeading
-          eyebrow="Who Aurelia is for"
-          title="Six roles, six deliberately separated workspaces"
-          description="Each role sees exactly what it needs — and nothing it does not."
-        />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {audiences.map((audience) => (
-            <Link key={audience.title} to={audience.to} className="group block">
-              <FeatureCard icon={audience.icon} title={audience.title} className="h-full">
-                {audience.text}
-              </FeatureCard>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {interests.map(({ icon: Icon, label, detail }) => (
+            <Link key={label} to="/ideas-and-resources" className="group rounded-2xl border border-border bg-card p-5 transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-gold-soft text-gold-foreground">
+                <Icon className="size-5" aria-hidden="true" />
+              </div>
+              <h3 className="mt-4 font-display text-xl tracking-tight">{label}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{detail}</p>
+              <span className="mt-4 inline-flex items-center text-sm font-medium">Explore <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-0.5" /></span>
             </Link>
           ))}
         </div>
       </Section>
 
-      {/* 7 — Challenges & clubs */}
-      <Section tone="muted">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <SectionHeading
-            eyebrow="Challenges & Clubs"
-            title="Purpose to create for, and people to create with"
-            description="Challenges give young people a reason to make something. Clubs give them a small, supervised group to make it with — always with adult oversight and bounded membership."
-          />
-          <CheckList
-            items={[
-              "Challenges set by verified schools, groups and organisations.",
-              "Small clubs with named adult supervision and clear boundaries.",
-              "No open messaging, no follower counts, no public popularity metrics.",
-              "Submissions inherit the same guardian approval rules as all work.",
-            ]}
-          />
-        </div>
-        <div className="mt-10">
-          <Button asChild variant="outline">
-            <Link to="/challenges-and-clubs">See challenges and clubs</Link>
-          </Button>
-        </div>
-      </Section>
-
-      {/* 8 — AI */}
       <Section>
-        <div className="grid gap-12 lg:grid-cols-2">
-          <SectionHeading
-            eyebrow="AI and children"
-            title="Assistance with a boundary around it"
-            description="AI in Aurelia helps a young person think, plan and improve — it does not do the work for them, and it never pretends the output is unassisted."
-          />
-          <CheckList
-            items={[
-              "Age-banded capability: what is available at 8 is not what is available at 15.",
-              "Authorship labelling so verification stays honest.",
-              "Guardians and schools can restrict or disable assistance entirely.",
-              "No child data is used to train third-party models.",
-            ]}
-          />
-        </div>
-        <div className="mt-10">
-          <Button asChild variant="outline">
-            <Link to="/ai-and-children">Read the AI position</Link>
-          </Button>
-        </div>
-      </Section>
-
-      {/* 9 — Alumni */}
-      <Section tone="muted">
-        <div className="grid items-start gap-12 lg:grid-cols-2">
-          <SectionHeading
-            eyebrow="16+ Alumni"
-            title="A separate world for growing up"
-            description="At 16, members move into a distinct adult environment with its own rules, portfolio, opportunities and mentoring — and no social surface shared with the under-16 world."
-          />
-          <CheckList
-            items={[
-              "A deliberate transition, not an automatic merge of accounts.",
-              "Portfolio and Achievement Passport carry forward with the member.",
-              "Opportunities, mentoring and community designed for adults.",
-              "Parent Alumni gives families continuity without child-world access.",
-            ]}
-          />
-        </div>
-        <div className="mt-10">
-          <Button asChild variant="outline">
-            <Link to="/alumni-world">Explore the Alumni world</Link>
-          </Button>
+        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-foreground">One piece of work</p>
+            <h2 className="mt-3 max-w-lg font-display text-4xl tracking-tight sm:text-5xl">One learning journey from idea to evidence.</h2>
+            <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">The product is designed around doing, reflecting and proving — not around posting more often.</p>
+            <Button asChild variant="outline" className="mt-6">
+              <Link to="/achievement-passport">See the Achievement Passport</Link>
+            </Button>
+          </div>
+          <div className="relative border-s border-gold/35 ps-6 sm:ps-8">
+            {journey.map(([step, title, text]) => (
+              <div key={step} className="relative pb-7 last:pb-0">
+                <span className="absolute -left-[2.05rem] top-1 flex size-6 items-center justify-center rounded-full border border-gold/50 bg-background text-[10px] font-bold text-gold-foreground sm:-left-[2.55rem]">{step}</span>
+                <h3 className="font-display text-2xl tracking-tight">{title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </Section>
 
-      {/* 10 — Trust signals */}
+      <Section tone="ink">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Childhood first</p>
+            <h2 className="mt-3 font-display text-4xl tracking-tight sm:text-5xl">The things we chose not to build matter too.</h2>
+            <p className="mt-5 text-base leading-7 text-ink-foreground/75">Aurelia is designed to help children make, learn and achieve without copying the mechanics that turn childhood into performance.</p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {["No follower counts", "No popularity score", "No endless-scroll feed", "No unrelated adult DMs", "No child directory", "No behavioural advertising", "No AI companion relationship", "No livestream pressure"].map((item) => (
+              <div key={item} className="flex items-start gap-3 rounded-xl border border-ink-foreground/15 bg-ink-foreground/5 px-4 py-3 text-sm">
+                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden="true" />
+                <span>{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
       <Section>
         <SectionHeading
-          eyebrow="Trust"
-          title="Built to be inspected"
-          align="center"
-          description="We would rather explain exactly how Aurelia protects children than ask anyone to take it on trust."
+          eyebrow="For the adults around them"
+          title="Support without taking over"
+          description="Different adults have different jobs. Aurelia keeps those boundaries visible."
         />
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {trustSignals.map((signal) => (
-            <FeatureCard key={signal.title} icon={signal.icon} title={signal.title}>
-              {signal.text}
-            </FeatureCard>
-          ))}
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <AudienceCard icon={Users} title="Families" text="Approve wider sharing, see progress and protect privacy without opening every private draft." to="/for-families" />
+          <AudienceCard icon={School} title="Teachers & schools" text="Set briefs, review authorised work and verify achievements with evidence." to="/for-schools" />
+          <AudienceCard icon={ShieldCheck} title="Education groups" text="Govern schools, roles, safeguarding and aggregate outcomes without creating a cross-school child directory." to="/for-education-groups" />
+          <AudienceCard icon={BriefcaseBusiness} title="Organisations" text="Offer approved challenges, content and opportunities through institutions — never direct child access." to="/for-organisations" />
         </div>
       </Section>
 
-      {/* 11 — Reporting */}
       <Section tone="muted">
-        <div className="flex flex-col items-start gap-6 rounded-2xl border border-border bg-card p-8 sm:flex-row sm:items-center sm:justify-between">
-          <div className="max-w-2xl">
-            <Eyebrow>Safeguarding</Eyebrow>
-            <h2 className="mt-2 font-display text-2xl tracking-tight">
-              Worried about something you have seen?
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Anyone — child, parent, teacher or member of the public — can raise a safeguarding
-              concern. Reports are triaged by trained staff with clear escalation routes.
-            </p>
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-foreground">Growing up without starting over</p>
+            <h2 className="mt-3 font-display text-4xl tracking-tight sm:text-5xl">At 16+, the environment changes. The person does not disappear.</h2>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">Selected verified Passport items can move into the separate 16+ Alumni environment. Private childhood records do not transfer automatically.</p>
+            <Button asChild className="mt-6">
+              <Link to="/alumni-world">Explore the 16+ world</Link>
+            </Button>
           </div>
-          <Button asChild size="lg">
-            <Link to="/report-concern">Report a concern</Link>
-          </Button>
+          <div className="rounded-3xl border border-border bg-card p-6 sm:p-8">
+            <p className="font-display text-2xl tracking-tight">A portfolio that can grow into opportunity.</p>
+            <div className="mt-6 space-y-4 text-sm text-muted-foreground">
+              <div className="flex gap-3"><Trophy className="mt-0.5 size-5 shrink-0 text-gold-foreground" /><span>Verified achievements with issuer and evidence provenance.</span></div>
+              <div className="flex gap-3"><BriefcaseBusiness className="mt-0.5 size-5 shrink-0 text-gold-foreground" /><span>Applications disclose only the adult portfolio items deliberately selected.</span></div>
+              <div className="flex gap-3"><Users className="mt-0.5 size-5 shrink-0 text-gold-foreground" /><span>Adult-to-adult mentoring and opportunity pathways remain separate from the under-16 world.</span></div>
+            </div>
+          </div>
         </div>
       </Section>
 
-      {/* 12 — Closing CTA */}
+      <Section>
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-foreground">Why Aurelia exists</p>
+          <h2 className="mt-4 font-display text-4xl leading-tight tracking-tight sm:text-5xl">We wanted children to have somewhere online where making something mattered more than being watched.</h2>
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">Somewhere a rough first attempt could stay private. Somewhere an adult could witness real progress without turning a child into a data point. Somewhere achievement could travel forward without childhood being permanently exposed behind it.</p>
+        </div>
+      </Section>
+
       <CtaBand
-        title="Bring Aurelia to your family, school or organisation"
-        description="Aurelia is invitation-only. Tell us who you are and we will guide you through verified onboarding."
+        eyebrow="Aurelia"
+        title="Give young people somewhere worth making things."
+        description="Invitation-only access for children, verified adult roles, and a platform built around creation, evidence and trust."
+        primary={{ label: "Join with an invitation", to: "/auth/join" }}
+        secondary={{ label: "Send an enquiry", to: "/contact-enquiry" }}
       />
     </PublicPage>
+  );
+}
+
+function ExampleCard({
+  icon: Icon,
+  title,
+  text,
+  accent,
+  className = "",
+}: {
+  icon: LucideIcon;
+  title: string;
+  text: string;
+  accent: string;
+  className?: string;
+}) {
+  return (
+    <article className={`group relative overflow-hidden rounded-2xl border border-border bg-card p-6 ${className}`}>
+      <div className="absolute -right-8 -top-8 size-28 rounded-full bg-gold-soft/70 transition-transform group-hover:scale-110" />
+      <div className="relative">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex size-11 items-center justify-center rounded-xl bg-ink text-ink-foreground"><Icon className="size-5" aria-hidden="true" /></div>
+          <span className="rounded-full border border-border bg-background px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Example · {accent}</span>
+        </div>
+        <h3 className="mt-7 font-display text-3xl tracking-tight">{title}</h3>
+        <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">{text}</p>
+      </div>
+    </article>
+  );
+}
+
+function AudienceCard({ icon: Icon, title, text, to }: { icon: LucideIcon; title: string; text: string; to: string }) {
+  return (
+    <Link to={to as never} className="group rounded-2xl border border-border bg-card p-6 transition-transform hover:-translate-y-0.5">
+      <div className="flex size-11 items-center justify-center rounded-xl bg-gold-soft text-gold-foreground"><Icon className="size-5" aria-hidden="true" /></div>
+      <h3 className="mt-5 font-display text-2xl tracking-tight">{title}</h3>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{text}</p>
+      <span className="mt-5 inline-flex items-center text-sm font-medium">Learn more <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-0.5" /></span>
+    </Link>
   );
 }
