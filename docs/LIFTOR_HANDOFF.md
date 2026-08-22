@@ -1,10 +1,10 @@
 # Aurelia World → Liftor handoff
 
-Status: **product build ready; `theaureliaworld.com` secured; Dodo configuration/payment proof and formal trademark clearance remain.**
+Status: **product build ready; GSM legal pack prepared for counsel; `theaureliaworld.com` live; Dodo configuration/payment proof and final hardening remain.**
 
-Working brand: **AURELIA WORLD**  
-Permanent domain secured: **`theaureliaworld.com`**  
-Current production site: `https://aurelia-world.lovable.app`  
+Legal operator / contracting entity: **Global Solutions Management LLC (Delaware LLC)**  
+Product/brand: **AURELIA WORLD**  
+Production site: **https://theaureliaworld.com**  
 Live Supabase project: `boybpjenlqtchsvhncgl`
 
 Dodo webhook endpoint:
@@ -13,21 +13,35 @@ Dodo webhook endpoint:
 
 The webhook is already deployed. It deliberately fails closed until its Dodo signing secret and all four Dodo product IDs are configured.
 
+## Corporate / legal position
+
+Aurelia World must be treated in customer contracts, Dodo configuration, invoices and Liftor operating records as a **GSM-operated product**, not a separate unincorporated company.
+
+Public legal pages now identify GSM as operator. The counsel-review pack is under `docs/legal/`:
+
+- `GSM_GLOBAL_LEGAL_LAUNCH_PACK_2026-08-22.md`
+- `GSM_AURELIA_WORLD_DPA_TEMPLATE.md`
+- `CHILD_SAFETY_PRIVACY_RISK_ASSESSMENT_2026-08-22.md`
+
+Gary/counsel should also review `docs/BRAND_CLEARANCE.md`, the public Terms, Privacy Policy, child notice, cookie notice, Community Standards and school data-protection summary.
+
+Formal AURELIA WORLD trademark clearance and jurisdiction-specific counsel decisions remain required before material broad paid acquisition or major institutional contracts.
+
 ## Brand/domain position
 
-- Preferred working brand selected: **AURELIA WORLD**.
-- `theaureliaworld.com` was purchased and secured on **22 August 2026**.
-- The bare `AURELIA` mark is crowded in education/software, so formal trademark review of **AURELIA WORLD** is still required before broad paid acquisition or formal filing.
-- Read `docs/BRAND_CLEARANCE.md` for the preliminary conflict/domain sweep.
-- Domain connection/DNS is still pending; do not replace the current production URL in server configuration until the custom domain is actually connected and HTTPS verified.
+- Working brand: **AURELIA WORLD**.
+- `theaureliaworld.com` was purchased on 22 August 2026 and is already connected to production over HTTPS.
+- The former Lovable host redirects to the custom domain.
+- Use `https://theaureliaworld.com` as the canonical public URL in tomorrow's secure configuration review.
 
 ## What is already complete
 
 - Invitation-only adult and child authentication.
-- Sponsored child onboarding without dependency on outbound confirmation email.
-- Role-separated dashboards and public dashboard showroom.
+- Sponsored child onboarding.
+- Role-separated dashboards and public synthetic dashboard showroom.
 - Live child project persistence.
-- Child sharing request → real permission workflow → verified guardian approve/decline.
+- Child sharing request → permission workflow → verified guardian approve/decline, with safety/moderation still required before wider publication.
+- Private drafts are not generically exposed to parents/schools.
 - Parent/Parent Alumni adult community backend and UI.
 - Family pricing and checkout server function.
 - Billing accounts, subscriptions, entitlements and billing event audit tables.
@@ -35,18 +49,26 @@ The webhook is already deployed. It deliberately fails closed until its Dodo sig
 - Atomic Dodo subscription lifecycle RPC with idempotency.
 - Signed Dodo webhook Edge Function deployed to live Supabase.
 - Public contact/safeguarding intake backend.
-- Current build/test baseline: 558 tests passing, typecheck and production build passing.
+- Public GTranslate option with private/sensitive routes excluded; translation is now visitor opt-in.
+- GSM-oriented public Terms/Privacy/child notice/cookie notice/Community Standards/institutional data-protection summary.
+- DPA and global counsel-review/legal-risk pack.
+
+Previous full automated baseline before the final legal pass: 558 tests passing, typecheck clean, production build passing. A post-legal verification is required before final deployment lock.
 
 ## Tomorrow — integration/proof day
 
-1. Connect `theaureliaworld.com` to the production site and verify HTTPS/canonical redirects.
-2. Keep **Aurelia World** as the working customer-facing name for sandbox/test integration.
-3. Create the four Dodo recurring GBP products.
-4. Add Dodo API/webhook secrets and product IDs to secure server/Supabase environments.
-5. Run a full test payment and verify database entitlements.
-6. Run one real low-risk payment only after test proof is clean.
-7. Connect Aurelia World into the Liftor operating workflow.
-8. Obtain formal trademark clearance before broad paid acquisition/brand filing.
+1. Complete the post-legal automated/browser verification if not already recorded as passed.
+2. Enable Supabase leaked-password protection.
+3. Harden production Auth email/recovery/quota behaviour.
+4. Confirm the canonical public URL is `https://theaureliaworld.com` everywhere relevant.
+5. Confirm an operational family cancellation/support path before broad recurring billing.
+6. Create the four Dodo recurring GBP products under the GSM/Aurelia World commercial identity.
+7. Add Dodo API/webhook secrets and product IDs to secure server/Supabase environments.
+8. Run a full test payment and verify database entitlements and idempotency.
+9. Test cancellation, on-hold and failed states.
+10. Run one controlled live Family payment only after test proof is clean.
+11. Record Gary/counsel decisions and launch holds from the GSM legal pack.
+12. Connect Aurelia World into Liftor as a GSM organisation/product workflow.
 
 ## Dodo products
 
@@ -61,7 +83,7 @@ Create fixed recurring GBP products matching the locked pricing architecture exa
 
 Do not enable customer-entered discounting for the first launch test. The webhook validates the recurring amount against the locked plan price.
 
-Record the four resulting product IDs.
+Customer-facing merchant/product configuration should identify **Global Solutions Management LLC / Aurelia World** consistently wherever Dodo permits.
 
 ## App/server environment
 
@@ -73,7 +95,7 @@ Configure these in the secure server environment used by Aurelia World/Liftor. N
 - `DODO_FAMILY_ANNUAL_PRODUCT_ID`
 - `DODO_FAMILY_PLUS_MONTHLY_PRODUCT_ID`
 - `DODO_FAMILY_PLUS_ANNUAL_PRODUCT_ID`
-- `AURELIA_PUBLIC_URL=https://aurelia-world.lovable.app` until `theaureliaworld.com` is connected and verified; then change to the canonical HTTPS custom domain.
+- `AURELIA_PUBLIC_URL=https://theaureliaworld.com`
 
 ## Supabase Edge Function secrets
 
@@ -107,44 +129,50 @@ Subscribe to:
 
 Copy the endpoint signing secret into `DODO_PAYMENTS_WEBHOOK_KEY` in the Supabase Edge Function secrets.
 
-The endpoint verifies Dodo's Standard Webhooks HMAC signature and timestamp. It uses the `webhook-id` as the idempotency key, so a Dodo retry cannot double-activate or extend access.
+The endpoint verifies Dodo's webhook signature and timestamp and uses the `webhook-id` as an idempotency key.
 
 ## Test-mode proof — do not skip
 
 1. Use a verified adult parent account.
 2. Start a Family Monthly checkout from the product.
 3. Complete the Dodo test payment.
-4. Return to the product. The browser return page is **not** proof of payment and must not activate access itself.
-5. Confirm the signed `payment.succeeded` event binds the Dodo subscription ID to the correct billing account.
-6. Confirm `subscription.active` changes the subscription/account to active and creates an active `family_core` entitlement.
-7. Repeat with Family Plus and confirm both `family_core` and `family_plus` are active.
-8. Replay a delivered webhook in Dodo. Confirm the same `webhook-id` is recorded once and does not duplicate access.
-9. Test cancel-at-next-billing-date. Access should remain active until the period end while the local subscription becomes `cancel_at_period_end`.
-10. Test an on-hold/failed state if Dodo test tooling permits it; access must not be silently treated as a healthy active subscription.
+4. Confirm browser return alone does not activate access.
+5. Confirm signed `payment.succeeded` binds the Dodo subscription ID to the correct billing account.
+6. Confirm `subscription.active` activates account/subscription and creates `family_core` entitlement.
+7. Repeat with Family Plus and confirm `family_core` + `family_plus`.
+8. Replay a delivered webhook; confirm no duplicate access/event processing.
+9. Test cancel-at-period-end and verify access remains until the valid end date.
+10. Test on-hold/failed state if supported.
 
-Expected live-table evidence after a successful Family payment:
+Expected live-table evidence:
 
-- `billing_events`: Dodo event exists with `processed_at` set.
-- `billing_subscriptions`: Dodo subscription ID, product ID, plan and active lifecycle state recorded.
-- `billing_accounts`: family account status `active`.
-- `billing_entitlements`: `family_core` active; `family_plus` active only for Family Plus.
+- `billing_events`: Dodo event with `processed_at` set.
+- `billing_subscriptions`: Dodo subscription/product IDs, plan and lifecycle state.
+- `billing_accounts`: correct family account status.
+- `billing_entitlements`: correct active entitlements.
 
-## One Supabase security switch still to enable
+## Security / legal hardening still required
 
-The current Supabase security advisor reports **Leaked Password Protection Disabled**. Enable leaked-password protection in Supabase Auth before broad public launch. This is an Auth project setting, not an application-code change, and the current connector does not expose a safe setting mutation for it.
+- Supabase **Leaked Password Protection** is still disabled and should be enabled before broad public launch.
+- Production Auth email/recovery reliability must be reviewed.
+- Operational recurring-payment cancellation/support must be proven.
+- Gary/counsel should approve the institutional MSA/DPA, applicable UK/EU/US child/privacy/platform scope and representative/contact requirements.
+- Trademark clearance remains a separate formal item.
+- Copyright/DMCA process should be completed before opening externally published UGC at scale.
+- Liability caps/indemnities should be aligned to GSM's actual insurance programme.
 
-The other current RLS advisor notices are intentional server-only tables (`account_invitations`, `audit_log`, jurisdiction policy and public-intake operational tables). Unused-index notices are expected before real traffic and should not be 'cleaned up' pre-launch.
+The existing RLS/no-policy INFO notices are intentional server-only tables; do not weaken RLS to make an advisor screen look cleaner.
 
 ## Deliberate safety boundaries that remain
 
 - Private child media uploads stay disabled until the quarantine/scanning storage path is real.
-- A child or parent cannot bypass safety/moderation to publish work publicly.
+- A child or guardian cannot bypass safety/moderation to publish work publicly.
 - Browser redirect/query parameters never activate a paid entitlement.
 - Dodo API keys, webhook signing keys and Supabase service-role credentials are server-side only.
 - Public dashboard demos use illustrative content and do not expose real child records.
 
 ## Liftor tomorrow
 
-Treat tomorrow as an **integration and proof day, not a new product-build day**:
+Treat tomorrow as an **integration, legal-decision and proof day — not a new product-build day**:
 
-**Connect `theaureliaworld.com` → Dodo products → secure secrets → webhook setup → test payment → verify entitlements → live payment proof → Liftor.**
+**Security hardening → Dodo products/secrets → payment/cancellation proof → Gary legal decisions → Liftor under GSM.**
