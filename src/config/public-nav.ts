@@ -5,6 +5,7 @@ export interface PublicLink {
 }
 
 export const productLinks: PublicLink[] = [
+  { label: "Ideas & Resources", to: "/ideas-and-resources", description: "Curated project starters by interest and age — no behavioural recommendation feed." },
   { label: "Creator Studio", to: "/creator-studio", description: "Podcasts, shows, stories, art, film, games and inventions." },
   { label: "Achievement Passport", to: "/achievement-passport", description: "Verified evidence of skills, leadership and contribution." },
   { label: "Challenges & Clubs", to: "/challenges-and-clubs", description: "Purposeful challenges and small, supervised clubs." },
@@ -15,7 +16,7 @@ export const audienceLinks: PublicLink[] = [
   { label: "For Families", to: "/for-families", description: "Child creators, guardian approval and the parent layer." },
   { label: "For Schools", to: "/for-schools", description: "Briefs, review, verification and safeguarding workflows." },
   { label: "For Education Groups", to: "/for-education-groups", description: "A multi-school operating and governance layer." },
-  { label: "For Organisations", to: "/for-organisations", description: "Challenges and opportunities through verified access." },
+  { label: "For Organisations", to: "/for-organisations", description: "Challenges and opportunities through verified institutional access." },
   { label: "Parent Community", to: "/parent-community", description: "Verified adult community and Parent Alumni continuity." },
   { label: "16+ Alumni", to: "/alumni-world", description: "A separate adult world for portfolio, work and mentoring." },
 ];
@@ -35,7 +36,7 @@ export const companyLinks: PublicLink[] = [
 ];
 
 export const primaryNav = [
-  { label: "Platform", links: productLinks },
+  { label: "Explore", links: productLinks },
   { label: "Audiences", links: audienceLinks },
   { label: "Trust", links: trustLinks },
   { label: "Company", links: companyLinks },
