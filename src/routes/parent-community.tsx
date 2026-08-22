@@ -46,19 +46,35 @@ export const Route = createFileRoute("/parent-community")({
 });
 
 const features = [
-  { icon: Users, title: "Circles", text: "Small groups of parents organised around a school, a club or a shared interest, giving families a place to compare notes and support one another." },
+  { icon: Users, title: "Circles", text: "Small groups of adults organised around a school, a club or a shared interest, giving parents a place to compare notes and support one another." },
   { icon: CalendarDays, title: "Events", text: "School and community events that parents can see, discuss and organise attendance around, kept separate from anything a child would see." },
-  { icon: Contact, title: "Directory", text: "An opt-in directory that lets verified parents connect with one another, with visibility controlled entirely by the parent who is listed." },
+  { icon: Contact, title: "Directory", text: "An opt-in directory of verified adults, with visibility controlled entirely by the parent who is listed — and no child named anywhere in it." },
 ];
 
+const cardShows = [
+  "The adult's own display name and, if they choose it, a photograph of themselves.",
+  "A short self-written introduction.",
+  "Broad interests or the circles they take part in.",
+  "A general area or the school community they've chosen to associate with.",
+];
+
+const cardNeverShows = [
+  "Any child's name, photograph, age or year group.",
+  "The number of children in a household, or their school class.",
+  "Any child's work, drafts, Passport achievements or activity.",
+  "Home addresses or private contact details.",
+];
 
 const boundaries = [
   "No parent can browse, search or view another family's child through the parent community.",
-  "The parent community has no view into a specific child's work, messages or Achievement Passport beyond what that child's own guardian shares.",
-  "Children cannot see, join or be added to the parent community at any age.",
+  "No child identifiers appear in the adult directory or on community cards — the community describes adults only.",
+  "The parent community has no view into a specific child's work, private drafts or Achievement Passport beyond what that child's own guardian shares.",
+  "Children cannot see, join, message or be added to the parent community at any age.",
   "Membership requires the same identity verification as any adult account on Aurelia.",
+  "Parent Alumni status is an adult community status only — it never grants access to any child, including a member's own now-adult child's account.",
   "Circles, events and the directory operate under their own moderation, distinct from moderation of child-facing spaces.",
 ];
+
 
 function ParentCommunity() {
   return (
