@@ -6,7 +6,7 @@ import { RoleSwitcher } from "@/components/layout/role-switcher";
 import { BackendStatus } from "@/components/system/backend-status";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { authenticatedHomeForRole, canEnterDashboardPath } from "@/domain/auth-routing";
-import { getCurrentActorFn } from "@/server/auth";
+import { getCurrentActorFn } from "@/functions/auth";
 
 export const Route = createFileRoute("/dashboard")({
   beforeLoad: async ({ location }) => {
