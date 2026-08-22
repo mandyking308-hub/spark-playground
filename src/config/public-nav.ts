@@ -12,7 +12,6 @@ export const productLinks: PublicLink[] = [
   { label: "AI & Children", to: "/ai-and-children", description: "Bounded, age-banded assistance with authorship labels." },
 ];
 
-
 export const audienceLinks: PublicLink[] = [
   { label: "For Families", to: "/for-families", description: "Child creators, guardian approval and the parent layer." },
   { label: "For Schools", to: "/for-schools", description: "Briefs, review, verification and safeguarding workflows." },
@@ -32,6 +31,7 @@ export const trustLinks: PublicLink[] = [
 ];
 
 export const companyLinks: PublicLink[] = [
+  { label: "Pricing", to: "/pricing", description: "Family subscriptions and annual institutional licensing." },
   { label: "About Aurelia", to: "/about", description: "Why this platform exists." },
   { label: "Contact & enquiries", to: "/contact", description: "Schools, groups, organisations and general questions." },
 ];
