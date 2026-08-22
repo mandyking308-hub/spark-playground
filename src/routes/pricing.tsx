@@ -216,14 +216,14 @@ function PricingPage() {
 
       <Section tone="ink">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground/70">Ready when you are</p>
-          <h2 className="mt-4 font-display text-4xl tracking-tight text-primary-foreground">Pay for the platform. Never sell the child's attention.</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-primary-foreground/75">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-foreground/70">Ready when you are</p>
+          <h2 className="mt-4 font-display text-4xl tracking-tight text-ink-foreground">Pay for the platform. Never sell the child's attention.</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-ink-foreground/75">
             Family subscriptions fund the household experience. Institutional licences fund the systems, safeguarding and administration schools need around it.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" variant="secondary"><Link to="/auth/sign-in">Family sign in</Link></Button>
-            <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"><Link to="/contact">Institutional enquiry</Link></Button>
+            <Button asChild size="lg" variant="outline" className="border-ink-foreground/30 bg-transparent text-ink-foreground hover:bg-ink-foreground/10"><Link to="/contact">Institutional enquiry</Link></Button>
           </div>
         </div>
       </Section>
