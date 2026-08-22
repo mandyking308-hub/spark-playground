@@ -46,7 +46,7 @@ export function brokeredPreviewStorage() {
       const onMessage = (e: MessageEvent) => {
         if (editorOrigins.indexOf(e.origin) < 0) return;
         const d = e.data;
-        if (d && d.type === RESULT && d.requestId === requestId) finish(d);
+        if (d && d['type'] === RESULT && d['requestId'] === requestId) finish(d);
       };
       window.addEventListener('message', onMessage);
       const msg: Record<string, unknown> = { type, requestId, projectId, key };
