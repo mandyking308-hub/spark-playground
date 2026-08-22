@@ -1,14 +1,10 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
-  CalendarClock,
-  ClipboardCheck,
-  FileCheck2,
   GraduationCap,
-  Puzzle,
   ShieldAlert,
   Users2,
-  Workflow,
 } from "lucide-react";
+
 
 import { PublicPage } from "@/components/public/public-page";
 import {
