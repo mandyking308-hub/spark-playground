@@ -225,15 +225,28 @@ function ForSchools() {
           }
         >
           <SectionHeading
-            eyebrow="Resource library"
-            title="Brief templates, ready to adapt"
-            description="A growing set of static brief templates and project starters, written for teachers to adapt to their own class rather than use as-is."
+            eyebrow="Educator resource library"
+            title="Brief templates and starters, ready to adapt"
+            description="Educator briefs, project starters, constructive-feedback guidance and digital-wellbeing material — written for teachers to adapt to their own class rather than use as-is. All of it is example material, not pupil work."
           />
+          <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
+            {[
+              "Educator starter-brief templates across podcast, film, story, design, invention and coding",
+              "How to give constructive feedback on a child's project",
+              "A one-page project-planning worksheet to hand out",
+            ].map((item) => (
+              <li key={item} className="flex gap-3">
+                <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-gold" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
           <div className="mt-8">
-            <Button asChild variant="outline">
-              <Link to="/ideas-and-resources">Browse ideas & resources</Link>
+            <Button asChild size="lg">
+              <Link to="/ideas-and-resources">Open the educator resource library</Link>
             </Button>
           </div>
+
         </SplitFeature>
       </Section>
 
