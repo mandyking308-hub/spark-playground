@@ -1,6 +1,6 @@
 import { withSupabase } from "@supabase/server";
 
-type Action = "issue_invitation" | "claim_invitation" | "revoke_invitation";
+type Action = "issue_invitation" | "claim_invitation" | "revoke_invitation" | "list_invitations";
 type PilotRole = "child" | "parent" | "teacher" | "school_admin" | "group_admin";
 type AgeBand = "under_9" | "age_9_12" | "age_13_15" | "adult";
 
@@ -65,6 +65,26 @@ export default {
     }
 
     try {
+      if (body.action === "list_invitations") {
+        const { data: actor, error: actorError } = await ctx.supabaseAdmin
+          .from("profiles")
+          .select("id")
+          .eq("auth_user_id", authUserId)
+          .is("disabled_at", null)
+          .maybeSingle();
+        if (actorError || !actor) throw actorError ?? new Error("actor_not_found");
+
+        const { data, error } = await ctx.supabaseAdmin
+          .from("account_invitations")
+          .select("id,intended_role,intended_age_band,school_id,cohort_id,education_group_id,state,expires_at,created_at")
+          .eq("issued_by_profile_id", actor.id)
+          .order("created_at", { ascending: false })
+          .limit(50);
+        if (error) throw error;
+
+        return Response.json({ data: data ?? [] });
+      }
+
       if (body.action === "issue_invitation") {
         if (!body.intendedRole || !roles.has(body.intendedRole)) return badRequest();
         if (!body.ageBand || !ageBands.has(body.ageBand)) return badRequest();

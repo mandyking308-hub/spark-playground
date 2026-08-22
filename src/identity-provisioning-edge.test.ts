@@ -45,6 +45,14 @@ describe("identity provisioning Edge Function", () => {
     expect(claimSection).not.toContain("p_intended_age_band");
   });
 
+  test("lists only invitations issued by the authenticated actor", () => {
+    const listSection = source.split('body.action === "list_invitations"')[1]?.split('body.action === "issue_invitation"')[0] ?? "";
+    expect(listSection).toContain('.eq("issued_by_profile_id", actor.id)');
+    expect(listSection).toContain('select("id,intended_role,intended_age_band,school_id,cohort_id,education_group_id,state,expires_at,created_at")');
+    expect(listSection).not.toContain("token_hash");
+    expect(listSection).not.toContain("invitationToken");
+  });
+
   test("returns generic errors without provider detail", () => {
     expect(source).toContain('error: "Request could not be completed"');
     expect(source).not.toContain("error.message");

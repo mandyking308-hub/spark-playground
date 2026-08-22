@@ -120,6 +120,10 @@ const organisationAdministration = new Set([
   "/dashboard/partner-safety",
 ]);
 
+const invitationAdministration = new Set([
+  "/dashboard/invitations",
+]);
+
 export function authenticatedHomeForRole(role: PlatformRole): AuthenticatedHomeRoute {
   return homeByRole[role];
 }
@@ -167,6 +171,10 @@ export function canEnterDashboardPath(role: PlatformRole, pathname: string): boo
 
   if (organisationAdministration.has(pathname)) {
     return ["organisation_admin", "school_admin", "group_admin", "platform_admin"].includes(role);
+  }
+
+  if (invitationAdministration.has(pathname)) {
+    return ["parent", "school_admin", "platform_admin"].includes(role);
   }
 
   // Shared authenticated utilities (notifications, feedback, data rights, etc.)
