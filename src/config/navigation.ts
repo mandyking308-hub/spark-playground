@@ -23,6 +23,7 @@ import {
   Bell,
   CreditCard,
   ClipboardList,
+  UserPlus,
 } from "lucide-react";
 
 export type RoleKey = "child" | "parent" | "parent_alumni" | "teacher" | "school" | "group";
@@ -130,6 +131,7 @@ export const platformModules = [
   { key: "clubs", label: "Clubs", to: "/dashboard/clubs", icon: UsersRound, audience: "Under-16" },
   { key: "parent-community", label: "Parent Community", to: "/dashboard/parent-community", icon: UsersRound, audience: "Adults" },
   { key: "parent-alumni-community", label: "Parent Alumni Network", to: "/dashboard/parent-alumni-community", icon: UserRoundCheck, audience: "Adults" },
+  { key: "invitations", label: "Invitations", to: "/dashboard/invitations", icon: UserPlus, audience: "Verified issuers" },
   { key: "ai-controls", label: "AI Controls", to: "/dashboard/ai-controls", icon: ShieldCheck, audience: "Parents & staff" },
   { key: "privacy", label: "Privacy & Consent", to: "/dashboard/privacy", icon: ShieldCheck, audience: "Parents & staff" },
   { key: "notifications", label: "Notifications", to: "/dashboard/notifications", icon: Bell, audience: "Members" },
