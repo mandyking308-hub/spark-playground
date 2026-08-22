@@ -1,5 +1,6 @@
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 
+import { AureliaMark } from "@/components/brand/aurelia-logo";
 import { SignOutButton } from "@/components/auth/sign-out-button";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { RoleSwitcher } from "@/components/layout/role-switcher";
@@ -34,6 +35,7 @@ function DashboardLayout() {
         <SidebarInset>
           <header className="sticky top-0 z-10 flex h-14 items-center gap-3 border-b border-border bg-background/80 px-4 backdrop-blur">
             <SidebarTrigger />
+            <AureliaMark className="size-6 shrink-0 md:hidden" title="Aurelia" />
             <div className="min-w-0">
               <span className="block truncate text-sm font-medium text-foreground">{actor.displayName}</span>
               <span className="hidden text-xs text-muted-foreground sm:block">Verified Aurelia workspace</span>
