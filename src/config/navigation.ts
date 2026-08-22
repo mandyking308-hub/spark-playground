@@ -137,7 +137,7 @@ export const platformModules = [
   { key: "notifications", label: "Notifications", to: "/dashboard/notifications", icon: Bell, audience: "Members" },
   { key: "safeguarding", label: "Safeguarding Centre", to: "/dashboard/safeguarding", icon: ShieldCheck, audience: "Staff" },
   { key: "organisations", label: "Organisation Spaces", to: "/dashboard/organisations", icon: Building2, audience: "Partners" },
-  { key: "licensing", label: "Licensing & Billing", to: "/dashboard/licensing", icon: CreditCard, audience: "Enterprise" },
+  { key: "licensing", label: "Licensing & Billing", to: "/dashboard/licensing", icon: CreditCard, audience: "Payers & admins" },
   { key: "audit", label: "Audit & Compliance", to: "/dashboard/audit", icon: ClipboardList, audience: "Enterprise" },
 ] as const;
 
