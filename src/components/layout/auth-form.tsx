@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { AureliaLogo } from "@/components/brand/aurelia-logo";
 import { signInFn } from "@/functions/auth";
+
 
 export function AuthForm({
   mode,
