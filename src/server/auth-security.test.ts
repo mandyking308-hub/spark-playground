@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 
-const authServer = readFileSync(new URL("./auth.ts", import.meta.url), "utf8").toLowerCase();
+const authServer = readFileSync(new URL("../functions/auth.ts", import.meta.url), "utf8").toLowerCase();
 const serverClient = readFileSync(new URL("../lib/supabase/server-client.ts", import.meta.url), "utf8").toLowerCase();
 const dashboard = readFileSync(new URL("../routes/dashboard.tsx", import.meta.url), "utf8").toLowerCase();
 const roleControl = readFileSync(new URL("../components/layout/role-switcher.tsx", import.meta.url), "utf8").toLowerCase();
