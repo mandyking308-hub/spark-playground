@@ -57,8 +57,10 @@ export function SiteHeader() {
                 ))}
               </div>
             </div>
-          ))}
+            );
+          })}
         </nav>
+
 
         <div className="ms-auto flex items-center gap-2">
           <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
