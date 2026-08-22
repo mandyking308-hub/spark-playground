@@ -5,6 +5,7 @@ import {
   canEnterAlumniExperience,
   canEnterDashboardPath,
 } from "./auth-routing";
+import type { PlatformRole } from "./access-control";
 
 describe("authenticated route boundaries", () => {
   test("routes each verified lifecycle role to its own home", () => {
@@ -71,6 +72,37 @@ describe("authenticated route boundaries", () => {
 
     for (const role of ["child", "parent_alumni", "teacher", "group_admin", "organisation_admin", "alumni", "mentor"] as const) {
       expect(canEnterDashboardPath(role, "/dashboard/invitations")).toBe(false);
+    }
+  });
+});
+
+describe("adult child-experience preview", () => {
+  const adultRoles: PlatformRole[] = [
+    "parent",
+    "parent_alumni",
+    "teacher",
+    "school_admin",
+    "group_admin",
+    "organisation_admin",
+    "platform_admin",
+  ];
+
+  test("allows verified adult roles into the read-only preview", () => {
+    for (const role of adultRoles) {
+      expect(canEnterDashboardPath(role, "/dashboard/child-preview")).toBe(true);
+    }
+  });
+
+  test("keeps child, alumni and mentor out of the adult preview", () => {
+    for (const role of ["child", "alumni", "mentor"] as PlatformRole[]) {
+      expect(canEnterDashboardPath(role, "/dashboard/child-preview")).toBe(false);
+    }
+  });
+
+  test("does not broaden access to child-only routes", () => {
+    for (const role of adultRoles) {
+      expect(canEnterDashboardPath(role, "/dashboard/child")).toBe(false);
+      expect(canEnterDashboardPath(role, "/dashboard/creator")).toBe(false);
     }
   });
 });

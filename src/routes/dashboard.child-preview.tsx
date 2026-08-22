@@ -1,14 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   BookOpen,
+  CheckCircle2,
+  Eye,
   Film,
   Gamepad2,
   Image,
   MessageCircleHeart,
   Mic2,
+  Palette,
   Share2,
   ShieldCheck,
-  Sparkles,
   Trophy,
   UsersRound,
 } from "lucide-react";
@@ -23,147 +25,184 @@ export const Route = createFileRoute("/dashboard/child-preview")({
       { title: "Preview child experience — Aurelia" },
       {
         name: "description",
-        content: "A read-only adult preview of Aurelia's protected child experience.",
+        content:
+          "A read-only, illustrative preview of the under-16 Aurelia experience for verified adults. No real child data is shown.",
+      },
+      { property: "og:title", content: "Preview child experience — Aurelia" },
+      {
+        property: "og:description",
+        content: "See how the protected under-16 space looks, using illustrative demo content only.",
       },
     ],
   }),
   component: ChildExperiencePreview,
 });
 
-const childDestinations = [
+const childHome = [
   { title: "Create", description: "Podcasts, stories, art, video and projects.", icon: Mic2 },
-  { title: "Challenges", description: "Make something for an approved school, group or partner brief.", icon: Trophy },
+  { title: "Challenges", description: "Make something for a school, group or approved partner challenge.", icon: Trophy },
   { title: "Clubs", description: "Join verified communities around interests and projects.", icon: UsersRound },
   { title: "My Passport", description: "Projects, awards, certificates, skills and milestones.", icon: BookOpen },
   { title: "Sharing", description: "Request wider sharing and see what is waiting for approval.", icon: Share2 },
-  { title: "Feedback", description: "Constructive encouragement without follower counts or popularity scores.", icon: MessageCircleHeart },
+  { title: "Feedback", description: "Constructive encouragement without public popularity scores.", icon: MessageCircleHeart },
 ] as const;
 
-const creationTypes = [
-  { title: "Podcast", description: "Plan an episode, add a transcript and move through the safety workflow.", icon: Mic2 },
-  { title: "Story or book", description: "Write, illustrate and develop a multi-page story while keeping authorship clear.", icon: BookOpen },
-  { title: "Art", description: "Create artwork with bounded assistance and visible AI attribution where relevant.", icon: Image },
-  { title: "Video", description: "Develop a pre-recorded video project with captions and moderated sharing.", icon: Film },
-  { title: "Game or invention", description: "Document a game, coding project, experiment, prototype or invention.", icon: Gamepad2 },
+const studioTypes = [
+  { title: "Podcast", description: "Record or upload an episode with a transcript.", icon: Mic2 },
+  { title: "Story or book", description: "Write and illustrate a multi-page story.", icon: BookOpen },
+  { title: "Art", description: "Upload artwork with clear authorship and AI attribution.", icon: Image },
+  { title: "Video", description: "Pre-recorded video projects with captions.", icon: Film },
+  { title: "Game or invention", description: "Document a game, coding project, experiment or invention.", icon: Gamepad2 },
+] as const;
+
+const journey = [
+  { step: "Draft", description: "Private by default. Only the child can see it." },
+  { step: "Safety scan", description: "Automated media and text checks run before anything moves on." },
+  { step: "Parent approval", description: "A verified parent or guardian approves wider sharing." },
+  { step: "Moderation", description: "A verified adult reviews context before publication." },
+  { step: "Shared", description: "Visible only within the approved audience — never an open feed." },
 ] as const;
 
 function ChildExperiencePreview() {
   return (
     <div className="space-y-8">
-      <div className="rounded-xl border border-primary/20 bg-primary/5 p-4">
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="secondary">Preview — no real child data</Badge>
-          <Badge variant="outline">Read only</Badge>
-          <Badge variant="outline">Adult viewing mode</Badge>
+      <div
+        role="status"
+        className="flex items-start gap-3 rounded-lg border border-primary/30 bg-primary/5 px-4 py-3"
+      >
+        <Eye className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
+        <div>
+          <p className="text-sm font-medium text-foreground">Preview — no real child data</p>
+          <p className="text-sm text-muted-foreground">
+            This is a read-only illustration of the under-16 experience for verified adults. Nothing here is
+            loaded from, or written to, a real child account.
+          </p>
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          This mirrors the protected child experience for parents, schools and other verified adults. It never opens a real child's workspace and never writes to child records.
-        </p>
       </div>
 
       <PageHeader
-        eyebrow="Protected under-16 world"
-        title="Your creative home"
-        description="Create, learn, join approved communities and build a body of work without follower pressure, open strangers or unrestricted AI."
-        crumbs={[{ label: "Dashboards", to: "/dashboard" }, { label: "Child experience preview" }]}
+        eyebrow="Adult preview"
+        title="Preview child experience"
+        description="See exactly what the protected under-16 space looks like before inviting a child, without entering a child account or viewing any child's work."
+        crumbs={[{ label: "Dashboard", to: "/dashboard" }, { label: "Preview child experience" }]}
       />
 
       <div className="flex flex-wrap gap-2">
-        <Badge variant="secondary">Private by default</Badge>
-        <Badge variant="outline">Interest-led discovery</Badge>
-        <Badge variant="outline">Age-banded AI</Badge>
+        <Badge variant="secondary">Read-only</Badge>
+        <Badge variant="outline">Illustrative content</Badge>
+        <Badge variant="outline">No child records queried</Badge>
       </div>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {childDestinations.map((item) => (
-          <Card key={item.title}>
-            <CardHeader>
-              <item.icon className="size-5 text-primary" />
-              <CardTitle>{item.title}</CardTitle>
-              <CardDescription>{item.description}</CardDescription>
-            </CardHeader>
-          </Card>
-        ))}
-      </section>
-
-      <section className="space-y-4">
+      <section aria-labelledby="child-home" className="space-y-4">
         <div>
-          <p className="text-sm font-medium text-primary">Creator Studio</p>
-          <h2 className="mt-1 font-display text-2xl font-semibold tracking-tight">What can I make?</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            The child chooses the medium. Aurelia supports the process around the work rather than turning creativity into a social popularity contest.
+          <h2 id="child-home" className="font-display text-xl tracking-tight">
+            The child home screen
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            What a child sees when they sign in. No follower counts, no open directory, no strangers.
           </p>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {creationTypes.map((item) => (
-            <Card key={item.title} className="h-full">
+        <div className="grid gap-4 md:grid-cols-2">
+          {childHome.map((item) => (
+            <Card key={item.title}>
               <CardHeader>
-                <div className="mb-2 flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <item.icon className="size-5" />
-                </div>
+                <item.icon className="size-5 text-primary" aria-hidden="true" />
                 <CardTitle>{item.title}</CardTitle>
-                <CardDescription className="leading-relaxed">{item.description}</CardDescription>
+                <CardDescription>{item.description}</CardDescription>
               </CardHeader>
             </Card>
           ))}
         </div>
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <Badge variant="outline">Illustrative demo — not a real child</Badge>
-                <CardTitle className="mt-3">Moonbase Garden</CardTitle>
-                <CardDescription>A sample invention project showing how a child records both the idea and the making process.</CardDescription>
-              </div>
-              <Sparkles className="size-5 text-primary" />
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4 text-sm">
-            <div className="rounded-lg border bg-muted/30 p-4">
-              <p className="font-medium">My idea</p>
-              <p className="mt-1 text-muted-foreground">Design a small garden that could grow food on a moon base using recycled water and very little space.</p>
-            </div>
-            <div className="rounded-lg border bg-muted/30 p-4">
-              <p className="font-medium">How I made it</p>
-              <p className="mt-1 text-muted-foreground">Sketch the system, test plant choices, explain the water loop, improve the design and record what changed after each experiment.</p>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary">Private draft</Badge>
-              <Badge variant="outline">Made by me</Badge>
-              <Badge variant="outline">AI help must be labelled</Badge>
-            </div>
-          </CardContent>
-        </Card>
+      <section aria-labelledby="studio-preview" className="space-y-4">
+        <div>
+          <h2 id="studio-preview" className="font-display text-xl tracking-tight">
+            Creator Studio preview
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            The five ways a child can make something inside Aurelia.
+          </p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {studioTypes.map((item) => (
+            <Card key={item.title}>
+              <CardHeader>
+                <item.icon className="size-5 text-primary" aria-hidden="true" />
+                <CardTitle className="text-base">{item.title}</CardTitle>
+                <CardDescription>{item.description}</CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
+        </div>
+      </section>
 
+      <section aria-labelledby="sample-project" className="space-y-4">
+        <div>
+          <h2 id="sample-project" className="font-display text-xl tracking-tight">
+            An illustrative sample project
+          </h2>
+        </div>
         <Card>
           <CardHeader>
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="size-5 text-primary" />
-              <CardTitle>How sharing works</CardTitle>
+            <div className="flex flex-wrap items-center gap-2">
+              <Palette className="size-5 text-primary" aria-hidden="true" />
+              <CardTitle>“The Tide Pool Podcast” — Episode 1</CardTitle>
+              <Badge variant="secondary">Demo content</Badge>
             </div>
-            <CardDescription>Sharing is a controlled journey, not an instant public post.</CardDescription>
+            <CardDescription>
+              Demo content only. This is not a real child, a real account or a real piece of work — it exists
+              to show how a project looks as it moves through Aurelia.
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <ol className="space-y-3">
-              {["Draft", "Safety scan", "Parent approval", "Moderation", "Shared"].map((step, index) => (
-                <li key={step} className="flex items-center gap-3 rounded-lg border bg-muted/25 p-3">
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">{index + 1}</span>
-                  <span className="text-sm font-medium">{step}</span>
-                </li>
-              ))}
-            </ol>
+          <CardContent className="space-y-3 text-sm text-muted-foreground">
+            <p>
+              A six-minute recorded episode about rock pools, with a written transcript, two hand-drawn
+              illustrations and a short reflection on what the maker learned.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="outline">Podcast</Badge>
+              <Badge variant="outline">Transcript attached</Badge>
+              <Badge variant="outline">Awaiting parent approval (illustrative)</Badge>
+            </div>
           </CardContent>
         </Card>
       </section>
 
+      <section aria-labelledby="publication-journey" className="space-y-4">
+        <div>
+          <h2 id="publication-journey" className="font-display text-xl tracking-tight">
+            The publication journey
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            Draft → Safety scan → Parent approval → Moderation → Shared.
+          </p>
+        </div>
+        <ol className="grid gap-3 md:grid-cols-5">
+          {journey.map((stage, index) => (
+            <li key={stage.step} className="rounded-lg border border-border bg-card p-4">
+              <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Step {index + 1}
+              </span>
+              <p className="mt-1 flex items-center gap-2 text-sm font-medium text-foreground">
+                <CheckCircle2 className="size-4 text-primary" aria-hidden="true" />
+                {stage.step}
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">{stage.description}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
       <Card>
         <CardHeader>
-          <CardTitle>What is different in a real child account?</CardTitle>
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="size-5 text-primary" aria-hidden="true" />
+            <CardTitle>Why this preview is safe</CardTitle>
+          </div>
           <CardDescription>
-            A real child sees this same protected structure, but their private drafts, approved challenges, clubs, passport and feedback are live and belong only to that child. This preview deliberately contains no child records and cannot create or edit anything.
+            This page reads no database records and offers no controls. Adults never gain access to a child
+            account, a child's drafts or any child-only route through this preview.
           </CardDescription>
         </CardHeader>
       </Card>
