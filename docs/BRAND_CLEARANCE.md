@@ -1,12 +1,14 @@
 # Aurelia preliminary brand clearance — 22 August 2026
 
-Status: **HOLD final brand lock before Dodo/live commercial launch.**
+Status: **AURELIA WORLD selected as preferred working brand; `theaureliaworld.com` SECURED on 22 August 2026. Formal trademark clearance still required before broad paid launch.**
 
 This is a preliminary commercial/name clearance sweep, not legal advice or a formal trademark opinion.
 
 ## Key finding
 
 The bare name **AURELIA is not a clean, uncontested name in the UK/global education/software space**. Do not assume exclusivity and do not file/payment-brand solely as `Aurelia` until a qualified trademark professional has reviewed the relevant classes and territories.
+
+The preferred compound brand is now **AURELIA WORLD**. The permanent-domain candidate `theaureliaworld.com` has been purchased and secured by the owner on 22 August 2026.
 
 ### Material conflicts / crowding found
 
@@ -16,7 +18,7 @@ The bare name **AURELIA is not a clean, uncontested name in the UK/global educat
 - The established **Aurelia** JavaScript framework has operated for more than a decade at `aurelia.io`, creating software/search-engine overlap.
 - Other education uses include Aurelia Education Ltd and an online K-12 curriculum using the Aurelia name.
 
-This does not automatically mean Aurelia cannot be used, but it means the bare mark is crowded and requires a proper confusion/registrability assessment.
+This does not automatically mean Aurelia World cannot be used, but the retained `Aurelia` element is crowded and still deserves a proper confusion/registrability assessment.
 
 ## Domain findings
 
@@ -29,39 +31,35 @@ Observed as already registered/owned as of the sweep:
 - `aurelia-world.com` — has prior/other web use.
 - `joinaurelia.com` — appears in a newly registered .COM list dated 12 August 2026.
 
-### Live registrar availability check — 22 August 2026
+### Live registrar availability and purchase — 22 August 2026
 
-A live Wix Domains API check was run before handoff.
+A live Wix Domains API check was run before purchase.
 
 - `aureliaworld.com` — **TAKEN**.
-- `theaureliaworld.com` — **AVAILABLE**, non-premium at time of check.
-- `myaureliaworld.com` — **AVAILABLE**, non-premium at time of check.
-- `enteraurelia.com` — **AVAILABLE**, non-premium at time of check.
-- `aureliaworldapp.com` — **AVAILABLE**, non-premium at time of check.
-- `aureliaworldhq.com` — **AVAILABLE**, non-premium at time of check.
-- `weareaureliaworld.com` — **AVAILABLE**, non-premium at time of check.
-- `aureliacreate.com` — **AVAILABLE**, non-premium at time of check.
-- `aureliaone.com` — **TAKEN**.
+- `theaureliaworld.com` — **AVAILABLE**, non-premium at time of check — **PURCHASED AND SECURED 22 AUGUST 2026**.
+- `myaureliaworld.com` — available at time of check.
+- `enteraurelia.com` — available at time of check.
+- `aureliaworldapp.com` — available at time of check.
 
-Preferred available domain if the compound brand **Aurelia World** is legally cleared: **`theaureliaworld.com`**. It reads as an intentional brand address rather than a technical fallback.
-
-Domain availability is time-sensitive. Re-check at checkout immediately before purchase.
+Preferred permanent domain: **`theaureliaworld.com`**.
 
 ## Current product position
 
-The live product can remain on the temporary Lovable hostname while brand clearance is completed:
+The live product remains on the Lovable hostname until DNS/custom-domain connection is completed:
 
 `https://aurelia-world.lovable.app`
 
-Do not buy paid traffic, print collateral, announce a permanent domain, or create final Dodo customer-facing product names until the brand decision below is resolved.
+Next domain task: connect `theaureliaworld.com` to the production site, configure HTTPS/redirects, then make it the canonical public URL.
 
-## Decision required before commercial lock
+## Brand decision
 
-Choose one of these routes:
+Working commercial identity:
 
-1. **Keep Aurelia only if trademark counsel clears it** for the intended UK/global education, SaaS, community and child-platform services; then file the appropriate marks and acquire the best available domain/defensive domains.
-2. **Adopt a materially more distinctive compound brand** if counsel considers the bare Aurelia element too risky/crowded.
-3. **Rename before paid launch** to a newly coined mark with a clean company/trademark/domain footprint. The codebase is still at the right stage for a controlled brand rename without altering the underlying product architecture.
+**AURELIA WORLD**  
+**Create · Learn · Achieve**  
+**theaureliaworld.com**
+
+Before broad paid acquisition or formal trademark filing, obtain a qualified trademark review for the compound mark **AURELIA WORLD** across the intended territories and services.
 
 ## Suggested legal classes to review
 
@@ -76,6 +74,6 @@ The exact specification should be drafted by qualified trademark counsel rather 
 
 ## Launch rule
 
-**Product build may continue. Commercial brand lock may not.**
+**Product build and integration may continue under the working brand Aurelia World.**
 
-Dodo integration can be technically configured/tested in sandbox, but the final customer-facing Dodo product names, permanent domain, trademark filing and paid launch should follow the brand decision.
+Dodo sandbox/test integration, Liftor connection and custom-domain setup can proceed. Broad paid acquisition and formal brand filing should follow final trademark clearance of **AURELIA WORLD**.
