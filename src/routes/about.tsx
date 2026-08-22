@@ -323,7 +323,12 @@ function AboutPage() {
       </Section>
 
       <Section>
-        <SectionHeading eyebrow="Brand facts" title="Aurelia, in plain terms" />
+        <SectionHeading
+          eyebrow="Press & brand facts"
+          title="Aurelia, in plain terms"
+          description="A reference for press, partners and prospective schools. Every line below describes how Aurelia is built and operated today. We do not publish user numbers, customer names, launch claims, awards or testimonials, and nothing here should be reported as such."
+        />
+
         <dl className="mt-10 grid gap-6 sm:grid-cols-2">
           {brandFacts.map((fact) => (
             <div key={fact.label} className="rounded-2xl border border-border/70 bg-card p-6">
