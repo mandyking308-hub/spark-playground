@@ -1,6 +1,8 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 
+import { AureliaMark } from "@/components/brand/aurelia-logo";
 import { dashboardNav, platformModules, roles } from "@/config/navigation";
+
 import type { PlatformRole } from "@/domain/access-control";
 import { canEnterAlumniExperience, canEnterDashboardPath } from "@/domain/auth-routing";
 import {
