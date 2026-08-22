@@ -252,12 +252,13 @@ export function PublicGTranslate({ children }: { children: ReactNode }) {
   };
 
   const disableTranslation = () => {
+    const translationWasActive = hasTranslationState();
     localStorage.setItem(TRANSLATION_CONSENT_KEY, "disabled");
     removeTranslationChrome();
     expireTranslationCookies();
     delete window.gtranslateSettings;
     setTranslationEnabled(false);
-    if (hasTranslationState()) window.location.reload();
+    if (translationWasActive) window.location.reload();
   };
 
   return (
