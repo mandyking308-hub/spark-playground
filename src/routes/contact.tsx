@@ -19,13 +19,13 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "How to reach Aurelia: separate routes for families, schools, education groups, organisations, press and safeguarding concerns.",
+          "Send an enquiry to Aurelia, or report a safeguarding concern. Separate routes for families, schools, education groups, organisations and press.",
       },
       { property: "og:title", content: "Contact Aurelia" },
       {
         property: "og:description",
         content:
-          "Clear, separated enquiry routes for families, schools, education groups, organisations, press and safeguarding.",
+          "Send an enquiry or report a safeguarding concern, with clear routes for every audience.",
       },
       { property: "og:url", content: "/contact" },
       { property: "og:type", content: "website" },
@@ -77,7 +77,7 @@ const routes: ContactRoute[] = [
     icon: AlertTriangle,
     title: "Safeguarding",
     text: "If you need to raise a concern about a child's safety on Aurelia, do not wait for a general enquiry response. Use the dedicated safeguarding and reporting route, which is triaged separately.",
-    primary: { label: "Report a concern", to: "/safeguarding-and-reporting" },
+    primary: { label: "Report a concern", to: "/report-concern" },
   },
 ];
 
@@ -86,15 +86,15 @@ function ContactPage() {
     <PublicPage>
       <PageHero
         eyebrow="Contact"
-        title="Six routes in, each one going to the right place"
-        description="Aurelia is invitation-only, so there is no single general enquiry form to fill in. Instead, each audience has a clear starting point, and safeguarding concerns have their own dedicated, faster route."
+        title="Send an enquiry, or report a concern"
+        description="General enquiries go through our enquiry form. Safeguarding concerns have their own dedicated route, triaged separately by trained staff. Each audience below also has a starting point that answers most first questions."
         actions={
           <>
             <Button asChild size="lg">
-              <Link to="/auth/join">Join with an invitation</Link>
+              <Link to="/contact-enquiry">Send an enquiry</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link to="/safeguarding-and-reporting">Report a safeguarding concern</Link>
+              <Link to="/report-concern">Report a safeguarding concern</Link>
             </Button>
           </>
         }
@@ -102,9 +102,9 @@ function ContactPage() {
 
       <Section>
         <SectionHeading
-          eyebrow="Why there is no general contact form"
-          title="Routing matters more than a single inbox"
-          description="A single generic contact form tends to slow down the enquiries that matter most — particularly safeguarding concerns, which need to reach a trained team immediately rather than sit in a shared queue. Instead, each audience below is pointed to the page that answers most first questions and the correct next step to take."
+          eyebrow="How enquiries are handled"
+          title="Two routes, kept deliberately separate"
+          description="General enquiries — questions about Aurelia, onboarding, partnerships or press — go through the enquiry form. Safeguarding concerns use a separate restricted route so they reach trained staff rather than sitting in a shared queue. Please do not include a child's personal details in a general enquiry; the form only needs your own contact details and your question."
         />
       </Section>
 
@@ -142,9 +142,14 @@ function ContactPage() {
           description="If you are unsure whether your concern belongs in a general enquiry or a safeguarding report, treat it as a safeguarding matter. Reports are triaged by trained staff, and a report that turns out to be a general question causes no harm — a general enquiry that should have been a safeguarding report can."
         />
         <div className="mt-8">
-          <Button asChild size="lg">
-            <Link to="/safeguarding-and-reporting">Go to safeguarding and reporting</Link>
-          </Button>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild size="lg">
+              <Link to="/report-concern">Report a concern</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link to="/safeguarding-and-reporting">Read the safeguarding process</Link>
+            </Button>
+          </div>
         </div>
       </Section>
 
@@ -155,17 +160,20 @@ function ContactPage() {
           description="Whichever route applies to you, onboarding moves faster if you already know a little about how Aurelia works."
         />
         <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Aurelia does not accept open self-registration for children. Families typically join
-          through an invitation from a school, education group or organisation already using
-          Aurelia, or by requesting one directly. Reading the relevant overview page above before
-          you begin will make sure you understand what is being asked of you, and what Aurelia
-          asks of the young person in your care.
+          Aurelia does not accept open self-registration for children. An under-16 account is
+          sponsored through a verified parent or guardian, or through a verified school. Approved
+          organisations can offer challenges, content and opportunities through institutional
+          workflows, but they never create or invite child accounts and never receive a child
+          directory or private contact route. Parents and other adult roles use their own verified
+          onboarding paths. Reading the relevant overview page above before you begin will make
+          sure you understand what is being asked of you, and what Aurelia asks of the young person
+          in your care.
         </p>
       </Section>
 
       <CtaBand
         title="Ready to take the next step"
-        description="Most enquiries end in the same place: a verified, invitation-based join. Start there, or dig deeper into the page that matches who you are."
+        description="Most enquiries end in the same place: a verified, invitation-based join. Start there, or send us a question first."
       />
     </PublicPage>
   );
