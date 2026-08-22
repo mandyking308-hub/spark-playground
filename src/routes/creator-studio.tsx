@@ -14,12 +14,27 @@ import { PublicPage } from "@/components/public/public-page";
 import {
   CheckList,
   CtaBand,
+  Eyebrow,
   FeatureCard,
   PageHero,
   Section,
   SectionHeading,
 } from "@/components/public/sections";
+import {
+  Figure,
+  GoldRule,
+  PaperNote,
+  SplitFeature,
+  WaveformStrip,
+} from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+
+import heroPodcast from "@/assets/hero-podcast.jpg";
+import makingFilm from "@/assets/making-film.jpg";
+import storyArt from "@/assets/story-art.jpg";
+import designDesk from "@/assets/design-desk.jpg";
+import inventionPrototype from "@/assets/invention-prototype.jpg";
+import codingGame from "@/assets/coding-game.jpg";
 
 export const Route = createFileRoute("/creator-studio")({
   head: () => ({
@@ -44,22 +59,68 @@ export const Route = createFileRoute("/creator-studio")({
   component: CreatorStudioPage,
 });
 
-const disciplines = [
-  { icon: Mic, title: "Podcasts & shows", text: "Plan an episode, record audio or video, edit a running order and build a series over time." },
-  { icon: Film, title: "Film", text: "Storyboard, shoot and cut short films, with each stage kept as part of the project's history." },
-  { icon: Palette, title: "Art", text: "Digital and documented physical artwork, from first sketch to finished piece." },
-  { icon: PenTool, title: "Writing", text: "Stories, scripts, journalism and poetry, drafted and redrafted with visible revision history." },
-  { icon: Gamepad2, title: "Games", text: "Design simple games and interactive projects, describing mechanics as well as building them." },
-  { icon: Lightbulb, title: "Inventions", text: "Prototype physical or conceptual inventions and document the reasoning behind each choice." },
-];
-
-const lifecycle = [
-  { step: "01", title: "Start a project", text: "A child opens a project in the studio, chooses a discipline and sets out what they intend to make." },
-  { step: "02", title: "Draft and iterate", text: "Work is built up in stages. Earlier drafts stay attached to the project rather than being overwritten and lost." },
-  { step: "03", title: "Ask for feedback", text: "A parent, teacher or club supervisor can leave constructive comments before anything is finished." },
-  { step: "04", title: "Guardian review", text: "Before a project can be shared beyond the family, a guardian reviews and approves it." },
-  { step: "05", title: "Safe publishing", text: "Approved work is published into the appropriate, moderated space — never to the open internet by default." },
-  { step: "06", title: "Recognition", text: "Where a teacher verifies the achievement it demonstrates, it can be recorded to the Achievement Passport." },
+const mosaic = [
+  {
+    icon: Mic,
+    src: heroPodcast,
+    alt: "Hands setting up a podcast microphone beside a handwritten episode plan",
+    label: "Example · Podcast & show",
+    title: "Podcasts & shows",
+    text: "Plan an episode, record audio or video, edit a running order and build a series over time.",
+    flow: "Idea: \"Episode 3, finding my voice\" → Draft running order → Record & edit → Family feedback → Guardian approval to share.",
+    ratio: "wide" as const,
+    span: true,
+  },
+  {
+    icon: Film,
+    src: makingFilm,
+    alt: "Two young people filming a stop-motion set with a phone on a tripod",
+    label: "Example · Film",
+    title: "Film",
+    text: "Storyboard, shoot and cut short films, with each stage kept as part of the project's history.",
+    flow: "Idea: a one-minute film about their street → Storyboard draft → Shoot & cut → Feedback from a supervisor → Guardian approval.",
+    ratio: "landscape" as const,
+  },
+  {
+    icon: PenTool,
+    src: storyArt,
+    alt: "An illustrated storybook spread with hand lettering and coloured pencils",
+    label: "Example · Story & writing",
+    title: "Story & writing",
+    text: "Stories, scripts, journalism and poetry, drafted and redrafted with visible revision history.",
+    flow: "Idea: a picture book for a younger sibling → First draft pages → Redraft & illustrate → Feedback → Guardian approval.",
+    ratio: "square" as const,
+  },
+  {
+    icon: Palette,
+    src: designDesk,
+    alt: "Hands sketching a poster design with markers, swatches and tape",
+    label: "Example · Art & design",
+    title: "Art & design",
+    text: "Digital and documented physical artwork and design, from first sketch to finished piece.",
+    flow: "Idea: a poster for a cause they chose → Thumbnail sketches → Make the final piece → Feedback → Guardian approval.",
+    ratio: "landscape" as const,
+  },
+  {
+    icon: Lightbulb,
+    src: inventionPrototype,
+    alt: "A cardboard and electronics prototype beside annotated design sketches",
+    label: "Example · Invention",
+    title: "Invention",
+    text: "Prototype physical or conceptual inventions and document the reasoning behind each choice.",
+    flow: "Idea: fix one annoying thing at home → Sketch the mechanism → Build a prototype → Feedback → Guardian approval.",
+    ratio: "square" as const,
+  },
+  {
+    icon: Gamepad2,
+    src: codingGame,
+    alt: "A young person coding a simple platform game beside pixel sketches on graph paper",
+    label: "Example · Game",
+    title: "Game",
+    text: "Design simple games and interactive projects, describing mechanics as well as building them.",
+    flow: "Idea: a game built around one rule → Sketch mechanics on paper → Build & test → Feedback → Guardian approval.",
+    ratio: "landscape" as const,
+  },
 ];
 
 function CreatorStudioPage() {
@@ -75,25 +136,57 @@ function CreatorStudioPage() {
               <Link to="/auth/join">Join with an invitation</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link to="/achievement-passport">See how work becomes achievement</Link>
+              <Link to="/ideas-and-resources">Browse project starters</Link>
             </Button>
           </>
         }
-      />
+      >
+        <div className="mt-12 max-w-md rounded-2xl border border-border/70 bg-card p-5">
+          <WaveformStrip className="mb-3" />
+          <p className="font-display text-base leading-snug tracking-tight">
+            “Episode 3: Finding Voice.”
+          </p>
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+            Illustrative example of the kind of episode plan a child might start from.
+          </p>
+        </div>
+      </PageHero>
 
+      {/* Mosaic of capability categories */}
       <Section>
         <SectionHeading
-          eyebrow="Seven disciplines"
+          eyebrow="Six ways in"
           title="Room to make almost anything"
-          description="The studio is not a single tool. It is a set of project types that share the same safety rules, so a child can move between podcasting one week and prototyping an invention the next."
+          description="The studio is not a single tool. It is a set of project categories that share the same safety rules, so a child can move between podcasting one week and prototyping an invention the next."
         />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {disciplines.map((item) => (
-            <FeatureCard key={item.title} icon={item.icon} title={item.title}>
-              {item.text}
-            </FeatureCard>
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {mosaic.map((item, index) => (
+            <article
+              key={item.title}
+              className={item.span ? "lg:col-span-2" : undefined}
+            >
+              <Figure src={item.src} alt={item.alt} width={1280} height={960} ratio={item.ratio} label={item.label} />
+              <div className="mt-4 flex items-start gap-3">
+                <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                  <item.icon className="size-4" aria-hidden="true" />
+                </span>
+                <div>
+                  <h3 className="font-display text-lg leading-snug tracking-tight">{item.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+                </div>
+              </div>
+              <GoldRule className="mt-4 w-10" />
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                <span className="font-medium text-foreground">Example project flow: </span>
+                {item.flow}
+              </p>
+            </article>
           ))}
         </div>
+        <p className="mt-10 text-xs text-muted-foreground">
+          All images and project descriptions above are illustrative examples created for Aurelia.
+          They are not member work and do not depict identifiable people.
+        </p>
       </Section>
 
       <Section tone="muted">
@@ -121,7 +214,45 @@ function CreatorStudioPage() {
         </div>
       </Section>
 
+      {/* Audio section using WaveformStrip */}
       <Section>
+        <SplitFeature
+          image={
+            <div className="space-y-5">
+              <div className="rounded-2xl border border-border/70 bg-card p-6">
+                <WaveformStrip className="mb-4" />
+                <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Illustrative example
+                </p>
+                <p className="mt-2 font-display text-lg tracking-tight">
+                  Episode plan, take three
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  A running order, a recorded take, feedback from a parent, and a revised edit —
+                  all attached to the same project.
+                </p>
+              </div>
+              <PaperNote tone="lined">
+                Not every take makes the final cut, and that's fine — the earlier ones stay
+                attached so the project shows real iteration, not just a finished file.
+              </PaperNote>
+            </div>
+          }
+        >
+          <SectionHeading
+            eyebrow="Sound, structured"
+            title="Podcasting and audio, built for iteration"
+            description="Audio projects in the studio keep every take, script revision and running order alongside the finished episode, so the process of making something heard stays visible."
+          />
+          <div className="mt-8">
+            <Button asChild variant="outline">
+              <Link to="/ideas-and-resources">Find a podcast starter idea</Link>
+            </Button>
+          </div>
+        </SplitFeature>
+      </Section>
+
+      <Section tone="muted">
         <SectionHeading
           eyebrow="Constructive feedback"
           title="Comments that help the work improve"
@@ -143,26 +274,22 @@ function CreatorStudioPage() {
         </div>
       </Section>
 
-      <Section tone="muted">
-        <SectionHeading
-          eyebrow="From idea to record"
-          title="What a project looks like end to end"
-          description="Every discipline in the studio follows the same underlying journey, so families and schools always know what stage a piece of work is at."
-        />
-        <ol className="mt-12 grid gap-4 md:grid-cols-3">
-          {lifecycle.map((item) => (
-            <li key={item.step} className="rounded-2xl border border-border/70 bg-card p-6">
-              <span className="font-display text-sm tracking-[0.2em] text-accent-foreground">
-                {item.step}
-              </span>
-              <h3 className="mt-3 font-display text-lg tracking-tight">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
-            </li>
-          ))}
-        </ol>
+      {/* Maker's note */}
+      <Section>
+        <div className="mx-auto max-w-2xl text-center">
+          <Eyebrow className="justify-center">A maker's note</Eyebrow>
+          <h2 className="mt-3 font-display text-2xl tracking-tight sm:text-3xl">
+            What we ask every young maker to keep
+          </h2>
+        </div>
+        <PaperNote className="mx-auto mt-8 max-w-xl text-center" tone="paper">
+          Keep the messy version. Say why you changed it. Ask someone you trust what they think
+          before you ask everyone. That's the whole method — illustrative, not an actual member's
+          note.
+        </PaperNote>
       </Section>
 
-      <Section>
+      <Section tone="muted">
         <SectionHeading
           eyebrow="Safe publishing pipeline"
           title="Sharing is a decision, not a default"

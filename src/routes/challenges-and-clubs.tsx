@@ -19,7 +19,12 @@ import {
   Section,
   SectionHeading,
 } from "@/components/public/sections";
+import { Figure, GoldRule, PaperNote, SplitFeature } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+
+import clubCollaboration from "@/assets/club-collaboration.jpg";
+import challengeBrief from "@/assets/challenge-brief.jpg";
+import classroomMaking from "@/assets/classroom-making.jpg";
 
 export const Route = createFileRoute("/challenges-and-clubs")({
   head: () => ({
@@ -51,6 +56,20 @@ const challengeFlow = [
   { step: "04", title: "Named reviewers assess it", text: "Entries are reviewed by identified adults connected to the challenge, not by public voting." },
 ];
 
+const examplePrompts = [
+  { title: "\"Tell a one-minute story about your street\"", format: "Film or audio" },
+  { title: "\"Design a poster for a cause you care about\"", format: "Art & design" },
+  { title: "\"Invent something that fixes one small annoyance\"", format: "Invention" },
+  { title: "\"Build a game with exactly one rule\"", format: "Game" },
+];
+
+const clubBoundaries = [
+  "Named adult supervision for every club — a teacher, group leader or approved supervisor.",
+  "Bounded membership: children are added by a school, group or guardian, never self-service.",
+  "No open messaging between members — feedback is structured and tied to the work.",
+  "No public follower counts, friend lists or popularity metrics inside a club.",
+];
+
 function ChallengesAndClubsPage() {
   return (
     <PublicPage>
@@ -68,7 +87,18 @@ function ChallengesAndClubsPage() {
             </Button>
           </>
         }
-      />
+      >
+        <div className="mt-12 max-w-lg">
+          <Figure
+            src={challengeBrief}
+            alt="A printed challenge brief with a gold seal, pinned notes and a project label"
+            width={1280}
+            height={960}
+            label="Illustrative example"
+            ratio="landscape"
+          />
+        </div>
+      </PageHero>
 
       <Section>
         <SectionHeading
@@ -92,7 +122,28 @@ function ChallengesAndClubsPage() {
         </div>
       </Section>
 
+      {/* Example challenge prompts */}
       <Section tone="muted">
+        <SectionHeading
+          eyebrow="Example prompts"
+          title="The kind of brief a challenge might set"
+          description="Illustrative examples only — not live challenges, and not written for a real organisation."
+        />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          {examplePrompts.map((p) => (
+            <PaperNote key={p.title} tone="paper">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent-foreground">
+                {p.format} · illustrative
+              </p>
+              <p className="mt-2 font-display text-base leading-snug tracking-tight text-foreground">
+                {p.title}
+              </p>
+            </PaperNote>
+          ))}
+        </div>
+      </Section>
+
+      <Section>
         <SectionHeading
           eyebrow="Submission and review"
           title="From brief to reviewed entry"
@@ -111,21 +162,63 @@ function ChallengesAndClubsPage() {
         </ol>
       </Section>
 
+      {/* Clubs, editorial split */}
+      <Section tone="muted">
+        <SplitFeature
+          image={
+            <Figure
+              src={clubCollaboration}
+              alt="A small supervised club of young people building a project together at a table"
+              width={1280}
+              height={960}
+              label="Illustrative example · Clubs"
+            />
+          }
+        >
+          <SectionHeading
+            eyebrow="Clubs"
+            title="A small, supervised group with a shared interest"
+            description="Clubs bring together a bounded group of children around a shared interest — a podcasting club, a nature-writing club, an invention club — always under the direct supervision of a named, accountable adult."
+          />
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <FeatureCard icon={UserCheck} title="Named adult supervision">
+              Every club has a specific, identified adult responsible for it — a teacher, group
+              leader or approved supervisor — not an anonymous moderator.
+            </FeatureCard>
+            <FeatureCard icon={Users2} title="Bounded membership">
+              Clubs are limited to members who have been added by a school, group or guardian.
+              There is no open, self-service joining of clubs by children.
+            </FeatureCard>
+          </div>
+        </SplitFeature>
+      </Section>
+
+      {/* Making together band */}
       <Section>
-        <SectionHeading
-          eyebrow="Clubs"
-          title="A small, supervised group with a shared interest"
-          description="Clubs bring together a bounded group of children around a shared interest — a podcasting club, a nature-writing club, an invention club — always under the direct supervision of a named, accountable adult."
-        />
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          <FeatureCard icon={UserCheck} title="Named adult supervision">
-            Every club has a specific, identified adult responsible for it — a teacher, group
-            leader or approved supervisor — not an anonymous moderator.
-          </FeatureCard>
-          <FeatureCard icon={Users2} title="Bounded membership">
-            Clubs are limited to members who have been added by a school, group or guardian.
-            There is no open, self-service joining of clubs by children.
-          </FeatureCard>
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+          <Figure
+            src={classroomMaking}
+            alt="A sunlit classroom of students making things together, seen from behind"
+            width={1536}
+            height={1024}
+            ratio="wide"
+            label="Illustrative example · Making together"
+            className="lg:order-2"
+          />
+          <div>
+            <GoldRule className="w-10" />
+            <h2 className="mt-4 font-display text-2xl leading-tight tracking-tight sm:text-3xl">
+              Making together, without the features that turn it competitive
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              A club or challenge is a place to build something alongside other people — not a
+              feed to perform on. Aurelia deliberately leaves out the mechanics that make many
+              online groups unsafe or anxiety-inducing for children.
+            </p>
+            <div className="mt-6">
+              <CheckList items={clubBoundaries} />
+            </div>
+          </div>
         </div>
       </Section>
 
@@ -135,40 +228,30 @@ function ChallengesAndClubsPage() {
           title="What challenges and clubs deliberately do not include"
           description="The features that make many online communities unsafe for children are simply not present in Aurelia's design."
         />
-        <div className="mt-10 grid gap-8 lg:grid-cols-2">
-          <CheckList
-            items={[
-              "No open, unmoderated messaging between children inside a challenge or club.",
-              "No public follower counts, friend lists or popularity metrics.",
-              "No ability for a child to be added to a club or challenge without an adult's action.",
-              "No anonymous accounts participating in review or supervision.",
-            ]}
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
-            <FeatureCard icon={MessageCircleOff} title="No open messaging">
-              Communication about a project happens through structured feedback tied to the work,
-              not free-form chat.
-            </FeatureCard>
-            <FeatureCard icon={Ban} title="No popularity metrics">
-              Aurelia does not surface follower counts or public rankings that could turn
-              creativity into a competition for attention.
-            </FeatureCard>
-          </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          <FeatureCard icon={MessageCircleOff} title="No open messaging">
+            Communication about a project happens through structured feedback tied to the work,
+            not free-form chat.
+          </FeatureCard>
+          <FeatureCard icon={Ban} title="No popularity metrics">
+            Aurelia does not surface follower counts or public rankings that could turn
+            creativity into a competition for attention.
+          </FeatureCard>
         </div>
       </Section>
 
       <Section>
         <SectionHeading
-          eyebrow="Oversight"
-          title="Safety does not pause for a deadline"
-          description="Even under the time pressure of a challenge, guardian approval, teacher verification and named supervision remain in place. Aurelia does not offer a faster path that skips them."
+          eyebrow="The organisation boundary"
+          title="An organisation sets challenges. It never meets a child directly."
+          description="Organisations take part in Aurelia entirely through institutional workflows — publishing a brief, reviewing entries with named reviewers, and providing recognition. They never gain any other access to children."
         />
         <div className="mt-8">
           <ShieldCheck className="size-6 text-accent-foreground" aria-hidden="true" />
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
             Organisations and schools setting challenges do not gain any ability to bypass a
-            family's control over their child's work. Every entry is still the guardian's decision
-            to share.
+            family's control over their child's work, contact a child privately, or browse a
+            directory of children. Every entry is still the guardian's decision to share.
           </p>
         </div>
       </Section>

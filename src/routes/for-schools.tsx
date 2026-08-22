@@ -1,8 +1,10 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
+  CalendarClock,
   ClipboardCheck,
   FileCheck2,
   GraduationCap,
+  Puzzle,
   ShieldAlert,
   Users2,
   Workflow,
@@ -12,12 +14,23 @@ import { PublicPage } from "@/components/public/public-page";
 import {
   CheckList,
   CtaBand,
+  Eyebrow,
   FeatureCard,
   PageHero,
   Section,
   SectionHeading,
 } from "@/components/public/sections";
+import {
+  Figure,
+  GoldRule,
+  PaperNote,
+  SplitFeature,
+} from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+
+import teacherEvidence from "@/assets/teacher-evidence.jpg";
+import classroomMaking from "@/assets/classroom-making.jpg";
+import challengeBrief from "@/assets/challenge-brief.jpg";
 
 export const Route = createFileRoute("/for-schools")({
   head: () => ({
@@ -26,13 +39,13 @@ export const Route = createFileRoute("/for-schools")({
       {
         name: "description",
         content:
-          "How Aurelia works for schools: teacher briefs, pupil work review, Achievement Passport verification, class oversight, safeguarding and staff roles.",
+          "How Aurelia works for schools: the journey from brief to verified achievement, what verification asks of a teacher, safeguarding and oversight, and an educator resource library.",
       },
       { property: "og:title", content: "For Schools — Aurelia" },
       {
         property: "og:description",
         content:
-          "Teacher briefs, verification, class oversight and safeguarding workflow for schools using Aurelia.",
+          "Briefs, evidence, teacher verification, safeguarding and class oversight for schools using Aurelia.",
       },
       { property: "og:url", content: "/for-schools" },
       { property: "og:type", content: "website" },
@@ -42,10 +55,13 @@ export const Route = createFileRoute("/for-schools")({
   component: ForSchools,
 });
 
-const staffRoles = [
-  { icon: GraduationCap, title: "Teacher", text: "Sets briefs, reviews submitted work and verifies achievements for the classes they are assigned to — nothing outside that scope." },
-  { icon: Users2, title: "School Admin", text: "Manages staff and class rosters, oversees safeguarding cases raised within the school, and reports to the education group where one exists." },
-  { icon: ShieldAlert, title: "Designated safeguarding lead", text: "Receives escalated concerns, coordinates the school's response and maintains the audit trail of any case involving a pupil." },
+const journey = [
+  { step: "01", title: "The brief", text: "A teacher sets a real task with clear success criteria — not just a platform to fill in." },
+  { step: "02", title: "The making", text: "Pupils work in the Creator Studio, with drafts kept rather than discarded." },
+  { step: "03", title: "The evidence", text: "What they made, and the decisions behind it, sits together as one submission." },
+  { step: "04", title: "Constructive feedback", text: "Specific and kind, about the work itself — never a score or a ranking." },
+  { step: "05", title: "Verify", text: "A teacher who genuinely reviewed the work confirms the skill it demonstrates." },
+  { step: "06", title: "The Passport", text: "Verified evidence is written to the pupil's Achievement Passport, theirs to keep." },
 ];
 
 const oversight = [
@@ -55,11 +71,17 @@ const oversight = [
   "Class rosters and staff assignments are set by the School Admin and enforced at the database level, not just in the interface.",
 ];
 
-const safeguarding = [
-  { step: "01", title: "A concern is raised", text: "By a pupil, a parent, a member of staff or through automated review flags on submitted content." },
-  { step: "02", title: "It is triaged", text: "The designated safeguarding lead reviews the concern and decides on urgency and next steps." },
-  { step: "03", title: "It is escalated where needed", text: "Serious concerns are escalated beyond the school through the same safeguarding route used platform-wide." },
-  { step: "04", title: "It is recorded", text: "Every action taken is written to an auditable trail that the school can be held to account against." },
+const staffRoles = [
+  { icon: GraduationCap, title: "Teacher", text: "Sets briefs, reviews submitted work and verifies achievements for the classes they are assigned to — nothing outside that scope." },
+  { icon: Users2, title: "School Admin", text: "Manages staff and class rosters, oversees safeguarding cases raised within the school, and reports to the education group where one exists." },
+  { icon: ShieldAlert, title: "Designated safeguarding lead", text: "Receives escalated concerns, coordinates the school's response and maintains the audit trail of any case involving a pupil." },
+];
+
+const updatesVisibility = [
+  "Class and brief calendars showing what's due, what's in review and what's been verified — this is the direction we're building, and not every part is live today.",
+  "Reminders for upcoming brief deadlines and pending verifications, so nothing sits unreviewed by accident.",
+  "School-level visibility of pupil progress toward the Achievement Passport, scoped to the classes a teacher is actually assigned.",
+  "All of this runs inside Aurelia itself — it does not read from or write to a school's existing MIS, timetable or messaging systems.",
 ];
 
 function ForSchools() {
@@ -67,50 +89,90 @@ function ForSchools() {
     <PublicPage>
       <PageHero
         eyebrow="For schools"
-        title="Give pupils real briefs, and give teachers real oversight"
-        description="Aurelia lets teachers set meaningful briefs, review the work pupils actually produce, and verify genuine achievement — inside a class structure with clear roles and a safeguarding workflow behind it."
+        title="Give pupils a real brief, and give teachers a real say in what counts"
+        description="Aurelia lets a teacher set a genuine task, watch the work take shape, give feedback that matters, and verify what a pupil can actually do — inside clear roles and a safeguarding workflow behind it."
         actions={
           <>
             <Button asChild size="lg">
-              <Link to="/contact">Talk to us about your school</Link>
+              <Link to="/contact-enquiry">Talk to us about your school</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link to="/achievement-passport">See the Achievement Passport</Link>
             </Button>
           </>
         }
-      />
+      >
+        <div className="mt-12">
+          <Figure
+            src={classroomMaking}
+            alt="A sunlit classroom of students making things, seen from behind"
+            width={1536}
+            height={1024}
+            ratio="wide"
+            priority
+            label="Illustrative example"
+          />
+        </div>
+      </PageHero>
 
       <Section>
         <SectionHeading
-          eyebrow="Teacher briefs"
-          title="Set the task, not just the platform"
-          description="A teacher creates a brief for a class or a group within it — a project, a challenge response, a piece of coursework — and pupils submit their work against that brief inside the Creator Studio."
+          eyebrow="One piece of work, one journey"
+          title="From brief to Passport, every project travels the same route"
+          description="Nothing skips a step, and nothing is verified because it was popular."
         />
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
-          <FeatureCard icon={Workflow} title="Structured briefs">
-            Briefs carry clear success criteria, so a teacher's review and a pupil's submission are working against the same expectations.
-          </FeatureCard>
-          <FeatureCard icon={FileCheck2} title="Draft and review cycle">
-            Pupils can submit drafts before a final version, and teachers can give feedback that becomes part of the visible evidence of the work.
-          </FeatureCard>
-          <FeatureCard icon={ClipboardCheck} title="Review at the point of submission">
-            Teachers review pupil work directly against the brief, rather than relying on a separate, disconnected marking system.
-          </FeatureCard>
+        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+          <div className="space-y-4">
+            <Figure
+              src={challengeBrief}
+              alt="A printed challenge brief with a gold seal and a project label"
+              width={1280}
+              height={960}
+              label="The brief"
+            />
+            <PaperNote tone="lined">
+              A brief with clear success criteria means a teacher's review and a pupil's
+              submission are working against the same expectations.
+            </PaperNote>
+          </div>
+          <ol className="grid gap-4 sm:grid-cols-2">
+            {journey.map((item) => (
+              <li key={item.step} className="rounded-2xl border border-border/70 bg-card p-6">
+                <span className="font-display text-sm tracking-[0.2em] text-accent-foreground">
+                  {item.step}
+                </span>
+                <h3 className="mt-3 font-display text-lg tracking-tight">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </Section>
 
       <Section tone="muted">
-        <SectionHeading
-          eyebrow="Achievement Passport"
-          title="Verification with a named teacher behind it"
-          description="When a teacher confirms that a pupil has genuinely demonstrated a skill or completed a piece of work to standard, that verification is written to the pupil's Achievement Passport — durable evidence the pupil keeps."
-        />
-        <div className="mt-10">
-          <Button asChild variant="outline">
-            <Link to="/achievement-passport">How the passport works</Link>
-          </Button>
-        </div>
+        <SplitFeature
+          reverse
+          image={
+            <Figure
+              src={teacherEvidence}
+              alt="A teacher and a student looking together at printed project evidence and sketches"
+              width={1280}
+              height={960}
+              label="Verification"
+            />
+          }
+        >
+          <SectionHeading
+            eyebrow="What verification asks of a teacher"
+            title="A professional act, not a button"
+            description="Verifying an achievement means a named teacher is putting their judgement behind it — that they reviewed the evidence and genuinely believe the pupil demonstrated the skill. It is deliberately harder to earn than a badge, and it is written to the pupil's Achievement Passport for them to keep."
+          />
+          <div className="mt-8">
+            <Button asChild variant="outline">
+              <Link to="/achievement-passport">How the passport works</Link>
+            </Button>
+          </div>
+        </SplitFeature>
       </Section>
 
       <Section>
@@ -118,35 +180,94 @@ function ForSchools() {
           <SectionHeading
             eyebrow="Class oversight"
             title="Scoped access, not blanket visibility"
-            description="Oversight in Aurelia is built to mirror how a school actually works — a teacher sees their classes, a School Admin sees the school, and nobody sees more than their role requires."
+            description="Oversight in Aurelia mirrors how a school actually works — a teacher sees their classes, a School Admin sees the school, and nobody sees more than their role requires."
           />
           <CheckList items={oversight} />
         </div>
       </Section>
 
       <Section tone="muted">
-        <SectionHeading
-          eyebrow="Safeguarding workflow"
-          title="A clear route from concern to resolution"
-          description="Every school using Aurelia operates the same underlying safeguarding workflow, so a concern raised about a pupil is never left to informal handling."
-        />
-        <ol className="mt-12 grid gap-4 md:grid-cols-4">
-          {safeguarding.map((item) => (
-            <li key={item.step} className="rounded-2xl border border-border/70 bg-card p-6">
-              <span className="font-display text-sm tracking-[0.2em] text-accent-foreground">{item.step}</span>
-              <h3 className="mt-3 font-display text-lg tracking-tight">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-8">
-          <Button asChild variant="outline">
-            <Link to="/safeguarding-and-reporting">Read the safeguarding model</Link>
-          </Button>
+        <div>
+          <Eyebrow>Safeguarding and oversight</Eyebrow>
+          <h2 className="mt-3 font-display text-3xl leading-tight tracking-tight sm:text-4xl">
+            A clear route from concern to resolution
+          </h2>
+          <GoldRule className="mt-6 w-24" />
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
+            Every school using Aurelia operates the same underlying safeguarding workflow, in
+            plain language: a concern raised by anyone — pupil, parent or staff — is triaged by
+            the designated safeguarding lead, escalated where needed through the platform-wide
+            reporting route, and recorded on an auditable trail the school can be held to account
+            against. It is never left to informal handling.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Button asChild variant="outline">
+              <Link to="/safety-and-trust">How safety is designed</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/safeguarding-and-reporting">Read the safeguarding model</Link>
+            </Button>
+          </div>
         </div>
       </Section>
 
       <Section>
+        <SplitFeature
+          image={
+            <Figure
+              src={challengeBrief}
+              alt="A printed challenge brief with a gold seal, pinned notes and a project label"
+              width={1280}
+              height={960}
+              label="Resource library"
+            />
+          }
+        >
+          <SectionHeading
+            eyebrow="Resource library"
+            title="Brief templates, ready to adapt"
+            description="A growing set of static brief templates and project starters, written for teachers to adapt to their own class rather than use as-is."
+          />
+          <div className="mt-8">
+            <Button asChild variant="outline">
+              <Link to="/ideas-and-resources">Browse ideas & resources</Link>
+            </Button>
+          </div>
+        </SplitFeature>
+      </Section>
+
+      <Section tone="muted">
+        <SectionHeading
+          eyebrow="Integration-ready architecture"
+          title="Built to connect, honestly described"
+          description="Aurelia does not currently integrate with any school MIS, LMS or timetabling system. The platform is built with an integration-ready architecture as a direction for the future, but nothing here should be read as a live integration claim — today, everything runs inside Aurelia itself."
+        />
+      </Section>
+
+      <Section>
+        <SplitFeature
+          reverse
+          image={
+            <Figure
+              src={classroomMaking}
+              alt="Students making projects with cardboard, paint and laptops in a sunlit classroom"
+              width={1536}
+              height={1024}
+              ratio="wide"
+              label="School view"
+            />
+          }
+        >
+          <SectionHeading
+            eyebrow="Updates, events & visibility"
+            title="One place for a school to keep track"
+            description="For teachers and school admins, Aurelia is working toward a single, quiet view of what's coming up and what's already been verified."
+          />
+          <CheckList className="mt-8" items={updatesVisibility} />
+        </SplitFeature>
+      </Section>
+
+      <Section tone="muted">
         <SectionHeading
           eyebrow="Staff roles and setup"
           title="Roles built around real school structure"
@@ -170,6 +291,8 @@ function ForSchools() {
       <CtaBand
         title="Bring Aurelia into your school"
         description="We work with schools individually to set up staff roles, classes and safeguarding contacts before any pupil joins."
+        primary={{ label: "Talk to us", to: "/contact-enquiry" }}
+        secondary={{ label: "Read the safeguarding model", to: "/safeguarding-and-reporting" }}
       />
     </PublicPage>
   );

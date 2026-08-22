@@ -6,6 +6,7 @@ import {
   MegaphoneOff,
   ShieldCheck,
   Trophy,
+  UserRoundX,
 } from "lucide-react";
 
 import { PublicPage } from "@/components/public/public-page";
@@ -17,7 +18,12 @@ import {
   Section,
   SectionHeading,
 } from "@/components/public/sections";
+import { Figure, GoldRule, SplitFeature } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+
+import challengeBrief from "@/assets/challenge-brief.jpg";
+import designDesk from "@/assets/design-desk.jpg";
+import inventionPrototype from "@/assets/invention-prototype.jpg";
 
 export const Route = createFileRoute("/for-organisations")({
   head: () => ({
@@ -42,10 +48,12 @@ export const Route = createFileRoute("/for-organisations")({
   component: ForOrganisations,
 });
 
-const boundaries = [
-  { icon: Ban, title: "No direct contact with children", text: "An organisation never messages, emails or otherwise contacts a child directly. All interaction happens through published challenges reviewed by Aurelia staff." },
-  { icon: ShieldCheck, title: "No data harvesting", text: "Organisations do not receive personal data about the children who take part. Submissions are handled through Aurelia, with only what is necessary for judging shared, and only with guardian consent." },
-  { icon: MegaphoneOff, title: "No advertising to children", text: "Organisations cannot advertise products, services or brands to children on Aurelia. A challenge is a task to respond to, not a marketing surface." },
+const neverList = [
+  { icon: UserRoundX, title: "No child accounts", text: "An organisation cannot create, hold or manage an account for any child, under any circumstance." },
+  { icon: Ban, title: "No child directory", text: "There is no list of children an organisation can browse, search or select from — children are never visible to an organisation as individuals." },
+  { icon: MegaphoneOff, title: "No private contact with children", text: "An organisation never messages, emails or otherwise contacts a child directly. All interaction happens through published challenges reviewed by Aurelia staff." },
+  { icon: ShieldCheck, title: "No behavioural targeting", text: "Organisations cannot target, segment or recommend content to individual children based on behaviour, engagement or profile data." },
+  { icon: Ban, title: "No data harvesting", text: "Organisations do not receive personal data about the children who take part. Only what a judging process genuinely needs is shared, and only with guardian consent." },
 ];
 
 const process = [
@@ -60,8 +68,8 @@ function ForOrganisations() {
     <PublicPage>
       <PageHero
         eyebrow="For organisations"
-        title="Reach young creators without ever reaching them directly"
-        description="Verified organisations can publish challenges and opportunities that give young people something real to work towards — inside strict boundaries that keep the organisation at arm's length from any individual child."
+        title="Set a brief. Never meet the child who answers it."
+        description="Verified organisations work with Aurelia the way a publisher works with a school — through briefs, content and opportunities that pass through institutional review, never through a direct line to a young person."
         actions={
           <>
             <Button asChild size="lg">
@@ -72,14 +80,56 @@ function ForOrganisations() {
             </Button>
           </>
         }
-      />
+      >
+        <div className="mt-12 grid gap-5 sm:grid-cols-3">
+          <Figure
+            src={challengeBrief}
+            alt="A printed challenge brief with a gold seal, pinned notes and a project label"
+            width={1280}
+            height={960}
+            label="Illustrative · Brief"
+            priority
+          />
+          <Figure
+            src={designDesk}
+            alt="Hands sketching a poster design with markers, swatches and tape"
+            width={1280}
+            height={960}
+            label="Illustrative · Response"
+          />
+          <Figure
+            src={inventionPrototype}
+            alt="A cardboard and electronics prototype beside annotated design sketches"
+            width={1024}
+            height={1024}
+            label="Illustrative · Outcome"
+          />
+        </div>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Images are illustrative examples of the kind of project work a brief can inspire. They
+          are not member work and depict no identifiable people or direct contact with children.
+        </p>
+      </PageHero>
 
       <Section>
-        <SectionHeading
-          eyebrow="What organisations can do"
-          title="Publish a challenge, not a relationship"
-          description="Aurelia lets an organisation set a task worth doing — a design brief, a research question, a piece of writing — and offer genuine recognition for it, without ever establishing a direct line to a child."
-        />
+        <SplitFeature
+          image={
+            <Figure
+              src={designDesk}
+              alt="Hands sketching a poster design with markers, swatches and tape on a studio desk"
+              width={1280}
+              height={960}
+              label="A brief, answered"
+            />
+          }
+        >
+          <SectionHeading
+            eyebrow="What organisations can do"
+            title="Publish a challenge, not a relationship"
+            description="Aurelia lets an organisation set a task worth doing — a design brief, a research question, a piece of writing — and offer genuine recognition for it, entirely through institutional workflows."
+          />
+          <GoldRule className="mt-6 w-16" />
+        </SplitFeature>
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           <FeatureCard icon={Trophy} title="Set a real challenge">
             Define a task with a clear brief, age band and judging criteria, aligned with what young creators can genuinely produce.
@@ -93,17 +143,22 @@ function ForOrganisations() {
         </div>
       </Section>
 
-      <Section tone="muted">
+      <Section tone="ink">
         <SectionHeading
           eyebrow="Strict boundaries"
           title="What organisations can never do"
-          description="These boundaries are non-negotiable and are enforced structurally, not left to an organisation's good intentions."
+          description="These are not policy preferences — they are structural limits, enforced in how Aurelia is built, not left to an organisation's good intentions."
         />
         <div className="mt-12 grid gap-4 md:grid-cols-3">
-          {boundaries.map((item) => (
-            <FeatureCard key={item.title} icon={item.icon} title={item.title}>
-              {item.text}
-            </FeatureCard>
+          {neverList.map((item) => (
+            <div
+              key={item.title}
+              className="rounded-2xl border border-ink-foreground/15 bg-ink-foreground/5 p-6"
+            >
+              <item.icon className="size-6 text-gold" aria-hidden="true" />
+              <h3 className="mt-4 font-display text-lg tracking-tight">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-foreground/75">{item.text}</p>
+            </div>
           ))}
         </div>
       </Section>
