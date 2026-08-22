@@ -7,7 +7,6 @@ export interface PublicLink {
 export const productLinks: PublicLink[] = [
   { label: "See the dashboards", to: "/dashboard-demos", description: "Demo workspaces for every role, from child to education group." },
   { label: "Ideas & Resources", to: "/ideas-and-resources", description: "Project starters, family guides and educator brief templates." },
-
   { label: "Creator Studio", to: "/creator-studio", description: "Podcasts, shows, stories, art, film, games and inventions." },
   { label: "Challenges & Clubs", to: "/challenges-and-clubs", description: "Purposeful challenges and small, supervised clubs." },
   { label: "Achievement Passport", to: "/achievement-passport", description: "Verified evidence of skills, leadership and contribution." },
@@ -28,13 +27,15 @@ export const trustLinks: PublicLink[] = [
   { label: "Safeguarding & Reporting", to: "/safeguarding-and-reporting", description: "How to raise a concern and what happens next." },
   { label: "Privacy Policy", to: "/privacy-policy" },
   { label: "Child-friendly Privacy Notice", to: "/privacy-for-children" },
+  { label: "Data Protection for Schools", to: "/data-protection-for-schools" },
+  { label: "Cookie & Storage Notice", to: "/cookie-notice" },
   { label: "Terms of Use", to: "/terms-of-use" },
   { label: "Community Standards", to: "/community-standards" },
 ];
 
 export const companyLinks: PublicLink[] = [
   { label: "Pricing", to: "/pricing", description: "Family subscriptions and annual institutional licensing." },
-  { label: "About Aurelia", to: "/about", description: "Why this platform exists." },
+  { label: "About Aurelia World", to: "/about", description: "Why this platform exists." },
   { label: "Contact & enquiries", to: "/contact", description: "Schools, groups, organisations and general questions." },
 ];
 
