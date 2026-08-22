@@ -19,7 +19,7 @@ export const Route = createFileRoute("/auth/join")({
       {
         name: "description",
         content:
-          "Aurelia is invitation-only. Use your verified family, school or organisation invitation to finish setting up your account.",
+          "Aurelia is invitation-only. Use your verified parent/guardian or school invitation to finish setting up your account.",
       },
       { property: "og:title", content: "Join with an invitation — Aurelia" },
       {

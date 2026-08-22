@@ -37,13 +37,13 @@ export const listInvitationsFn = createServerFn({ method: "GET" }).handler(async
   if (error || !Array.isArray(data?.data)) throw new Error("Unable to load invitations");
 
   return data.data.map((row: Record<string, unknown>) => ({
-    id: String(row.id),
-    intendedRole: row.intended_role as InvitationSummary["intendedRole"],
-    ageBand: row.intended_age_band as InvitationSummary["ageBand"],
-    schoolId: typeof row.school_id === "string" ? row.school_id : undefined,
-    state: row.state as InvitationSummary["state"],
-    expiresAt: String(row.expires_at),
-    createdAt: String(row.created_at),
+    id: String(row['id']),
+    intendedRole: row['intended_role'] as InvitationSummary["intendedRole"],
+    ageBand: row['intended_age_band'] as InvitationSummary["ageBand"],
+    schoolId: typeof row['school_id'] === "string" ? row['school_id'] : undefined,
+    state: row['state'] as InvitationSummary["state"],
+    expiresAt: String(row['expires_at']),
+    createdAt: String(row['created_at']),
   }));
 });
 
