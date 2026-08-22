@@ -19,7 +19,7 @@ export interface ProjectSummary {
   id: string;
   kind: z.infer<typeof projectKind>;
   title: string;
-  summary?: string;
+  summary?: string | undefined;
   state: "draft" | "scan_pending" | "approval_pending" | "moderation_pending" | "published" | "rejected" | "removed";
   createdAt: string;
   updatedAt: string;
