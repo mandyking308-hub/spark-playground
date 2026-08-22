@@ -24,6 +24,7 @@ import {
   CreditCard,
   ClipboardList,
   UserPlus,
+  Eye,
 } from "lucide-react";
 
 export type RoleKey = "child" | "parent" | "parent_alumni" | "teacher" | "school" | "group";
@@ -129,6 +130,7 @@ export const platformModules = [
   { key: "passport", label: "Achievement Passport", to: "/dashboard/passport", icon: IdCard, audience: "Under-16" },
   { key: "challenges", label: "Challenges", to: "/dashboard/challenges", icon: Trophy, audience: "Under-16" },
   { key: "clubs", label: "Clubs", to: "/dashboard/clubs", icon: UsersRound, audience: "Under-16" },
+  { key: "child-preview", label: "Preview child experience", to: "/dashboard/child-preview", icon: Eye, audience: "Adults" },
   { key: "parent-community", label: "Parent Community", to: "/dashboard/parent-community", icon: UsersRound, audience: "Adults" },
   { key: "parent-alumni-community", label: "Parent Alumni Network", to: "/dashboard/parent-alumni-community", icon: UserRoundCheck, audience: "Adults" },
   { key: "invitations", label: "Invitations", to: "/dashboard/invitations", icon: UserPlus, audience: "Verified issuers" },
