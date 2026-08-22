@@ -107,6 +107,7 @@ import { Route as DashboardTeacherBriefRouteImport } from './routes/dashboard.te
 import { Route as DashboardTeacherReviewRouteImport } from './routes/dashboard.teacher-review'
 import { Route as DashboardUploadSafetyRouteImport } from './routes/dashboard.upload-safety'
 import { Route as DashboardWebSecurityRouteImport } from './routes/dashboard.web-security'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -614,6 +615,12 @@ const DashboardWebSecurityRoute = DashboardWebSecurityRouteImport.update({
   path: '/web-security',
   getParentRoute: () => DashboardRoute,
 } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -714,6 +721,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/web-security': typeof DashboardWebSecurityRoute
   '/alumni/': typeof AlumniIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -812,6 +820,7 @@ export interface FileRoutesByTo {
   '/dashboard/web-security': typeof DashboardWebSecurityRoute
   '/alumni': typeof AlumniIndexRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -913,6 +922,7 @@ export interface FileRoutesById {
   '/dashboard/web-security': typeof DashboardWebSecurityRoute
   '/alumni/': typeof AlumniIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -1015,6 +1025,7 @@ export interface FileRouteTypes {
     | '/dashboard/web-security'
     | '/alumni/'
     | '/dashboard/'
+    | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1113,6 +1124,7 @@ export interface FileRouteTypes {
     | '/dashboard/web-security'
     | '/alumni'
     | '/dashboard'
+    | '/lovable/email/transactional/preview'
   id:
     | '__root__'
     | '/'
@@ -1213,6 +1225,7 @@ export interface FileRouteTypes {
     | '/dashboard/web-security'
     | '/alumni/'
     | '/dashboard/'
+    | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1246,6 +1259,7 @@ export interface RootRouteChildren {
   AuthJoinRoute: typeof AuthJoinRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1936,6 +1950,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardWebSecurityRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -2125,6 +2146,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthJoinRoute: AuthJoinRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
