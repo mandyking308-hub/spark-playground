@@ -1,12 +1,17 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
+  AtSign,
   Ban,
   Building2,
   ClipboardCheck,
+  Eye,
+  EyeOff,
+  ListOrdered,
   MessageCircleOff,
   ShieldCheck,
   Trophy,
   UserCheck,
+  UserRoundX,
   Users2,
 } from "lucide-react";
 
@@ -14,6 +19,7 @@ import { PublicPage } from "@/components/public/public-page";
 import {
   CheckList,
   CtaBand,
+  Eyebrow,
   FeatureCard,
   PageHero,
   Section,
@@ -25,6 +31,7 @@ import { Button } from "@/components/ui/button";
 import clubCollaboration from "@/assets/club-collaboration.jpg";
 import challengeBrief from "@/assets/challenge-brief.jpg";
 import classroomMaking from "@/assets/classroom-making.jpg";
+
 
 export const Route = createFileRoute("/challenges-and-clubs")({
   head: () => ({
