@@ -54,6 +54,7 @@ import { Route as DashboardChallengeBuilderRouteImport } from './routes/dashboar
 import { Route as DashboardChallengeSubmitRouteImport } from './routes/dashboard.challenge-submit'
 import { Route as DashboardChallengesRouteImport } from './routes/dashboard.challenges'
 import { Route as DashboardChildRouteImport } from './routes/dashboard.child'
+import { Route as DashboardChildPreviewRouteImport } from './routes/dashboard.child-preview'
 import { Route as DashboardClubBuilderRouteImport } from './routes/dashboard.club-builder'
 import { Route as DashboardClubSpaceRouteImport } from './routes/dashboard.club-space'
 import { Route as DashboardClubsRouteImport } from './routes/dashboard.clubs'
@@ -334,6 +335,11 @@ const DashboardChallengesRoute = DashboardChallengesRouteImport.update({
 const DashboardChildRoute = DashboardChildRouteImport.update({
   id: '/child',
   path: '/child',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardChildPreviewRoute = DashboardChildPreviewRouteImport.update({
+  id: '/child-preview',
+  path: '/child-preview',
   getParentRoute: () => DashboardRoute,
 } as any)
 const DashboardClubBuilderRoute = DashboardClubBuilderRouteImport.update({
@@ -647,6 +653,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/challenge-submit': typeof DashboardChallengeSubmitRoute
   '/dashboard/challenges': typeof DashboardChallengesRoute
   '/dashboard/child': typeof DashboardChildRoute
+  '/dashboard/child-preview': typeof DashboardChildPreviewRoute
   '/dashboard/club-builder': typeof DashboardClubBuilderRoute
   '/dashboard/club-space': typeof DashboardClubSpaceRoute
   '/dashboard/clubs': typeof DashboardClubsRoute
@@ -743,6 +750,7 @@ export interface FileRoutesByTo {
   '/dashboard/challenge-submit': typeof DashboardChallengeSubmitRoute
   '/dashboard/challenges': typeof DashboardChallengesRoute
   '/dashboard/child': typeof DashboardChildRoute
+  '/dashboard/child-preview': typeof DashboardChildPreviewRoute
   '/dashboard/club-builder': typeof DashboardClubBuilderRoute
   '/dashboard/club-space': typeof DashboardClubSpaceRoute
   '/dashboard/clubs': typeof DashboardClubsRoute
@@ -842,6 +850,7 @@ export interface FileRoutesById {
   '/dashboard/challenge-submit': typeof DashboardChallengeSubmitRoute
   '/dashboard/challenges': typeof DashboardChallengesRoute
   '/dashboard/child': typeof DashboardChildRoute
+  '/dashboard/child-preview': typeof DashboardChildPreviewRoute
   '/dashboard/club-builder': typeof DashboardClubBuilderRoute
   '/dashboard/club-space': typeof DashboardClubSpaceRoute
   '/dashboard/clubs': typeof DashboardClubsRoute
@@ -942,6 +951,7 @@ export interface FileRouteTypes {
     | '/dashboard/challenge-submit'
     | '/dashboard/challenges'
     | '/dashboard/child'
+    | '/dashboard/child-preview'
     | '/dashboard/club-builder'
     | '/dashboard/club-space'
     | '/dashboard/clubs'
@@ -1038,6 +1048,7 @@ export interface FileRouteTypes {
     | '/dashboard/challenge-submit'
     | '/dashboard/challenges'
     | '/dashboard/child'
+    | '/dashboard/child-preview'
     | '/dashboard/club-builder'
     | '/dashboard/club-space'
     | '/dashboard/clubs'
@@ -1136,6 +1147,7 @@ export interface FileRouteTypes {
     | '/dashboard/challenge-submit'
     | '/dashboard/challenges'
     | '/dashboard/child'
+    | '/dashboard/child-preview'
     | '/dashboard/club-builder'
     | '/dashboard/club-space'
     | '/dashboard/clubs'
@@ -1540,6 +1552,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardChildRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/child-preview': {
+      id: '/dashboard/child-preview'
+      path: '/child-preview'
+      fullPath: '/dashboard/child-preview'
+      preLoaderRoute: typeof DashboardChildPreviewRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/club-builder': {
       id: '/dashboard/club-builder'
       path: '/club-builder'
@@ -1931,6 +1950,7 @@ interface DashboardRouteChildren {
   DashboardChallengeSubmitRoute: typeof DashboardChallengeSubmitRoute
   DashboardChallengesRoute: typeof DashboardChallengesRoute
   DashboardChildRoute: typeof DashboardChildRoute
+  DashboardChildPreviewRoute: typeof DashboardChildPreviewRoute
   DashboardClubBuilderRoute: typeof DashboardClubBuilderRoute
   DashboardClubSpaceRoute: typeof DashboardClubSpaceRoute
   DashboardClubsRoute: typeof DashboardClubsRoute
@@ -1995,6 +2015,7 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardChallengeSubmitRoute: DashboardChallengeSubmitRoute,
   DashboardChallengesRoute: DashboardChallengesRoute,
   DashboardChildRoute: DashboardChildRoute,
+  DashboardChildPreviewRoute: DashboardChildPreviewRoute,
   DashboardClubBuilderRoute: DashboardClubBuilderRoute,
   DashboardClubSpaceRoute: DashboardClubSpaceRoute,
   DashboardClubsRoute: DashboardClubsRoute,
