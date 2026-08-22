@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   Ban,
   BadgeCheck,
+  EyeOff,
   Handshake,
   MegaphoneOff,
   ShieldCheck,
