@@ -1,9 +1,10 @@
-# Aurelia → Liftor handoff
+# Aurelia World → Liftor handoff
 
-Status: **product build ready; brand clearance must be resolved before final commercial lock; Dodo configuration and payment proof remain.**
+Status: **product build ready; `theaureliaworld.com` secured; Dodo configuration/payment proof and formal trademark clearance remain.**
 
-Production site: `https://aurelia-world.lovable.app`
-
+Working brand: **AURELIA WORLD**  
+Permanent domain secured: **`theaureliaworld.com`**  
+Current production site: `https://aurelia-world.lovable.app`  
 Live Supabase project: `boybpjenlqtchsvhncgl`
 
 Dodo webhook endpoint:
@@ -12,13 +13,13 @@ Dodo webhook endpoint:
 
 The webhook is already deployed. It deliberately fails closed until its Dodo signing secret and all four Dodo product IDs are configured.
 
-## IMPORTANT — brand/name hold before tomorrow's commercial lock
+## Brand/domain position
 
-A preliminary 22 August 2026 clearance sweep found that the bare **AURELIA** name is materially crowded in education/software and cannot be treated as cleared. In particular, an active UK `AURELIA LIMITED` lists SIC 85320 (technical and vocational secondary education), and there are existing education/software trademark and market uses. The obvious domains are also substantially occupied.
-
-Read `docs/BRAND_CLEARANCE.md` before creating final customer-facing Dodo product names, buying a permanent domain, filing a mark or starting paid acquisition.
-
-Tomorrow may still use Dodo sandbox/test configuration technically, but **do not treat `Aurelia` as the final commercially cleared brand until the naming decision is resolved**.
+- Preferred working brand selected: **AURELIA WORLD**.
+- `theaureliaworld.com` was purchased and secured on **22 August 2026**.
+- The bare `AURELIA` mark is crowded in education/software, so formal trademark review of **AURELIA WORLD** is still required before broad paid acquisition or formal filing.
+- Read `docs/BRAND_CLEARANCE.md` for the preliminary conflict/domain sweep.
+- Domain connection/DNS is still pending; do not replace the current production URL in server configuration until the custom domain is actually connected and HTTPS verified.
 
 ## What is already complete
 
@@ -34,20 +35,22 @@ Tomorrow may still use Dodo sandbox/test configuration technically, but **do not
 - Atomic Dodo subscription lifecycle RPC with idempotency.
 - Signed Dodo webhook Edge Function deployed to live Supabase.
 - Public contact/safeguarding intake backend.
-- Current build/test baseline: 558 tests passing, typecheck and production build passing before this billing-only backend handoff.
+- Current build/test baseline: 558 tests passing, typecheck and production build passing.
 
-## Tomorrow — first resolve the brand gate
+## Tomorrow — integration/proof day
 
-Before customer-facing commercial configuration:
+1. Connect `theaureliaworld.com` to the production site and verify HTTPS/canonical redirects.
+2. Keep **Aurelia World** as the working customer-facing name for sandbox/test integration.
+3. Create the four Dodo recurring GBP products.
+4. Add Dodo API/webhook secrets and product IDs to secure server/Supabase environments.
+5. Run a full test payment and verify database entitlements.
+6. Run one real low-risk payment only after test proof is clean.
+7. Connect Aurelia World into the Liftor operating workflow.
+8. Obtain formal trademark clearance before broad paid acquisition/brand filing.
 
-1. Review `docs/BRAND_CLEARANCE.md`.
-2. Decide whether to seek rapid trademark counsel clearance for Aurelia or adopt a more distinctive final mark.
-3. Once the final mark is chosen, secure the best available permanent domain and key defensive domains immediately.
-4. Use that final customer-facing name for Dodo products and commercial materials.
+## Dodo products
 
-## Dodo products after the brand gate
-
-Create fixed recurring GBP products matching the locked Aurelia pricing architecture exactly (customer-facing names may change with the final brand):
+Create fixed recurring GBP products matching the locked pricing architecture exactly:
 
 | Product tier | Price | Billing interval |
 | --- | ---: | --- |
@@ -62,7 +65,7 @@ Record the four resulting product IDs.
 
 ## App/server environment
 
-Configure these in the secure server environment used by the product/Liftor. Never place API keys in browser/VITE variables or source control.
+Configure these in the secure server environment used by Aurelia World/Liftor. Never place API keys in browser/VITE variables or source control.
 
 - `DODO_PAYMENTS_API_KEY`
 - `DODO_PAYMENTS_API_BASE_URL`
@@ -70,7 +73,7 @@ Configure these in the secure server environment used by the product/Liftor. Nev
 - `DODO_FAMILY_ANNUAL_PRODUCT_ID`
 - `DODO_FAMILY_PLUS_MONTHLY_PRODUCT_ID`
 - `DODO_FAMILY_PLUS_ANNUAL_PRODUCT_ID`
-- `AURELIA_PUBLIC_URL=https://aurelia-world.lovable.app` (temporary product URL until permanent brand/domain is locked)
+- `AURELIA_PUBLIC_URL=https://aurelia-world.lovable.app` until `theaureliaworld.com` is connected and verified; then change to the canonical HTTPS custom domain.
 
 ## Supabase Edge Function secrets
 
@@ -86,7 +89,7 @@ Configure for `dodo-billing-webhook`:
 
 ## Dodo webhook configuration
 
-Create the Dodo webhook endpoint using:
+Use:
 
 `https://boybpjenlqtchsvhncgl.supabase.co/functions/v1/dodo-billing-webhook`
 
@@ -126,16 +129,6 @@ Expected live-table evidence after a successful Family payment:
 - `billing_accounts`: family account status `active`.
 - `billing_entitlements`: `family_core` active; `family_plus` active only for Family Plus.
 
-## Move from Dodo test to live
-
-Only after the brand gate and test-mode proof pass:
-
-1. Create/confirm the same four products in Dodo live mode under the final customer-facing brand.
-2. Replace test API key/base URL/product IDs with live values in the secure environment.
-3. Create the live webhook endpoint and install its live signing secret.
-4. Run one real Family Monthly payment end-to-end.
-5. Verify the database evidence above before opening paid acquisition.
-
 ## One Supabase security switch still to enable
 
 The current Supabase security advisor reports **Leaked Password Protection Disabled**. Enable leaked-password protection in Supabase Auth before broad public launch. This is an Auth project setting, not an application-code change, and the current connector does not expose a safe setting mutation for it.
@@ -154,4 +147,4 @@ The other current RLS advisor notices are intentional server-only tables (`accou
 
 Treat tomorrow as an **integration and proof day, not a new product-build day**:
 
-**Brand decision → secure permanent domain → Dodo products → secure secrets → webhook setup → test payment → verify entitlements → live payment proof → connect the product into the Liftor operating workflow.**
+**Connect `theaureliaworld.com` → Dodo products → secure secrets → webhook setup → test payment → verify entitlements → live payment proof → Liftor.**
