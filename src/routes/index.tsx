@@ -84,11 +84,27 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+const heroCrafts = [
+  { label: "Podcast", glyph: "microphone" as const },
+  { label: "Short film", glyph: "camera" as const },
+  { label: "Story", glyph: "pencil" as const },
+  { label: "Invention", glyph: "prototype" as const },
+  { label: "Game", glyph: "controller" as const },
+];
+
 const mosaic = [
+  {
+    src: heroPodcast,
+    alt: "A young person at a podcast microphone with a handwritten episode plan on the desk",
+    label: "Illustrative example · Podcast",
+    title: "A three-episode series about their neighbourhood",
+    width: 1536,
+    height: 1024,
+  },
   {
     src: makingFilm,
     alt: "Two young people filming a small stop-motion set with a phone on a tripod",
-    label: "Example · Short film",
+    label: "Illustrative example · Short film",
     title: "A one-minute film about their street",
     width: 1280,
     height: 960,
@@ -96,31 +112,31 @@ const mosaic = [
   {
     src: storyArt,
     alt: "An illustrated storybook spread with hand lettering and coloured pencils",
-    label: "Example · Story",
+    label: "Illustrative example · Story / book",
     title: "A picture book written for a younger sibling",
     width: 1024,
     height: 1024,
   },
   {
+    src: designDesk,
+    alt: "Hands painting and sketching artwork with markers, swatches and tape on a desk",
+    label: "Illustrative example · Artwork",
+    title: "A painted series about somewhere they love",
+    width: 1280,
+    height: 960,
+  },
+  {
     src: inventionPrototype,
     alt: "A cardboard and electronics prototype beside annotated design sketches",
-    label: "Example · Invention",
+    label: "Illustrative example · Invention / prototype",
     title: "A prototype that fixes one annoying thing",
     width: 1024,
     height: 1024,
   },
   {
-    src: designDesk,
-    alt: "Hands sketching a poster design with markers, swatches and tape",
-    label: "Example · Design",
-    title: "A poster for a cause they chose themselves",
-    width: 1280,
-    height: 960,
-  },
-  {
     src: codingGame,
     alt: "A young person coding a simple platform game beside pixel sketches on graph paper",
-    label: "Example · Game",
+    label: "Illustrative example · Coding / game",
     title: "A game built around exactly one rule",
     width: 1280,
     height: 960,
@@ -128,15 +144,15 @@ const mosaic = [
   {
     src: challengeBrief,
     alt: "A printed challenge brief with a gold seal, pinned notes and a project label",
-    label: "Example · Challenge entry",
-    title: "An answer to a brief set by a verified partner",
+    label: "Illustrative example · Social-impact challenge",
+    title: "An answer to a brief about their own community",
     width: 1280,
     height: 960,
   },
 ];
 
 const interestPaths = [
-  { title: "Create", text: "Podcasts, shows, films and everything that starts with making something." },
+  { title: "Making & creating", text: "Podcasts, shows, films and everything that starts with making something." },
   { title: "Science & invention", text: "Prototypes, experiments and the failures that come first." },
   { title: "Storytelling", text: "Writing, illustration, audio and the shape of a good idea." },
   { title: "Design", text: "Type, colour, posters, objects and the craft of making it clear." },
@@ -144,6 +160,7 @@ const interestPaths = [
   { title: "World & culture", text: "Places, languages, history and the world beyond the classroom." },
   { title: "Enterprise & ideas", text: "Local problems, real audiences and work that is useful to someone." },
 ];
+
 
 const journey = [
   { step: "01", title: "An idea", text: "Something they actually want to make, not an assignment they endure." },
