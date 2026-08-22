@@ -141,15 +141,36 @@ function CreatorStudioPage() {
           </>
         }
       >
-        <div className="mt-12 max-w-md rounded-2xl border border-border/70 bg-card p-5">
-          <WaveformStrip className="mb-3" />
-          <p className="font-display text-base leading-snug tracking-tight">
-            “Episode 3: Finding Voice.”
-          </p>
-          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-            Illustrative example of the kind of episode plan a child might start from.
-          </p>
+        <div className="mt-12 grid gap-5 sm:grid-cols-[minmax(0,22rem)_1fr] sm:items-center">
+          <div className="brand-card max-w-md rounded-2xl border border-border/70 bg-card p-5">
+            <WaveformStrip className="mb-3" />
+            <p className="font-display text-base leading-snug tracking-tight">
+              “Episode 3: Finding Voice.”
+            </p>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+              Illustrative example of the kind of episode plan a child might start from.
+            </p>
+          </div>
+          <ul className="flex flex-wrap gap-2">
+            {[
+              { name: "microphone" as const, label: "Microphone" },
+              { name: "camera" as const, label: "Camera" },
+              { name: "pencil" as const, label: "Pencil" },
+              { name: "notebook" as const, label: "Notebook" },
+              { name: "prototype" as const, label: "Prototype" },
+              { name: "controller" as const, label: "Controller" },
+            ].map((chip) => (
+              <li
+                key={chip.label}
+                className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/80 px-3 py-1.5 text-xs tracking-wide text-muted-foreground"
+              >
+                <ObjectGlyph name={chip.name} className="size-4 text-accent-foreground" />
+                {chip.label}
+              </li>
+            ))}
+          </ul>
         </div>
+
       </PageHero>
 
       {/* Mosaic of capability categories */}
