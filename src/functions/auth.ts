@@ -104,6 +104,23 @@ async function claimInvitation(
   return !error && Boolean(data?.data?.profile_id);
 }
 
+async function createSponsoredChildAccount(
+  supabase: SupabaseServerClient,
+  input: z.infer<typeof joinInput>,
+): Promise<boolean> {
+  const { data, error } = await supabase.functions.invoke("child-invitation-signup", {
+    body: {
+      invitationToken: input.invitationToken,
+      displayName: input.displayName,
+      email: input.email,
+      password: input.password,
+      countryCode: input.countryCode?.toUpperCase(),
+    },
+  });
+
+  return !error && data?.data?.created === true && data?.data?.role === "child";
+}
+
 export const getCurrentActorFn = createServerFn({ method: "GET" }).handler(async () => {
   const supabase = getSupabaseServerClient();
   const {
@@ -157,6 +174,8 @@ export const joinWithInvitationFn = createServerFn({ method: "POST" })
     // A confirmed account may be returning to finish claiming its invitation.
     // The same generic form is used for new and returning users to avoid account enumeration.
     let user = null as { id: string; email?: string | null } | null;
+    let invitationAlreadyClaimed = false;
+
     const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
       email: data.email,
       password: data.password,
@@ -165,27 +184,46 @@ export const joinWithInvitationFn = createServerFn({ method: "POST" })
     if (!signInError && signInData.user) {
       user = signInData.user;
     } else {
-      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-        email: data.email,
-        password: data.password,
-      });
+      // Sponsored under-16 accounts do not depend on outbound confirmation email.
+      // A live one-time child invitation issued by a verified parent/school is the onboarding credential.
+      const childCreated = await createSponsoredChildAccount(supabase, data);
 
-      if (signUpError || !signUpData.user) {
-        return { ok: false, error: "We couldn't create or continue that account." };
+      if (childCreated) {
+        invitationAlreadyClaimed = true;
+        const { data: childSignInData, error: childSignInError } = await supabase.auth.signInWithPassword({
+          email: data.email,
+          password: data.password,
+        });
+
+        if (childSignInError || !childSignInData.user) {
+          return { ok: false, error: "Your child workspace was created, but we couldn't sign you in. Please use the sign-in page with the same details." };
+        }
+
+        user = childSignInData.user;
+      } else {
+        // Non-child invitations keep normal email-confirmation onboarding.
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+          email: data.email,
+          password: data.password,
+        });
+
+        if (signUpError || !signUpData.user) {
+          return { ok: false, error: "We couldn't create or continue that account." };
+        }
+
+        if (!signUpData.session) {
+          return {
+            ok: false,
+            confirmationRequired: true,
+            error: "Check your email to confirm the address, then return here with the same invitation and sign-in details to finish joining Aurelia.",
+          };
+        }
+
+        user = signUpData.user;
       }
-
-      if (!signUpData.session) {
-        return {
-          ok: false,
-          confirmationRequired: true,
-          error: "Check your email to confirm the address, then return here with the same invitation and sign-in details to finish joining Aurelia.",
-        };
-      }
-
-      user = signUpData.user;
     }
 
-    if (!(await claimInvitation(supabase, data))) {
+    if (!invitationAlreadyClaimed && !(await claimInvitation(supabase, data))) {
       await supabase.auth.signOut();
       return { ok: false, error: "That invitation could not be claimed." };
     }
