@@ -291,16 +291,54 @@ function CreatorStudioPage() {
 
       <Section tone="muted">
         <SectionHeading
-          eyebrow="Safe publishing pipeline"
+          eyebrow="From private draft to published piece"
           title="Sharing is a decision, not a default"
-          description="Nothing a child makes in the studio is visible outside their own account until a guardian explicitly approves it, and even then it is published into moderated, age-appropriate spaces rather than the open internet."
+          description="Everything a child makes starts private to them. Publishing is a specific request they choose to make, and it travels through safety checks and adult approval before anything appears anywhere."
         />
+        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            {
+              title: "Private idea and draft",
+              text: "The project lives in the child's own space. Nobody else sees it while it is being made.",
+            },
+            {
+              title: "Uploads land in quarantine",
+              text: "Any file a child uploads goes into a private holding area first. It is not visible or shareable from there.",
+            },
+            {
+              title: "Scans and sanitisation",
+              text: "Quarantined media is scanned and sanitised — stripping embedded data such as location before anything can move on.",
+            },
+            {
+              title: "The child requests publication",
+              text: "The child chooses a specific piece and a specific audience — a class, a club, a challenge. There is no blanket 'make public'.",
+            },
+            {
+              title: "Required adult and safety approvals",
+              text: "The request needs the approvals that apply to it — guardian, and where relevant school or safety review — before it can proceed.",
+            },
+            {
+              title: "A publication derivative is what appears",
+              text: "What the approved audience sees is a prepared publication copy. The original file and the project's private drafts are never made public.",
+            },
+          ].map((item, index) => (
+            <li key={item.title} className="rounded-2xl border border-border/70 bg-card p-6">
+              <span className="font-display text-sm tracking-[0.2em] text-accent-foreground">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-3 font-display text-lg leading-snug tracking-tight">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+            </li>
+          ))}
+        </ol>
         <div className="mt-10">
           <CheckList
             items={[
               "Private by default: only the child can see a project while it is in draft.",
-              "Guardian approval is required before a project can be shared with a class, club or challenge.",
               "Publication targets are bounded — a class, a club, a challenge — never an open public feed.",
+              "Original uploads stay private; only an approved derivative is ever shown.",
               "Approval and publication events are recorded, so families and schools can see what has been shared and when.",
             ]}
           />
@@ -308,10 +346,12 @@ function CreatorStudioPage() {
       </Section>
 
       <CtaBand
-        title="See where a project can go next"
-        description="Work made in the Creator Studio can become a verified achievement, a challenge entry, or a club contribution. Explore how recognition works in Aurelia."
-        secondary={{ label: "Read the Achievement Passport", to: "/achievement-passport" }}
+        title="Find the first thing to make"
+        description="Pick a starter idea, or come in through a verified parent, guardian or school invitation. Work made here can become a verified achievement, a challenge entry or a club contribution."
+        primary={{ label: "Join with an invitation", to: "/auth/join" }}
+        secondary={{ label: "Browse ideas & resources", to: "/ideas-and-resources" }}
       />
     </PublicPage>
   );
 }
+
