@@ -11,7 +11,7 @@ describe("identity provisioning Edge Function", () => {
 
   test("requires authenticated user context", () => {
     expect(source).toContain('withSupabase({ auth: "user" }');
-    expect(source).toContain("ctx.userClaims?.sub");
+    expect(source).toContain("(ctx.userClaims as { sub?: string } | undefined)?.sub");
   });
 
   test("does not read privileged credentials directly", () => {

@@ -8,7 +8,7 @@ describe("Passport verification Edge Function", () => {
   test("pins the server SDK and requires authenticated user context", () => {
     expect(denoConfig).toContain("jsr:@supabase/server@1.4.1");
     expect(source).toContain('withSupabase({ auth: "user" }');
-    expect(source).toContain("ctx.userClaims?.sub");
+    expect(source).toContain("(ctx.userClaims as { sub?: string } | undefined)?.sub");
   });
 
   test("does not read or expose privileged credentials", () => {
