@@ -43,7 +43,7 @@ export default {
       return badRequest();
     }
 
-    const authUserId = ctx.userClaims?.sub;
+    const authUserId = (ctx.userClaims as { sub?: string } | undefined)?.sub;
     if (typeof authUserId !== "string" || !uuidPattern.test(authUserId)) {
       return Response.json({ error: "Authentication required" }, { status: 401 });
     }
