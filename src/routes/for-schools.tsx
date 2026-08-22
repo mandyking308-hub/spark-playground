@@ -117,10 +117,11 @@ function ForSchools() {
 
       <Section>
         <SectionHeading
-          eyebrow="One piece of work, one journey"
-          title="From brief to Passport, every project travels the same route"
-          description="Nothing skips a step, and nothing is verified because it was popular."
+          eyebrow="The supported chain, end to end"
+          title="Verified teacher, brief, pupil submission, review, verified Passport entry"
+          description="This is the chain Aurelia supports today. Nothing skips a step, nothing is verified because it was popular, and a teacher can always send work back for revision rather than sign it off."
         />
+
         <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-start">
           <div className="space-y-4">
             <Figure
