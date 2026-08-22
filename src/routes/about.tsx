@@ -67,7 +67,7 @@ const holds = [
   {
     icon: GraduationCap,
     title: "Verified achievement",
-    text: "Achievements are confirmed by a real adult who witnessed the work — a teacher, guardian or named supervisor — not awarded automatically.",
+    text: "Achievements are never awarded automatically. They are confirmed through an accountable verified workflow; in the live school flow, a verified teacher reviews the evidence behind the work before it is recorded.",
   },
   {
     icon: Users,
