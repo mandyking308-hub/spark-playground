@@ -8,9 +8,29 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { AureliaLogo } from "@/components/brand/aurelia-logo";
 import { joinWithInvitationFn } from "@/functions/auth";
 
+
 export const Route = createFileRoute("/auth/join")({
+  head: () => ({
+    meta: [
+      { title: "Join with an invitation — Aurelia" },
+      {
+        name: "description",
+        content:
+          "Aurelia is invitation-only. Use your verified family, school or organisation invitation to finish setting up your account.",
+      },
+      { property: "og:title", content: "Join with an invitation — Aurelia" },
+      {
+        property: "og:description",
+        content: "Use your verified invitation to finish setting up your Aurelia account.",
+      },
+      { property: "og:url", content: "/auth/join" },
+      { name: "robots", content: "noindex" },
+    ],
+    links: [{ rel: "canonical", href: "/auth/join" }],
+  }),
   component: JoinPage,
 });
 
@@ -20,12 +40,12 @@ function JoinPage() {
   const [message, setMessage] = useState<{ kind: "error" | "confirmation"; text: string } | null>(null);
 
   return (
-    <div className="min-h-screen bg-muted/30 px-4 py-12">
+    <div className="brand-dawn min-h-screen px-4 py-12">
       <div className="mx-auto w-full max-w-4xl">
-        <Link to="/" className="mb-8 flex items-center justify-center gap-2">
-          <span className="flex size-8 items-center justify-center rounded-md bg-primary text-sm font-semibold text-primary-foreground">A</span>
-          <span className="font-display text-base tracking-tight">Aurelia</span>
+        <Link to="/" className="mb-8 flex items-center justify-center" aria-label="Aurelia home">
+          <AureliaLogo />
         </Link>
+
 
         <div className="mx-auto max-w-2xl text-center">
           <Badge variant="secondary">Invitation only</Badge>

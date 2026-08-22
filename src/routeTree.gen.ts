@@ -10,8 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AchievementPassportRouteImport } from './routes/achievement-passport'
+import { Route as AiAndChildrenRouteImport } from './routes/ai-and-children'
 import { Route as AlumniRouteImport } from './routes/alumni'
+import { Route as AlumniWorldRouteImport } from './routes/alumni-world'
+import { Route as ChallengesAndClubsRouteImport } from './routes/challenges-and-clubs'
+import { Route as CommunityStandardsRouteImport } from './routes/community-standards'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CreatorStudioRouteImport } from './routes/creator-studio'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ForEducationGroupsRouteImport } from './routes/for-education-groups'
+import { Route as ForFamiliesRouteImport } from './routes/for-families'
+import { Route as ForOrganisationsRouteImport } from './routes/for-organisations'
+import { Route as ForSchoolsRouteImport } from './routes/for-schools'
+import { Route as ParentCommunityRouteImport } from './routes/parent-community'
+import { Route as PrivacyForChildrenRouteImport } from './routes/privacy-for-children'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as SafeguardingAndReportingRouteImport } from './routes/safeguarding-and-reporting'
+import { Route as SafetyAndTrustRouteImport } from './routes/safety-and-trust'
+import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
 import { Route as AlumniIndexRouteImport } from './routes/alumni.index'
 import { Route as AlumniApplicationRouteImport } from './routes/alumni.application'
 import { Route as AlumniCommunityRouteImport } from './routes/alumni.community'
@@ -88,14 +106,105 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AchievementPassportRoute = AchievementPassportRouteImport.update({
+  id: '/achievement-passport',
+  path: '/achievement-passport',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAndChildrenRoute = AiAndChildrenRouteImport.update({
+  id: '/ai-and-children',
+  path: '/ai-and-children',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AlumniRoute = AlumniRouteImport.update({
   id: '/alumni',
   path: '/alumni',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlumniWorldRoute = AlumniWorldRouteImport.update({
+  id: '/alumni-world',
+  path: '/alumni-world',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChallengesAndClubsRoute = ChallengesAndClubsRouteImport.update({
+  id: '/challenges-and-clubs',
+  path: '/challenges-and-clubs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityStandardsRoute = CommunityStandardsRouteImport.update({
+  id: '/community-standards',
+  path: '/community-standards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreatorStudioRoute = CreatorStudioRouteImport.update({
+  id: '/creator-studio',
+  path: '/creator-studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForEducationGroupsRoute = ForEducationGroupsRouteImport.update({
+  id: '/for-education-groups',
+  path: '/for-education-groups',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForFamiliesRoute = ForFamiliesRouteImport.update({
+  id: '/for-families',
+  path: '/for-families',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForOrganisationsRoute = ForOrganisationsRouteImport.update({
+  id: '/for-organisations',
+  path: '/for-organisations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForSchoolsRoute = ForSchoolsRouteImport.update({
+  id: '/for-schools',
+  path: '/for-schools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentCommunityRoute = ParentCommunityRouteImport.update({
+  id: '/parent-community',
+  path: '/parent-community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyForChildrenRoute = PrivacyForChildrenRouteImport.update({
+  id: '/privacy-for-children',
+  path: '/privacy-for-children',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafeguardingAndReportingRoute =
+  SafeguardingAndReportingRouteImport.update({
+    id: '/safeguarding-and-reporting',
+    path: '/safeguarding-and-reporting',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SafetyAndTrustRoute = SafetyAndTrustRouteImport.update({
+  id: '/safety-and-trust',
+  path: '/safety-and-trust',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsOfUseRoute = TermsOfUseRouteImport.update({
+  id: '/terms-of-use',
+  path: '/terms-of-use',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AlumniIndexRoute = AlumniIndexRouteImport.update({
@@ -466,8 +575,26 @@ const DashboardWebSecurityRoute = DashboardWebSecurityRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/achievement-passport': typeof AchievementPassportRoute
+  '/ai-and-children': typeof AiAndChildrenRoute
   '/alumni': typeof AlumniRouteWithChildren
+  '/alumni-world': typeof AlumniWorldRoute
+  '/challenges-and-clubs': typeof ChallengesAndClubsRoute
+  '/community-standards': typeof CommunityStandardsRoute
+  '/contact': typeof ContactRoute
+  '/creator-studio': typeof CreatorStudioRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/for-education-groups': typeof ForEducationGroupsRoute
+  '/for-families': typeof ForFamiliesRoute
+  '/for-organisations': typeof ForOrganisationsRoute
+  '/for-schools': typeof ForSchoolsRoute
+  '/parent-community': typeof ParentCommunityRoute
+  '/privacy-for-children': typeof PrivacyForChildrenRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/safeguarding-and-reporting': typeof SafeguardingAndReportingRoute
+  '/safety-and-trust': typeof SafetyAndTrustRoute
+  '/terms-of-use': typeof TermsOfUseRoute
   '/alumni/application': typeof AlumniApplicationRoute
   '/alumni/community': typeof AlumniCommunityRoute
   '/alumni/mentoring': typeof AlumniMentoringRoute
@@ -541,6 +668,24 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/achievement-passport': typeof AchievementPassportRoute
+  '/ai-and-children': typeof AiAndChildrenRoute
+  '/alumni-world': typeof AlumniWorldRoute
+  '/challenges-and-clubs': typeof ChallengesAndClubsRoute
+  '/community-standards': typeof CommunityStandardsRoute
+  '/contact': typeof ContactRoute
+  '/creator-studio': typeof CreatorStudioRoute
+  '/for-education-groups': typeof ForEducationGroupsRoute
+  '/for-families': typeof ForFamiliesRoute
+  '/for-organisations': typeof ForOrganisationsRoute
+  '/for-schools': typeof ForSchoolsRoute
+  '/parent-community': typeof ParentCommunityRoute
+  '/privacy-for-children': typeof PrivacyForChildrenRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/safeguarding-and-reporting': typeof SafeguardingAndReportingRoute
+  '/safety-and-trust': typeof SafetyAndTrustRoute
+  '/terms-of-use': typeof TermsOfUseRoute
   '/alumni/application': typeof AlumniApplicationRoute
   '/alumni/community': typeof AlumniCommunityRoute
   '/alumni/mentoring': typeof AlumniMentoringRoute
@@ -615,8 +760,26 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/achievement-passport': typeof AchievementPassportRoute
+  '/ai-and-children': typeof AiAndChildrenRoute
   '/alumni': typeof AlumniRouteWithChildren
+  '/alumni-world': typeof AlumniWorldRoute
+  '/challenges-and-clubs': typeof ChallengesAndClubsRoute
+  '/community-standards': typeof CommunityStandardsRoute
+  '/contact': typeof ContactRoute
+  '/creator-studio': typeof CreatorStudioRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/for-education-groups': typeof ForEducationGroupsRoute
+  '/for-families': typeof ForFamiliesRoute
+  '/for-organisations': typeof ForOrganisationsRoute
+  '/for-schools': typeof ForSchoolsRoute
+  '/parent-community': typeof ParentCommunityRoute
+  '/privacy-for-children': typeof PrivacyForChildrenRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/safeguarding-and-reporting': typeof SafeguardingAndReportingRoute
+  '/safety-and-trust': typeof SafetyAndTrustRoute
+  '/terms-of-use': typeof TermsOfUseRoute
   '/alumni/application': typeof AlumniApplicationRoute
   '/alumni/community': typeof AlumniCommunityRoute
   '/alumni/mentoring': typeof AlumniMentoringRoute
@@ -692,8 +855,26 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/achievement-passport'
+    | '/ai-and-children'
     | '/alumni'
+    | '/alumni-world'
+    | '/challenges-and-clubs'
+    | '/community-standards'
+    | '/contact'
+    | '/creator-studio'
     | '/dashboard'
+    | '/for-education-groups'
+    | '/for-families'
+    | '/for-organisations'
+    | '/for-schools'
+    | '/parent-community'
+    | '/privacy-for-children'
+    | '/privacy-policy'
+    | '/safeguarding-and-reporting'
+    | '/safety-and-trust'
+    | '/terms-of-use'
     | '/alumni/application'
     | '/alumni/community'
     | '/alumni/mentoring'
@@ -767,6 +948,24 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/achievement-passport'
+    | '/ai-and-children'
+    | '/alumni-world'
+    | '/challenges-and-clubs'
+    | '/community-standards'
+    | '/contact'
+    | '/creator-studio'
+    | '/for-education-groups'
+    | '/for-families'
+    | '/for-organisations'
+    | '/for-schools'
+    | '/parent-community'
+    | '/privacy-for-children'
+    | '/privacy-policy'
+    | '/safeguarding-and-reporting'
+    | '/safety-and-trust'
+    | '/terms-of-use'
     | '/alumni/application'
     | '/alumni/community'
     | '/alumni/mentoring'
@@ -840,8 +1039,26 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/achievement-passport'
+    | '/ai-and-children'
     | '/alumni'
+    | '/alumni-world'
+    | '/challenges-and-clubs'
+    | '/community-standards'
+    | '/contact'
+    | '/creator-studio'
     | '/dashboard'
+    | '/for-education-groups'
+    | '/for-families'
+    | '/for-organisations'
+    | '/for-schools'
+    | '/parent-community'
+    | '/privacy-for-children'
+    | '/privacy-policy'
+    | '/safeguarding-and-reporting'
+    | '/safety-and-trust'
+    | '/terms-of-use'
     | '/alumni/application'
     | '/alumni/community'
     | '/alumni/mentoring'
@@ -916,8 +1133,26 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AchievementPassportRoute: typeof AchievementPassportRoute
+  AiAndChildrenRoute: typeof AiAndChildrenRoute
   AlumniRoute: typeof AlumniRouteWithChildren
+  AlumniWorldRoute: typeof AlumniWorldRoute
+  ChallengesAndClubsRoute: typeof ChallengesAndClubsRoute
+  CommunityStandardsRoute: typeof CommunityStandardsRoute
+  ContactRoute: typeof ContactRoute
+  CreatorStudioRoute: typeof CreatorStudioRoute
   DashboardRoute: typeof DashboardRouteWithChildren
+  ForEducationGroupsRoute: typeof ForEducationGroupsRoute
+  ForFamiliesRoute: typeof ForFamiliesRoute
+  ForOrganisationsRoute: typeof ForOrganisationsRoute
+  ForSchoolsRoute: typeof ForSchoolsRoute
+  ParentCommunityRoute: typeof ParentCommunityRoute
+  PrivacyForChildrenRoute: typeof PrivacyForChildrenRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  SafeguardingAndReportingRoute: typeof SafeguardingAndReportingRoute
+  SafetyAndTrustRoute: typeof SafetyAndTrustRoute
+  TermsOfUseRoute: typeof TermsOfUseRoute
   AuthGuardianLinkRoute: typeof AuthGuardianLinkRoute
   AuthJoinRoute: typeof AuthJoinRoute
   AuthSignInRoute: typeof AuthSignInRoute
@@ -933,6 +1168,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/achievement-passport': {
+      id: '/achievement-passport'
+      path: '/achievement-passport'
+      fullPath: '/achievement-passport'
+      preLoaderRoute: typeof AchievementPassportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-and-children': {
+      id: '/ai-and-children'
+      path: '/ai-and-children'
+      fullPath: '/ai-and-children'
+      preLoaderRoute: typeof AiAndChildrenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/alumni': {
       id: '/alumni'
       path: '/alumni'
@@ -940,11 +1196,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlumniRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/alumni-world': {
+      id: '/alumni-world'
+      path: '/alumni-world'
+      fullPath: '/alumni-world'
+      preLoaderRoute: typeof AlumniWorldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/challenges-and-clubs': {
+      id: '/challenges-and-clubs'
+      path: '/challenges-and-clubs'
+      fullPath: '/challenges-and-clubs'
+      preLoaderRoute: typeof ChallengesAndClubsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community-standards': {
+      id: '/community-standards'
+      path: '/community-standards'
+      fullPath: '/community-standards'
+      preLoaderRoute: typeof CommunityStandardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creator-studio': {
+      id: '/creator-studio'
+      path: '/creator-studio'
+      fullPath: '/creator-studio'
+      preLoaderRoute: typeof CreatorStudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-education-groups': {
+      id: '/for-education-groups'
+      path: '/for-education-groups'
+      fullPath: '/for-education-groups'
+      preLoaderRoute: typeof ForEducationGroupsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-families': {
+      id: '/for-families'
+      path: '/for-families'
+      fullPath: '/for-families'
+      preLoaderRoute: typeof ForFamiliesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-organisations': {
+      id: '/for-organisations'
+      path: '/for-organisations'
+      fullPath: '/for-organisations'
+      preLoaderRoute: typeof ForOrganisationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-schools': {
+      id: '/for-schools'
+      path: '/for-schools'
+      fullPath: '/for-schools'
+      preLoaderRoute: typeof ForSchoolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parent-community': {
+      id: '/parent-community'
+      path: '/parent-community'
+      fullPath: '/parent-community'
+      preLoaderRoute: typeof ParentCommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-for-children': {
+      id: '/privacy-for-children'
+      path: '/privacy-for-children'
+      fullPath: '/privacy-for-children'
+      preLoaderRoute: typeof PrivacyForChildrenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safeguarding-and-reporting': {
+      id: '/safeguarding-and-reporting'
+      path: '/safeguarding-and-reporting'
+      fullPath: '/safeguarding-and-reporting'
+      preLoaderRoute: typeof SafeguardingAndReportingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safety-and-trust': {
+      id: '/safety-and-trust'
+      path: '/safety-and-trust'
+      fullPath: '/safety-and-trust'
+      preLoaderRoute: typeof SafetyAndTrustRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-of-use': {
+      id: '/terms-of-use'
+      path: '/terms-of-use'
+      fullPath: '/terms-of-use'
+      preLoaderRoute: typeof TermsOfUseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/alumni/': {
@@ -1593,8 +1954,26 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AchievementPassportRoute: AchievementPassportRoute,
+  AiAndChildrenRoute: AiAndChildrenRoute,
   AlumniRoute: AlumniRouteWithChildren,
+  AlumniWorldRoute: AlumniWorldRoute,
+  ChallengesAndClubsRoute: ChallengesAndClubsRoute,
+  CommunityStandardsRoute: CommunityStandardsRoute,
+  ContactRoute: ContactRoute,
+  CreatorStudioRoute: CreatorStudioRoute,
   DashboardRoute: DashboardRouteWithChildren,
+  ForEducationGroupsRoute: ForEducationGroupsRoute,
+  ForFamiliesRoute: ForFamiliesRoute,
+  ForOrganisationsRoute: ForOrganisationsRoute,
+  ForSchoolsRoute: ForSchoolsRoute,
+  ParentCommunityRoute: ParentCommunityRoute,
+  PrivacyForChildrenRoute: PrivacyForChildrenRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  SafeguardingAndReportingRoute: SafeguardingAndReportingRoute,
+  SafetyAndTrustRoute: SafetyAndTrustRoute,
+  TermsOfUseRoute: TermsOfUseRoute,
   AuthGuardianLinkRoute: AuthGuardianLinkRoute,
   AuthJoinRoute: AuthJoinRoute,
   AuthSignInRoute: AuthSignInRoute,

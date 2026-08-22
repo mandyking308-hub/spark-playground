@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { AureliaLogo } from "@/components/brand/aurelia-logo";
 import { signInFn } from "@/functions/auth";
+
 
 export function AuthForm({
   mode,
@@ -24,16 +26,14 @@ export function AuthForm({
   const [error, setError] = useState<string | null>(null);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4 py-12">
+    <div className="brand-dawn flex min-h-screen items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
-        <Link to="/" className="mb-8 flex items-center justify-center gap-2">
-          <span className="flex size-7 items-center justify-center rounded-md bg-primary text-xs font-semibold text-primary-foreground">
-            A
-          </span>
-          <span className="font-display text-sm tracking-tight">Aurelia</span>
+        <Link to="/" className="mb-8 flex items-center justify-center" aria-label="Aurelia home">
+          <AureliaLogo />
         </Link>
 
-        <Card className="border-border/70 shadow-sm">
+        <Card className="brand-card border-border/70">
+
           <CardHeader>
             <CardTitle className="font-display text-2xl tracking-tight">{title}</CardTitle>
             <CardDescription>{description}</CardDescription>

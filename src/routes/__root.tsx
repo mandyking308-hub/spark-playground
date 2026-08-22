@@ -79,18 +79,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { name: "theme-color", content: "#174d55" },
-      { title: "Aurelia — Child-safe creation, learning and achievement" },
+      { name: "theme-color", content: "#141c2e" },
+      { title: "Aurelia — Create. Learn. Achieve. Safely." },
       {
         name: "description",
         content:
-          "A global child-safe platform for under-16s to create, learn and achieve, with a separate 16+ alumni environment.",
+          "Aurelia is a protected global creation, learning and achievement world for under-16s, with a separate 16+ alumni environment.",
       },
-      { property: "og:title", content: "Aurelia" },
-      {
-        property: "og:description",
-        content: "Child-safe digital creation, learning and achievement for under-16s.",
-      },
+      { property: "og:site_name", content: "Aurelia" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -106,9 +102,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "alternate icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Aurelia",
+          description:
+            "A protected global creation, learning and achievement world for under-16s, with a separate 16+ alumni environment.",
+          logo: "/icon-512.png",
+        }),
+      },
     ],
   }),
+
 
   shellComponent: RootShell,
   component: RootComponent,

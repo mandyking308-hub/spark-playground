@@ -8,6 +8,25 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export const Route = createFileRoute("/auth/guardian-link")({
+  head: () => ({
+    meta: [
+      { title: "Link a parent or guardian — Aurelia" },
+      {
+        name: "description",
+        content:
+          "A child account only becomes active once a verified guardian or school invitation establishes the relationship.",
+      },
+      { property: "og:title", content: "Link a parent or guardian — Aurelia" },
+      {
+        property: "og:description",
+        content: "Establish the verified guardian relationship behind a child's Aurelia account.",
+      },
+      { property: "og:url", content: "/auth/guardian-link" },
+      { name: "robots", content: "noindex" },
+    ],
+    links: [{ rel: "canonical", href: "/auth/guardian-link" }],
+  }),
+
   component: GuardianLinkPage,
 });
 
