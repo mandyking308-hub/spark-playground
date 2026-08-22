@@ -2,13 +2,13 @@
 
 Date: **22 August 2026**
 
-Status: **CODE/PRODUCT GATE PASSED — ready for final hardening, domain connection and Dodo proof on 23 August 2026.**
+Status: **CODE/PRODUCT GATE PASSED — custom domain live; ready for final hardening and Dodo proof on 23 August 2026.**
 
 ## Brand/domain
 
 - Working brand: **AURELIA WORLD**.
-- Secured permanent domain: **theaureliaworld.com**.
-- Current production host until DNS/custom-domain cutover is verified: `https://aurelia-world.lovable.app`.
+- Permanent domain: **https://theaureliaworld.com**.
+- Production verification confirms the former `https://aurelia-world.lovable.app` address redirects to `https://theaureliaworld.com` and checked routes resolve over HTTPS with final HTTP 200.
 - Formal trademark clearance for AURELIA WORLD remains required before broad paid acquisition or filing.
 
 ## Automated verification
@@ -22,6 +22,15 @@ Final verification after branding + translation integration:
 - Production build: **PASS**.
 - No broken imports/routes identified.
 - No service-role or secret credentials exposed in browser/VITE code.
+
+## Production verification
+
+Verified on the published production deployment:
+
+- `/` → HTTP 200 at `theaureliaworld.com`, Aurelia World visible, public translator present.
+- `/dashboard-demos` → HTTP 200 at `theaureliaworld.com/dashboard-demos`, public translator present.
+- `/auth/sign-in` → HTTP 200, **no** GTranslate wrapper/script.
+- `/report-concern` → HTTP 200, **no** GTranslate wrapper/script.
 
 ## Global public translation — complete
 
@@ -88,9 +97,9 @@ Security advisor rerun after the final code pass:
 
 ## Tomorrow — final hardening/configuration only
 
-1. Connect `theaureliaworld.com` and verify HTTPS + canonical redirect behavior.
-2. Enable Supabase leaked-password protection.
-3. Review/configure production Auth email delivery/quota for adult onboarding at launch scale.
+1. Enable Supabase leaked-password protection.
+2. Review/configure production Auth email delivery/quota for adult onboarding at launch scale.
+3. Update the secure canonical/public URL configuration to `https://theaureliaworld.com` anywhere still using the temporary Lovable host.
 4. Create the four Dodo recurring products:
    - Family £12.99 monthly
    - Family £129 yearly
@@ -111,4 +120,4 @@ Media upload remains disabled until a genuine quarantine/scanning pipeline exist
 
 **GO for tomorrow's hardening + Dodo integration/proof.**
 
-**NO-GO for broad paid acquisition until:** custom domain/HTTPS, Dodo live proof, leaked-password protection, production Auth email delivery and formal trademark clearance are resolved.
+**NO-GO for broad paid acquisition until:** Dodo live proof, leaked-password protection, production Auth email delivery and formal trademark clearance are resolved.
