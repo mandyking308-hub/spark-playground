@@ -65,7 +65,7 @@ export default {
       return badRequest();
     }
 
-    const authUserId = ctx.userClaims?.sub;
+    const authUserId = (ctx.userClaims as { sub?: string } | undefined)?.sub;
     if (typeof authUserId !== "string" || !uuidPattern.test(authUserId)) {
       return Response.json({ error: "Authentication required" }, { status: 401 });
     }
@@ -76,7 +76,7 @@ export default {
           return badRequest();
         }
 
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_set_submission_review_state", {
+        const { data, error } = await (ctx.supabaseAdmin as unknown as AdminClient).rpc("server_set_submission_review_state", {
           p_auth_user_id: authUserId,
           p_submission_id: body.submissionId,
           p_review_state: body.reviewState,
@@ -102,7 +102,7 @@ export default {
           return badRequest("Achievement text is too long");
         }
 
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_issue_passport_achievement", {
+        const { data, error } = await (ctx.supabaseAdmin as unknown as AdminClient).rpc("server_issue_passport_achievement", {
           p_auth_user_id: authUserId,
           p_submission_id: body.submissionId,
           p_kind: body.achievementKind,
@@ -119,7 +119,7 @@ export default {
         const reason = body.reason.trim();
         if (reason.length < 1 || reason.length > 2000) return badRequest("Revocation reason is required");
 
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_revoke_passport_achievement", {
+        const { data, error } = await (ctx.supabaseAdmin as unknown as AdminClient).rpc("server_revoke_passport_achievement", {
           p_auth_user_id: authUserId,
           p_achievement_id: body.achievementId,
           p_reason: reason,
