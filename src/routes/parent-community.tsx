@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   CalendarDays,
   Contact,
+  EyeOff,
   ShieldCheck,
   Users,
   UserRoundCheck,
