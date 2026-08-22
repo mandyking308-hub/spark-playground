@@ -8,7 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { AureliaLogo } from "@/components/brand/aurelia-logo";
 import { joinWithInvitationFn } from "@/functions/auth";
+
 
 export const Route = createFileRoute("/auth/join")({
   head: () => ({
