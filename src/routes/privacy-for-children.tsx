@@ -6,17 +6,17 @@ import { LegalPage } from "@/components/public/sections";
 export const Route = createFileRoute("/privacy-for-children")({
   head: () => ({
     meta: [
-      { title: "Your privacy, explained simply — Aurelia" },
+      { title: "Your privacy, explained simply — Aurelia World" },
       {
         name: "description",
         content:
-          "A simple, plain-language explanation of privacy on Aurelia, written for young people to read and understand.",
+          "A simple explanation for young people of privacy, private drafts, sharing permissions and safety on Aurelia World.",
       },
-      { property: "og:title", content: "Your privacy, explained simply — Aurelia" },
+      { property: "og:title", content: "Your privacy, explained simply — Aurelia World" },
       {
         property: "og:description",
         content:
-          "What Aurelia knows about you, who can see your work, and how to ask for help — explained simply.",
+          "What Aurelia World knows about you, who can see your work, and how to ask for help — explained simply.",
       },
       { property: "og:url", content: "/privacy-for-children" },
       { property: "og:type", content: "website" },
@@ -31,44 +31,62 @@ function PrivacyForChildren() {
     <PublicPage>
       <LegalPage
         title="Your privacy, explained simply"
-        updated="August 2026"
-        intro="This page tells you, in plain words, what we know about you on Aurelia and how you stay in control."
+        updated="22 August 2026"
+        intro="Aurelia World is run by Global Solutions Management LLC. This page explains, in plain words, what the platform knows about you, what stays private, and how you can ask for help."
       >
         <h2>What we know about you</h2>
         <p>
-          We know your name, your age, and who your parent or guardian is. We also keep the
-          things you make — your stories, art, films, podcasts and other work — so you can find
-          them again and keep building on them.
+          We keep the information we need to give you the right type of account and keep it safe —
+          for example your name, age band, country and the verified adult, school or organisation
+          connected to your account. We also keep the projects you save so you can come back to them.
         </p>
         <p>
-          We do not ask you for more than we need. We do not use your information to show you
-          adverts.
-        </p>
-
-        <h2>Who can see your work</h2>
-        <p>
-          At first, only you and your parent or guardian can see something you make. If you want
-          to share it with your class, a club, or more widely, your parent or guardian has to say
-          yes first. Nobody can share your work more widely without that permission.
-        </p>
-        <p>
-          Teachers can see the work you share with them, so they can help you and confirm your
-          achievements. Strangers cannot message you or see private parts of your account.
+          We try not to collect information we do not need. We do not sell your personal
+          information and we do not use it to show you behavioural adverts.
         </p>
 
-        <h2>Who is in charge of your account</h2>
+        <h2>Your drafts are private</h2>
         <p>
-          Your parent or guardian is in charge of your account. They set it up, they approve what
-          gets shared, and they can see what is happening on it. If you are ever unsure about a
-          setting or a decision, they are the best person to ask.
+          When you save a draft, it does <strong>not</strong> automatically become visible to your
+          parent, teacher, school or anyone else. Your private workspace is protected by the rules
+          built into Aurelia World.
+        </p>
+        <p>
+          If you press "Request to share", the platform starts a protected approval journey. Your
+          parent or guardian can see the permission request they need to decide, but that does not
+          give them a general right to browse all your private drafts.
         </p>
 
-        <h2>How to ask for things to be deleted</h2>
+        <h2>What happens if you want to share something</h2>
         <p>
-          If you want something you made removed, or you want your account closed, tell your
-          parent or guardian. They can ask us to delete it, and we will, unless we need to keep a
-          record for a safety reason. You can also ask a trusted adult to help you make this
-          request through our{" "}
+          Work does not become public just because you ask to share it. Sharing can require safety
+          checks, your parent or guardian's approval and moderation before it can reach an approved
+          audience. A teacher can see work only when the platform rules and permissions allow it.
+          Strangers cannot browse your private account or message you through an open child directory.
+        </p>
+
+        <h2>Who helps manage your account</h2>
+        <p>
+          A verified parent, guardian, school or approved organisation may help sponsor or manage
+          parts of your account, depending on how you joined Aurelia World. Adults can make the
+          decisions their role allows, but they do not automatically get access to everything you
+          write or make privately.
+        </p>
+
+        <h2>AI tools</h2>
+        <p>
+          Aurelia World's AI tools are there to help with things like ideas, structure, spelling or
+          accessibility. They are not a person or a secret friend, and they can make mistakes. Do
+          not tell an AI tool secrets or personal information you would not want shared with the
+          adults who help keep the platform safe.
+        </p>
+
+        <h2>How to ask for information to be changed or deleted</h2>
+        <p>
+          You can ask a parent, guardian or another trusted adult to help you ask what information
+          we hold, correct something that is wrong, remove a project or close an account. Some
+          safety or legal records may need to be kept for longer even after an account is closed.
+          You can also ask for help through our{" "}
           <Link to="/contact" className="font-medium text-foreground underline underline-offset-4">
             contact page
           </Link>
@@ -77,16 +95,25 @@ function PrivacyForChildren() {
 
         <h2>How to tell someone if you feel unsafe</h2>
         <p>
-          If anything on Aurelia makes you feel worried, uncomfortable or unsafe, tell a parent,
-          guardian, teacher or another adult you trust straight away. You can also use the report
-          button wherever you see it on the platform, or visit our{" "}
+          If anything on Aurelia World makes you worried, uncomfortable or unsafe, tell a parent,
+          guardian, teacher or another adult you trust. You can also use the report tools on the
+          platform or visit our{" "}
           <Link
             to="/safeguarding-and-reporting"
             className="font-medium text-foreground underline underline-offset-4"
           >
             safeguarding and reporting page
+          </Link>
+          . You will not get in trouble for asking for help.
+        </p>
+
+        <h2>Who runs Aurelia World</h2>
+        <p>
+          Aurelia World is operated by <strong>Global Solutions Management LLC</strong>. The longer{" "}
+          <Link to="/privacy-policy" className="font-medium text-foreground underline underline-offset-4">
+            Privacy Policy
           </Link>{" "}
-          to find out more. You will not get in trouble for telling someone.
+          explains the legal details for parents, schools and other adults.
         </p>
       </LegalPage>
     </PublicPage>
