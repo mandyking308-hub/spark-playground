@@ -207,8 +207,9 @@ export function PaperNote({
 export function WaveformStrip({ className, bars = 42 }: { className?: string; bars?: number }) {
   const heights = Array.from({ length: bars }, (_, index) => {
     const wave = Math.sin(index * 0.7) * Math.cos(index * 0.23);
-    return 22 + Math.abs(wave) * 70;
+    return Math.round(22 + Math.abs(wave) * 70);
   });
+
 
   return (
     <span
