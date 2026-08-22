@@ -1,5 +1,23 @@
 import { withSupabase } from "@supabase/server";
 
+// This deployment targets an external Aurelia database without generated types,
+// so the admin client is narrowed to the minimal untyped surface used here.
+type AdminRows = { data: Record<string, unknown>[] | null; error: unknown };
+type AdminRow = { data: Record<string, unknown> | null; error: unknown };
+type AdminQuery = {
+  select: (columns: string) => AdminQuery;
+  eq: (column: string, value: unknown) => AdminQuery;
+  is: (column: string, value: unknown) => AdminQuery;
+  order: (column: string, options?: Record<string, unknown>) => AdminQuery;
+  limit: (count: number) => Promise<AdminRows>;
+  maybeSingle: () => Promise<AdminRow>;
+};
+type AdminClient = {
+  from: (table: string) => AdminQuery;
+  rpc: (fn: string, args: Record<string, unknown>) => Promise<AdminRows>;
+};
+
+
 type Action = "issue_invitation" | "claim_invitation" | "revoke_invitation" | "list_invitations";
 type PilotRole = "child" | "parent" | "teacher" | "school_admin" | "group_admin";
 type AgeBand = "under_9" | "age_9_12" | "age_13_15" | "adult";
