@@ -52,7 +52,7 @@ export default {
       if (body.action === "request_publication") {
         if (!validUuid(body.projectId)) return badRequest();
 
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_request_project_publication", {
+        const { data, error } = await (ctx.supabaseAdmin as unknown as AdminClient).rpc("server_request_project_publication", {
           p_auth_user_id: authUserId,
           p_project_id: body.projectId,
         });
