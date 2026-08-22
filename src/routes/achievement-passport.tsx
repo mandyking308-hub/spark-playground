@@ -200,72 +200,116 @@ function AchievementPassportPage() {
         </SplitFeature>
       </Section>
 
-      {/* Example achievement cards */}
+      {/* Single illustrative achievement card */}
       <Section tone="muted">
         <SectionHeading
           eyebrow="What an entry contains"
           title="Evidence, not a badge icon"
-          description="A verified achievement is a small dossier, not a single graphic. The three cards below are illustrative examples only — no named people, schools or real submissions are shown."
+          description="A verified achievement is a small dossier, not a single graphic. The card below is an illustrative example — no named people, schools or real submissions are shown."
         />
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {exampleCards.map((card) => (
-            <div
-              key={card.title}
-              className="flex h-full flex-col rounded-2xl border border-border/70 bg-[oklch(0.98_0.01_95)] p-6 shadow-sm"
-            >
-              <GoldRule className="w-10" />
-              <h3 className="mt-4 font-display text-lg leading-snug tracking-tight">
-                {card.title}
-              </h3>
-              <p className="mt-1 text-xs font-medium uppercase tracking-[0.12em] text-accent-foreground">
-                {card.role}
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                {card.evidence.map((e) => (
-                  <li key={e} className="flex gap-2">
-                    <span aria-hidden="true" className="mt-1.5 size-1 shrink-0 rounded-full bg-gold" />
-                    <span>{e}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-auto pt-5 text-xs text-muted-foreground">
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1.05fr_1fr] lg:items-start">
+          <article
+            className="rounded-2xl border border-border/70 bg-[oklch(0.98_0.01_95)] p-7 shadow-sm"
+            aria-label="Illustrative achievement card"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <ProjectLabel>Illustrative achievement</ProjectLabel>
+              <span className="text-xs uppercase tracking-[0.14em] text-accent-foreground">
                 Verified · example
+              </span>
+            </div>
+            <GoldRule className="mt-5 w-12" />
+            <h3 className="mt-4 font-display text-2xl leading-snug tracking-tight">
+              Podcast series, three episodes
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Skill demonstrated: planning, recording and editing a structured audio series, and
+              revising it after feedback.
+            </p>
+            <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div>
+                <dt className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                  Issuer provenance
+                </dt>
+                <dd className="mt-1 text-sm">
+                  Verified class teacher, recorded with their role and school at the time of
+                  verification
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                  Visibility
+                </dt>
+                <dd className="mt-1 text-sm">Private by default; the child chooses who sees it</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                  Evidence attached
+                </dt>
+                <dd className="mt-1 text-sm">Running order drafts, recorded takes, feedback notes</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                  Status
+                </dt>
+                <dd className="mt-1 text-sm">Revocable and auditable — every change is logged</dd>
+              </div>
+            </dl>
+            <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
+              A static illustration of how a verified entry is presented. It is not a real member
+              achievement.
+            </p>
+          </article>
+          <div className="space-y-8">
+            <CheckList items={contains} />
+            <div className="rounded-2xl border border-border/70 bg-card p-6">
+              <h3 className="font-display text-lg tracking-tight">
+                What a parent sees — and what stays closed
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                A guardian can see that an achievement was verified, what skill it recognises, and
+                who verified it. That does not unlock the underlying project: the drafts and
+                private working behind it stay in the child's own space unless the child puts them
+                forward.
               </p>
             </div>
-          ))}
-        </div>
-        <p className="mt-6 text-xs text-muted-foreground">
-          These cards are illustrative examples of how a verified entry is presented. They are not
-          real member achievements.
-        </p>
-        <div className="mt-8">
-          <CheckList items={contains} />
+          </div>
         </div>
       </Section>
 
       <Section>
         <SectionHeading
-          eyebrow="Portability"
-          title="A record that follows the young person, not the platform"
-          description="Achievements are tied to the person, not to a single school year or a single school. As a member approaches 16 and transitions into the alumni world, their Achievement Passport moves with them."
+          eyebrow="Turning 16"
+          title="Selective transfer, never a wholesale copy"
+          description="Moving into the 16+ Alumni environment is a deliberate act by the young person. Only the Passport entries and portfolio items they explicitly select move forward with them."
         />
         <div className="mt-10 grid gap-8 lg:grid-cols-2">
           <p className="text-base leading-relaxed text-muted-foreground">
-            When a member reaches 16 and moves into the separate 16+ Alumni environment, their
-            existing Achievement Passport carries forward intact. It can then form the basis of a
-            portfolio used for further education, work experience or mentoring — evidence built up
-            over years, rather than a CV written from scratch.
+            At 16, a young person chooses item by item what becomes part of their adult portfolio.
+            Selected entries keep their evidence and issuer provenance, so they remain meaningful
+            for further education, work experience or mentoring. Everything they do not select
+            stays where it is.
           </p>
           <CheckList
             items={[
-              "Entries verified before 16 remain valid and visible after the transition.",
-              "The passport is exportable as a readable record the young person controls.",
-              "Alumni add to the same passport rather than starting a new, disconnected one.",
-              "Guardians retain visibility into historical entries created while their child was under 16.",
+              "Only explicitly selected Passport entries and portfolio items transfer into Alumni.",
+              "Private childhood drafts, wellbeing records and safeguarding material never transfer automatically.",
+              "Transferred entries keep their evidence and the provenance of who verified them.",
+              "Entries verified before 16 remain valid; nothing is re-verified or re-scored.",
+              "Selection is the young person's decision, made item by item rather than in bulk.",
             ]}
           />
         </div>
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Button asChild variant="outline">
+            <Link to="/alumni-world">See the 16+ Alumni world</Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link to="/ideas-and-resources">Browse ideas & resources</Link>
+          </Button>
+        </div>
       </Section>
+
 
       <Section tone="ink">
         <SectionHeading
