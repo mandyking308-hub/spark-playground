@@ -19,9 +19,11 @@ import { Route as ChallengesAndClubsRouteImport } from './routes/challenges-and-
 import { Route as CommunityStandardsRouteImport } from './routes/community-standards'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ContactEnquiryRouteImport } from './routes/contact-enquiry'
+import { Route as CookieNoticeRouteImport } from './routes/cookie-notice'
 import { Route as CreatorStudioRouteImport } from './routes/creator-studio'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DashboardDemosRouteImport } from './routes/dashboard-demos'
+import { Route as DataProtectionForSchoolsRouteImport } from './routes/data-protection-for-schools'
 import { Route as ForEducationGroupsRouteImport } from './routes/for-education-groups'
 import { Route as ForFamiliesRouteImport } from './routes/for-families'
 import { Route as ForOrganisationsRouteImport } from './routes/for-organisations'
@@ -161,6 +163,11 @@ const ContactEnquiryRoute = ContactEnquiryRouteImport.update({
   path: '/contact-enquiry',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CookieNoticeRoute = CookieNoticeRouteImport.update({
+  id: '/cookie-notice',
+  path: '/cookie-notice',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CreatorStudioRoute = CreatorStudioRouteImport.update({
   id: '/creator-studio',
   path: '/creator-studio',
@@ -176,6 +183,12 @@ const DashboardDemosRoute = DashboardDemosRouteImport.update({
   path: '/dashboard-demos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DataProtectionForSchoolsRoute =
+  DataProtectionForSchoolsRouteImport.update({
+    id: '/data-protection-for-schools',
+    path: '/data-protection-for-schools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ForEducationGroupsRoute = ForEducationGroupsRouteImport.update({
   id: '/for-education-groups',
   path: '/for-education-groups',
@@ -645,9 +658,11 @@ export interface FileRoutesByFullPath {
   '/community-standards': typeof CommunityStandardsRoute
   '/contact': typeof ContactRoute
   '/contact-enquiry': typeof ContactEnquiryRoute
+  '/cookie-notice': typeof CookieNoticeRoute
   '/creator-studio': typeof CreatorStudioRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/dashboard-demos': typeof DashboardDemosRoute
+  '/data-protection-for-schools': typeof DataProtectionForSchoolsRoute
   '/for-education-groups': typeof ForEducationGroupsRoute
   '/for-families': typeof ForFamiliesRoute
   '/for-organisations': typeof ForOrganisationsRoute
@@ -747,8 +762,10 @@ export interface FileRoutesByTo {
   '/community-standards': typeof CommunityStandardsRoute
   '/contact': typeof ContactRoute
   '/contact-enquiry': typeof ContactEnquiryRoute
+  '/cookie-notice': typeof CookieNoticeRoute
   '/creator-studio': typeof CreatorStudioRoute
   '/dashboard-demos': typeof DashboardDemosRoute
+  '/data-protection-for-schools': typeof DataProtectionForSchoolsRoute
   '/for-education-groups': typeof ForEducationGroupsRoute
   '/for-families': typeof ForFamiliesRoute
   '/for-organisations': typeof ForOrganisationsRoute
@@ -850,9 +867,11 @@ export interface FileRoutesById {
   '/community-standards': typeof CommunityStandardsRoute
   '/contact': typeof ContactRoute
   '/contact-enquiry': typeof ContactEnquiryRoute
+  '/cookie-notice': typeof CookieNoticeRoute
   '/creator-studio': typeof CreatorStudioRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/dashboard-demos': typeof DashboardDemosRoute
+  '/data-protection-for-schools': typeof DataProtectionForSchoolsRoute
   '/for-education-groups': typeof ForEducationGroupsRoute
   '/for-families': typeof ForFamiliesRoute
   '/for-organisations': typeof ForOrganisationsRoute
@@ -955,9 +974,11 @@ export interface FileRouteTypes {
     | '/community-standards'
     | '/contact'
     | '/contact-enquiry'
+    | '/cookie-notice'
     | '/creator-studio'
     | '/dashboard'
     | '/dashboard-demos'
+    | '/data-protection-for-schools'
     | '/for-education-groups'
     | '/for-families'
     | '/for-organisations'
@@ -1057,8 +1078,10 @@ export interface FileRouteTypes {
     | '/community-standards'
     | '/contact'
     | '/contact-enquiry'
+    | '/cookie-notice'
     | '/creator-studio'
     | '/dashboard-demos'
+    | '/data-protection-for-schools'
     | '/for-education-groups'
     | '/for-families'
     | '/for-organisations'
@@ -1159,9 +1182,11 @@ export interface FileRouteTypes {
     | '/community-standards'
     | '/contact'
     | '/contact-enquiry'
+    | '/cookie-notice'
     | '/creator-studio'
     | '/dashboard'
     | '/dashboard-demos'
+    | '/data-protection-for-schools'
     | '/for-education-groups'
     | '/for-families'
     | '/for-organisations'
@@ -1263,9 +1288,11 @@ export interface RootRouteChildren {
   CommunityStandardsRoute: typeof CommunityStandardsRoute
   ContactRoute: typeof ContactRoute
   ContactEnquiryRoute: typeof ContactEnquiryRoute
+  CookieNoticeRoute: typeof CookieNoticeRoute
   CreatorStudioRoute: typeof CreatorStudioRoute
   DashboardRoute: typeof DashboardRouteWithChildren
   DashboardDemosRoute: typeof DashboardDemosRoute
+  DataProtectionForSchoolsRoute: typeof DataProtectionForSchoolsRoute
   ForEducationGroupsRoute: typeof ForEducationGroupsRoute
   ForFamiliesRoute: typeof ForFamiliesRoute
   ForOrganisationsRoute: typeof ForOrganisationsRoute
@@ -1360,6 +1387,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactEnquiryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cookie-notice': {
+      id: '/cookie-notice'
+      path: '/cookie-notice'
+      fullPath: '/cookie-notice'
+      preLoaderRoute: typeof CookieNoticeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/creator-studio': {
       id: '/creator-studio'
       path: '/creator-studio'
@@ -1379,6 +1413,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard-demos'
       fullPath: '/dashboard-demos'
       preLoaderRoute: typeof DashboardDemosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data-protection-for-schools': {
+      id: '/data-protection-for-schools'
+      path: '/data-protection-for-schools'
+      fullPath: '/data-protection-for-schools'
+      preLoaderRoute: typeof DataProtectionForSchoolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/for-education-groups': {
@@ -2166,9 +2207,11 @@ const rootRouteChildren: RootRouteChildren = {
   CommunityStandardsRoute: CommunityStandardsRoute,
   ContactRoute: ContactRoute,
   ContactEnquiryRoute: ContactEnquiryRoute,
+  CookieNoticeRoute: CookieNoticeRoute,
   CreatorStudioRoute: CreatorStudioRoute,
   DashboardRoute: DashboardRouteWithChildren,
   DashboardDemosRoute: DashboardDemosRoute,
+  DataProtectionForSchoolsRoute: DataProtectionForSchoolsRoute,
   ForEducationGroupsRoute: ForEducationGroupsRoute,
   ForFamiliesRoute: ForFamiliesRoute,
   ForOrganisationsRoute: ForOrganisationsRoute,
