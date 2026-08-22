@@ -214,7 +214,7 @@ function PricingPage() {
         </div>
       </Section>
 
-      <Section tone="dark">
+      <Section tone="ink">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground/70">Ready when you are</p>
           <h2 className="mt-4 font-display text-4xl tracking-tight text-primary-foreground">Pay for the platform. Never sell the child's attention.</h2>
