@@ -48,7 +48,7 @@ const foundations = [
   {
     icon: Users2,
     title: "Invitation-only onboarding",
-    text: "There is no open self-registration for children. Every child joins through a verified family, school or organisation invitation, so we know who is bringing a child onto the platform before an account exists.",
+    text: "There is no open self-registration for children. Every child joins through a verified parent/guardian or school invitation, so we know who is bringing a child onto the platform before an account exists.",
   },
   {
     icon: ShieldCheck,
@@ -107,7 +107,7 @@ function SafetyAndTrust() {
         actions={
           <>
             <Button asChild size="lg">
-              <Link to="/safeguarding-and-reporting">Report a concern</Link>
+              <Link to="/report-concern">Report a concern</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link to="/for-families">For families</Link>

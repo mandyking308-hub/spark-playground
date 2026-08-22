@@ -141,7 +141,7 @@ function Home() {
                 </Button>
               </div>
               <p className="mt-6 text-sm text-muted-foreground">
-                Children join through a verified family, school or organisation invitation.{" "}
+                Children join through a verified parent/guardian or school invitation.{" "}
                 <Link to="/for-schools" className="font-medium text-foreground underline underline-offset-4">
                   Schools start here
                 </Link>
@@ -380,7 +380,7 @@ function Home() {
             </p>
           </div>
           <Button asChild size="lg">
-            <Link to="/safeguarding-and-reporting">Report a concern</Link>
+            <Link to="/report-concern">Report a concern</Link>
           </Button>
         </div>
       </Section>

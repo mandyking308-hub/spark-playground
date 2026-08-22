@@ -18,6 +18,7 @@ import { Route as AlumniWorldRouteImport } from './routes/alumni-world'
 import { Route as ChallengesAndClubsRouteImport } from './routes/challenges-and-clubs'
 import { Route as CommunityStandardsRouteImport } from './routes/community-standards'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ContactEnquiryRouteImport } from './routes/contact-enquiry'
 import { Route as CreatorStudioRouteImport } from './routes/creator-studio'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ForEducationGroupsRouteImport } from './routes/for-education-groups'
@@ -27,6 +28,7 @@ import { Route as ForSchoolsRouteImport } from './routes/for-schools'
 import { Route as ParentCommunityRouteImport } from './routes/parent-community'
 import { Route as PrivacyForChildrenRouteImport } from './routes/privacy-for-children'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as ReportConcernRouteImport } from './routes/report-concern'
 import { Route as SafeguardingAndReportingRouteImport } from './routes/safeguarding-and-reporting'
 import { Route as SafetyAndTrustRouteImport } from './routes/safety-and-trust'
 import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
@@ -65,6 +67,7 @@ import { Route as DashboardFeedbackSendRouteImport } from './routes/dashboard.fe
 import { Route as DashboardGroupRouteImport } from './routes/dashboard.group'
 import { Route as DashboardGroupSchoolsRouteImport } from './routes/dashboard.group-schools'
 import { Route as DashboardIncidentResponseRouteImport } from './routes/dashboard.incident-response'
+import { Route as DashboardInvitationsRouteImport } from './routes/dashboard.invitations'
 import { Route as DashboardLicensingRouteImport } from './routes/dashboard.licensing'
 import { Route as DashboardNotificationsRouteImport } from './routes/dashboard.notifications'
 import { Route as DashboardObservabilityRouteImport } from './routes/dashboard.observability'
@@ -146,6 +149,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactEnquiryRoute = ContactEnquiryRouteImport.update({
+  id: '/contact-enquiry',
+  path: '/contact-enquiry',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CreatorStudioRoute = CreatorStudioRouteImport.update({
   id: '/creator-studio',
   path: '/creator-studio',
@@ -189,6 +197,11 @@ const PrivacyForChildrenRoute = PrivacyForChildrenRouteImport.update({
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportConcernRoute = ReportConcernRouteImport.update({
+  id: '/report-concern',
+  path: '/report-concern',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SafeguardingAndReportingRoute =
@@ -389,6 +402,11 @@ const DashboardIncidentResponseRoute =
     path: '/incident-response',
     getParentRoute: () => DashboardRoute,
   } as any)
+const DashboardInvitationsRoute = DashboardInvitationsRouteImport.update({
+  id: '/invitations',
+  path: '/invitations',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardLicensingRoute = DashboardLicensingRouteImport.update({
   id: '/licensing',
   path: '/licensing',
@@ -583,6 +601,7 @@ export interface FileRoutesByFullPath {
   '/challenges-and-clubs': typeof ChallengesAndClubsRoute
   '/community-standards': typeof CommunityStandardsRoute
   '/contact': typeof ContactRoute
+  '/contact-enquiry': typeof ContactEnquiryRoute
   '/creator-studio': typeof CreatorStudioRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/for-education-groups': typeof ForEducationGroupsRoute
@@ -592,6 +611,7 @@ export interface FileRoutesByFullPath {
   '/parent-community': typeof ParentCommunityRoute
   '/privacy-for-children': typeof PrivacyForChildrenRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/report-concern': typeof ReportConcernRoute
   '/safeguarding-and-reporting': typeof SafeguardingAndReportingRoute
   '/safety-and-trust': typeof SafetyAndTrustRoute
   '/terms-of-use': typeof TermsOfUseRoute
@@ -628,6 +648,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/group': typeof DashboardGroupRoute
   '/dashboard/group-schools': typeof DashboardGroupSchoolsRoute
   '/dashboard/incident-response': typeof DashboardIncidentResponseRoute
+  '/dashboard/invitations': typeof DashboardInvitationsRoute
   '/dashboard/licensing': typeof DashboardLicensingRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/observability': typeof DashboardObservabilityRoute
@@ -675,6 +696,7 @@ export interface FileRoutesByTo {
   '/challenges-and-clubs': typeof ChallengesAndClubsRoute
   '/community-standards': typeof CommunityStandardsRoute
   '/contact': typeof ContactRoute
+  '/contact-enquiry': typeof ContactEnquiryRoute
   '/creator-studio': typeof CreatorStudioRoute
   '/for-education-groups': typeof ForEducationGroupsRoute
   '/for-families': typeof ForFamiliesRoute
@@ -683,6 +705,7 @@ export interface FileRoutesByTo {
   '/parent-community': typeof ParentCommunityRoute
   '/privacy-for-children': typeof PrivacyForChildrenRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/report-concern': typeof ReportConcernRoute
   '/safeguarding-and-reporting': typeof SafeguardingAndReportingRoute
   '/safety-and-trust': typeof SafetyAndTrustRoute
   '/terms-of-use': typeof TermsOfUseRoute
@@ -719,6 +742,7 @@ export interface FileRoutesByTo {
   '/dashboard/group': typeof DashboardGroupRoute
   '/dashboard/group-schools': typeof DashboardGroupSchoolsRoute
   '/dashboard/incident-response': typeof DashboardIncidentResponseRoute
+  '/dashboard/invitations': typeof DashboardInvitationsRoute
   '/dashboard/licensing': typeof DashboardLicensingRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/observability': typeof DashboardObservabilityRoute
@@ -768,6 +792,7 @@ export interface FileRoutesById {
   '/challenges-and-clubs': typeof ChallengesAndClubsRoute
   '/community-standards': typeof CommunityStandardsRoute
   '/contact': typeof ContactRoute
+  '/contact-enquiry': typeof ContactEnquiryRoute
   '/creator-studio': typeof CreatorStudioRoute
   '/dashboard': typeof DashboardRouteWithChildren
   '/for-education-groups': typeof ForEducationGroupsRoute
@@ -777,6 +802,7 @@ export interface FileRoutesById {
   '/parent-community': typeof ParentCommunityRoute
   '/privacy-for-children': typeof PrivacyForChildrenRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/report-concern': typeof ReportConcernRoute
   '/safeguarding-and-reporting': typeof SafeguardingAndReportingRoute
   '/safety-and-trust': typeof SafetyAndTrustRoute
   '/terms-of-use': typeof TermsOfUseRoute
@@ -813,6 +839,7 @@ export interface FileRoutesById {
   '/dashboard/group': typeof DashboardGroupRoute
   '/dashboard/group-schools': typeof DashboardGroupSchoolsRoute
   '/dashboard/incident-response': typeof DashboardIncidentResponseRoute
+  '/dashboard/invitations': typeof DashboardInvitationsRoute
   '/dashboard/licensing': typeof DashboardLicensingRoute
   '/dashboard/notifications': typeof DashboardNotificationsRoute
   '/dashboard/observability': typeof DashboardObservabilityRoute
@@ -863,6 +890,7 @@ export interface FileRouteTypes {
     | '/challenges-and-clubs'
     | '/community-standards'
     | '/contact'
+    | '/contact-enquiry'
     | '/creator-studio'
     | '/dashboard'
     | '/for-education-groups'
@@ -872,6 +900,7 @@ export interface FileRouteTypes {
     | '/parent-community'
     | '/privacy-for-children'
     | '/privacy-policy'
+    | '/report-concern'
     | '/safeguarding-and-reporting'
     | '/safety-and-trust'
     | '/terms-of-use'
@@ -908,6 +937,7 @@ export interface FileRouteTypes {
     | '/dashboard/group'
     | '/dashboard/group-schools'
     | '/dashboard/incident-response'
+    | '/dashboard/invitations'
     | '/dashboard/licensing'
     | '/dashboard/notifications'
     | '/dashboard/observability'
@@ -955,6 +985,7 @@ export interface FileRouteTypes {
     | '/challenges-and-clubs'
     | '/community-standards'
     | '/contact'
+    | '/contact-enquiry'
     | '/creator-studio'
     | '/for-education-groups'
     | '/for-families'
@@ -963,6 +994,7 @@ export interface FileRouteTypes {
     | '/parent-community'
     | '/privacy-for-children'
     | '/privacy-policy'
+    | '/report-concern'
     | '/safeguarding-and-reporting'
     | '/safety-and-trust'
     | '/terms-of-use'
@@ -999,6 +1031,7 @@ export interface FileRouteTypes {
     | '/dashboard/group'
     | '/dashboard/group-schools'
     | '/dashboard/incident-response'
+    | '/dashboard/invitations'
     | '/dashboard/licensing'
     | '/dashboard/notifications'
     | '/dashboard/observability'
@@ -1047,6 +1080,7 @@ export interface FileRouteTypes {
     | '/challenges-and-clubs'
     | '/community-standards'
     | '/contact'
+    | '/contact-enquiry'
     | '/creator-studio'
     | '/dashboard'
     | '/for-education-groups'
@@ -1056,6 +1090,7 @@ export interface FileRouteTypes {
     | '/parent-community'
     | '/privacy-for-children'
     | '/privacy-policy'
+    | '/report-concern'
     | '/safeguarding-and-reporting'
     | '/safety-and-trust'
     | '/terms-of-use'
@@ -1092,6 +1127,7 @@ export interface FileRouteTypes {
     | '/dashboard/group'
     | '/dashboard/group-schools'
     | '/dashboard/incident-response'
+    | '/dashboard/invitations'
     | '/dashboard/licensing'
     | '/dashboard/notifications'
     | '/dashboard/observability'
@@ -1141,6 +1177,7 @@ export interface RootRouteChildren {
   ChallengesAndClubsRoute: typeof ChallengesAndClubsRoute
   CommunityStandardsRoute: typeof CommunityStandardsRoute
   ContactRoute: typeof ContactRoute
+  ContactEnquiryRoute: typeof ContactEnquiryRoute
   CreatorStudioRoute: typeof CreatorStudioRoute
   DashboardRoute: typeof DashboardRouteWithChildren
   ForEducationGroupsRoute: typeof ForEducationGroupsRoute
@@ -1150,6 +1187,7 @@ export interface RootRouteChildren {
   ParentCommunityRoute: typeof ParentCommunityRoute
   PrivacyForChildrenRoute: typeof PrivacyForChildrenRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  ReportConcernRoute: typeof ReportConcernRoute
   SafeguardingAndReportingRoute: typeof SafeguardingAndReportingRoute
   SafetyAndTrustRoute: typeof SafetyAndTrustRoute
   TermsOfUseRoute: typeof TermsOfUseRoute
@@ -1224,6 +1262,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact-enquiry': {
+      id: '/contact-enquiry'
+      path: '/contact-enquiry'
+      fullPath: '/contact-enquiry'
+      preLoaderRoute: typeof ContactEnquiryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/creator-studio': {
       id: '/creator-studio'
       path: '/creator-studio'
@@ -1285,6 +1330,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy-policy'
       fullPath: '/privacy-policy'
       preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report-concern': {
+      id: '/report-concern'
+      path: '/report-concern'
+      fullPath: '/report-concern'
+      preLoaderRoute: typeof ReportConcernRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/safeguarding-and-reporting': {
@@ -1551,6 +1603,13 @@ declare module '@tanstack/react-router' {
       path: '/incident-response'
       fullPath: '/dashboard/incident-response'
       preLoaderRoute: typeof DashboardIncidentResponseRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/invitations': {
+      id: '/dashboard/invitations'
+      path: '/invitations'
+      fullPath: '/dashboard/invitations'
+      preLoaderRoute: typeof DashboardInvitationsRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/dashboard/licensing': {
@@ -1847,6 +1906,7 @@ interface DashboardRouteChildren {
   DashboardGroupRoute: typeof DashboardGroupRoute
   DashboardGroupSchoolsRoute: typeof DashboardGroupSchoolsRoute
   DashboardIncidentResponseRoute: typeof DashboardIncidentResponseRoute
+  DashboardInvitationsRoute: typeof DashboardInvitationsRoute
   DashboardLicensingRoute: typeof DashboardLicensingRoute
   DashboardNotificationsRoute: typeof DashboardNotificationsRoute
   DashboardObservabilityRoute: typeof DashboardObservabilityRoute
@@ -1910,6 +1970,7 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardGroupRoute: DashboardGroupRoute,
   DashboardGroupSchoolsRoute: DashboardGroupSchoolsRoute,
   DashboardIncidentResponseRoute: DashboardIncidentResponseRoute,
+  DashboardInvitationsRoute: DashboardInvitationsRoute,
   DashboardLicensingRoute: DashboardLicensingRoute,
   DashboardNotificationsRoute: DashboardNotificationsRoute,
   DashboardObservabilityRoute: DashboardObservabilityRoute,
@@ -1962,6 +2023,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChallengesAndClubsRoute: ChallengesAndClubsRoute,
   CommunityStandardsRoute: CommunityStandardsRoute,
   ContactRoute: ContactRoute,
+  ContactEnquiryRoute: ContactEnquiryRoute,
   CreatorStudioRoute: CreatorStudioRoute,
   DashboardRoute: DashboardRouteWithChildren,
   ForEducationGroupsRoute: ForEducationGroupsRoute,
@@ -1971,6 +2033,7 @@ const rootRouteChildren: RootRouteChildren = {
   ParentCommunityRoute: ParentCommunityRoute,
   PrivacyForChildrenRoute: PrivacyForChildrenRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
+  ReportConcernRoute: ReportConcernRoute,
   SafeguardingAndReportingRoute: SafeguardingAndReportingRoute,
   SafetyAndTrustRoute: SafetyAndTrustRoute,
   TermsOfUseRoute: TermsOfUseRoute,

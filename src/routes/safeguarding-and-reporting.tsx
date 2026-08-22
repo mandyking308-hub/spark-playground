@@ -46,7 +46,7 @@ const process = [
   {
     step: "01",
     title: "Triage",
-    text: "Every report is read by a trained member of staff within a short, defined window. It is categorised by urgency and type before anything else happens.",
+    text: "Every report is read by a trained member of staff and triaged by urgency and type through human safeguarding workflows before anything else happens.",
   },
   {
     step: "02",
@@ -81,7 +81,7 @@ function SafeguardingAndReporting() {
         description="Anyone — a child, a parent, a teacher, or a member of the public — can raise a safeguarding concern about Aurelia. This page explains how to do that, what happens next, and where to turn if a child is in immediate danger."
         actions={
           <Button asChild size="lg">
-            <Link to="/contact">Report a concern</Link>
+            <Link to="/report-concern">Report a concern</Link>
           </Button>
         }
       />
@@ -114,8 +114,8 @@ function SafeguardingAndReporting() {
           <FeatureCard icon={MessageSquareWarning} title="Inside the platform">
             Signed-in members can report content, messages or accounts directly from where they encounter them.
           </FeatureCard>
-          <FeatureCard icon={FileText} title="Through our contact route">
-            Anyone, including people without an account, can raise a concern through our contact page.
+          <FeatureCard icon={FileText} title="Through our reporting form">
+            Anyone, including people without an account, can raise a concern through our reporting form, anonymously if they prefer.
           </FeatureCard>
           <FeatureCard icon={ShieldAlert} title="Via a school or organisation">
             Teachers and school safeguarding leads can also escalate concerns through their own institution's channels.
@@ -127,7 +127,7 @@ function SafeguardingAndReporting() {
         <SectionHeading
           eyebrow="What happens next"
           title="Triage, review, escalation"
-          description="Every report follows the same basic path, though the speed and depth of response depends on the level of risk involved."
+          description="Every report follows the same basic path, though the speed and depth of response depend on the urgency and level of risk involved."
         />
         <ol className="mt-12 grid gap-4 md:grid-cols-4">
           {process.map((item) => (
@@ -183,7 +183,7 @@ function SafeguardingAndReporting() {
       <CtaBand
         title="Concerned about something you have seen on Aurelia"
         description="Tell us what happened. Reports are read by trained staff and acted on according to our safeguarding process."
-        primary={{ label: "Report a concern", to: "/contact" }}
+        primary={{ label: "Report a concern", to: "/report-concern" }}
         secondary={{ label: "Read our safety model", to: "/safety-and-trust" }}
       />
     </PublicPage>
