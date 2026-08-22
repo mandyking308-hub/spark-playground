@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { PwaRuntime } from "../components/pwa/pwa-runtime";
+import { PublicGTranslate } from "../components/translation/public-gtranslate";
 import { DEFAULT_LOCALE, directionForLocale } from "../config/locales";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -80,13 +81,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { name: "theme-color", content: "#141c2e" },
-      { title: "Aurelia — Create. Learn. Achieve. Safely." },
+      { title: "Aurelia World — Create. Learn. Achieve. Safely." },
       {
         name: "description",
         content:
-          "Aurelia is a protected global creation, learning and achievement world for under-16s, with a separate 16+ alumni environment.",
+          "Aurelia World is a protected global creation, learning and achievement world for under-16s, with a separate 16+ alumni environment.",
       },
-      { property: "og:site_name", content: "Aurelia" },
+      { property: "og:site_name", content: "Aurelia World" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -106,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "Aurelia",
+          name: "Aurelia World",
           description:
             "A protected global creation, learning and achievement world for under-16s, with a separate 16+ alumni environment.",
           logo: "/icon-512.png",
@@ -114,7 +115,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
   }),
-
 
   shellComponent: RootShell,
   component: RootComponent,
@@ -142,10 +142,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div id="main-content" tabIndex={-1}>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-      </div>
+      <PublicGTranslate>
+        <div id="main-content" tabIndex={-1}>
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </div>
+      </PublicGTranslate>
       <PwaRuntime />
     </QueryClientProvider>
   );
