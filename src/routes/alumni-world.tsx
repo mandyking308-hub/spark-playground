@@ -11,12 +11,17 @@ import { PublicPage } from "@/components/public/public-page";
 import {
   CheckList,
   CtaBand,
+  Eyebrow,
   FeatureCard,
   PageHero,
   Section,
   SectionHeading,
 } from "@/components/public/sections";
+import { Figure, GoldRule, PaperNote, SplitFeature } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+
+import alumniPortfolio from "@/assets/alumni-portfolio.jpg";
+import adultsCommunity from "@/assets/adults-community.jpg";
 
 export const Route = createFileRoute("/alumni-world")({
   head: () => ({
@@ -51,7 +56,7 @@ const pillars = [
 const transition = [
   "The move to Alumni happens at 16, on a schedule the young person and their guardian can see coming in advance.",
   "It is a deliberate, one-way step into a new environment — not an automatic merge of the child account into an adult one.",
-  "The young person's portfolio and Achievement Passport history move with them; the child-only social surface does not.",
+  "The young person chooses what carries forward: selected portfolio pieces and Passport history, not a wholesale copy of the child account.",
   "Once in the Alumni world, the account is the young person's own, with adult-level control over privacy and sharing.",
 ];
 
@@ -60,8 +65,8 @@ function AlumniWorld() {
     <PublicPage>
       <PageHero
         eyebrow="Alumni world"
-        title="A separate world for the next stage, entered on purpose"
-        description="At 16, Aurelia members step into a distinct environment built for young adults — with its own portfolio, opportunities, mentoring and community — through a deliberate transition rather than an automatic change of settings."
+        title="At sixteen, the ink changes"
+        description="Aurelia's under-16 world is warm and closely supervised, by design. At 16, members step deliberately out of it into something else entirely — a quieter, more adult space with its own portfolio, opportunities, mentoring and community."
         actions={
           <>
             <Button asChild size="lg">
@@ -72,7 +77,29 @@ function AlumniWorld() {
             </Button>
           </>
         }
-      />
+      >
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+          <Figure
+            src={alumniPortfolio}
+            alt="A young adult presenting a wall of pinned portfolio work to two people"
+            width={1280}
+            height={960}
+            label="Illustrative · Portfolio"
+            priority
+          />
+          <Figure
+            src={adultsCommunity}
+            alt="Adults talking around a table in a sunlit room"
+            width={1280}
+            height={960}
+            label="Illustrative · Alumni community"
+          />
+        </div>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Images are illustrative examples created for Aurelia. They are not member work and do not
+          depict identifiable people.
+        </p>
+      </PageHero>
 
       <Section>
         <SectionHeading
@@ -89,22 +116,51 @@ function AlumniWorld() {
         </div>
       </Section>
 
-      <Section tone="muted">
-        <div className="grid gap-12 lg:grid-cols-2">
-          <SectionHeading
-            eyebrow="The transition at 16"
-            title="A deliberate step, not an automatic merge"
-            description="Aurelia treats the move from the under-16 world to the Alumni world as a genuine transition, with its own moment and its own consent — not a background account upgrade."
-          />
-          <CheckList items={transition} />
-        </div>
+      <Section tone="ink">
+        <SplitFeature
+          image={
+            <div className="space-y-4">
+              <Figure
+                src={alumniPortfolio}
+                alt="A young adult standing in front of a wall of pinned portfolio work"
+                width={1280}
+                height={960}
+                label="A body of work, finally theirs to show"
+              />
+              <PaperNote tone="paper" className="text-ink border-ink-foreground/20">
+                Nothing carries over that the member didn't choose. Alumni pick which pieces from
+                their Passport travel with them into the new portfolio — this is not a data export,
+                it's a curated first exhibition.
+              </PaperNote>
+            </div>
+          }
+        >
+          <Eyebrow>The transition at 16</Eyebrow>
+          <h2 className="mt-3 font-display text-3xl leading-tight tracking-tight sm:text-4xl">
+            A deliberate step, not an automatic merge
+          </h2>
+          <GoldRule className="mt-6 w-24" />
+          <p className="mt-5 text-base leading-relaxed text-ink-foreground/75">
+            Aurelia treats the move from the under-16 world to the Alumni world as a genuine
+            transition, with its own moment and its own consent — not a background account
+            upgrade.
+          </p>
+          <ul className="mt-8 space-y-4">
+            {transition.map((item) => (
+              <li key={item} className="flex gap-3 text-sm leading-relaxed text-ink-foreground/80">
+                <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-gold" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </SplitFeature>
       </Section>
 
       <Section>
         <SectionHeading
           eyebrow="Why the separation matters"
           title="Two different worlds need two different rules"
-          description="The safeguards that protect an 11-year-old — no open messaging, no public profile, guardian approval on everything — would be the wrong fit for an 17-year-old preparing for further study or early work. Rather than compromise either group, Aurelia keeps the environments entirely separate."
+          description="The safeguards that protect an 11-year-old — no open messaging, no public profile, guardian approval on everything — would be the wrong fit for a 17-year-old preparing for further study or early work. Rather than compromise either group, Aurelia keeps the environments entirely separate."
         />
         <div className="mt-10 flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-6">
           <ArrowRightLeft className="mt-1 size-6 shrink-0 text-accent-foreground" aria-hidden="true" />

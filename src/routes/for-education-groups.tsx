@@ -17,7 +17,16 @@ import {
   Section,
   SectionHeading,
 } from "@/components/public/sections";
+import {
+  Figure,
+  GoldRule,
+  PaperNote,
+  SplitFeature,
+} from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+
+import classroomMaking from "@/assets/classroom-making.jpg";
+import teacherEvidence from "@/assets/teacher-evidence.jpg";
 
 export const Route = createFileRoute("/for-education-groups")({
   head: () => ({
@@ -60,8 +69,8 @@ function ForEducationGroups() {
     <PublicPage>
       <PageHero
         eyebrow="For education groups"
-        title="One policy layer, many schools, no loss of local control"
-        description="Aurelia gives multi-academy trusts and school groups a group-level operating layer — consistent policy and reporting across every school, while day-to-day administration stays with each school's own staff."
+        title="Start with the classroom, not the spreadsheet"
+        description="Somewhere behind every dashboard is a student finishing something they're proud of and a teacher deciding it's good enough to verify. Aurelia gives multi-academy trusts and school groups a group-level operating layer — consistent policy and reporting across every school — without taking that moment away from the people closest to it."
         actions={
           <>
             <Button asChild size="lg">
@@ -72,17 +81,51 @@ function ForEducationGroups() {
             </Button>
           </>
         }
-      />
+      >
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+          <Figure
+            src={classroomMaking}
+            alt="A sunlit classroom of students making things together, seen from behind"
+            width={1536}
+            height={1024}
+            ratio="landscape"
+            label="Illustrative · Classroom"
+            priority
+          />
+          <Figure
+            src={teacherEvidence}
+            alt="A teacher and a student reviewing printed project evidence together"
+            width={1280}
+            height={960}
+            ratio="landscape"
+            label="Illustrative · Verification"
+          />
+        </div>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Images are illustrative examples created for Aurelia. They are not member work and do not
+          depict identifiable people.
+        </p>
+      </PageHero>
 
       <Section>
-        <div className="grid gap-12 lg:grid-cols-2">
+        <SplitFeature
+          image={
+            <div className="space-y-4">
+              <PaperNote tone="lined">
+                A Group Admin sets the standard once. A class teacher still decides whether the
+                work in front of them earns verification. Neither job replaces the other.
+              </PaperNote>
+              <GoldRule className="w-16" />
+            </div>
+          }
+        >
           <SectionHeading
             eyebrow="Tenancy"
             title="Every school is its own protected space"
             description="Aurelia treats each school as a distinct tenant within the group. Group-wide visibility is additive — it never removes the boundaries between individual schools."
           />
-          <CheckList items={tenancy} />
-        </div>
+          <CheckList className="mt-6" items={tenancy} />
+        </SplitFeature>
       </Section>
 
       <Section tone="muted">
@@ -143,6 +186,20 @@ function ForEducationGroups() {
             group can demonstrate exactly how and why it exercised oversight.
           </p>
         </div>
+      </Section>
+
+      <Section tone="muted">
+        <SectionHeading
+          eyebrow="Integration-ready architecture"
+          title="Built to fit into an existing IT estate, honestly described"
+          description="Aurelia's tenancy model is designed with future integration in mind — but we don't claim what isn't live yet."
+        />
+        <PaperNote className="mt-8 max-w-2xl">
+          Aurelia's data model and roles are designed to make future integration with school MIS
+          and LMS systems straightforward to build. Today, onboarding is handled through verified
+          invitations and CSV-based roster setup rather than a live sync — we would rather say that
+          plainly than overstate what exists.
+        </PaperNote>
       </Section>
 
       <CtaBand

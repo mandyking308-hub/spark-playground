@@ -4,7 +4,7 @@ import { AureliaLogo } from "@/components/brand/aurelia-logo";
 import { productLinks, audienceLinks, trustLinks, companyLinks } from "@/config/public-nav";
 
 const columns = [
-  { title: "Platform", links: productLinks },
+  { title: "Explore", links: productLinks },
   { title: "Audiences", links: audienceLinks },
   { title: "Trust & legal", links: trustLinks },
   { title: "Company", links: companyLinks },

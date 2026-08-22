@@ -265,3 +265,66 @@
     0 1px 2px color-mix(in oklab, var(--color-foreground) 6%, transparent),
     0 18px 40px -28px color-mix(in oklab, var(--color-foreground) 45%, transparent);
 }
+
+/* --- Editorial human texture utilities (presentation only) --- */
+
+.brand-paper {
+  background-color: color-mix(in oklab, var(--color-card) 92%, var(--color-gold) 8%);
+  background-image:
+    radial-gradient(28rem 18rem at 8% 0%, color-mix(in oklab, var(--color-gold) 10%, transparent), transparent 70%);
+}
+
+.brand-lined {
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 1.65rem,
+      color-mix(in oklab, var(--color-border) 70%, transparent) 1.65rem,
+      color-mix(in oklab, var(--color-border) 70%, transparent) calc(1.65rem + 1px)
+    );
+}
+
+.brand-tape {
+  position: absolute;
+  inset-inline-start: 50%;
+  top: -0.7rem;
+  height: 1.4rem;
+  width: 5.5rem;
+  transform: translateX(-50%) rotate(-2deg);
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--color-gold) 42%, transparent);
+  box-shadow: 0 1px 2px color-mix(in oklab, var(--color-foreground) 12%, transparent);
+}
+
+.brand-rule-gold {
+  height: 2px;
+  width: 3.5rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gold),
+    color-mix(in oklab, var(--color-gold) 20%, transparent)
+  );
+}
+
+.brand-label {
+  box-shadow: 0 1px 2px color-mix(in oklab, var(--color-foreground) 10%, transparent);
+}
+
+.brand-frame {
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--color-border) 90%, transparent),
+    0 30px 60px -40px color-mix(in oklab, var(--color-foreground) 60%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

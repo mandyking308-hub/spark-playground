@@ -1,5 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
+  Baby,
+  Bot,
   Building2,
   Database,
   GraduationCap,
@@ -14,12 +16,17 @@ import { PublicPage } from "@/components/public/public-page";
 import {
   CheckList,
   CtaBand,
+  Eyebrow,
   FeatureCard,
   PageHero,
   Section,
   SectionHeading,
 } from "@/components/public/sections";
+import { Figure, GoldRule, SplitFeature } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+
+import adultsCommunity from "@/assets/adults-community.jpg";
+import passportEvidence from "@/assets/passport-evidence.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -51,19 +58,46 @@ const principles = [
   { icon: Layers, title: "Separation by design", text: "Under-16 and 16+ worlds, and the roles within them, are kept structurally apart rather than relying on settings alone." },
 ];
 
-const architecture = [
-  "Permissions are enforced in the database through row-level security, not only in the interface.",
-  "Under-16 and 16+ environments run as genuinely separate spaces, not the same space with a toggle.",
-  "Publication of a child's work always requires explicit guardian approval before it leaves the family.",
-  "Safeguarding reports are triaged and escalated by trained processes, not left to community moderation alone.",
-  "AI assistance is bounded, age-banded and labelled rather than open-ended.",
+const holds = [
+  {
+    icon: Baby,
+    title: "Invitation-only under-16 onboarding",
+    text: "There is no open self-registration for children. Every child joins through a verified parent/guardian or through a verified school invitation.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Verified achievement",
+    text: "Achievements are confirmed by a real adult who witnessed the work — a teacher, guardian or named supervisor — not awarded automatically.",
+  },
+  {
+    icon: Users,
+    title: "No popularity metrics",
+    text: "No follower counts, no likes, no leaderboards. A young person's standing here is never a number other people gave them.",
+  },
+  {
+    icon: Bot,
+    title: "Bounded AI, labelled authorship",
+    text: "AI assistance is age-banded and limited in scope, and it is always labelled, so it is always clear what a young person made themselves.",
+  },
+  {
+    icon: Database,
+    title: "Minimal data, no behavioural targeting",
+    text: "Aurelia collects what it needs to operate safely and nothing more. Children are never profiled or targeted based on behaviour.",
+  },
+  {
+    icon: Layers,
+    title: "A separate 16+ environment",
+    text: "The under-16 world and the 16+ alumni environment are genuinely separate spaces, with no shared social surface between them.",
+  },
 ];
 
-const audiences = [
-  { icon: Users, title: "Families", text: "Parents and guardians who want their child to create and be recognised for real work, with genuine oversight." },
-  { icon: GraduationCap, title: "Schools", text: "Teachers who want to set meaningful briefs and verify achievement without taking on unmanaged risk." },
-  { icon: Building2, title: "Education groups", text: "Multi-school organisations that need consistent safeguarding and oversight across many sites." },
-  { icon: Database, title: "Organisations", text: "Bodies that want to reach young creators responsibly, through verified challenges rather than open access." },
+const brandFacts = [
+  { label: "Product", value: "Aurelia" },
+  { label: "What it is", value: "A protected global creation, learning and achievement platform for under-16s, with a separate 16+ alumni environment." },
+  { label: "Who it is for", value: "Families, schools, education groups and organisations, alongside the young people at the centre of it." },
+  { label: "Age model", value: "Under-16 and 16+ are structurally separate environments." },
+  { label: "Onboarding model", value: "Invitation-only, via a verified parent/guardian or a verified school." },
+  { label: "Contact route", value: "/contact-enquiry" },
 ];
 
 function AboutPage() {
@@ -79,7 +113,7 @@ function AboutPage() {
               <Link to="/safety-and-trust">See how safety works</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link to="/contact">Get in touch</Link>
+              <Link to="/contact-enquiry">Get in touch</Link>
             </Button>
           </>
         }
@@ -94,7 +128,7 @@ function AboutPage() {
             </p>
           </div>
           <SectionHeading
-            eyebrow="Why Aurelia exists"
+            eyebrow="Our mission"
             title="Creativity and recognition without the usual trade-offs"
             description="Most platforms built for creativity, community or gamified achievement were designed for adults first, with child safety added afterwards as a layer of restrictions. Aurelia starts from the opposite direction: it asks what a genuinely safe environment for a child looks like, and only then builds the creative and recognition tools inside it."
           />
@@ -102,6 +136,42 @@ function AboutPage() {
       </Section>
 
       <Section tone="muted">
+        <SplitFeature
+          image={
+            <Figure
+              src={adultsCommunity}
+              alt="Adults talking around a table in a sunlit room"
+              width={1280}
+              height={960}
+              label="Why Aurelia exists"
+            />
+          }
+        >
+          <Eyebrow>Why Aurelia exists</Eyebrow>
+          <h2 className="mt-3 font-display text-3xl leading-tight tracking-tight sm:text-4xl">
+            We think a child's creativity deserves better than a feed
+          </h2>
+          <GoldRule className="mt-6 w-20" />
+          <div className="mt-5 space-y-4 text-base leading-relaxed text-muted-foreground">
+            <p>
+              We kept noticing the same gap: children are natural makers, but almost everywhere
+              they go online to share that making, the platform is really built to hold their
+              attention rather than to develop their skill.
+            </p>
+            <p>
+              So we built something with a different starting question. Not "how do we keep them
+              here longer", but "how do we help a young person finish something real, get honest
+              feedback from an adult who cares, and walk away with proof of what they can do".
+            </p>
+            <p>
+              That question is why the boundaries are non-negotiable, not a compromise we made
+              along the way.
+            </p>
+          </div>
+        </SplitFeature>
+      </Section>
+
+      <Section>
         <SectionHeading
           eyebrow="Principles"
           title="What Aurelia is built on"
@@ -116,15 +186,52 @@ function AboutPage() {
         </div>
       </Section>
 
-      <Section>
+      <Section tone="muted">
         <SectionHeading
-          eyebrow="How it is built"
-          title="Safety-first architecture, not a safety-first policy"
-          description="Aurelia's safety commitments are backed by how the platform is actually built, not only by what its policies say."
+          eyebrow="The principles Aurelia holds"
+          title="Six commitments that do not move"
+          description="Whatever else changes as Aurelia grows, these hold."
         />
-        <div className="mt-10">
-          <CheckList items={architecture} />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {holds.map((item) => (
+            <FeatureCard key={item.title} icon={item.icon} title={item.title}>
+              {item.text}
+            </FeatureCard>
+          ))}
         </div>
+      </Section>
+
+      <Section>
+        <SplitFeature
+          reverse
+          image={
+            <Figure
+              src={passportEvidence}
+              alt="An achievement certificate with a gold seal over a project timeline"
+              width={1280}
+              height={960}
+              label="Verified achievement"
+              caption="Illustrative representation of verified achievement and its evidence trail."
+            />
+          }
+        >
+          <SectionHeading
+            eyebrow="How it is built"
+            title="Safety-first architecture, not a safety-first policy"
+            description="Aurelia's safety commitments are backed by how the platform is actually built, not only by what its policies say."
+          />
+          <div className="mt-8">
+            <CheckList
+              items={[
+                "Permissions are enforced in the database through row-level security, not only in the interface.",
+                "Under-16 and 16+ environments run as genuinely separate spaces, not the same space with a toggle.",
+                "Publication of a child's work always requires explicit guardian approval before it leaves the family.",
+                "Safeguarding reports are triaged and escalated by trained processes, not left to community moderation alone.",
+                "AI assistance is bounded, age-banded and labelled rather than open-ended.",
+              ]}
+            />
+          </div>
+        </SplitFeature>
       </Section>
 
       <Section tone="muted">
@@ -134,11 +241,18 @@ function AboutPage() {
           description="Aurelia is built for the people directly responsible for a child's safety and development, as well as for the child themselves."
         />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {audiences.map((item) => (
-            <FeatureCard key={item.title} icon={item.icon} title={item.title}>
-              {item.text}
-            </FeatureCard>
-          ))}
+          <FeatureCard icon={Users} title="Families">
+            Parents and guardians who want their child to create and be recognised for real work, with genuine oversight.
+          </FeatureCard>
+          <FeatureCard icon={GraduationCap} title="Schools">
+            Teachers who want to set meaningful briefs and verify achievement without taking on unmanaged risk.
+          </FeatureCard>
+          <FeatureCard icon={Building2} title="Education groups">
+            Multi-school organisations that need consistent safeguarding and oversight across many sites.
+          </FeatureCard>
+          <FeatureCard icon={Database} title="Organisations">
+            Bodies that want to reach young creators responsibly, through verified challenges rather than open access.
+          </FeatureCard>
         </div>
       </Section>
 
@@ -155,10 +269,24 @@ function AboutPage() {
         </div>
       </Section>
 
+      <Section tone="muted">
+        <SectionHeading eyebrow="Brand facts" title="Aurelia, in plain terms" />
+        <dl className="mt-10 grid gap-6 sm:grid-cols-2">
+          {brandFacts.map((fact) => (
+            <div key={fact.label} className="rounded-2xl border border-border/70 bg-card p-6">
+              <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                {fact.label}
+              </dt>
+              <dd className="mt-2 text-sm leading-relaxed text-foreground">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </Section>
+
       <CtaBand
         title="Tell us who you are"
         description="Whether you are a family, a school, an education group or an organisation, there is a clear route to get started with Aurelia."
-        secondary={{ label: "See enquiry routes", to: "/contact" }}
+        secondary={{ label: "See enquiry routes", to: "/contact-enquiry" }}
       />
     </PublicPage>
   );

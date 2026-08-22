@@ -19,7 +19,11 @@ import {
   Section,
   SectionHeading,
 } from "@/components/public/sections";
+import { Figure, GoldRule, SplitFeature } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+
+import passportEvidence from "@/assets/passport-evidence.jpg";
+import teacherEvidence from "@/assets/teacher-evidence.jpg";
 
 export const Route = createFileRoute("/achievement-passport")({
   head: () => ({
@@ -44,11 +48,13 @@ export const Route = createFileRoute("/achievement-passport")({
   component: AchievementPassportPage,
 });
 
-const flow = [
-  { step: "01", icon: FileCheck2, title: "Create", text: "A child completes a project, challenge entry or piece of work inside Aurelia, with drafts and context attached." },
-  { step: "02", icon: Users, title: "Guardian approves", text: "A parent or guardian reviews what was made and approves it for sharing beyond the immediate family." },
-  { step: "03", icon: GraduationCap, title: "Teacher verifies", text: "A verified educator who genuinely reviewed the work confirms the skill, effort or contribution it demonstrates." },
-  { step: "04", icon: BadgeCheck, title: "Recorded", text: "The achievement is written to the child's Achievement Passport as a durable, dated entry they keep." },
+const timeline = [
+  { title: "Drafts", text: "Early, unpolished versions of the work, kept rather than discarded." },
+  { title: "Decisions", text: "The choices made along the way — what changed, and why." },
+  { title: "Feedback", text: "Constructive comments from a named adult with a real relationship to the child." },
+  { title: "Guardian approval", text: "Explicit permission from a parent or guardian for the work to be shared and considered." },
+  { title: "Teacher verification", text: "An educator who genuinely reviewed the work confirms the skill it demonstrates." },
+  { title: "Recorded achievement", text: "A dated entry written to the Achievement Passport, with the evidence still attached." },
 ];
 
 const contains = [
@@ -57,6 +63,24 @@ const contains = [
   "The date the achievement was verified and the context it was verified in.",
   "A link back to the evidence: the drafts, the final piece, and any relevant feedback.",
   "Guardian approval status, confirming the family agreed to the achievement being recorded.",
+];
+
+const exampleCards = [
+  {
+    title: "Podcast series, three episodes",
+    role: "Verifier · Class teacher",
+    evidence: ["Running order drafts", "Recorded takes", "Family feedback notes"],
+  },
+  {
+    title: "Short stop-motion film",
+    role: "Verifier · Club supervisor",
+    evidence: ["Storyboard sketches", "Shot log", "Guardian approval record"],
+  },
+  {
+    title: "Working prototype & sketches",
+    role: "Verifier · Subject teacher",
+    evidence: ["Design sketches", "Build notes", "Reasoning behind each choice"],
+  },
 ];
 
 function AchievementPassportPage() {
@@ -76,7 +100,18 @@ function AchievementPassportPage() {
             </Button>
           </>
         }
-      />
+      >
+        <div className="mt-12 max-w-lg">
+          <Figure
+            src={passportEvidence}
+            alt="An achievement certificate with a gold seal laid over a project timeline"
+            width={1280}
+            height={960}
+            label="Illustrative example"
+            ratio="landscape"
+          />
+        </div>
+      </PageHero>
 
       <Section>
         <SectionHeading
@@ -100,38 +135,112 @@ function AchievementPassportPage() {
         </div>
       </Section>
 
+      {/* Visual evidence timeline */}
       <Section tone="muted">
         <SectionHeading
-          eyebrow="How an entry is created"
-          title="Create, approve, verify, record"
-          description="Every achievement follows the same four-step path, so families and schools always know exactly how much scrutiny sits behind an entry."
+          eyebrow="How an entry is built"
+          title="The evidence timeline behind every achievement"
+          description="Before anything is recorded, it travels through the same six stages — visible to the family and, once shared, to the verifying teacher."
         />
-        <ol className="mt-12 grid gap-4 md:grid-cols-4">
-          {flow.map((item) => (
-            <li key={item.step} className="rounded-2xl border border-border/70 bg-card p-6">
-              <span className="font-display text-sm tracking-[0.2em] text-accent-foreground">
-                {item.step}
+        <ol className="mt-12 grid gap-0 sm:grid-cols-2 lg:grid-cols-6">
+          {timeline.map((item, index) => (
+            <li key={item.title} className="relative border-t-2 border-gold/60 pt-5 sm:px-3">
+              <span className="absolute -top-[9px] start-0 size-4 rounded-full border-2 border-gold bg-card" aria-hidden="true" />
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-accent-foreground">
+                {String(index + 1).padStart(2, "0")}
               </span>
-              <item.icon className="mt-3 size-6 text-accent-foreground" aria-hidden="true" />
-              <h3 className="mt-3 font-display text-lg tracking-tight">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+              <h3 className="mt-1 font-display text-base tracking-tight">{item.title}</h3>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{item.text}</p>
             </li>
           ))}
         </ol>
       </Section>
 
       <Section>
+        <SplitFeature
+          reverse
+          image={
+            <Figure
+              src={teacherEvidence}
+              alt="A teacher and a student looking together at printed project evidence and sketches"
+              width={1280}
+              height={960}
+              label="Evidence review"
+            />
+          }
+        >
+          <SectionHeading
+            eyebrow="Teacher verification"
+            title="What verification means — and what it is not"
+            description="Verification is a professional judgement, not a mechanism. A named teacher or recognised educator reviews the drafts, the decisions and the feedback, and confirms that a specific skill was genuinely demonstrated."
+          />
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-xl border border-border/70 bg-card p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent-foreground">
+                It is
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                A deliberate, human judgement, made by someone who reviewed the actual evidence
+                behind the work.
+              </p>
+            </div>
+            <div className="rounded-xl border border-border/70 bg-card p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent-foreground">
+                It is not
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                An automatic badge for activity, and not a score, streak or ranking against other
+                children.
+              </p>
+            </div>
+          </div>
+        </SplitFeature>
+      </Section>
+
+      {/* Example achievement cards */}
+      <Section tone="muted">
         <SectionHeading
           eyebrow="What an entry contains"
           title="Evidence, not a badge icon"
-          description="A verified achievement is a small dossier, not a single graphic. Anyone with permission to view it can see exactly what it is based on."
+          description="A verified achievement is a small dossier, not a single graphic. The three cards below are illustrative examples only — no named people, schools or real submissions are shown."
         />
-        <div className="mt-10">
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {exampleCards.map((card) => (
+            <div
+              key={card.title}
+              className="flex h-full flex-col rounded-2xl border border-border/70 bg-[oklch(0.98_0.01_95)] p-6 shadow-sm"
+            >
+              <GoldRule className="w-10" />
+              <h3 className="mt-4 font-display text-lg leading-snug tracking-tight">
+                {card.title}
+              </h3>
+              <p className="mt-1 text-xs font-medium uppercase tracking-[0.12em] text-accent-foreground">
+                {card.role}
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+                {card.evidence.map((e) => (
+                  <li key={e} className="flex gap-2">
+                    <span aria-hidden="true" className="mt-1.5 size-1 shrink-0 rounded-full bg-gold" />
+                    <span>{e}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-auto pt-5 text-xs text-muted-foreground">
+                Verified · example
+              </p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-6 text-xs text-muted-foreground">
+          These cards are illustrative examples of how a verified entry is presented. They are not
+          real member achievements.
+        </p>
+        <div className="mt-8">
           <CheckList items={contains} />
         </div>
       </Section>
 
-      <Section tone="muted">
+      <Section>
         <SectionHeading
           eyebrow="Portability"
           title="A record that follows the young person, not the platform"
@@ -139,7 +248,7 @@ function AchievementPassportPage() {
         />
         <div className="mt-10 grid gap-8 lg:grid-cols-2">
           <p className="text-base leading-relaxed text-muted-foreground">
-            When a member reaches 16 and moves into the separate alumni environment, their
+            When a member reaches 16 and moves into the separate 16+ Alumni environment, their
             existing Achievement Passport carries forward intact. It can then form the basis of a
             portfolio used for further education, work experience or mentoring — evidence built up
             over years, rather than a CV written from scratch.
@@ -155,21 +264,29 @@ function AchievementPassportPage() {
         </div>
       </Section>
 
-      <Section>
+      <Section tone="ink">
         <SectionHeading
           eyebrow="What it deliberately is not"
           title="No vanity badges, no leaderboards"
           description="The passport is designed to resist the incentives that make many gamified platforms unhealthy for children."
         />
         <div className="mt-10 grid gap-4 md:grid-cols-2">
-          <FeatureCard icon={Ban} title="No automatic badges">
-            There are no achievements awarded purely for logging in, streaking or clicking through
-            content. Every entry requires a human to verify real substance.
-          </FeatureCard>
-          <FeatureCard icon={Award} title="No public leaderboards">
-            Aurelia does not rank children against each other by achievement count. The passport
-            is a personal record, not a competition.
-          </FeatureCard>
+          <div className="rounded-2xl border border-ink-foreground/15 bg-ink-foreground/5 p-6">
+            <Ban className="size-6 text-gold" aria-hidden="true" />
+            <h3 className="mt-3 font-display text-lg tracking-tight">No automatic badges</h3>
+            <p className="mt-2 text-sm leading-relaxed text-ink-foreground/75">
+              There are no achievements awarded purely for logging in, streaking or clicking
+              through content. Every entry requires a human to verify real substance.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-ink-foreground/15 bg-ink-foreground/5 p-6">
+            <Award className="size-6 text-gold" aria-hidden="true" />
+            <h3 className="mt-3 font-display text-lg tracking-tight">No public leaderboards</h3>
+            <p className="mt-2 text-sm leading-relaxed text-ink-foreground/75">
+              Aurelia does not rank children against each other by achievement count. The passport
+              is a personal record, not a competition.
+            </p>
+          </div>
         </div>
       </Section>
 

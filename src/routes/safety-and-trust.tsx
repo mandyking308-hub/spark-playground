@@ -19,7 +19,11 @@ import {
   Section,
   SectionHeading,
 } from "@/components/public/sections";
+import { Figure, GoldRule, SplitFeature } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+
+import familyReview from "@/assets/family-review.jpg";
+import classroomMaking from "@/assets/classroom-making.jpg";
 
 export const Route = createFileRoute("/safety-and-trust")({
   head: () => ({
@@ -117,11 +121,24 @@ function SafetyAndTrust() {
       />
 
       <Section>
-        <SectionHeading
-          eyebrow="The foundations"
-          title="Four decisions that shape everything else"
-          description="These are structural choices, not optional settings. They apply to every account, every piece of work and every interaction on the platform."
-        />
+        <SplitFeature
+          reverse
+          image={
+            <Figure
+              src={familyReview}
+              alt="A parent and child looking together at a drawing on a tablet, from behind"
+              width={1280}
+              height={960}
+              label="Family oversight"
+            />
+          }
+        >
+          <SectionHeading
+            eyebrow="The foundations"
+            title="Four decisions that shape everything else"
+            description="These are structural choices, not optional settings. They apply to every account, every piece of work and every interaction on the platform."
+          />
+        </SplitFeature>
         <div className="mt-12 grid gap-4 sm:grid-cols-2">
           {foundations.map((item) => (
             <FeatureCard key={item.title} icon={item.icon} title={item.title}>
@@ -154,6 +171,30 @@ function SafetyAndTrust() {
               {item.text}
             </FeatureCard>
           ))}
+        </div>
+      </Section>
+
+      <Section tone="muted">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+          <div>
+            <GoldRule className="mb-6 w-16" />
+            <h2 className="font-display text-2xl leading-snug tracking-tight sm:text-3xl">
+              Detail matters here, because a policy page is not enough
+            </h2>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
+              This page is deliberately thorough. The reassurance a family or school needs is not
+              a soft promise — it is a clear account of the specific mechanisms holding a child's
+              safety in place, so anyone can see exactly how the protection works.
+            </p>
+          </div>
+          <Figure
+            src={classroomMaking}
+            alt="A sunlit classroom of students making things, from behind"
+            width={1536}
+            height={1024}
+            ratio="wide"
+            label="Supervised making"
+          />
         </div>
       </Section>
 

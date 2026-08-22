@@ -17,7 +17,10 @@ import {
   Section,
   SectionHeading,
 } from "@/components/public/sections";
+import { Figure, GoldRule } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+
+import adultsCommunity from "@/assets/adults-community.jpg";
 
 export const Route = createFileRoute("/safeguarding-and-reporting")({
   head: () => ({
@@ -127,7 +130,7 @@ function SafeguardingAndReporting() {
         <SectionHeading
           eyebrow="What happens next"
           title="Triage, review, escalation"
-          description="Every report follows the same basic path, though the speed and depth of response depend on the urgency and level of risk involved."
+          description="Every report follows the same basic path: it is triaged by urgency and handled through human safeguarding workflows, though the speed and depth of response depend on the level of risk involved."
         />
         <ol className="mt-12 grid gap-4 md:grid-cols-4">
           {process.map((item) => (
@@ -154,29 +157,40 @@ function SafeguardingAndReporting() {
       </Section>
 
       <Section tone="muted">
-        <div className="grid gap-12 lg:grid-cols-2">
-          <SectionHeading
-            eyebrow="Confidentiality"
-            title="Your report is handled carefully"
-            description="We treat every safeguarding report as sensitive information."
-          />
-          <div className="flex flex-col gap-4">
-            <div className="flex gap-3">
-              <Lock className="mt-1 size-5 shrink-0 text-accent-foreground" aria-hidden="true" />
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                Access to a report is limited to the people who need it to investigate and act on it. We do not share
-                a reporter's identity with the person they have reported except where we are legally required to, or
-                where it is necessary to protect a child from harm.
-              </p>
-            </div>
-            <div className="flex gap-3">
-              <Search className="mt-1 size-5 shrink-0 text-accent-foreground" aria-hidden="true" />
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                You can report anonymously, though giving us a way to reach you helps us ask follow-up questions and
-                let you know the outcome where appropriate.
-              </p>
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div>
+            <GoldRule className="mb-6 w-16" />
+            <SectionHeading
+              eyebrow="Confidentiality"
+              title="Your report is handled carefully"
+              description="We treat every safeguarding report as sensitive information."
+            />
+            <div className="mt-6 flex flex-col gap-4">
+              <div className="flex gap-3">
+                <Lock className="mt-1 size-5 shrink-0 text-accent-foreground" aria-hidden="true" />
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Access to a report is limited to the people who need it to investigate and act on it. We do not share
+                  a reporter's identity with the person they have reported except where we are legally required to, or
+                  where it is necessary to protect a child from harm.
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <Search className="mt-1 size-5 shrink-0 text-accent-foreground" aria-hidden="true" />
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  You can report anonymously, though giving us a way to reach you helps us ask follow-up questions and
+                  let you know the outcome where appropriate.
+                </p>
+              </div>
             </div>
           </div>
+          <Figure
+            src={adultsCommunity}
+            alt="Adults talking around a table in a sunlit room"
+            width={1280}
+            height={960}
+            label="Human review"
+            caption="Reports are read and acted on by trained people, not resolved by an algorithm alone."
+          />
         </div>
       </Section>
 

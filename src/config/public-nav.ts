@@ -5,11 +5,13 @@ export interface PublicLink {
 }
 
 export const productLinks: PublicLink[] = [
+  { label: "Ideas & Resources", to: "/ideas-and-resources", description: "Project starters, family guides and educator brief templates." },
   { label: "Creator Studio", to: "/creator-studio", description: "Podcasts, shows, stories, art, film, games and inventions." },
-  { label: "Achievement Passport", to: "/achievement-passport", description: "Verified evidence of skills, leadership and contribution." },
   { label: "Challenges & Clubs", to: "/challenges-and-clubs", description: "Purposeful challenges and small, supervised clubs." },
+  { label: "Achievement Passport", to: "/achievement-passport", description: "Verified evidence of skills, leadership and contribution." },
   { label: "AI & Children", to: "/ai-and-children", description: "Bounded, age-banded assistance with authorship labels." },
 ];
+
 
 export const audienceLinks: PublicLink[] = [
   { label: "For Families", to: "/for-families", description: "Child creators, guardian approval and the parent layer." },
@@ -35,7 +37,7 @@ export const companyLinks: PublicLink[] = [
 ];
 
 export const primaryNav = [
-  { label: "Platform", links: productLinks },
+  { label: "Explore", links: productLinks },
   { label: "Audiences", links: audienceLinks },
   { label: "Trust", links: trustLinks },
   { label: "Company", links: companyLinks },

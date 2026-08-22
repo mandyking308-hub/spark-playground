@@ -16,7 +16,11 @@ import {
   Section,
   SectionHeading,
 } from "@/components/public/sections";
+import { Figure, GoldRule, PaperNote, SplitFeature } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+
+import adultsCommunity from "@/assets/adults-community.jpg";
+import familyReview from "@/assets/family-review.jpg";
 
 export const Route = createFileRoute("/parent-community")({
   head: () => ({
@@ -48,6 +52,7 @@ const features = [
 ];
 
 const boundaries = [
+  "No parent can browse, search or view another family's child through the parent community.",
   "The parent community has no view into a specific child's work, messages or Achievement Passport beyond what that child's own guardian shares.",
   "Children cannot see, join or be added to the parent community at any age.",
   "Membership requires the same identity verification as any adult account on Aurelia.",
@@ -59,7 +64,7 @@ function ParentCommunity() {
     <PublicPage>
       <PageHero
         eyebrow="Parent community"
-        title="A verified space for parents, kept apart from the child world"
+        title="A room for the grown-ups, once the kids are busy making things"
         description="Alongside the guardian controls every parent has over their own child's account, Aurelia offers a separate adult-only community — circles, events and a directory — with no bridge into the world their children use."
         actions={
           <>
@@ -71,13 +76,35 @@ function ParentCommunity() {
             </Button>
           </>
         }
-      />
+      >
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+          <Figure
+            src={adultsCommunity}
+            alt="A small group of adults talking around a table in a sunlit room, notebooks open"
+            width={1280}
+            height={960}
+            label="Illustrative · Parent circle"
+            priority
+          />
+          <Figure
+            src={familyReview}
+            alt="A parent and child looking together at a drawing on a tablet, seen from behind"
+            width={1280}
+            height={960}
+            label="Illustrative · At home"
+          />
+        </div>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Images are illustrative examples created for Aurelia. They are not member work and do not
+          depict identifiable people.
+        </p>
+      </PageHero>
 
       <Section>
         <SectionHeading
           eyebrow="What's inside"
           title="A community built for parents, not for children"
-          description="The parent community exists to support the adults raising the children who use Aurelia — not to extend the child experience upward."
+          description="The parent community exists to support the adults raising the children who use Aurelia — not to extend the child experience upward. It reads and feels like a room full of adults, because it is one."
         />
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {features.map((item) => (
@@ -89,20 +116,38 @@ function ParentCommunity() {
       </Section>
 
       <Section tone="muted">
-        <div className="grid gap-12 lg:grid-cols-2">
+        <SplitFeature
+          reverse
+          image={
+            <div className="space-y-4">
+              <Figure
+                src={adultsCommunity}
+                alt="Adults in conversation around a table, coffee cups and notebooks between them"
+                width={1280}
+                height={960}
+                label="Verified adults"
+              />
+              <PaperNote tone="lined">
+                Verification happens once, at account level, and applies across every community
+                feature. There is no separate signup that skips the check.
+              </PaperNote>
+            </div>
+          }
+        >
           <SectionHeading
             eyebrow="Verified adults only"
             title="Membership is verified, not open"
             description="Every member of the parent community has been through the same identity verification required of any guardian account, so the space stays trustworthy."
           />
           <CheckList
+            className="mt-6"
             items={[
               "Verification happens once, at account level, and applies across every community feature.",
               "Parents choose what to share in the directory and can withdraw at any time.",
               "Moderation staff can act on reports within the community independently of child-side moderation.",
             ]}
           />
-        </div>
+        </SplitFeature>
       </Section>
 
       <Section>
@@ -111,7 +156,8 @@ function ParentCommunity() {
           title="Where the parent community stops"
           description="The parent community is deliberately bounded so that it never becomes a way to reach or observe children beyond what their own guardian already controls."
         />
-        <div className="mt-10">
+        <GoldRule className="mt-6 w-16" />
+        <div className="mt-8">
           <CheckList items={boundaries} />
         </div>
       </Section>

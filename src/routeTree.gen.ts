@@ -25,6 +25,7 @@ import { Route as ForEducationGroupsRouteImport } from './routes/for-education-g
 import { Route as ForFamiliesRouteImport } from './routes/for-families'
 import { Route as ForOrganisationsRouteImport } from './routes/for-organisations'
 import { Route as ForSchoolsRouteImport } from './routes/for-schools'
+import { Route as IdeasAndResourcesRouteImport } from './routes/ideas-and-resources'
 import { Route as ParentCommunityRouteImport } from './routes/parent-community'
 import { Route as PrivacyForChildrenRouteImport } from './routes/privacy-for-children'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
@@ -182,6 +183,11 @@ const ForOrganisationsRoute = ForOrganisationsRouteImport.update({
 const ForSchoolsRoute = ForSchoolsRouteImport.update({
   id: '/for-schools',
   path: '/for-schools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IdeasAndResourcesRoute = IdeasAndResourcesRouteImport.update({
+  id: '/ideas-and-resources',
+  path: '/ideas-and-resources',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ParentCommunityRoute = ParentCommunityRouteImport.update({
@@ -608,6 +614,7 @@ export interface FileRoutesByFullPath {
   '/for-families': typeof ForFamiliesRoute
   '/for-organisations': typeof ForOrganisationsRoute
   '/for-schools': typeof ForSchoolsRoute
+  '/ideas-and-resources': typeof IdeasAndResourcesRoute
   '/parent-community': typeof ParentCommunityRoute
   '/privacy-for-children': typeof PrivacyForChildrenRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -702,6 +709,7 @@ export interface FileRoutesByTo {
   '/for-families': typeof ForFamiliesRoute
   '/for-organisations': typeof ForOrganisationsRoute
   '/for-schools': typeof ForSchoolsRoute
+  '/ideas-and-resources': typeof IdeasAndResourcesRoute
   '/parent-community': typeof ParentCommunityRoute
   '/privacy-for-children': typeof PrivacyForChildrenRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -799,6 +807,7 @@ export interface FileRoutesById {
   '/for-families': typeof ForFamiliesRoute
   '/for-organisations': typeof ForOrganisationsRoute
   '/for-schools': typeof ForSchoolsRoute
+  '/ideas-and-resources': typeof IdeasAndResourcesRoute
   '/parent-community': typeof ParentCommunityRoute
   '/privacy-for-children': typeof PrivacyForChildrenRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -897,6 +906,7 @@ export interface FileRouteTypes {
     | '/for-families'
     | '/for-organisations'
     | '/for-schools'
+    | '/ideas-and-resources'
     | '/parent-community'
     | '/privacy-for-children'
     | '/privacy-policy'
@@ -991,6 +1001,7 @@ export interface FileRouteTypes {
     | '/for-families'
     | '/for-organisations'
     | '/for-schools'
+    | '/ideas-and-resources'
     | '/parent-community'
     | '/privacy-for-children'
     | '/privacy-policy'
@@ -1087,6 +1098,7 @@ export interface FileRouteTypes {
     | '/for-families'
     | '/for-organisations'
     | '/for-schools'
+    | '/ideas-and-resources'
     | '/parent-community'
     | '/privacy-for-children'
     | '/privacy-policy'
@@ -1184,6 +1196,7 @@ export interface RootRouteChildren {
   ForFamiliesRoute: typeof ForFamiliesRoute
   ForOrganisationsRoute: typeof ForOrganisationsRoute
   ForSchoolsRoute: typeof ForSchoolsRoute
+  IdeasAndResourcesRoute: typeof IdeasAndResourcesRoute
   ParentCommunityRoute: typeof ParentCommunityRoute
   PrivacyForChildrenRoute: typeof PrivacyForChildrenRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
@@ -1309,6 +1322,13 @@ declare module '@tanstack/react-router' {
       path: '/for-schools'
       fullPath: '/for-schools'
       preLoaderRoute: typeof ForSchoolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ideas-and-resources': {
+      id: '/ideas-and-resources'
+      path: '/ideas-and-resources'
+      fullPath: '/ideas-and-resources'
+      preLoaderRoute: typeof IdeasAndResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/parent-community': {
@@ -2030,6 +2050,7 @@ const rootRouteChildren: RootRouteChildren = {
   ForFamiliesRoute: ForFamiliesRoute,
   ForOrganisationsRoute: ForOrganisationsRoute,
   ForSchoolsRoute: ForSchoolsRoute,
+  IdeasAndResourcesRoute: IdeasAndResourcesRoute,
   ParentCommunityRoute: ParentCommunityRoute,
   PrivacyForChildrenRoute: PrivacyForChildrenRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
