@@ -19,8 +19,10 @@ import {
   interests,
   projectStarters,
   resourceCards,
+  resourceTypes,
   type AgeBand,
   type Interest,
+  type ResourceType,
 } from "@/data/ideas-resources";
 
 import designDesk from "@/assets/design-desk.jpg";
@@ -53,6 +55,13 @@ export const Route = createFileRoute("/ideas-and-resources")({
 function IdeasAndResources() {
   const [age, setAge] = useState<AgeBand | "All">("All");
   const [interest, setInterest] = useState<Interest | "All">("All");
+  const [resourceType, setResourceType] = useState<ResourceType | "All">("All");
+
+  const filteredResources = useMemo(
+    () =>
+      resourceCards.filter((card) => resourceType === "All" || card.type === resourceType),
+    [resourceType],
+  );
 
   const filtered = useMemo(
     () =>
@@ -249,8 +258,34 @@ function IdeasAndResources() {
           title="Practical help for families and educators"
           description="Short, usable guidance written for the people who sit beside young makers — plus static brief templates educators can adapt."
         />
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {resourceCards.map((card) => (
+        <fieldset className="mt-8">
+          <legend className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            Resource type
+          </legend>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {(["All", ...resourceTypes] as const).map((item) => (
+              <button
+                key={item}
+                type="button"
+                aria-pressed={resourceType === item}
+                onClick={() => setResourceType(item)}
+                className={cn(
+                  "rounded-full border border-border bg-card px-3.5 py-1.5 text-sm transition-colors hover:border-gold",
+                  resourceType === item && "border-gold bg-gold-soft font-medium",
+                )}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+        <p aria-live="polite" className="mt-5 text-sm text-muted-foreground">
+          Showing {filteredResources.length} of {resourceCards.length} resources. Everything here is
+          an example resource written by Aurelia — never member or customer work.
+        </p>
+
+        <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {filteredResources.map((card) => (
             <article
               key={card.id}
               className="brand-card flex flex-col rounded-2xl border border-border/70 bg-card p-6"
@@ -264,7 +299,9 @@ function IdeasAndResources() {
                   <BookOpen className="size-5" aria-hidden="true" />
                 )}
               </span>
-              <Eyebrow className="mt-4">{card.audience}</Eyebrow>
+              <Eyebrow className="mt-4">
+                {card.type} · {card.audience}
+              </Eyebrow>
               <h3 className="mt-2 font-display text-lg leading-snug tracking-tight">
                 {card.title}
               </h3>
