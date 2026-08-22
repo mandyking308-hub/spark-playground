@@ -338,21 +338,43 @@ function ChallengesAndClubsPage() {
       </Section>
 
 
-      <Section>
+      <Section tone="muted">
         <SectionHeading
           eyebrow="The organisation boundary"
-          title="An organisation sets challenges. It never meets a child directly."
-          description="Organisations take part in Aurelia entirely through institutional workflows — publishing a brief, reviewing entries with named reviewers, and providing recognition. They never gain any other access to children."
+          title="An organisation can sponsor a challenge. It never meets the child who answers it."
+          description="Verified organisations can sponsor approved challenge and content workflows — funding a prize, setting a brief in their field, offering recognition. That sponsorship runs entirely through institutional workflows and grants no other access to children."
         />
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-border/70 bg-card p-6">
+            <ShieldCheck className="size-5 text-accent-foreground" aria-hidden="true" />
+            <h3 className="mt-4 font-display text-lg tracking-tight">
+              What a sponsoring organisation can do
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              Propose an approved brief, supply approved supporting content, provide named
+              reviewers for judging, and offer recognition that a verified teacher can turn into a
+              Passport achievement.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-dashed border-border bg-background p-6">
+            <UserRoundX className="size-5 text-muted-foreground" aria-hidden="true" />
+            <h3 className="mt-4 font-display text-lg tracking-tight">
+              What sponsorship never unlocks
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              No direct contact with a child, no browsing or searching children, no contact details,
+              no bypassing a family's control over their child's work. Every entry remains the
+              guardian's decision to share.
+            </p>
+          </div>
+        </div>
         <div className="mt-8">
-          <ShieldCheck className="size-6 text-accent-foreground" aria-hidden="true" />
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            Organisations and schools setting challenges do not gain any ability to bypass a
-            family's control over their child's work, contact a child privately, or browse a
-            directory of children. Every entry is still the guardian's decision to share.
-          </p>
+          <Button asChild variant="outline">
+            <Link to="/for-organisations">How organisation partnerships work</Link>
+          </Button>
         </div>
       </Section>
+
 
       <CtaBand
         title="Bring a challenge or club to Aurelia"
