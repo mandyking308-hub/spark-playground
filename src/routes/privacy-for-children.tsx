@@ -6,13 +6,13 @@ import { LegalPage } from "@/components/public/sections";
 export const Route = createFileRoute("/privacy-for-children")({
   head: () => ({
     meta: [
-      { title: "Privacy For Children — Aurelia" },
+      { title: "Your privacy, explained simply — Aurelia" },
       {
         name: "description",
         content:
           "A simple, plain-language explanation of privacy on Aurelia, written for young people to read and understand.",
       },
-      { property: "og:title", content: "Privacy For Children — Aurelia" },
+      { property: "og:title", content: "Your privacy, explained simply — Aurelia" },
       {
         property: "og:description",
         content:
