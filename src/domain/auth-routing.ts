@@ -38,6 +38,10 @@ const childOnly = new Set([
   "/dashboard/club-space",
 ]);
 
+const childExperiencePreview = new Set([
+  "/dashboard/child-preview",
+]);
+
 const parentOnly = new Set([
   "/dashboard/parent",
   "/dashboard/parent-community",
@@ -137,6 +141,17 @@ export function canEnterDashboardPath(role: PlatformRole, pathname: string): boo
   if (pathname === "/dashboard" || pathname === "/dashboard/") return true;
 
   if (childOnly.has(pathname)) return role === "child";
+  if (childExperiencePreview.has(pathname)) {
+    return [
+      "parent",
+      "parent_alumni",
+      "teacher",
+      "school_admin",
+      "group_admin",
+      "organisation_admin",
+      "platform_admin",
+    ].includes(role);
+  }
   if (parentOnly.has(pathname)) return role === "parent";
   if (parentAlumniOnly.has(pathname)) return role === "parent_alumni";
   if (parentAdultShared.has(pathname)) return role === "parent" || role === "parent_alumni";
