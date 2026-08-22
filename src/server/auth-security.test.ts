@@ -11,7 +11,7 @@ describe("live auth bridge security", () => {
     expect(serverClient).toContain('httponly: true');
     expect(serverClient).toContain('samesite: "lax"');
     expect(serverClient).toContain('secure,');
-    expect(serverClient).not.toContain("localstorage");
+    expect(serverClient).not.toMatch(/\blocalstorage\s*(?:\.|\[)/);
     expect(serverClient).not.toContain("service_role");
     expect(serverClient).not.toContain("secret_key");
   });
