@@ -1,0 +1,237 @@
+import { useEffect, type ReactNode } from "react";
+import { useRouterState } from "@tanstack/react-router";
+
+declare global {
+  interface Window {
+    gtranslateSettings?: Record<string, unknown>;
+  }
+}
+
+const SCRIPT_ID = "aurelia-world-gtranslate-script";
+const RESET_GUARD_KEY = "aurelia-world-gtranslate-private-reset";
+
+/**
+ * GTranslate is deliberately limited to public, non-sensitive Aurelia World pages.
+ * It must never load on authenticated areas, account creation/sign-in, safeguarding
+ * reports or contact/intake forms because rendered private/sensitive content must
+ * not be exposed to an external page-translation service.
+ */
+const EXCLUDED_ROUTE_PREFIXES = [
+  "/auth",
+  "/dashboard",
+  "/alumni",
+  "/contact-enquiry",
+  "/report-concern",
+] as const;
+
+const SENSITIVE_SELECTOR = [
+  "input",
+  "textarea",
+  "select",
+  "option",
+  '[contenteditable="true"]',
+  "code",
+  "pre",
+  "[data-notranslate]",
+  'a[href^="mailto:"]',
+  'a[href^="tel:"]',
+  'iframe[src*="dodo" i]',
+  'iframe[name*="dodo" i]',
+  'iframe[title*="card" i]',
+  'iframe[title*="payment" i]',
+].join(",");
+
+const SENSITIVE_TERMS = [
+  "password",
+  "passcode",
+  "one-time-code",
+  "otp",
+  "api-key",
+  "api_key",
+  "token",
+  "secret",
+  "account-number",
+  "account_number",
+  "sort-code",
+  "sort_code",
+  "card-number",
+  "card_number",
+  "payment",
+  "billing",
+  "banking",
+  "safeguarding",
+  "concern",
+] as const;
+
+const BRAND_TERMS = new Set([
+  "Aurelia",
+  "Aurelia World",
+  "AURELIA",
+  "AURELIA WORLD",
+  "Create · Learn · Achieve",
+]);
+
+function isExcludedRoute(pathname: string) {
+  return EXCLUDED_ROUTE_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
+}
+
+function markNoTranslate(element: Element) {
+  element.setAttribute("translate", "no");
+  element.classList.add("notranslate");
+}
+
+function protectSensitiveNodes(root: ParentNode | Element = document) {
+  const elements = new Set<Element>();
+
+  if (root instanceof Element) elements.add(root);
+  root.querySelectorAll(SENSITIVE_SELECTOR).forEach((element) => elements.add(element));
+  elements.forEach((element) => {
+    if (element.matches(SENSITIVE_SELECTOR)) markNoTranslate(element);
+  });
+
+  root
+    .querySelectorAll<HTMLElement>("[id], [name], [autocomplete], [placeholder], [aria-label]")
+    .forEach((element) => {
+      const descriptor = [
+        element.id,
+        element.getAttribute("name"),
+        element.getAttribute("autocomplete"),
+        element.getAttribute("placeholder"),
+        element.getAttribute("aria-label"),
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      if (SENSITIVE_TERMS.some((term) => descriptor.includes(term))) {
+        markNoTranslate(element);
+      }
+    });
+
+  root
+    .querySelectorAll<HTMLElement>("h1, h2, h3, h4, h5, h6, a, span, strong, b, small")
+    .forEach((element) => {
+      if (BRAND_TERMS.has((element.textContent || "").trim())) {
+        markNoTranslate(element);
+      }
+    });
+}
+
+function hasTranslationState() {
+  return (
+    document.cookie.includes("googtrans=") ||
+    document.documentElement.classList.contains("translated-ltr") ||
+    document.documentElement.classList.contains("translated-rtl") ||
+    document.body.classList.contains("translated-ltr") ||
+    document.body.classList.contains("translated-rtl")
+  );
+}
+
+function expireTranslationCookies() {
+  const host = window.location.hostname;
+  const domains = ["", host, `.${host}`];
+
+  for (const name of ["googtrans", "googtransopt"]) {
+    for (const domain of domains) {
+      document.cookie = `${name}=; Max-Age=0; path=/;${domain ? ` domain=${domain};` : ""} SameSite=Lax`;
+    }
+  }
+}
+
+function removeTranslationChrome() {
+  document.getElementById(SCRIPT_ID)?.remove();
+  document
+    .querySelectorAll(
+      ".gt_float_switcher, .gt_switcher_wrapper, iframe.goog-te-banner-frame, .goog-te-banner-frame",
+    )
+    .forEach((element) => element.remove());
+
+  document.documentElement.classList.remove("translated-ltr", "translated-rtl");
+  document.body.classList.remove("translated-ltr", "translated-rtl");
+  document.documentElement.style.removeProperty("top");
+  document.body.style.removeProperty("top");
+}
+
+export function PublicGTranslate({ children }: { children: ReactNode }) {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const excluded = isExcludedRoute(pathname);
+
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+
+    if (excluded) {
+      const translationWasActive = hasTranslationState();
+      removeTranslationChrome();
+      expireTranslationCookies();
+      delete window.gtranslateSettings;
+
+      if (
+        translationWasActive &&
+        sessionStorage.getItem(RESET_GUARD_KEY) !== currentPath
+      ) {
+        sessionStorage.setItem(RESET_GUARD_KEY, currentPath);
+        window.location.reload();
+        return;
+      }
+
+      sessionStorage.removeItem(RESET_GUARD_KEY);
+      return;
+    }
+
+    sessionStorage.removeItem(RESET_GUARD_KEY);
+    protectSensitiveNodes(document);
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        mutation.addedNodes.forEach((node) => {
+          if (node instanceof Element) protectSensitiveNodes(node);
+        });
+      }
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+
+    window.gtranslateSettings = {
+      default_language: "en",
+      detect_browser_language: false,
+      all_languages: true,
+      wrapper_selector: ".gtranslate_wrapper",
+      flag_style: "3d",
+      flag_size: 24,
+      switcher_horizontal_position: "right",
+      switcher_vertical_position: "bottom",
+      switcher_open_direction: "top",
+      alt_flags: {},
+      native_language_names: true,
+    };
+
+    if (!document.getElementById(SCRIPT_ID)) {
+      const script = document.createElement("script");
+      script.id = SCRIPT_ID;
+      script.src = "https://cdn.gtranslate.net/widgets/latest/float.js";
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+
+    return () => {
+      observer.disconnect();
+      removeTranslationChrome();
+      delete window.gtranslateSettings;
+    };
+  }, [excluded, pathname]);
+
+  return (
+    <>
+      {children}
+      {!excluded && (
+        <div
+          className="gtranslate_wrapper notranslate"
+          translate="no"
+          data-notranslate
+          aria-label="Website language selector"
+        />
+      )}
+    </>
+  );
+}
