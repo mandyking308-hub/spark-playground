@@ -24,16 +24,23 @@ export function SiteHeader() {
         </Link>
 
         <nav aria-label="Main" className="ml-4 hidden items-center gap-1 lg:flex">
-          {primaryNav.map((group) => (
+          {primaryNav.map((group) => {
+            const prominent = group.label === "Explore";
+            return (
             <div key={group.label} className="group relative">
               <button
                 type="button"
-                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className={
+                  prominent
+                    ? "rounded-full border border-gold/60 bg-gold-soft/60 px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:border-gold"
+                    : "rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                }
                 aria-haspopup="true"
               >
                 {group.label}
               </button>
               <div className="invisible absolute start-0 top-full z-50 w-80 translate-y-1 rounded-xl border border-border bg-popover p-2 opacity-0 shadow-lg transition-[opacity,visibility] group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+
                 {group.links.map((link) => (
                   <Link
                     key={link.to}
