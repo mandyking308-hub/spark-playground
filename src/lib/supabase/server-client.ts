@@ -6,7 +6,7 @@ import { currentPublicRuntimeConfig } from "@/config/runtime";
 
 /**
  * Aurelia keeps Supabase session tokens in server-managed cookies rather than
- * browser localStorage. The browser receives no service-role credential and
+ * browser-managed persistent storage. The browser receives no service-role credential and
  * authorization remains enforced by the live database RLS policies.
  */
 export const getSupabaseServerClient = createServerOnlyFn(() => {
