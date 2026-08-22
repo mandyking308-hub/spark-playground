@@ -1,5 +1,5 @@
-const CACHE_NAME = "aurelia-static-shell-v1";
-const STATIC_SHELL = ["/offline.html", "/manifest.webmanifest", "/favicon.ico"];
+const CACHE_NAME = "aurelia-static-shell-v2";
+const STATIC_SHELL = ["/offline.html", "/manifest.webmanifest", "/favicon.ico", "/favicon.svg"];
 
 function isSafeStaticPath(pathname) {
   return pathname.startsWith("/assets/") || STATIC_SHELL.includes(pathname);
