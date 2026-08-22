@@ -63,28 +63,14 @@ const timeline = [
 const contains = [
   "What was made, and in which discipline of the Creator Studio, a challenge or a club.",
   "Who verified it — a named, school-affiliated teacher or recognised educator, not an algorithm.",
+  "Issuer provenance: the verifier's role and setting at the moment of verification, stored with the entry.",
   "The date the achievement was verified and the context it was verified in.",
   "A link back to the evidence: the drafts, the final piece, and any relevant feedback.",
   "Guardian approval status, confirming the family agreed to the achievement being recorded.",
+  "An audit trail — an entry can be revoked or corrected, and that action is recorded too.",
 ];
 
-const exampleCards = [
-  {
-    title: "Podcast series, three episodes",
-    role: "Verifier · Class teacher",
-    evidence: ["Running order drafts", "Recorded takes", "Family feedback notes"],
-  },
-  {
-    title: "Short stop-motion film",
-    role: "Verifier · Club supervisor",
-    evidence: ["Storyboard sketches", "Shot log", "Guardian approval record"],
-  },
-  {
-    title: "Working prototype & sketches",
-    role: "Verifier · Subject teacher",
-    evidence: ["Design sketches", "Build notes", "Reasoning behind each choice"],
-  },
-];
+
 
 function AchievementPassportPage() {
   return (
