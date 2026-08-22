@@ -408,21 +408,27 @@ function Home() {
             title="From a half-formed idea to something that counts"
             description="Every project in Aurelia travels the same route. Nothing skips a step, and nothing is published because it was popular."
           />
-          <ol className="mt-8 space-y-4">
+          <ol className="relative mt-8 space-y-5 ps-8">
+            <span
+              aria-hidden="true"
+              className="absolute bottom-3 start-[0.68rem] top-3 w-px bg-gradient-to-b from-gold via-gold/50 to-transparent"
+            />
             {journey.map((item) => (
-              <li key={item.step} className="flex gap-4">
-                <span className="mt-1 font-display text-sm tracking-[0.2em] text-accent-foreground">
+              <li key={item.step} className="relative">
+                <span
+                  aria-hidden="true"
+                  className="absolute -start-8 top-1 flex size-6 items-center justify-center rounded-full border border-gold/60 bg-card text-[0.6rem] font-semibold tracking-tight text-accent-foreground"
+                >
                   {item.step}
                 </span>
-                <span>
-                  <span className="block font-medium">{item.title}</span>
-                  <span className="mt-0.5 block text-sm leading-relaxed text-muted-foreground">
-                    {item.text}
-                  </span>
+                <span className="block font-medium">{item.title}</span>
+                <span className="mt-0.5 block text-sm leading-relaxed text-muted-foreground">
+                  {item.text}
                 </span>
               </li>
             ))}
           </ol>
+
           <div className="mt-8">
             <Button asChild variant="outline">
               <Link to="/achievement-passport">See the Achievement Passport</Link>
