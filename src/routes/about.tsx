@@ -24,6 +24,7 @@ import {
 } from "@/components/public/sections";
 import { Figure, GoldRule, SplitFeature } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
+import { compareModel } from "@/data/ideas-resources";
 
 import adultsCommunity from "@/assets/adults-community.jpg";
 import passportEvidence from "@/assets/passport-evidence.jpg";
@@ -269,7 +270,53 @@ function AboutPage() {
         </div>
       </Section>
 
-      <Section tone="muted">
+      <Section id="compare" tone="muted">
+        <SectionHeading
+          eyebrow="Compare the model"
+          title="How this differs from the two places children already are"
+          description="A measured comparison of design intent — an ordinary social platform, an ordinary school portal, and Aurelia. No products are named, and this describes how each model is typically designed rather than any specific service."
+        />
+        <div className="mt-10 overflow-x-auto rounded-2xl border border-border/70 bg-card">
+          <table className="w-full min-w-[46rem] border-collapse text-left text-sm">
+            <caption className="sr-only">
+              Comparison of ordinary social media, an ordinary school portal and Aurelia across
+              purpose, child identity, adult access, feedback, achievement, AI, data and turning 16.
+            </caption>
+            <thead>
+              <tr className="border-b border-border bg-muted/50">
+                <th scope="col" className="px-5 py-4 font-display text-sm tracking-tight">
+                  Dimension
+                </th>
+                <th scope="col" className="px-5 py-4 font-display text-sm tracking-tight">
+                  Ordinary social media
+                </th>
+                <th scope="col" className="px-5 py-4 font-display text-sm tracking-tight">
+                  Ordinary school portal
+                </th>
+                <th scope="col" className="px-5 py-4 font-display text-sm tracking-tight text-foreground">
+                  Aurelia
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {compareModel.map((row) => (
+                <tr key={row.dimension} className="border-b border-border/60 last:border-0">
+                  <th scope="row" className="px-5 py-4 align-top font-medium text-foreground">
+                    {row.dimension}
+                  </th>
+                  <td className="px-5 py-4 align-top text-muted-foreground">{row.social}</td>
+                  <td className="px-5 py-4 align-top text-muted-foreground">{row.portal}</td>
+                  <td className="bg-gold-soft/40 px-5 py-4 align-top text-foreground">
+                    {row.aurelia}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      <Section>
         <SectionHeading eyebrow="Brand facts" title="Aurelia, in plain terms" />
         <dl className="mt-10 grid gap-6 sm:grid-cols-2">
           {brandFacts.map((fact) => (
