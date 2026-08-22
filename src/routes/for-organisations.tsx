@@ -176,11 +176,11 @@ function ForOrganisations() {
 
       <Section>
         <SectionHeading
-          eyebrow="Review and approval"
+          eyebrow="The institutional workflow"
           title="Nothing reaches a young person unreviewed"
-          description="Every challenge or opportunity an organisation proposes passes through verification and review before it is visible to a single school or family."
+          description="Five steps, in order, from verifying an organisation to reporting on what a programme achieved. There is no shortcut between any two of them."
         />
-        <ol className="mt-12 grid gap-4 md:grid-cols-4">
+        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {process.map((item) => (
             <li key={item.step} className="rounded-2xl border border-border/70 bg-card p-6">
               <span className="font-display text-sm tracking-[0.2em] text-accent-foreground">{item.step}</span>
@@ -190,6 +190,32 @@ function ForOrganisations() {
           ))}
         </ol>
       </Section>
+
+      {/* Aggregate reporting */}
+      <Section tone="muted">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center">
+          <Figure
+            src={inventionPrototype}
+            alt="A cardboard and electronics prototype beside annotated design sketches on a workbench"
+            width={1024}
+            height={1024}
+            ratio="landscape"
+            label="Illustrative · Programme outcome"
+          />
+          <div>
+            <SectionHeading
+              eyebrow="Reporting"
+              title="You learn what your programme achieved, not who took part"
+              description="Verified organisations receive aggregate and approved programme reporting — enough to understand and evidence impact, never enough to identify or reach an individual child."
+            />
+            <GoldRule className="mt-6 w-16" />
+            <div className="mt-8">
+              <CheckList items={reporting} />
+            </div>
+          </div>
+        </div>
+      </Section>
+
 
       <Section tone="muted">
         <SectionHeading
