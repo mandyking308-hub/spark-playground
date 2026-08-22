@@ -23,10 +23,12 @@ import {
 import {
   Figure,
   GoldRule,
+  ObjectGlyph,
   PaperNote,
   SplitFeature,
   WaveformStrip,
 } from "@/components/public/editorial";
+
 import { Button } from "@/components/ui/button";
 
 import heroPodcast from "@/assets/hero-podcast.jpg";
