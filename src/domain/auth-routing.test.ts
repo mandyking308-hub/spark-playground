@@ -35,6 +35,7 @@ describe("authenticated route boundaries", () => {
       "/dashboard/group",
       "/dashboard/organisation-admin",
       "/dashboard/safeguarding",
+      "/dashboard/invitations",
     ]) {
       expect(canEnterDashboardPath("child", path)).toBe(false);
     }
@@ -61,5 +62,15 @@ describe("authenticated route boundaries", () => {
     expect(canEnterDashboardPath("school_admin", "/dashboard/safeguarding")).toBe(true);
     expect(canEnterDashboardPath("group_admin", "/dashboard/safeguarding")).toBe(true);
     expect(canEnterDashboardPath("parent", "/dashboard/safeguarding")).toBe(false);
+  });
+
+  test("limits invitation administration to verified issuers", () => {
+    expect(canEnterDashboardPath("parent", "/dashboard/invitations")).toBe(true);
+    expect(canEnterDashboardPath("school_admin", "/dashboard/invitations")).toBe(true);
+    expect(canEnterDashboardPath("platform_admin", "/dashboard/invitations")).toBe(true);
+
+    for (const role of ["child", "parent_alumni", "teacher", "group_admin", "organisation_admin", "alumni", "mentor"] as const) {
+      expect(canEnterDashboardPath(role, "/dashboard/invitations")).toBe(false);
+    }
   });
 });
