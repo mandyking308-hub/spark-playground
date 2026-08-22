@@ -235,7 +235,7 @@ export type ResourceType = (typeof resourceTypes)[number];
 export interface ResourceCard {
   id: string;
   title: string;
-  type: Exclude<ResourceType, "Project starters">;
+  type: ResourceType;
   audience: "Families" | "Educators" | "Both";
   summary: string;
   points: string[];
