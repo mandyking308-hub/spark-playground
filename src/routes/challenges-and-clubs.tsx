@@ -228,17 +228,90 @@ function ChallengesAndClubsPage() {
           title="What challenges and clubs deliberately do not include"
           description="The features that make many online communities unsafe for children are simply not present in Aurelia's design."
         />
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          <FeatureCard icon={MessageCircleOff} title="No open messaging">
-            Communication about a project happens through structured feedback tied to the work,
-            not free-form chat.
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <FeatureCard icon={MessageCircleOff} title="No child direct messages">
+            There is no private messaging between children, and no route for an adult outside a
+            child's verified circle to open a conversation with them. Communication about a project
+            happens through structured feedback tied to the work.
           </FeatureCard>
-          <FeatureCard icon={Ban} title="No popularity metrics">
-            Aurelia does not surface follower counts or public rankings that could turn
-            creativity into a competition for attention.
+          <FeatureCard icon={Ban} title="No follower or popularity counts">
+            No followers, no likes, no vote tallies and no public ranking of entrants. A challenge
+            result is a judged outcome, not a competition for attention.
+          </FeatureCard>
+          <FeatureCard icon={UserRoundX} title="No open child directory">
+            Children are not browsable, searchable or listed anywhere — not by other children, not
+            by clubs, and not by the organisations sponsoring a challenge.
+          </FeatureCard>
+          <FeatureCard icon={AtSign} title="No contact details shared">
+            Email addresses, phone numbers, handles and locations are never exposed through a club
+            or a challenge entry, in either direction.
+          </FeatureCard>
+          <FeatureCard icon={ListOrdered} title="No feed and no endless scroll">
+            Clubs and challenges are bounded spaces with a purpose and a deadline, not an infinite
+            stream ranked to keep a young person scrolling.
+          </FeatureCard>
+          <FeatureCard icon={UserCheck} title="No unsupervised space">
+            Every club and every challenge review sits with a named, accountable adult. There is no
+            corner of this area without adult responsibility attached to it.
           </FeatureCard>
         </div>
       </Section>
+
+      {/* What a judge actually sees */}
+      <Section>
+        <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-start">
+          <div>
+            <SectionHeading
+              eyebrow="Judging"
+              title="A judge sees the work. Not the child."
+              description="When an entry reaches a challenge reviewer, it arrives stripped of anything that identifies the young person behind it. Judging is an assessment of a piece of work against a brief — it is never an introduction."
+            />
+            <GoldRule className="mt-6 w-16" />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild variant="outline">
+                <Link to="/ideas-and-resources">Ideas &amp; Resources</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/creator-studio">See the Creator Studio</Link>
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-border/70 bg-card p-6">
+              <Eye className="size-5 text-accent-foreground" aria-hidden="true" />
+              <h3 className="mt-4 font-display text-lg tracking-tight">What a judge sees</h3>
+              <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-muted-foreground">
+                {judgeSees.map((item) => (
+                  <li key={item} className="flex gap-2.5">
+                    <span
+                      aria-hidden="true"
+                      className="mt-2 size-1.5 shrink-0 rounded-full bg-accent-foreground"
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-dashed border-border bg-muted/40 p-6">
+              <EyeOff className="size-5 text-muted-foreground" aria-hidden="true" />
+              <h3 className="mt-4 font-display text-lg tracking-tight">What a judge never sees</h3>
+              <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-muted-foreground">
+                {judgeNeverSees.map((item) => (
+                  <li key={item} className="flex gap-2.5">
+                    <span
+                      aria-hidden="true"
+                      className="mt-[0.6rem] h-px w-3 shrink-0 bg-muted-foreground/60"
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Section>
+
 
       <Section>
         <SectionHeading
