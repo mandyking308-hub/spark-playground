@@ -1,8 +1,20 @@
-import { Outlet, Link, createFileRoute, useRouterState } from "@tanstack/react-router";
+import { Outlet, Link, createFileRoute, redirect, useRouterState } from "@tanstack/react-router";
 
+import { SignOutButton } from "@/components/auth/sign-out-button";
+import { RoleSwitcher } from "@/components/layout/role-switcher";
 import { Button } from "@/components/ui/button";
+import { authenticatedHomeForRole, canEnterAlumniExperience } from "@/domain/auth-routing";
+import { getCurrentActorFn } from "@/functions/auth";
 
 export const Route = createFileRoute("/alumni")({
+  beforeLoad: async () => {
+    const actor = await getCurrentActorFn();
+    if (!actor) throw redirect({ to: "/auth/sign-in" });
+    if (!canEnterAlumniExperience(actor.role)) {
+      throw redirect({ to: authenticatedHomeForRole(actor.role) });
+    }
+    return { actor };
+  },
   component: AlumniLayout,
 });
 
@@ -15,6 +27,7 @@ const alumniLinks = [
 
 function AlumniLayout() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const { actor } = Route.useRouteContext();
 
   return (
     <div className="dark min-h-screen bg-background text-foreground">
@@ -35,8 +48,9 @@ function AlumniLayout() {
           </nav>
 
           <div className="ml-auto flex items-center gap-2">
-            <Button asChild variant="ghost" size="sm"><Link to="/dashboard">Under-16 platform</Link></Button>
-            <Button asChild size="sm"><Link to="/auth/sign-in">Sign in</Link></Button>
+            <span className="hidden max-w-40 truncate text-xs text-muted-foreground md:inline">{actor.displayName}</span>
+            <RoleSwitcher role={actor.role} />
+            <SignOutButton />
           </div>
         </div>
       </header>

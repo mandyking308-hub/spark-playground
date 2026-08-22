@@ -1,15 +1,22 @@
 import { describe, expect, test } from "bun:test";
 
-import { resolvePublicRuntimeConfig } from "./runtime";
+import { DEDICATED_AURELIA_PUBLIC_RUNTIME, resolvePublicRuntimeConfig } from "./runtime";
 
 describe("public runtime configuration", () => {
-  test("supports disconnected preview mode", () => {
+  test("supports disconnected preview mode at the pure resolver boundary", () => {
     expect(resolvePublicRuntimeConfig({})).toEqual({
       supabaseUrl: undefined,
       supabasePublishableKey: undefined,
       supabaseProjectRef: undefined,
       backendConnected: false,
     });
+  });
+
+  test("pins the application fallback to the dedicated Aurelia project", () => {
+    expect(DEDICATED_AURELIA_PUBLIC_RUNTIME.backendConnected).toBe(true);
+    expect(DEDICATED_AURELIA_PUBLIC_RUNTIME.supabaseProjectRef).toBe("boybpjenlqtchsvhncgl");
+    expect(DEDICATED_AURELIA_PUBLIC_RUNTIME.supabaseUrl).toBe("https://boybpjenlqtchsvhncgl.supabase.co");
+    expect(DEDICATED_AURELIA_PUBLIC_RUNTIME.supabasePublishableKey).toMatch(/^sb_publishable_/);
   });
 
   test("requires URL, publishable key and dedicated project ref together", () => {
