@@ -3,6 +3,10 @@ import {
   ArrowRightLeft,
   BriefcaseBusiness,
   FolderOpenDot,
+  GraduationCap,
+  Hammer,
+  Lock,
+  Rocket,
   Users,
   UserRoundSearch,
 } from "lucide-react";
@@ -47,18 +51,28 @@ export const Route = createFileRoute("/alumni-world")({
 });
 
 const pillars = [
-  { icon: FolderOpenDot, title: "Portfolio", text: "Everything verified on the Achievement Passport, and everything created since, carries forward into a portfolio the alumnus now owns and controls outright." },
-  { icon: BriefcaseBusiness, title: "Opportunities", text: "Work experience, further study routes and early career opportunities suited to a 16 to 18-year-old, curated with the same care as the challenges they grew up with." },
-  { icon: UserRoundSearch, title: "Mentoring", text: "Access to mentors — adults who can offer guidance on a craft, a subject or a career path, in a structured and moderated setting." },
-  { icon: Users, title: "Community", text: "A community of peers at the same stage of life, with the open discussion and social features that would not be appropriate for a younger audience." },
+  { icon: FolderOpenDot, title: "Portfolio", text: "Selected Passport achievements and portfolio pieces the member chose to bring forward, plus everything created since — a body of work the alumnus now owns and controls outright." },
+  { icon: BriefcaseBusiness, title: "Opportunities", text: "Routes into further study, apprenticeships, early work and accelerator programmes, posted only by opportunity providers Aurelia has verified." },
+  { icon: UserRoundSearch, title: "Mentoring", text: "Adult-to-adult mentoring: guidance on a craft, a subject or a career path from verified adults, in a structured and moderated setting." },
+  { icon: Users, title: "Community", text: "A community of verified peers at the same stage of life, with discussion appropriate to adults and entirely separate from the under-16 world." },
+];
+
+const providers = [
+  { icon: GraduationCap, title: "Universities & colleges", text: "Admissions and outreach teams sharing routes, open days and portfolio guidance with 16+ members." },
+  { icon: BriefcaseBusiness, title: "Employers", text: "Verified employers posting early-career roles, work experience and insight days appropriate to 16 to 18-year-olds." },
+  { icon: Hammer, title: "Apprenticeship providers", text: "Recognised providers listing apprenticeship routes, entry requirements and application windows." },
+  { icon: Rocket, title: "Accelerators & programmes", text: "Creative, enterprise and research programmes offering structured places to keep building on their work." },
 ];
 
 const transition = [
   "The move to Alumni happens at 16, on a schedule the young person and their guardian can see coming in advance.",
   "It is a deliberate, one-way step into a new environment — not an automatic merge of the child account into an adult one.",
-  "The young person chooses what carries forward: selected portfolio pieces and Passport history, not a wholesale copy of the child account.",
+  "The young person chooses what carries forward: specifically selected portfolio pieces and Passport achievements, item by item.",
+  "Private childhood records — unpublished drafts, wellbeing notes, safeguarding records and family correspondence — never transfer automatically, and are not part of the Alumni account.",
   "Once in the Alumni world, the account is the young person's own, with adult-level control over privacy and sharing.",
+  "Alumni membership is an adult status. It never grants access to the under-16 world, to any child's work, or to any child member.",
 ];
+
 
 function AlumniWorld() {
   return (
@@ -172,13 +186,44 @@ function AlumniWorld() {
         </div>
       </Section>
 
+      {/* Verified opportunity providers */}
       <Section tone="muted">
         <SectionHeading
-          eyebrow="Community and mentoring"
-          title="Adult community, adult moderation"
-          description="The Alumni community operates under moderation appropriate to its members' age — more open discussion, direct connection between peers, and mentoring relationships with vetted adults — while still holding to Aurelia's standards of conduct and respect."
+          eyebrow="Opportunities"
+          title="Every opportunity provider is verified before it can post"
+          description="Universities, employers, apprenticeship providers and programme organisers are verified as institutions before an opportunity reaches a single Alumni member. What appears here is checked, not scraped or syndicated."
         />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {providers.map((item) => (
+            <FeatureCard key={item.title} icon={item.icon} title={item.title}>
+              {item.text}
+            </FeatureCard>
+          ))}
+        </div>
+        <p className="mt-8 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          Opportunity providers operate in the 16+ environment only. Verification as a provider
+          gives an organisation no visibility of, or route to, any under-16 member of Aurelia.
+        </p>
       </Section>
+
+      <Section>
+        <SectionHeading
+          eyebrow="Community and mentoring"
+          title="Adult community, adult-to-adult mentoring"
+          description="The Alumni community operates under moderation appropriate to its members' age — open discussion, direct connection between verified peers, and mentoring between adults — while still holding to Aurelia's standards of conduct and respect."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          <FeatureCard icon={UserRoundSearch} title="Mentoring is adult to adult">
+            Mentors are verified adults working with members aged 16 and over. There is no
+            mentoring relationship between an adult and an under-16 member anywhere on Aurelia.
+          </FeatureCard>
+          <FeatureCard icon={Lock} title="Alumni status unlocks nothing below 16">
+            Being an Alumni member — or a mentor, or an opportunity provider within it — never
+            grants any access to the under-16 environment or to a child's work.
+          </FeatureCard>
+        </div>
+      </Section>
+
 
       <Section>
         <SectionHeading

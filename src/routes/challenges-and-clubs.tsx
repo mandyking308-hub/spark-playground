@@ -1,12 +1,17 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
+  AtSign,
   Ban,
   Building2,
   ClipboardCheck,
+  Eye,
+  EyeOff,
+  ListOrdered,
   MessageCircleOff,
   ShieldCheck,
   Trophy,
   UserCheck,
+  UserRoundX,
   Users2,
 } from "lucide-react";
 
@@ -25,6 +30,7 @@ import { Button } from "@/components/ui/button";
 import clubCollaboration from "@/assets/club-collaboration.jpg";
 import challengeBrief from "@/assets/challenge-brief.jpg";
 import classroomMaking from "@/assets/classroom-making.jpg";
+
 
 export const Route = createFileRoute("/challenges-and-clubs")({
   head: () => ({
@@ -69,6 +75,24 @@ const clubBoundaries = [
   "No open messaging between members — feedback is structured and tied to the work.",
   "No public follower counts, friend lists or popularity metrics inside a club.",
 ];
+
+const judgeSees = [
+  "The submitted piece of work itself, as approved for entry.",
+  "The project label — the format and the brief it was answering.",
+  "The age band the entry was submitted under, so it can be judged fairly against its peers.",
+  "The child's chosen display name for the entry, or an anonymous entry reference.",
+  "Any notes the child chose to include about how they made it.",
+];
+
+const judgeNeverSees = [
+  "A real name, email address, phone number or home address.",
+  "A school name, class or town that could locate the child.",
+  "Any route to message, follow or contact the child who entered.",
+  "Private drafts, earlier versions or anything else in the child's studio.",
+  "A browsable list of the other children who entered.",
+];
+
+
 
 function ChallengesAndClubsPage() {
   return (
@@ -228,33 +252,128 @@ function ChallengesAndClubsPage() {
           title="What challenges and clubs deliberately do not include"
           description="The features that make many online communities unsafe for children are simply not present in Aurelia's design."
         />
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          <FeatureCard icon={MessageCircleOff} title="No open messaging">
-            Communication about a project happens through structured feedback tied to the work,
-            not free-form chat.
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <FeatureCard icon={MessageCircleOff} title="No child direct messages">
+            There is no private messaging between children, and no route for an adult outside a
+            child's verified circle to open a conversation with them. Communication about a project
+            happens through structured feedback tied to the work.
           </FeatureCard>
-          <FeatureCard icon={Ban} title="No popularity metrics">
-            Aurelia does not surface follower counts or public rankings that could turn
-            creativity into a competition for attention.
+          <FeatureCard icon={Ban} title="No follower or popularity counts">
+            No followers, no likes, no vote tallies and no public ranking of entrants. A challenge
+            result is a judged outcome, not a competition for attention.
+          </FeatureCard>
+          <FeatureCard icon={UserRoundX} title="No open child directory">
+            Children are not browsable, searchable or listed anywhere — not by other children, not
+            by clubs, and not by the organisations sponsoring a challenge.
+          </FeatureCard>
+          <FeatureCard icon={AtSign} title="No contact details shared">
+            Email addresses, phone numbers, handles and locations are never exposed through a club
+            or a challenge entry, in either direction.
+          </FeatureCard>
+          <FeatureCard icon={ListOrdered} title="No feed and no endless scroll">
+            Clubs and challenges are bounded spaces with a purpose and a deadline, not an infinite
+            stream ranked to keep a young person scrolling.
+          </FeatureCard>
+          <FeatureCard icon={UserCheck} title="No unsupervised space">
+            Every club and every challenge review sits with a named, accountable adult. There is no
+            corner of this area without adult responsibility attached to it.
           </FeatureCard>
         </div>
       </Section>
 
+      {/* What a judge actually sees */}
       <Section>
-        <SectionHeading
-          eyebrow="The organisation boundary"
-          title="An organisation sets challenges. It never meets a child directly."
-          description="Organisations take part in Aurelia entirely through institutional workflows — publishing a brief, reviewing entries with named reviewers, and providing recognition. They never gain any other access to children."
-        />
-        <div className="mt-8">
-          <ShieldCheck className="size-6 text-accent-foreground" aria-hidden="true" />
-          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            Organisations and schools setting challenges do not gain any ability to bypass a
-            family's control over their child's work, contact a child privately, or browse a
-            directory of children. Every entry is still the guardian's decision to share.
-          </p>
+        <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-start">
+          <div>
+            <SectionHeading
+              eyebrow="Judging"
+              title="A judge sees the work. Not the child."
+              description="When an entry reaches a challenge reviewer, it arrives stripped of anything that identifies the young person behind it. Judging is an assessment of a piece of work against a brief — it is never an introduction."
+            />
+            <GoldRule className="mt-6 w-16" />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild variant="outline">
+                <Link to="/ideas-and-resources">Ideas &amp; Resources</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/creator-studio">See the Creator Studio</Link>
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-border/70 bg-card p-6">
+              <Eye className="size-5 text-accent-foreground" aria-hidden="true" />
+              <h3 className="mt-4 font-display text-lg tracking-tight">What a judge sees</h3>
+              <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-muted-foreground">
+                {judgeSees.map((item) => (
+                  <li key={item} className="flex gap-2.5">
+                    <span
+                      aria-hidden="true"
+                      className="mt-2 size-1.5 shrink-0 rounded-full bg-accent-foreground"
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl border border-dashed border-border bg-muted/40 p-6">
+              <EyeOff className="size-5 text-muted-foreground" aria-hidden="true" />
+              <h3 className="mt-4 font-display text-lg tracking-tight">What a judge never sees</h3>
+              <ul className="mt-4 space-y-2.5 text-sm leading-relaxed text-muted-foreground">
+                {judgeNeverSees.map((item) => (
+                  <li key={item} className="flex gap-2.5">
+                    <span
+                      aria-hidden="true"
+                      className="mt-[0.6rem] h-px w-3 shrink-0 bg-muted-foreground/60"
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </Section>
+
+
+      <Section tone="muted">
+        <SectionHeading
+          eyebrow="The organisation boundary"
+          title="An organisation can sponsor a challenge. It never meets the child who answers it."
+          description="Verified organisations can sponsor approved challenge and content workflows — funding a prize, setting a brief in their field, offering recognition. That sponsorship runs entirely through institutional workflows and grants no other access to children."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-border/70 bg-card p-6">
+            <ShieldCheck className="size-5 text-accent-foreground" aria-hidden="true" />
+            <h3 className="mt-4 font-display text-lg tracking-tight">
+              What a sponsoring organisation can do
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              Propose an approved brief, supply approved supporting content, provide named
+              reviewers for judging, and offer recognition that a verified teacher can turn into a
+              Passport achievement.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-dashed border-border bg-background p-6">
+            <UserRoundX className="size-5 text-muted-foreground" aria-hidden="true" />
+            <h3 className="mt-4 font-display text-lg tracking-tight">
+              What sponsorship never unlocks
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              No direct contact with a child, no browsing or searching children, no contact details,
+              no bypassing a family's control over their child's work. Every entry remains the
+              guardian's decision to share.
+            </p>
+          </div>
+        </div>
+        <div className="mt-8">
+          <Button asChild variant="outline">
+            <Link to="/for-organisations">How organisation partnerships work</Link>
+          </Button>
+        </div>
+      </Section>
+
 
       <CtaBand
         title="Bring a challenge or club to Aurelia"

@@ -96,9 +96,15 @@ const brandFacts = [
   { label: "Product", value: "Aurelia" },
   { label: "What it is", value: "A protected global creation, learning and achievement platform for under-16s, with a separate 16+ alumni environment." },
   { label: "Who it is for", value: "Families, schools, education groups and organisations, alongside the young people at the centre of it." },
-  { label: "Age model", value: "Under-16 and 16+ are structurally separate environments." },
-  { label: "Onboarding model", value: "Invitation-only, via a verified parent/guardian or a verified school." },
+  { label: "Age model", value: "Under-16 and 16+ are structurally separate environments, with no shared social surface between them." },
+  { label: "Onboarding model", value: "Invitation-only for under-16s, via a verified parent/guardian or a verified school. There is no open self-registration for children." },
+  { label: "Creation", value: "The Creator Studio, where children make podcasts, films, stories, artwork, inventions and games — private by default." },
+  { label: "Recognition", value: "The Achievement Passport: evidence-backed achievements confirmed through an accountable verified workflow rather than awarded automatically." },
+  { label: "Roles", value: "Verified roles — child, parent/guardian, teacher, school admin, education group admin and 16+ alumni — with distinct permissions." },
+  { label: "What it does not have", value: "No follower counts, no likes, no popularity ranking and no public directory of children." },
   { label: "Contact route", value: "/contact-enquiry" },
+  { label: "Reporting route", value: "/report-concern" },
+
 ];
 
 function AboutPage() {
@@ -317,7 +323,12 @@ function AboutPage() {
       </Section>
 
       <Section>
-        <SectionHeading eyebrow="Brand facts" title="Aurelia, in plain terms" />
+        <SectionHeading
+          eyebrow="Press & brand facts"
+          title="Aurelia, in plain terms"
+          description="A reference for press, partners and prospective schools. Every line below describes how Aurelia is built and operated today. We do not publish user numbers, customer names, launch claims, awards or testimonials, and nothing here should be reported as such."
+        />
+
         <dl className="mt-10 grid gap-6 sm:grid-cols-2">
           {brandFacts.map((fact) => (
             <div key={fact.label} className="rounded-2xl border border-border/70 bg-card p-6">
