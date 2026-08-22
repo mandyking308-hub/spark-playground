@@ -1,6 +1,6 @@
 # Aurelia → Liftor handoff
 
-Status: **product build ready; Dodo configuration and payment proof remain.**
+Status: **product build ready; brand clearance must be resolved before final commercial lock; Dodo configuration and payment proof remain.**
 
 Production site: `https://aurelia-world.lovable.app`
 
@@ -11,6 +11,14 @@ Dodo webhook endpoint:
 `https://boybpjenlqtchsvhncgl.supabase.co/functions/v1/dodo-billing-webhook`
 
 The webhook is already deployed. It deliberately fails closed until its Dodo signing secret and all four Dodo product IDs are configured.
+
+## IMPORTANT — brand/name hold before tomorrow's commercial lock
+
+A preliminary 22 August 2026 clearance sweep found that the bare **AURELIA** name is materially crowded in education/software and cannot be treated as cleared. In particular, an active UK `AURELIA LIMITED` lists SIC 85320 (technical and vocational secondary education), and there are existing education/software trademark and market uses. The obvious domains are also substantially occupied.
+
+Read `docs/BRAND_CLEARANCE.md` before creating final customer-facing Dodo product names, buying a permanent domain, filing a mark or starting paid acquisition.
+
+Tomorrow may still use Dodo sandbox/test configuration technically, but **do not treat `Aurelia` as the final commercially cleared brand until the naming decision is resolved**.
 
 ## What is already complete
 
@@ -28,24 +36,33 @@ The webhook is already deployed. It deliberately fails closed until its Dodo sig
 - Public contact/safeguarding intake backend.
 - Current build/test baseline: 558 tests passing, typecheck and production build passing before this billing-only backend handoff.
 
-## Tomorrow — create the four Dodo subscription products
+## Tomorrow — first resolve the brand gate
 
-Create fixed recurring GBP products matching Aurelia exactly:
+Before customer-facing commercial configuration:
 
-| Product | Price | Billing interval |
+1. Review `docs/BRAND_CLEARANCE.md`.
+2. Decide whether to seek rapid trademark counsel clearance for Aurelia or adopt a more distinctive final mark.
+3. Once the final mark is chosen, secure the best available permanent domain and key defensive domains immediately.
+4. Use that final customer-facing name for Dodo products and commercial materials.
+
+## Dodo products after the brand gate
+
+Create fixed recurring GBP products matching the locked Aurelia pricing architecture exactly (customer-facing names may change with the final brand):
+
+| Product tier | Price | Billing interval |
 | --- | ---: | --- |
 | Family | £12.99 | monthly |
 | Family | £129.00 | yearly |
 | Family Plus | £19.99 | monthly |
 | Family Plus | £199.00 | yearly |
 
-Do not enable customer-entered discounting for the first launch test. The webhook validates the recurring amount against Aurelia's locked plan price.
+Do not enable customer-entered discounting for the first launch test. The webhook validates the recurring amount against the locked plan price.
 
 Record the four resulting product IDs.
 
 ## App/server environment
 
-Configure these in the secure server environment used by Aurelia/Liftor. Never place API keys in browser/VITE variables or source control.
+Configure these in the secure server environment used by the product/Liftor. Never place API keys in browser/VITE variables or source control.
 
 - `DODO_PAYMENTS_API_KEY`
 - `DODO_PAYMENTS_API_BASE_URL`
@@ -53,7 +70,7 @@ Configure these in the secure server environment used by Aurelia/Liftor. Never p
 - `DODO_FAMILY_ANNUAL_PRODUCT_ID`
 - `DODO_FAMILY_PLUS_MONTHLY_PRODUCT_ID`
 - `DODO_FAMILY_PLUS_ANNUAL_PRODUCT_ID`
-- `AURELIA_PUBLIC_URL=https://aurelia-world.lovable.app`
+- `AURELIA_PUBLIC_URL=https://aurelia-world.lovable.app` (temporary product URL until permanent brand/domain is locked)
 
 ## Supabase Edge Function secrets
 
@@ -92,10 +109,10 @@ The endpoint verifies Dodo's Standard Webhooks HMAC signature and timestamp. It 
 ## Test-mode proof — do not skip
 
 1. Use a verified adult parent account.
-2. Start a Family Monthly checkout from Aurelia.
+2. Start a Family Monthly checkout from the product.
 3. Complete the Dodo test payment.
-4. Return to Aurelia. The browser return page is **not** proof of payment and must not activate access itself.
-5. Confirm the signed `payment.succeeded` event binds the Dodo subscription ID to the correct Aurelia billing account.
+4. Return to the product. The browser return page is **not** proof of payment and must not activate access itself.
+5. Confirm the signed `payment.succeeded` event binds the Dodo subscription ID to the correct billing account.
 6. Confirm `subscription.active` changes the subscription/account to active and creates an active `family_core` entitlement.
 7. Repeat with Family Plus and confirm both `family_core` and `family_plus` are active.
 8. Replay a delivered webhook in Dodo. Confirm the same `webhook-id` is recorded once and does not duplicate access.
@@ -111,9 +128,9 @@ Expected live-table evidence after a successful Family payment:
 
 ## Move from Dodo test to live
 
-Only after the test-mode proof passes:
+Only after the brand gate and test-mode proof pass:
 
-1. Create/confirm the same four products in Dodo live mode.
+1. Create/confirm the same four products in Dodo live mode under the final customer-facing brand.
 2. Replace test API key/base URL/product IDs with live values in the secure environment.
 3. Create the live webhook endpoint and install its live signing secret.
 4. Run one real Family Monthly payment end-to-end.
@@ -137,4 +154,4 @@ The other current RLS advisor notices are intentional server-only tables (`accou
 
 Treat tomorrow as an **integration and proof day, not a new product-build day**:
 
-**Dodo products → secure secrets → webhook setup → test payment → verify entitlements → live payment proof → connect Aurelia into the Liftor operating workflow.**
+**Brand decision → secure permanent domain → Dodo products → secure secrets → webhook setup → test payment → verify entitlements → live payment proof → connect the product into the Liftor operating workflow.**
