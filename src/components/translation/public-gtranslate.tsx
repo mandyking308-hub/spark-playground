@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useRouterState } from "@tanstack/react-router";
 
 declare global {
@@ -9,12 +9,13 @@ declare global {
 
 const SCRIPT_ID = "aurelia-world-gtranslate-script";
 const RESET_GUARD_KEY = "aurelia-world-gtranslate-private-reset";
+const TRANSLATION_CONSENT_KEY = "aurelia-world-public-translation";
 
 /**
- * GTranslate is deliberately limited to public, non-sensitive Aurelia World pages.
- * It must never load on authenticated areas, account creation/sign-in, safeguarding
- * reports or contact/intake forms because rendered private/sensitive content must
- * not be exposed to an external page-translation service.
+ * GTranslate is deliberately limited to public, non-sensitive Aurelia World pages
+ * and is opt-in. It must never load on authenticated areas, account creation/sign-in,
+ * safeguarding reports or contact/intake forms because rendered private/sensitive
+ * content must not be exposed to an external page-translation service.
  */
 const EXCLUDED_ROUTE_PREFIXES = [
   "/auth",
@@ -157,6 +158,19 @@ function removeTranslationChrome() {
 export function PublicGTranslate({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const excluded = isExcludedRoute(pathname);
+  const [translationEnabled, setTranslationEnabled] = useState(false);
+  const [preferenceLoaded, setPreferenceLoaded] = useState(false);
+
+  useEffect(() => {
+    if (excluded) {
+      setTranslationEnabled(false);
+      setPreferenceLoaded(true);
+      return;
+    }
+
+    setTranslationEnabled(localStorage.getItem(TRANSLATION_CONSENT_KEY) === "enabled");
+    setPreferenceLoaded(true);
+  }, [excluded]);
 
   useEffect(() => {
     const currentPath = window.location.pathname;
@@ -177,6 +191,17 @@ export function PublicGTranslate({ children }: { children: ReactNode }) {
       }
 
       sessionStorage.removeItem(RESET_GUARD_KEY);
+      return;
+    }
+
+    if (!preferenceLoaded) return;
+
+    if (!translationEnabled) {
+      const translationWasActive = hasTranslationState();
+      removeTranslationChrome();
+      expireTranslationCookies();
+      delete window.gtranslateSettings;
+      if (translationWasActive) window.location.reload();
       return;
     }
 
@@ -219,19 +244,68 @@ export function PublicGTranslate({ children }: { children: ReactNode }) {
       removeTranslationChrome();
       delete window.gtranslateSettings;
     };
-  }, [excluded]);
+  }, [excluded, preferenceLoaded, translationEnabled]);
+
+  const enableTranslation = () => {
+    localStorage.setItem(TRANSLATION_CONSENT_KEY, "enabled");
+    setTranslationEnabled(true);
+  };
+
+  const disableTranslation = () => {
+    localStorage.setItem(TRANSLATION_CONSENT_KEY, "disabled");
+    removeTranslationChrome();
+    expireTranslationCookies();
+    delete window.gtranslateSettings;
+    setTranslationEnabled(false);
+    if (hasTranslationState()) window.location.reload();
+  };
 
   return (
     <>
       {children}
-      {!excluded && (
+      {!excluded && preferenceLoaded && !translationEnabled ? (
         <div
-          className="gtranslate_wrapper notranslate"
+          className="notranslate fixed bottom-4 right-4 z-[100] max-w-[18rem] rounded-xl border border-border bg-background/95 p-3 shadow-lg backdrop-blur"
           translate="no"
           data-notranslate
-          aria-label="Website language selector"
-        />
-      )}
+          aria-label="Language translation choice"
+        >
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            Want another language? Translation is optional and uses a third-party service only on public pages.
+          </p>
+          <div className="mt-2 flex items-center gap-3">
+            <button
+              type="button"
+              onClick={enableTranslation}
+              className="rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90"
+            >
+              Enable languages
+            </button>
+            <a href="/cookie-notice" className="text-xs font-medium text-foreground underline underline-offset-4">
+              Privacy
+            </a>
+          </div>
+        </div>
+      ) : null}
+      {!excluded && translationEnabled ? (
+        <>
+          <div
+            className="gtranslate_wrapper notranslate"
+            translate="no"
+            data-notranslate
+            aria-label="Website language selector"
+          />
+          <button
+            type="button"
+            onClick={disableTranslation}
+            className="notranslate fixed bottom-4 left-4 z-[100] rounded-md border border-border bg-background/90 px-2.5 py-1.5 text-[0.7rem] font-medium text-muted-foreground shadow-sm backdrop-blur hover:text-foreground"
+            translate="no"
+            data-notranslate
+          >
+            Turn translation off
+          </button>
+        </>
+      ) : null}
     </>
   );
 }
