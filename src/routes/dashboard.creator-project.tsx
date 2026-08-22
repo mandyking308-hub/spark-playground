@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BookOpen, CheckCircle2, Film, Gamepad2, Image, Loader2, PencilLine, ShieldCheck, Sparkles } from "lucide-react";
+import { BookOpen, CheckCircle2, Film, Gamepad2, Image, Loader2, PencilLine, Share2, ShieldCheck, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { PageHeader } from "@/components/layout/page-header";
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { requestProjectPublicationFn } from "@/functions/permissions";
 import {
   createProjectFn,
   listMyProjectsFn,
@@ -53,6 +54,7 @@ function ProjectAuthoringPage() {
   const [projects, setProjects] = useState<ProjectSummary[]>([]);
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [sharing, setSharing] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -103,6 +105,21 @@ function ProjectAuthoringPage() {
     }
   }
 
+  async function requestSharing(id: string) {
+    setSharing(true);
+    setError(null);
+    setMessage(null);
+    try {
+      await requestProjectPublicationFn({ data: { projectId: id } });
+      setMessage("Sharing requested. Aurelia has moved this project into the protected approval journey.");
+      await refreshProjects();
+    } catch {
+      setError("This project could not enter the sharing journey right now. Make sure it is a saved private draft and try again.");
+    } finally {
+      setSharing(false);
+    }
+  }
+
   function editProject(project: ProjectSummary) {
     const parsed = parseSummary(project.summary);
     setProjectId(project.id);
@@ -124,6 +141,9 @@ function ProjectAuthoringPage() {
     setMessage("New private draft started.");
     setError(null);
   }
+
+  const activeProject = projectId ? projects.find((project) => project.id === projectId) : null;
+  const canRequestCurrent = Boolean(projectId && (!activeProject || activeProject.state === "draft" || activeProject.state === "rejected"));
 
   return (
     <div className="space-y-8">
@@ -185,39 +205,19 @@ function ProjectAuthoringPage() {
             </div>
             <div className="space-y-2">
               <label htmlFor="project-title" className="text-sm font-medium">Project title</label>
-              <Input
-                id="project-title"
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
-                maxLength={160}
-                placeholder="My project"
-              />
+              <Input id="project-title" value={title} onChange={(event) => setTitle(event.target.value)} maxLength={160} placeholder="My project" />
             </div>
             <div className="space-y-2">
               <label htmlFor="project-idea" className="text-sm font-medium">Your idea</label>
-              <Textarea
-                id="project-idea"
-                value={idea}
-                onChange={(event) => setIdea(event.target.value)}
-                className="min-h-36"
-                placeholder="What are you trying to make, explore or explain?"
-              />
+              <Textarea id="project-idea" value={idea} onChange={(event) => setIdea(event.target.value)} className="min-h-36" placeholder="What are you trying to make, explore or explain?" />
             </div>
             <div className="space-y-2">
               <label htmlFor="project-process" className="text-sm font-medium">How you made it</label>
-              <Textarea
-                id="project-process"
-                value={process}
-                onChange={(event) => setProcess(event.target.value)}
-                className="min-h-32"
-                placeholder="Record your choices, experiments, drafts and what you learned…"
-              />
+              <Textarea id="project-process" value={process} onChange={(event) => setProcess(event.target.value)} className="min-h-32" placeholder="Record your choices, experiments, drafts and what you learned…" />
             </div>
             <div className="rounded-lg border border-dashed p-6 text-center">
               <p className="font-medium">Files, images or video</p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Project text now saves live. Private media upload remains locked until the dedicated child-safe storage and scanning path is enabled.
-              </p>
+              <p className="mt-1 text-sm text-muted-foreground">Project text now saves live. Private media upload remains locked until the dedicated child-safe storage and scanning path is enabled.</p>
               <Button className="mt-4" variant="outline" disabled>Add files</Button>
             </div>
           </CardContent>
@@ -225,32 +225,20 @@ function ProjectAuthoringPage() {
 
         <div className="space-y-4">
           <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-base">
-                <Sparkles className="size-4" /> Authorship
-              </CardTitle>
-            </CardHeader>
+            <CardHeader><CardTitle className="flex items-center gap-2 text-base"><Sparkles className="size-4" /> Authorship</CardTitle></CardHeader>
             <CardContent className="space-y-3 text-sm text-muted-foreground">
               <p>The child remains the named creator. AI assistance should be visible rather than hidden.</p>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="outline">Made by me</Badge>
-                <Badge variant="outline">Made with AI assistance</Badge>
-                <Badge variant="outline">AI-generated element</Badge>
-              </div>
+              <div className="flex flex-wrap gap-2"><Badge variant="outline">Made by me</Badge><Badge variant="outline">Made with AI assistance</Badge><Badge variant="outline">AI-generated element</Badge></div>
             </CardContent>
           </Card>
 
           <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-base">
-                <ShieldCheck className="size-4" /> Project privacy
-              </CardTitle>
-            </CardHeader>
+            <CardHeader><CardTitle className="flex items-center gap-2 text-base"><ShieldCheck className="size-4" /> Project privacy</CardTitle></CardHeader>
             <CardContent className="space-y-2 text-sm text-muted-foreground">
               <p>Drafts are private by default.</p>
               <p>Only the child owner can create or edit a draft.</p>
-              <p>Uploads will be checked before broader sharing.</p>
-              <p>Publishing follows the separate permission and safety workflow.</p>
+              <p>Requesting to share starts the safety and guardian-approval journey.</p>
+              <p>Nothing becomes visible to a wider audience simply because the child presses the button.</p>
             </CardContent>
           </Card>
 
@@ -258,21 +246,23 @@ function ProjectAuthoringPage() {
             {saving ? <Loader2 className="mr-2 size-4 animate-spin" /> : null}
             {saving ? "Saving…" : projectId ? "Update project draft" : "Save project draft"}
           </Button>
-          <p className="text-center text-xs text-muted-foreground">
-            Saved through authenticated server functions and protected by Aurelia row-level security.
-          </p>
+
+          {canRequestCurrent && projectId ? (
+            <Button className="w-full" variant="outline" onClick={() => void requestSharing(projectId)} disabled={sharing || saving}>
+              {sharing ? <Loader2 className="mr-2 size-4 animate-spin" /> : <Share2 className="mr-2 size-4" />}
+              {sharing ? "Starting approval…" : "Request to share"}
+            </Button>
+          ) : null}
+
+          <p className="text-center text-xs text-muted-foreground">Saved through authenticated server functions and protected by Aurelia row-level security.</p>
         </div>
       </div>
 
       <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Your recent projects</CardTitle>
-        </CardHeader>
+        <CardHeader><CardTitle className="text-base">Your recent projects</CardTitle></CardHeader>
         <CardContent>
           {loadingProjects ? (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Loader2 className="size-4 animate-spin" /> Loading your drafts…
-            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground"><Loader2 className="size-4 animate-spin" /> Loading your drafts…</div>
           ) : projects.length === 0 ? (
             <p className="text-sm text-muted-foreground">No saved projects yet. Your first draft will appear here.</p>
           ) : (
@@ -283,18 +273,17 @@ function ProjectAuthoringPage() {
                     <div className="flex flex-wrap items-center gap-2">
                       <p className="font-medium">{project.title}</p>
                       <Badge variant="outline" className="capitalize">{project.kind}</Badge>
-                      <Badge variant={project.state === "draft" ? "secondary" : "outline"} className="capitalize">
-                        {project.state.replace("_", " ")}
-                      </Badge>
+                      <Badge variant={project.state === "draft" ? "secondary" : "outline"} className="capitalize">{project.state.replaceAll("_", " ")}</Badge>
                     </div>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      Updated {new Date(project.updatedAt).toLocaleString()}
-                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">Updated {new Date(project.updatedAt).toLocaleString()}</p>
                   </div>
                   {(project.state === "draft" || project.state === "rejected") ? (
-                    <Button variant="outline" size="sm" onClick={() => editProject(project)}>
-                      Edit draft
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" onClick={() => editProject(project)}>Edit draft</Button>
+                      <Button size="sm" onClick={() => void requestSharing(project.id)} disabled={sharing}>
+                        <Share2 className="mr-1 size-4" /> Request to share
+                      </Button>
+                    </div>
                   ) : null}
                 </div>
               ))}
