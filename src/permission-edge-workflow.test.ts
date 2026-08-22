@@ -13,7 +13,7 @@ describe("permission Edge Function boundary", () => {
 
   test("requires an authenticated user through the server SDK", () => {
     expect(source).toContain('withSupabase({ auth: "user" }');
-    expect(source).toContain("ctx.userClaims?.sub");
+    expect(source).toContain("(ctx.userClaims as { sub?: string } | undefined)?.sub");
   });
 
   test("does not read a service-role or secret key directly", () => {

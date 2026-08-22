@@ -1,0 +1,10 @@
+{
+  "nodeModulesDir": "none",
+  "workspace": [
+    "./supabase/functions/identity-provisioning",
+    "./supabase/functions/invitation-preflight",
+    "./supabase/functions/passport-verification",
+    "./supabase/functions/permission-workflow",
+    "./supabase/functions/public-intake"
+  ]
+}

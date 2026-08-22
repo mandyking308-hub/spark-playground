@@ -179,9 +179,9 @@ export const createFamilyCheckoutFn = createServerFn({ method: "POST" })
 
     const plan = familyPlanByKey(data.planKey);
     const productId = dodoProductEnv(data.planKey);
-    const apiKey = process.env.DODO_PAYMENTS_API_KEY?.trim();
-    const apiBaseUrl = process.env.DODO_PAYMENTS_API_BASE_URL?.trim().replace(/\/$/, "");
-    const publicUrl = process.env.AURELIA_PUBLIC_URL?.trim().replace(/\/$/, "");
+    const apiKey = process.env['DODO_PAYMENTS_API_KEY']?.trim();
+    const apiBaseUrl = process.env['DODO_PAYMENTS_API_BASE_URL']?.trim().replace(/\/$/, "");
+    const publicUrl = process.env['AURELIA_PUBLIC_URL']?.trim().replace(/\/$/, "");
 
     if (!apiKey || !apiBaseUrl || !publicUrl) {
       throw new Error("Family checkout is not configured yet");

@@ -1,5 +1,19 @@
 import { withSupabase } from "@supabase/server";
 
+// This deployment targets an external Aurelia database without generated types,
+// so the admin client is narrowed to the minimal untyped surface used here.
+type AdminClient = {
+  rpc: (fn: string, args: Record<string, unknown>) => Promise<{ data: unknown; error: unknown }>;
+  from: (table: string) => {
+    insert: (values: Record<string, unknown>) => {
+      select: (columns: string) => {
+        single: () => Promise<{ data: { id?: string } | null; error: unknown }>;
+      };
+    };
+  };
+};
+
+
 type IntakeKind = "enquiry" | "safeguarding";
 type IntakeAudience = "family" | "school" | "education_group" | "organisation" | "press" | "general";
 
@@ -96,7 +110,9 @@ export default {
       windowStart.setUTCMinutes(0, 0, 0);
       const keyHash = await sha256Hex(`${kind}|${windowStart.toISOString()}|${source}`);
 
-      const { data: allowed, error: quotaError } = await ctx.supabaseAdmin.rpc(
+      const admin = ctx.supabaseAdmin as unknown as AdminClient;
+
+      const { data: allowed, error: quotaError } = await admin.rpc(
         "server_consume_public_intake_quota",
         {
           p_key_hash: keyHash,
@@ -107,7 +123,8 @@ export default {
       if (quotaError) throw quotaError;
       if (allowed !== true) return response({ error: "Too many submissions. Please try again later." }, 429);
 
-      const { data, error } = await ctx.supabaseAdmin
+      const { data, error } = await admin
+
         .from("public_intake_submissions")
         .insert({
           kind,

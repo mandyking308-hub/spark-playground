@@ -99,7 +99,7 @@ const adultControls = new Set([
   "/dashboard/privacy",
 ]);
 
-const billingAdministration = new Set([
+const enterpriseAdministration = new Set([
   "/dashboard/licensing",
 ]);
 
@@ -153,8 +153,8 @@ export function canEnterDashboardPath(role: PlatformRole, pathname: string): boo
     return ["parent", "teacher", "school_admin", "group_admin", "platform_admin"].includes(role);
   }
 
-  if (billingAdministration.has(pathname)) {
-    return ["parent", "school_admin", "group_admin", "organisation_admin", "platform_admin"].includes(role);
+  if (enterpriseAdministration.has(pathname)) {
+    return ["school_admin", "group_admin", "platform_admin"].includes(role);
   }
 
   if (achievementIssuance.has(pathname)) {

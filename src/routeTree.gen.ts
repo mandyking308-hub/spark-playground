@@ -27,6 +27,7 @@ import { Route as ForOrganisationsRouteImport } from './routes/for-organisations
 import { Route as ForSchoolsRouteImport } from './routes/for-schools'
 import { Route as IdeasAndResourcesRouteImport } from './routes/ideas-and-resources'
 import { Route as ParentCommunityRouteImport } from './routes/parent-community'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyForChildrenRouteImport } from './routes/privacy-for-children'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ReportConcernRouteImport } from './routes/report-concern'
@@ -193,6 +194,11 @@ const IdeasAndResourcesRoute = IdeasAndResourcesRouteImport.update({
 const ParentCommunityRoute = ParentCommunityRouteImport.update({
   id: '/parent-community',
   path: '/parent-community',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyForChildrenRoute = PrivacyForChildrenRouteImport.update({
@@ -616,6 +622,7 @@ export interface FileRoutesByFullPath {
   '/for-schools': typeof ForSchoolsRoute
   '/ideas-and-resources': typeof IdeasAndResourcesRoute
   '/parent-community': typeof ParentCommunityRoute
+  '/pricing': typeof PricingRoute
   '/privacy-for-children': typeof PrivacyForChildrenRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/report-concern': typeof ReportConcernRoute
@@ -711,6 +718,7 @@ export interface FileRoutesByTo {
   '/for-schools': typeof ForSchoolsRoute
   '/ideas-and-resources': typeof IdeasAndResourcesRoute
   '/parent-community': typeof ParentCommunityRoute
+  '/pricing': typeof PricingRoute
   '/privacy-for-children': typeof PrivacyForChildrenRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/report-concern': typeof ReportConcernRoute
@@ -809,6 +817,7 @@ export interface FileRoutesById {
   '/for-schools': typeof ForSchoolsRoute
   '/ideas-and-resources': typeof IdeasAndResourcesRoute
   '/parent-community': typeof ParentCommunityRoute
+  '/pricing': typeof PricingRoute
   '/privacy-for-children': typeof PrivacyForChildrenRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/report-concern': typeof ReportConcernRoute
@@ -908,6 +917,7 @@ export interface FileRouteTypes {
     | '/for-schools'
     | '/ideas-and-resources'
     | '/parent-community'
+    | '/pricing'
     | '/privacy-for-children'
     | '/privacy-policy'
     | '/report-concern'
@@ -1003,6 +1013,7 @@ export interface FileRouteTypes {
     | '/for-schools'
     | '/ideas-and-resources'
     | '/parent-community'
+    | '/pricing'
     | '/privacy-for-children'
     | '/privacy-policy'
     | '/report-concern'
@@ -1100,6 +1111,7 @@ export interface FileRouteTypes {
     | '/for-schools'
     | '/ideas-and-resources'
     | '/parent-community'
+    | '/pricing'
     | '/privacy-for-children'
     | '/privacy-policy'
     | '/report-concern'
@@ -1198,6 +1210,7 @@ export interface RootRouteChildren {
   ForSchoolsRoute: typeof ForSchoolsRoute
   IdeasAndResourcesRoute: typeof IdeasAndResourcesRoute
   ParentCommunityRoute: typeof ParentCommunityRoute
+  PricingRoute: typeof PricingRoute
   PrivacyForChildrenRoute: typeof PrivacyForChildrenRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ReportConcernRoute: typeof ReportConcernRoute
@@ -1336,6 +1349,13 @@ declare module '@tanstack/react-router' {
       path: '/parent-community'
       fullPath: '/parent-community'
       preLoaderRoute: typeof ParentCommunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy-for-children': {
@@ -2052,6 +2072,7 @@ const rootRouteChildren: RootRouteChildren = {
   ForSchoolsRoute: ForSchoolsRoute,
   IdeasAndResourcesRoute: IdeasAndResourcesRoute,
   ParentCommunityRoute: ParentCommunityRoute,
+  PricingRoute: PricingRoute,
   PrivacyForChildrenRoute: PrivacyForChildrenRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ReportConcernRoute: ReportConcernRoute,

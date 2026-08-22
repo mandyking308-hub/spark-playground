@@ -1,5 +1,23 @@
 import { withSupabase } from "@supabase/server";
 
+// This deployment targets an external Aurelia database without generated types,
+// so the admin client is narrowed to the minimal untyped surface used here.
+type AdminRows = { data: Record<string, unknown>[] | null; error: unknown };
+type AdminRow = { data: { id?: string } | null; error: unknown };
+type AdminQuery = {
+  select: (columns: string) => AdminQuery;
+  eq: (column: string, value: unknown) => AdminQuery;
+  is: (column: string, value: unknown) => AdminQuery;
+  order: (column: string, options?: Record<string, unknown>) => AdminQuery;
+  limit: (count: number) => Promise<AdminRows>;
+  maybeSingle: () => Promise<AdminRow>;
+};
+type AdminClient = {
+  from: (table: string) => AdminQuery;
+  rpc: (fn: string, args: Record<string, unknown>) => Promise<AdminRows>;
+};
+
+
 type Action = "issue_invitation" | "claim_invitation" | "revoke_invitation" | "list_invitations";
 type PilotRole = "child" | "parent" | "teacher" | "school_admin" | "group_admin";
 type AgeBand = "under_9" | "age_9_12" | "age_13_15" | "adult";
@@ -59,14 +77,16 @@ export default {
       return badRequest();
     }
 
-    const authUserId = ctx.userClaims?.sub;
+    const authUserId = (ctx.userClaims as { sub?: string } | undefined)?.sub;
     if (typeof authUserId !== "string" || !uuidPattern.test(authUserId)) {
       return Response.json({ error: "Authentication required" }, { status: 401 });
     }
 
+    const admin = ctx.supabaseAdmin as unknown as AdminClient;
+
     try {
       if (body.action === "list_invitations") {
-        const { data: actor, error: actorError } = await ctx.supabaseAdmin
+        const { data: actor, error: actorError } = await admin
           .from("profiles")
           .select("id")
           .eq("auth_user_id", authUserId)
@@ -74,12 +94,13 @@ export default {
           .maybeSingle();
         if (actorError || !actor) throw actorError ?? new Error("actor_not_found");
 
-        const { data, error } = await ctx.supabaseAdmin
+        const { data, error } = await admin
           .from("account_invitations")
           .select("id,intended_role,intended_age_band,school_id,cohort_id,education_group_id,state,expires_at,created_at")
           .eq("issued_by_profile_id", actor.id)
           .order("created_at", { ascending: false })
           .limit(50);
+
         if (error) throw error;
 
         return Response.json({ data: data ?? [] });
@@ -98,7 +119,7 @@ export default {
         const tokenHash = await sha256Hex(rawToken);
         const expiresAt = new Date(Date.now() + ttlHours * 60 * 60 * 1000).toISOString();
 
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_issue_account_invitation", {
+        const { data, error } = await admin.rpc("server_issue_account_invitation", {
           p_auth_user_id: authUserId,
           p_token_hash: tokenHash,
           p_intended_role: body.intendedRole,
@@ -128,7 +149,7 @@ export default {
         if (countryCode !== undefined && !/^[A-Z]{2}$/.test(countryCode)) return badRequest("Invalid country code");
 
         const tokenHash = await sha256Hex(body.invitationToken);
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_claim_account_invitation", {
+        const { data, error } = await admin.rpc("server_claim_account_invitation", {
           p_auth_user_id: authUserId,
           p_token_hash: tokenHash,
           p_display_name: displayName,
@@ -140,7 +161,7 @@ export default {
 
       if (body.action === "revoke_invitation") {
         if (typeof body.invitationId !== "string" || !uuidPattern.test(body.invitationId)) return badRequest();
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_revoke_account_invitation", {
+        const { data, error } = await admin.rpc("server_revoke_account_invitation", {
           p_auth_user_id: authUserId,
           p_invitation_id: body.invitationId,
         });

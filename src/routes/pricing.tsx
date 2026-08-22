@@ -223,7 +223,7 @@ function PricingPage() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" variant="secondary"><Link to="/auth/sign-in">Family sign in</Link></Button>
-            <Button asChild size="lg" variant="outline" className="border-ink-foreground/30 bg-transparent text-ink-foreground hover:bg-ink-foreground/10 hover:text-ink-foreground"><Link to="/contact">Institutional enquiry</Link></Button>
+            <Button asChild size="lg" variant="outline" className="border-ink-foreground/30 bg-transparent text-ink-foreground hover:bg-ink-foreground/10"><Link to="/contact">Institutional enquiry</Link></Button>
           </div>
         </div>
       </Section>

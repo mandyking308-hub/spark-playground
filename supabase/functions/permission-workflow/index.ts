@@ -1,5 +1,15 @@
 import { withSupabase } from "@supabase/server";
 
+// This deployment targets an external Aurelia database without generated types,
+// so the admin client is narrowed to the minimal untyped surface used here.
+type AdminClient = {
+  rpc: (fn: string, args: Record<string, unknown>) => Promise<{
+    data: Record<string, unknown>[] | null;
+    error: unknown;
+  }>;
+};
+
+
 type Action = "request_publication" | "withdraw_request" | "guardian_decision";
 
 interface RequestBody {
@@ -33,7 +43,7 @@ export default {
       return badRequest();
     }
 
-    const authUserId = ctx.userClaims?.sub;
+    const authUserId = (ctx.userClaims as { sub?: string } | undefined)?.sub;
     if (typeof authUserId !== "string" || !uuidPattern.test(authUserId)) {
       return Response.json({ error: "Authentication required" }, { status: 401 });
     }
@@ -42,7 +52,7 @@ export default {
       if (body.action === "request_publication") {
         if (!validUuid(body.projectId)) return badRequest();
 
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_request_project_publication", {
+        const { data, error } = await (ctx.supabaseAdmin as unknown as AdminClient).rpc("server_request_project_publication", {
           p_auth_user_id: authUserId,
           p_project_id: body.projectId,
         });
@@ -53,7 +63,7 @@ export default {
       if (body.action === "withdraw_request") {
         if (!validUuid(body.requestId)) return badRequest();
 
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_withdraw_permission_request", {
+        const { data, error } = await (ctx.supabaseAdmin as unknown as AdminClient).rpc("server_withdraw_permission_request", {
           p_auth_user_id: authUserId,
           p_request_id: body.requestId,
         });
@@ -67,7 +77,7 @@ export default {
           return badRequest("Decision note is too long");
         }
 
-        const { data, error } = await ctx.supabaseAdmin.rpc("server_record_guardian_decision", {
+        const { data, error } = await (ctx.supabaseAdmin as unknown as AdminClient).rpc("server_record_guardian_decision", {
           p_auth_user_id: authUserId,
           p_request_id: body.requestId,
           p_approved: body.approved,
