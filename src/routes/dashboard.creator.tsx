@@ -1,10 +1,12 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { BookOpen, Film, Gamepad2, Image, Mic2, ShieldCheck, Sparkles } from "lucide-react";
+import { BookOpen, Clock3, Film, Gamepad2, Image, Loader2, Mic2, ShieldCheck, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { listMyProjectsFn, type ProjectSummary } from "@/functions/projects";
 
 export const Route = createFileRoute("/dashboard/creator")({
   head: () => ({
@@ -58,6 +60,30 @@ const creationTypes = [
 ];
 
 function CreatorStudio() {
+  const [projects, setProjects] = useState<ProjectSummary[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    void listMyProjectsFn()
+      .then((items) => {
+        if (!active) return;
+        setProjects(items.slice(0, 6));
+        setLoadError(false);
+      })
+      .catch(() => {
+        if (active) setLoadError(true);
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <div className="space-y-8">
       <PageHeader
@@ -73,6 +99,7 @@ function CreatorStudio() {
 
       <div className="flex flex-wrap items-center gap-2">
         <Badge variant="secondary">Private by default</Badge>
+        <Badge variant="outline">Live project drafts</Badge>
         <Badge variant="outline">Quarantined uploads</Badge>
         <Badge variant="outline">No follower counts</Badge>
         <Badge variant="outline">No open adult DMs</Badge>
@@ -97,6 +124,56 @@ function CreatorStudio() {
           </Card>
         ))}
       </section>
+
+      <Card>
+        <CardHeader className="flex-row items-start justify-between gap-4">
+          <div>
+            <CardTitle>My recent projects</CardTitle>
+            <CardDescription>Private work saved to the child-owned Aurelia workspace.</CardDescription>
+          </div>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/dashboard/creator-project">New project</Link>
+          </Button>
+        </CardHeader>
+        <CardContent>
+          {loading ? (
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Loader2 className="size-4 animate-spin" /> Loading projects…
+            </div>
+          ) : loadError ? (
+            <p className="text-sm text-muted-foreground">Projects could not be loaded right now.</p>
+          ) : projects.length === 0 ? (
+            <div className="rounded-xl border border-dashed p-6 text-center">
+              <Sparkles className="mx-auto size-6 text-primary" />
+              <p className="mt-3 font-medium">Your first idea starts here</p>
+              <p className="mt-1 text-sm text-muted-foreground">Create a private project and it will appear in this workspace.</p>
+              <Button asChild className="mt-4" size="sm">
+                <Link to="/dashboard/creator-project">Create a project</Link>
+              </Button>
+            </div>
+          ) : (
+            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+              {projects.map((project) => (
+                <div key={project.id} className="rounded-xl border bg-muted/20 p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="truncate font-medium">{project.title}</p>
+                      <p className="mt-1 text-xs capitalize text-muted-foreground">{project.kind}</p>
+                    </div>
+                    <Badge variant={project.state === "draft" ? "secondary" : "outline"} className="capitalize">
+                      {project.state.replace("_", " ")}
+                    </Badge>
+                  </div>
+                  <p className="mt-4 flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <Clock3 className="size-3.5" />
+                    Updated {new Date(project.updatedAt).toLocaleDateString()}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       <section className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
         <Card>
