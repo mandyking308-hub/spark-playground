@@ -3,7 +3,7 @@ import { withSupabase } from "@supabase/server";
 // This deployment targets an external Aurelia database without generated types,
 // so the admin client is narrowed to the minimal untyped surface used here.
 type AdminRows = { data: Record<string, unknown>[] | null; error: unknown };
-type AdminRow = { data: Record<string, unknown> | null; error: unknown };
+type AdminRow = { data: { id?: string } | null; error: unknown };
 type AdminQuery = {
   select: (columns: string) => AdminQuery;
   eq: (column: string, value: unknown) => AdminQuery;
