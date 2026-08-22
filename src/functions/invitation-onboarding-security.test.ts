@@ -47,7 +47,10 @@ describe("invitation-only onboarding security", () => {
   });
 
   test("claim failure signs the session out instead of leaving partial workspace access", () => {
-    expect(normalized).toContain("if (!(await claiminvitation(supabase, data))) { await supabase.auth.signout()");
+    expect(normalized).toContain(
+      "!(await claiminvitation(supabase, data))) { await supabase.auth.signout()",
+    );
+
   });
 
   test("the join UI has no role or workspace selector", () => {
