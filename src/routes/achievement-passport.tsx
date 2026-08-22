@@ -118,9 +118,11 @@ function AchievementPassportPage() {
             automated scoring system.
           </FeatureCard>
           <FeatureCard icon={ScrollText} title="Owned by the child">
-            The passport belongs to the young person. It travels with them through school changes
-            and, eventually, into the 16+ alumni world.
+            The passport belongs to the young person. It is private by default, travels with them
+            through school changes, and at 16 they choose item by item what moves into the Alumni
+            world.
           </FeatureCard>
+
         </div>
       </Section>
 
