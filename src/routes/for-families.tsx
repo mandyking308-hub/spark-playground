@@ -1,9 +1,9 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   Baby,
-  CalendarClock,
   Eye,
   KeyRound,
+  Lock,
   Mail,
   ShieldCheck,
   UserCheck,
@@ -22,7 +22,9 @@ import {
 import {
   Figure,
   GoldRule,
+  ObjectGlyph,
   PaperNote,
+  ProjectLabel,
   SplitFeature,
 } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
@@ -30,6 +32,7 @@ import { Button } from "@/components/ui/button";
 import familyReview from "@/assets/family-review.jpg";
 import storyArt from "@/assets/story-art.jpg";
 import heroPodcast from "@/assets/hero-podcast.jpg";
+
 
 export const Route = createFileRoute("/for-families")({
   head: () => ({
