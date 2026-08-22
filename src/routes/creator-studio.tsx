@@ -23,10 +23,12 @@ import {
 import {
   Figure,
   GoldRule,
+  ObjectGlyph,
   PaperNote,
   SplitFeature,
   WaveformStrip,
 } from "@/components/public/editorial";
+
 import { Button } from "@/components/ui/button";
 
 import heroPodcast from "@/assets/hero-podcast.jpg";
@@ -141,15 +143,36 @@ function CreatorStudioPage() {
           </>
         }
       >
-        <div className="mt-12 max-w-md rounded-2xl border border-border/70 bg-card p-5">
-          <WaveformStrip className="mb-3" />
-          <p className="font-display text-base leading-snug tracking-tight">
-            “Episode 3: Finding Voice.”
-          </p>
-          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-            Illustrative example of the kind of episode plan a child might start from.
-          </p>
+        <div className="mt-12 grid gap-5 sm:grid-cols-[minmax(0,22rem)_1fr] sm:items-center">
+          <div className="brand-card max-w-md rounded-2xl border border-border/70 bg-card p-5">
+            <WaveformStrip className="mb-3" />
+            <p className="font-display text-base leading-snug tracking-tight">
+              “Episode 3: Finding Voice.”
+            </p>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+              Illustrative example of the kind of episode plan a child might start from.
+            </p>
+          </div>
+          <ul className="flex flex-wrap gap-2">
+            {[
+              { name: "microphone" as const, label: "Microphone" },
+              { name: "camera" as const, label: "Camera" },
+              { name: "pencil" as const, label: "Pencil" },
+              { name: "notebook" as const, label: "Notebook" },
+              { name: "prototype" as const, label: "Prototype" },
+              { name: "controller" as const, label: "Controller" },
+            ].map((chip) => (
+              <li
+                key={chip.label}
+                className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/80 px-3 py-1.5 text-xs tracking-wide text-muted-foreground"
+              >
+                <ObjectGlyph name={chip.name} className="size-4 text-accent-foreground" />
+                {chip.label}
+              </li>
+            ))}
+          </ul>
         </div>
+
       </PageHero>
 
       {/* Mosaic of capability categories */}
@@ -291,16 +314,54 @@ function CreatorStudioPage() {
 
       <Section tone="muted">
         <SectionHeading
-          eyebrow="Safe publishing pipeline"
+          eyebrow="From private draft to published piece"
           title="Sharing is a decision, not a default"
-          description="Nothing a child makes in the studio is visible outside their own account until a guardian explicitly approves it, and even then it is published into moderated, age-appropriate spaces rather than the open internet."
+          description="Everything a child makes starts private to them. Publishing is a specific request they choose to make, and it travels through safety checks and adult approval before anything appears anywhere."
         />
+        <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            {
+              title: "Private idea and draft",
+              text: "The project lives in the child's own space. Nobody else sees it while it is being made.",
+            },
+            {
+              title: "Uploads land in quarantine",
+              text: "Any file a child uploads goes into a private holding area first. It is not visible or shareable from there.",
+            },
+            {
+              title: "Scans and sanitisation",
+              text: "Quarantined media is scanned and sanitised — stripping embedded data such as location before anything can move on.",
+            },
+            {
+              title: "The child requests publication",
+              text: "The child chooses a specific piece and a specific audience — a class, a club, a challenge. There is no blanket 'make public'.",
+            },
+            {
+              title: "Required adult and safety approvals",
+              text: "The request needs the approvals that apply to it — guardian, and where relevant school or safety review — before it can proceed.",
+            },
+            {
+              title: "A publication derivative is what appears",
+              text: "What the approved audience sees is a prepared publication copy. The original file and the project's private drafts are never made public.",
+            },
+          ].map((item, index) => (
+            <li key={item.title} className="rounded-2xl border border-border/70 bg-card p-6">
+              <span className="font-display text-sm tracking-[0.2em] text-accent-foreground">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-3 font-display text-lg leading-snug tracking-tight">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+            </li>
+          ))}
+        </ol>
         <div className="mt-10">
           <CheckList
             items={[
               "Private by default: only the child can see a project while it is in draft.",
-              "Guardian approval is required before a project can be shared with a class, club or challenge.",
               "Publication targets are bounded — a class, a club, a challenge — never an open public feed.",
+              "Original uploads stay private; only an approved derivative is ever shown.",
               "Approval and publication events are recorded, so families and schools can see what has been shared and when.",
             ]}
           />
@@ -308,10 +369,12 @@ function CreatorStudioPage() {
       </Section>
 
       <CtaBand
-        title="See where a project can go next"
-        description="Work made in the Creator Studio can become a verified achievement, a challenge entry, or a club contribution. Explore how recognition works in Aurelia."
-        secondary={{ label: "Read the Achievement Passport", to: "/achievement-passport" }}
+        title="Find the first thing to make"
+        description="Pick a starter idea, or come in through a verified parent, guardian or school invitation. Work made here can become a verified achievement, a challenge entry or a club contribution."
+        primary={{ label: "Join with an invitation", to: "/auth/join" }}
+        secondary={{ label: "Browse ideas & resources", to: "/ideas-and-resources" }}
       />
     </PublicPage>
   );
 }
+

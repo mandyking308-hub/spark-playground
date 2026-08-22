@@ -1,9 +1,9 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   Baby,
-  CalendarClock,
   Eye,
   KeyRound,
+  Lock,
   Mail,
   ShieldCheck,
   UserCheck,
@@ -22,7 +22,9 @@ import {
 import {
   Figure,
   GoldRule,
+  ObjectGlyph,
   PaperNote,
+  ProjectLabel,
   SplitFeature,
 } from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
@@ -30,6 +32,7 @@ import { Button } from "@/components/ui/button";
 import familyReview from "@/assets/family-review.jpg";
 import storyArt from "@/assets/story-art.jpg";
 import heroPodcast from "@/assets/hero-podcast.jpg";
+
 
 export const Route = createFileRoute("/for-families")({
   head: () => ({
@@ -208,19 +211,113 @@ function ForFamilies() {
           <div>
             <Eyebrow>Their privacy, your oversight</Eyebrow>
             <h2 className="mt-3 font-display text-3xl leading-tight tracking-tight sm:text-4xl">
-              You see what's shared. Not every private draft.
+              Guardian status is not a master key
             </h2>
             <GoldRule className="mt-6 w-24" />
             <p className="mt-5 text-base leading-relaxed text-muted-foreground">
               Children need somewhere to be messy, to try something and abandon it, to write a
-              first version nobody sees. Aurelia respects that — your child's private drafts stay
-              private to them, the way a notebook in a drawer would. The instant anything is meant
-              to go further than that, it comes to you.
+              first version nobody sees. Your child's drafts stay private to them by default, the
+              way a notebook in a drawer would. Being a verified guardian gives you decision rights
+              over what leaves the family and sight of verified progress — it does not hand you a
+              key to every unfinished page.
             </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild variant="outline">
+                <Link to="/privacy-for-children">Privacy explained for children</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/ideas-and-resources">Family guides & project starters</Link>
+              </Button>
+            </div>
           </div>
           <CheckList items={boundary} />
         </div>
       </Section>
+
+      {/* Illustrative approval / update card */}
+      <Section tone="muted">
+        <SectionHeading
+          eyebrow="What lands in a guardian account"
+          title="A specific request, with the work attached"
+          description="Approvals arrive as a decision to make, not a conversation to keep up with. Aurelia has no live parent–child chat and no real-time messaging; a request waits quietly until you answer it."
+        />
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1.05fr_1fr] lg:items-start">
+          <div
+            className="brand-card rounded-2xl border border-border/70 bg-card p-6"
+            role="group"
+            aria-label="Illustrative example of a guardian approval request"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <ProjectLabel>Illustrative example</ProjectLabel>
+              <span className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                Awaiting your decision
+              </span>
+            </div>
+            <GoldRule className="mt-5 w-12" />
+            <h3 className="mt-4 font-display text-xl leading-snug tracking-tight">
+              Share “Episode 3: Finding Voice” with Class 6B
+            </h3>
+            <dl className="mt-5 grid gap-4 sm:grid-cols-2">
+              <div>
+                <dt className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                  What it is
+                </dt>
+                <dd className="mt-1 flex items-center gap-2 text-sm">
+                  <ObjectGlyph name="microphone" className="size-4 text-accent-foreground" />
+                  A nine-minute podcast episode
+                </dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                  Who would see it
+                </dt>
+                <dd className="mt-1 text-sm">Class 6B and their assigned teacher only</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                  Why
+                </dt>
+                <dd className="mt-1 text-sm">Submitted against a class brief on local stories</dd>
+              </div>
+              <div>
+                <dt className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                  You can change your mind
+                </dt>
+                <dd className="mt-1 text-sm">Withdraw this permission at any time</dd>
+              </div>
+            </dl>
+            <div className="mt-6 flex flex-wrap gap-2" aria-hidden="true">
+              <span className="rounded-md bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground">
+                Approve
+              </span>
+              <span className="rounded-md border border-border/70 px-3 py-1.5 text-sm">
+                Not yet
+              </span>
+            </div>
+            <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+              A static illustration of the approval card, not a live control and not a real
+              child's work.
+            </p>
+          </div>
+          <div className="space-y-4">
+            <PaperNote tone="lined">
+              What you see here: the actual piece, the exact audience, and the reason. What you
+              don't see: the twelve earlier takes your child decided weren't ready.
+            </PaperNote>
+            <div className="rounded-2xl border border-border/70 bg-card p-6">
+              <span className="flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                <Lock className="size-4 text-accent-foreground" aria-hidden="true" />
+                Still private
+              </span>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Drafts, abandoned ideas and work-in-progress notes remain in your child's own
+                space unless they choose to put a specific piece forward.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
 
       <Section tone="muted">
         <SplitFeature

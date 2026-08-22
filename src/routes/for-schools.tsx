@@ -1,14 +1,10 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
-  CalendarClock,
-  ClipboardCheck,
-  FileCheck2,
   GraduationCap,
-  Puzzle,
   ShieldAlert,
   Users2,
-  Workflow,
 } from "lucide-react";
+
 
 import { PublicPage } from "@/components/public/public-page";
 import {
@@ -56,20 +52,23 @@ export const Route = createFileRoute("/for-schools")({
 });
 
 const journey = [
-  { step: "01", title: "The brief", text: "A teacher sets a real task with clear success criteria — not just a platform to fill in." },
-  { step: "02", title: "The making", text: "Pupils work in the Creator Studio, with drafts kept rather than discarded." },
-  { step: "03", title: "The evidence", text: "What they made, and the decisions behind it, sits together as one submission." },
-  { step: "04", title: "Constructive feedback", text: "Specific and kind, about the work itself — never a score or a ranking." },
-  { step: "05", title: "Verify", text: "A teacher who genuinely reviewed the work confirms the skill it demonstrates." },
-  { step: "06", title: "The Passport", text: "Verified evidence is written to the pupil's Achievement Passport, theirs to keep." },
+  { step: "01", title: "Verified teacher & cohort", text: "A verified teacher is assigned to a class or cohort by the School Admin. Nothing below happens outside that assignment." },
+  { step: "02", title: "Educator brief", text: "The teacher issues a brief with clear success criteria to that cohort — a real task, not a form to complete." },
+  { step: "03", title: "The child submits their own project", text: "The pupil makes the work in the Creator Studio and chooses to submit an eligible project against the brief themselves." },
+  { step: "04", title: "Teacher review", text: "The teacher reviews the submission and the evidence behind it, gives constructive feedback, and can request a revision instead of verifying." },
+  { step: "05", title: "Revision, if asked for", text: "A revision request sends the work back to the pupil with specifics. The project keeps its history rather than starting again." },
+  { step: "06", title: "Evidence-backed verification", text: "When the teacher is satisfied, they verify the skill demonstrated, and that evidence-backed achievement is written to the pupil's Achievement Passport." },
 ];
 
 const oversight = [
   "Teachers see only the pupils and classes they have been assigned, never the whole school by default.",
-  "School Admins see aggregate and case-level information across the school, with every access logged.",
+  "School Admins see aggregate and case-level information across their own school, with every access logged.",
+  "There is no cross-school directory of children. A school cannot browse, search or contact pupils belonging to another school or group.",
+  "Where a school belongs to an education group, group-level oversight is reporting and governance — it does not create a shared pupil directory.",
   "Guardian approval still governs whether a piece of work can be shared beyond the class, even once a teacher has reviewed it.",
   "Class rosters and staff assignments are set by the School Admin and enforced at the database level, not just in the interface.",
 ];
+
 
 const staffRoles = [
   { icon: GraduationCap, title: "Teacher", text: "Sets briefs, reviews submitted work and verifies achievements for the classes they are assigned to — nothing outside that scope." },
@@ -118,10 +117,11 @@ function ForSchools() {
 
       <Section>
         <SectionHeading
-          eyebrow="One piece of work, one journey"
-          title="From brief to Passport, every project travels the same route"
-          description="Nothing skips a step, and nothing is verified because it was popular."
+          eyebrow="The supported chain, end to end"
+          title="Verified teacher, brief, pupil submission, review, verified Passport entry"
+          description="This is the chain Aurelia supports today. Nothing skips a step, nothing is verified because it was popular, and a teacher can always send work back for revision rather than sign it off."
         />
+
         <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:items-start">
           <div className="space-y-4">
             <Figure
@@ -225,15 +225,28 @@ function ForSchools() {
           }
         >
           <SectionHeading
-            eyebrow="Resource library"
-            title="Brief templates, ready to adapt"
-            description="A growing set of static brief templates and project starters, written for teachers to adapt to their own class rather than use as-is."
+            eyebrow="Educator resource library"
+            title="Brief templates and starters, ready to adapt"
+            description="Educator briefs, project starters, constructive-feedback guidance and digital-wellbeing material — written for teachers to adapt to their own class rather than use as-is. All of it is example material, not pupil work."
           />
+          <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
+            {[
+              "Educator starter-brief templates across podcast, film, story, design, invention and coding",
+              "How to give constructive feedback on a child's project",
+              "A one-page project-planning worksheet to hand out",
+            ].map((item) => (
+              <li key={item} className="flex gap-3">
+                <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-gold" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
           <div className="mt-8">
-            <Button asChild variant="outline">
-              <Link to="/ideas-and-resources">Browse ideas & resources</Link>
+            <Button asChild size="lg">
+              <Link to="/ideas-and-resources">Open the educator resource library</Link>
             </Button>
           </div>
+
         </SplitFeature>
       </Section>
 
