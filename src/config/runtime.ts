@@ -5,6 +5,19 @@ export interface PublicRuntimeConfig {
   backendConnected: boolean;
 }
 
+/**
+ * Browser-safe connection details for the dedicated Aurelia project.
+ * Supabase publishable keys are intentionally public credentials; authorization
+ * is enforced by Auth + RLS. Privileged/service-role credentials must never be
+ * added here or to any VITE_* environment variable.
+ */
+export const DEDICATED_AURELIA_PUBLIC_RUNTIME: PublicRuntimeConfig = Object.freeze({
+  supabaseUrl: "https://boybpjenlqtchsvhncgl.supabase.co",
+  supabasePublishableKey: "sb_publishable_g7nFHMVQ-aGKlEx-RBFKxw_FtgPK_sb",
+  supabaseProjectRef: "boybpjenlqtchsvhncgl",
+  backendConnected: true,
+});
+
 const forbiddenClientKeyFragments = ["SERVICE_ROLE", "SECRET_KEY", "SUPABASE_SECRET"] as const;
 
 function projectRefFromSupabaseUrl(url: string): string | undefined {
@@ -55,5 +68,6 @@ export function resolvePublicRuntimeConfig(
 
 export function currentPublicRuntimeConfig(): PublicRuntimeConfig {
   const viteEnv = (import.meta as ImportMeta & { env?: Record<string, string | undefined> }).env ?? {};
-  return resolvePublicRuntimeConfig(viteEnv);
+  const configured = resolvePublicRuntimeConfig(viteEnv);
+  return configured.backendConnected ? configured : DEDICATED_AURELIA_PUBLIC_RUNTIME;
 }
