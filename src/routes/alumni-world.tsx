@@ -3,6 +3,10 @@ import {
   ArrowRightLeft,
   BriefcaseBusiness,
   FolderOpenDot,
+  GraduationCap,
+  Hammer,
+  Lock,
+  Rocket,
   Users,
   UserRoundSearch,
 } from "lucide-react";
