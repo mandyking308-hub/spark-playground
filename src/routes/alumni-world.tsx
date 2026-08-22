@@ -47,18 +47,28 @@ export const Route = createFileRoute("/alumni-world")({
 });
 
 const pillars = [
-  { icon: FolderOpenDot, title: "Portfolio", text: "Everything verified on the Achievement Passport, and everything created since, carries forward into a portfolio the alumnus now owns and controls outright." },
-  { icon: BriefcaseBusiness, title: "Opportunities", text: "Work experience, further study routes and early career opportunities suited to a 16 to 18-year-old, curated with the same care as the challenges they grew up with." },
-  { icon: UserRoundSearch, title: "Mentoring", text: "Access to mentors — adults who can offer guidance on a craft, a subject or a career path, in a structured and moderated setting." },
-  { icon: Users, title: "Community", text: "A community of peers at the same stage of life, with the open discussion and social features that would not be appropriate for a younger audience." },
+  { icon: FolderOpenDot, title: "Portfolio", text: "Selected Passport achievements and portfolio pieces the member chose to bring forward, plus everything created since — a body of work the alumnus now owns and controls outright." },
+  { icon: BriefcaseBusiness, title: "Opportunities", text: "Routes into further study, apprenticeships, early work and accelerator programmes, posted only by opportunity providers Aurelia has verified." },
+  { icon: UserRoundSearch, title: "Mentoring", text: "Adult-to-adult mentoring: guidance on a craft, a subject or a career path from verified adults, in a structured and moderated setting." },
+  { icon: Users, title: "Community", text: "A community of verified peers at the same stage of life, with discussion appropriate to adults and entirely separate from the under-16 world." },
+];
+
+const providers = [
+  { icon: GraduationCap, title: "Universities & colleges", text: "Admissions and outreach teams sharing routes, open days and portfolio guidance with 16+ members." },
+  { icon: BriefcaseBusiness, title: "Employers", text: "Verified employers posting early-career roles, work experience and insight days appropriate to 16 to 18-year-olds." },
+  { icon: Hammer, title: "Apprenticeship providers", text: "Recognised providers listing apprenticeship routes, entry requirements and application windows." },
+  { icon: Rocket, title: "Accelerators & programmes", text: "Creative, enterprise and research programmes offering structured places to keep building on their work." },
 ];
 
 const transition = [
   "The move to Alumni happens at 16, on a schedule the young person and their guardian can see coming in advance.",
   "It is a deliberate, one-way step into a new environment — not an automatic merge of the child account into an adult one.",
-  "The young person chooses what carries forward: selected portfolio pieces and Passport history, not a wholesale copy of the child account.",
+  "The young person chooses what carries forward: specifically selected portfolio pieces and Passport achievements, item by item.",
+  "Private childhood records — unpublished drafts, wellbeing notes, safeguarding records and family correspondence — never transfer automatically, and are not part of the Alumni account.",
   "Once in the Alumni world, the account is the young person's own, with adult-level control over privacy and sharing.",
+  "Alumni membership is an adult status. It never grants access to the under-16 world, to any child's work, or to any child member.",
 ];
+
 
 function AlumniWorld() {
   return (
