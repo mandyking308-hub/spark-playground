@@ -116,7 +116,7 @@ begin
   on conflict (provider, provider_subscription_id) do update
   set billing_account_id = excluded.billing_account_id,
       plan_key = excluded.plan_key,
-      provider_checkout_session_id = coalesce(excluded.provider_checkout_session_id, public.billing_subscriptions.provider_checkout_session_id),
+      provider_checkout_session_id = coalesce(excluded.provider_checkout_session_id, billing_subscriptions.provider_checkout_session_id),
       provider_product_id = excluded.provider_product_id,
       updated_at = now()
   returning id, status into v_subscription_id, v_status;
