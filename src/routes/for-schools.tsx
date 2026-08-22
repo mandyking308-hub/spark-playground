@@ -78,11 +78,12 @@ const staffRoles = [
 ];
 
 const updatesVisibility = [
-  "Class and brief calendars showing what's due, what's in review and what's been verified — this is the direction we're building, and not every part is live today.",
-  "Reminders for upcoming brief deadlines and pending verifications, so nothing sits unreviewed by accident.",
-  "School-level visibility of pupil progress toward the Achievement Passport, scoped to the classes a teacher is actually assigned.",
-  "All of this runs inside Aurelia itself — it does not read from or write to a school's existing MIS, timetable or messaging systems.",
+  "Class and brief calendars showing what's due, what's in review and what's been verified — product direction, not a description of what is live today.",
+  "Reminders for upcoming brief deadlines and pending verifications, so nothing sits unreviewed by accident — planned, and not yet live.",
+  "School-level visibility of pupil progress toward the Achievement Passport, scoped to the classes a teacher is actually assigned. Aurelia is designed for this; the parts that are live are the verification workflow itself.",
+  "Anything described here is designed to run inside Aurelia itself — it does not read from or write to a school's existing MIS, timetable or messaging systems.",
 ];
+
 
 function ForSchools() {
   return (

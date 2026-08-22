@@ -104,10 +104,11 @@ const boundary = [
 
 const updatesVisibility = [
   "A calendar view of class briefs, challenge deadlines and club sessions your child is part of, with reminders so nothing catches you by surprise. This is product direction we are building toward, not a description of every feature live today.",
-  "Family visibility of the approvals you've made and the work currently shared beyond your family, kept in one place rather than scattered across notifications.",
-  "A running view of Achievement Passport progress — what has been verified, and by whom — so you can see the shape of what your child is building over time.",
-  "None of this involves real-time messaging with staff or other families, and Aurelia does not connect to third-party calendar, school or messaging systems. Anything shown here happens inside Aurelia itself.",
+  "Family visibility of the approvals you've made and the work currently shared beyond your family, kept in one place rather than scattered across notifications — designed as a single calm view, with parts of it still being built.",
+  "A running view of Achievement Passport progress — what has been verified, and by whom — so you can see the shape of what your child is building over time. Verification itself is live; the at-a-glance family view is planned.",
+  "None of this involves real-time messaging with staff or other families, and Aurelia does not connect to third-party calendar, school or messaging systems. Anything described here is designed to happen inside Aurelia itself.",
 ];
+
 
 const reassurance = [
   "No follower counts, no likes, no leaderboards — nothing that turns your child's work into a popularity contest.",

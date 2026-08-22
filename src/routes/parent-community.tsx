@@ -51,6 +51,7 @@ const features = [
   { icon: Contact, title: "Directory", text: "An opt-in directory that lets verified parents connect with one another, with visibility controlled entirely by the parent who is listed." },
 ];
 
+
 const boundaries = [
   "No parent can browse, search or view another family's child through the parent community.",
   "The parent community has no view into a specific child's work, messages or Achievement Passport beyond what that child's own guardian shares.",
@@ -113,7 +114,14 @@ function ParentCommunity() {
             </FeatureCard>
           ))}
         </div>
+        <p className="mt-6 rounded-xl border border-dashed border-border bg-muted/40 p-4 text-xs leading-relaxed text-muted-foreground">
+          Circles, events and the directory describe product direction for the parent community and
+          are being rolled out to verified adult members — they are not all live today. The guardian
+          controls over your own child's account, described on the families page, are part of the
+          live platform.
+        </p>
       </Section>
+
 
       <Section tone="muted">
         <SplitFeature

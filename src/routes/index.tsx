@@ -516,9 +516,9 @@ function Home() {
           <div>
             <Eyebrow>Why Aurelia exists</Eyebrow>
             <h2 className="mt-3 font-display text-3xl leading-tight tracking-tight sm:text-4xl">
-              We wanted somewhere our own children could make things online without becoming the
-              product
+              We wanted somewhere children could make things online without becoming the product
             </h2>
+
             <GoldRule className="mt-6 w-24" />
             <div className="mt-6 space-y-4 text-base leading-relaxed text-muted-foreground">
               <p>
