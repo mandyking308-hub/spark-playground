@@ -1,13 +1,10 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import {
   Award,
-  BadgeCheck,
   Ban,
-  FileCheck2,
   GraduationCap,
   ScrollText,
   ShieldCheck,
-  Users,
 } from "lucide-react";
 
 import { PublicPage } from "@/components/public/public-page";
@@ -19,11 +16,17 @@ import {
   Section,
   SectionHeading,
 } from "@/components/public/sections";
-import { Figure, GoldRule, SplitFeature } from "@/components/public/editorial";
+import {
+  Figure,
+  GoldRule,
+  ProjectLabel,
+  SplitFeature,
+} from "@/components/public/editorial";
 import { Button } from "@/components/ui/button";
 
 import passportEvidence from "@/assets/passport-evidence.jpg";
 import teacherEvidence from "@/assets/teacher-evidence.jpg";
+
 
 export const Route = createFileRoute("/achievement-passport")({
   head: () => ({
