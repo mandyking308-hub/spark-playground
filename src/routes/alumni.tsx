@@ -4,7 +4,7 @@ import { SignOutButton } from "@/components/auth/sign-out-button";
 import { RoleSwitcher } from "@/components/layout/role-switcher";
 import { Button } from "@/components/ui/button";
 import { authenticatedHomeForRole, canEnterAlumniExperience } from "@/domain/auth-routing";
-import { getCurrentActorFn } from "@/server/auth";
+import { getCurrentActorFn } from "@/functions/auth";
 
 export const Route = createFileRoute("/alumni")({
   beforeLoad: async () => {
