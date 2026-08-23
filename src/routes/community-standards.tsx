@@ -31,7 +31,7 @@ function CommunityStandards() {
     <PublicPage>
       <LegalPage
         title="Community Standards"
-        updated="22 August 2026 — prepared for counsel review"
+        updated="23 August 2026"
         intro="These standards apply to Aurelia World, a service operated by Global Solutions Management LLC, and describe the behaviour and content expected from every young or adult member."
       >
         <h2>What is welcome</h2>
