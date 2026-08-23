@@ -14,13 +14,14 @@ const TRANSLATION_CONSENT_KEY = "aurelia-world-public-translation";
 /**
  * GTranslate is deliberately limited to public, non-sensitive Aurelia World pages
  * and is opt-in. It must never load on authenticated areas, account creation/sign-in,
- * safeguarding reports or contact/intake forms because rendered private/sensitive
- * content must not be exposed to an external page-translation service.
+ * safeguarding reports, billing pages or contact/intake forms because rendered
+ * private/sensitive content must not be exposed to an external page-translation service.
  */
 const EXCLUDED_ROUTE_PREFIXES = [
   "/auth",
   "/dashboard",
   "/alumni",
+  "/billing",
   "/contact-enquiry",
   "/report-concern",
 ] as const;
