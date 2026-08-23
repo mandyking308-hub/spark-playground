@@ -32,6 +32,7 @@ function TermsOfUse() {
       <LegalPage
         title="Terms of Use"
         updated="23 August 2026"
+        status="effective"
         intro="Aurelia World is a brand and service operated by Global Solutions Management LLC, a Delaware limited liability company. These terms are designed to govern use by families, schools, education groups, organisations and adult members across the jurisdictions in which the service is lawfully offered."
       >
         <h2>1. Contracting entity and scope</h2>
