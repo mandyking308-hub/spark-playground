@@ -31,7 +31,7 @@ function PrivacyForChildren() {
     <PublicPage>
       <LegalPage
         title="Your privacy, explained simply"
-        updated="22 August 2026"
+        updated="23 August 2026"
         intro="Aurelia World is run by Global Solutions Management LLC. This page explains, in plain words, what the platform knows about you, what stays private, and how you can ask for help."
       >
         <h2>What we know about you</h2>

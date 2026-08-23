@@ -31,7 +31,7 @@ function PrivacyPolicy() {
     <PublicPage>
       <LegalPage
         title="Privacy Policy"
-        updated="22 August 2026 — prepared for counsel review"
+        updated="23 August 2026"
         intro="Aurelia World is operated by Global Solutions Management LLC, a Delaware limited liability company. This notice explains how GSM handles personal data and the additional safeguards used because Aurelia World serves children, families, schools and education organisations."
       >
         <h2>1. Who is responsible for your data</h2>

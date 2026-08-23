@@ -26,7 +26,7 @@ function CookieNotice() {
     <PublicPage>
       <LegalPage
         title="Cookie & Local Storage Notice"
-        updated="22 August 2026 — prepared for counsel review"
+        updated="23 August 2026"
         intro="Aurelia World is operated by Global Solutions Management LLC. This notice explains the browser storage and similar technologies used to keep the service secure, remember choices and support optional public-page translation."
       >
         <h2>Essential technology</h2>

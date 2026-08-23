@@ -26,7 +26,7 @@ function DataProtectionForSchools() {
     <PublicPage>
       <LegalPage
         title="Data Protection for Schools & Organisations"
-        updated="22 August 2026 — prepared for counsel review"
+        updated="23 August 2026"
         intro="Aurelia World is operated by Global Solutions Management LLC. Institutional customers receive a data-protection framework that separates school-directed education processing from GSM's own platform-safety and security responsibilities."
       >
         <h2>Clear data roles</h2>
