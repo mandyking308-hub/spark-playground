@@ -188,22 +188,30 @@ export function LegalPage({
   updated,
   intro,
   children,
+  status = "draft",
 }: {
   title: string;
   updated: string;
   intro: ReactNode;
   children: ReactNode;
+  status?: "draft" | "effective";
 }) {
   return (
     <>
       <PageHero eyebrow="Trust & legal" title={title} description={intro} />
       <Section>
         <div className="max-w-3xl space-y-8 text-sm leading-relaxed text-muted-foreground [&_h2]:font-display [&_h2]:text-xl [&_h2]:tracking-tight [&_h2]:text-foreground [&_h3]:font-medium [&_h3]:text-foreground [&_li]:mt-2 [&_p]:mt-3 [&_ul]:mt-2 [&_ul]:list-disc [&_ul]:ps-5">
-          <p className="rounded-xl border border-dashed border-border bg-muted/40 p-4 text-xs">
-            Draft for review · Last updated {updated}. This document describes how Aurelia is
-            designed to work. It is a working draft and should be reviewed by qualified legal
-            counsel before public launch.
-          </p>
+          {status === "effective" ? (
+            <p className="rounded-xl border border-border bg-muted/40 p-4 text-xs">
+              Effective {updated}. This document is in force for use of Aurelia World from this date.
+            </p>
+          ) : (
+            <p className="rounded-xl border border-dashed border-border bg-muted/40 p-4 text-xs">
+              Draft for review · Last updated {updated}. This document describes how Aurelia World is
+              designed to work. It is a working draft and should be reviewed by qualified legal
+              counsel before public launch.
+            </p>
+          )}
           {children}
         </div>
       </Section>
