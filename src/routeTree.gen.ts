@@ -47,6 +47,7 @@ import { Route as AuthGuardianLinkRouteImport } from './routes/auth.guardian-lin
 import { Route as AuthJoinRouteImport } from './routes/auth.join'
 import { Route as AuthSignInRouteImport } from './routes/auth.sign-in'
 import { Route as AuthSignUpRouteImport } from './routes/auth.sign-up'
+import { Route as BillingReturnRouteImport } from './routes/billing.return'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as DashboardAbuseProtectionRouteImport } from './routes/dashboard.abuse-protection'
 import { Route as DashboardAccessibilityRouteImport } from './routes/dashboard.accessibility'
@@ -303,6 +304,11 @@ const AuthSignInRoute = AuthSignInRouteImport.update({
 const AuthSignUpRoute = AuthSignUpRouteImport.update({
   id: '/auth/sign-up',
   path: '/auth/sign-up',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BillingReturnRoute = BillingReturnRouteImport.update({
+  id: '/billing/return',
+  path: '/billing/return',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
@@ -685,6 +691,7 @@ export interface FileRoutesByFullPath {
   '/auth/join': typeof AuthJoinRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/billing/return': typeof BillingReturnRoute
   '/dashboard/abuse-protection': typeof DashboardAbuseProtectionRoute
   '/dashboard/accessibility': typeof DashboardAccessibilityRoute
   '/dashboard/achievement-issuer': typeof DashboardAchievementIssuerRoute
@@ -788,6 +795,7 @@ export interface FileRoutesByTo {
   '/auth/join': typeof AuthJoinRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/billing/return': typeof BillingReturnRoute
   '/dashboard/abuse-protection': typeof DashboardAbuseProtectionRoute
   '/dashboard/accessibility': typeof DashboardAccessibilityRoute
   '/dashboard/achievement-issuer': typeof DashboardAchievementIssuerRoute
@@ -894,6 +902,7 @@ export interface FileRoutesById {
   '/auth/join': typeof AuthJoinRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
+  '/billing/return': typeof BillingReturnRoute
   '/dashboard/abuse-protection': typeof DashboardAbuseProtectionRoute
   '/dashboard/accessibility': typeof DashboardAccessibilityRoute
   '/dashboard/achievement-issuer': typeof DashboardAchievementIssuerRoute
@@ -1001,6 +1010,7 @@ export interface FileRouteTypes {
     | '/auth/join'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/billing/return'
     | '/dashboard/abuse-protection'
     | '/dashboard/accessibility'
     | '/dashboard/achievement-issuer'
@@ -1104,6 +1114,7 @@ export interface FileRouteTypes {
     | '/auth/join'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/billing/return'
     | '/dashboard/abuse-protection'
     | '/dashboard/accessibility'
     | '/dashboard/achievement-issuer'
@@ -1209,6 +1220,7 @@ export interface FileRouteTypes {
     | '/auth/join'
     | '/auth/sign-in'
     | '/auth/sign-up'
+    | '/billing/return'
     | '/dashboard/abuse-protection'
     | '/dashboard/accessibility'
     | '/dashboard/achievement-issuer'
@@ -1310,6 +1322,7 @@ export interface RootRouteChildren {
   AuthJoinRoute: typeof AuthJoinRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
+  BillingReturnRoute: typeof BillingReturnRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
@@ -1581,6 +1594,13 @@ declare module '@tanstack/react-router' {
       path: '/auth/sign-up'
       fullPath: '/auth/sign-up'
       preLoaderRoute: typeof AuthSignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/billing/return': {
+      id: '/billing/return'
+      path: '/billing/return'
+      fullPath: '/billing/return'
+      preLoaderRoute: typeof BillingReturnRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/': {
@@ -2229,6 +2249,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthJoinRoute: AuthJoinRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
+  BillingReturnRoute: BillingReturnRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
