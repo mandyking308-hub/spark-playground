@@ -26,7 +26,11 @@ export function defineTemplate<TData extends object>(
       ? (data) => subjectTemplate(data as TData)
       : subjectTemplate
 
-  return { ...entry, component, subject }
+  const result: TemplateEntry = { component, subject }
+  if (entry.displayName !== undefined) result.displayName = entry.displayName
+  if (entry.previewData !== undefined) result.previewData = entry.previewData as TemplateData
+  if (entry.to !== undefined) result.to = entry.to
+  return result
 }
 
 /**
