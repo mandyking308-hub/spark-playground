@@ -2,7 +2,7 @@ import { createElement, type ComponentType } from 'react'
 
 export type TemplateData = Record<string, unknown>
 
-export interface TemplateEntry<TData extends TemplateData = TemplateData> {
+export interface TemplateEntry<TData extends object = TemplateData> {
   component: ComponentType<TData>
   subject: string | ((data: TData) => string)
   displayName?: string
@@ -15,7 +15,7 @@ export interface TemplateEntry<TData extends TemplateData = TemplateData> {
  * Adapt a template with specific props to the shared runtime registry type.
  * The call site supplies data from the matching template integration.
  */
-export function defineTemplate<TData extends TemplateData>(
+export function defineTemplate<TData extends object>(
   entry: TemplateEntry<TData>,
 ): TemplateEntry {
   const component: ComponentType<TemplateData> = (data) =>
