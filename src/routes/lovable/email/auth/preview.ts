@@ -8,57 +8,44 @@ import { RecoveryEmail } from '@/lib/email-templates/recovery'
 import { EmailChangeEmail } from '@/lib/email-templates/email-change'
 import { ReauthenticationEmail } from '@/lib/email-templates/reauthentication'
 
-const EMAIL_TEMPLATES: Record<string, React.ComponentType<any>> = {
-  signup: SignupEmail,
-  invite: InviteEmail,
-  magiclink: MagicLinkEmail,
-  recovery: RecoveryEmail,
-  email_change: EmailChangeEmail,
-  reauthentication: ReauthenticationEmail,
-}
-
-// Configuration
 const SITE_NAME = "The Aurelia World"
 const ROOT_DOMAIN = "theaureliaworld.com"
-
-// Sample data for preview mode ONLY (not used in actual email sending).
-// URLs are baked in at scaffold time from the project's real data.
-// The sample email uses a fixed placeholder (RFC 6761 .test TLD) so the Go backend
-// can always find-and-replace it with the actual recipient when sending test emails,
-// even if the project's domain has changed since the template was scaffolded.
 const SAMPLE_PROJECT_URL = "https://aurelia-world.lovable.app"
 const SAMPLE_EMAIL = "user@example.test"
-const SAMPLE_DATA: Record<string, object> = {
-  signup: {
+
+const EMAIL_TEMPLATES: Record<string, () => React.ReactElement> = {
+  signup: () => React.createElement(SignupEmail, {
     siteName: SITE_NAME,
     siteUrl: SAMPLE_PROJECT_URL,
     recipient: SAMPLE_EMAIL,
     confirmationUrl: SAMPLE_PROJECT_URL,
-  },
-  magiclink: {
-    siteName: SITE_NAME,
-    confirmationUrl: SAMPLE_PROJECT_URL,
-  },
-  recovery: {
-    siteName: SITE_NAME,
-    confirmationUrl: SAMPLE_PROJECT_URL,
-  },
-  invite: {
+  }),
+  invite: () => React.createElement(InviteEmail, {
     siteName: SITE_NAME,
     siteUrl: SAMPLE_PROJECT_URL,
     confirmationUrl: SAMPLE_PROJECT_URL,
-  },
-  email_change: {
+  }),
+  magiclink: () => React.createElement(MagicLinkEmail, {
+    siteName: SITE_NAME,
+    confirmationUrl: SAMPLE_PROJECT_URL,
+  }),
+  recovery: () => React.createElement(RecoveryEmail, {
+    siteName: SITE_NAME,
+    confirmationUrl: SAMPLE_PROJECT_URL,
+  }),
+  email_change: () => React.createElement(EmailChangeEmail, {
     siteName: SITE_NAME,
     oldEmail: SAMPLE_EMAIL,
     email: SAMPLE_EMAIL,
     newEmail: SAMPLE_EMAIL,
     confirmationUrl: SAMPLE_PROJECT_URL,
-  },
-  reauthentication: {
+  }),
+  reauthentication: () => React.createElement(ReauthenticationEmail, {
     token: '123456',
-  },
+  }),
 }
+
+
 
 export const Route = createFileRoute("/lovable/email/auth/preview")({
   server: {
@@ -90,17 +77,16 @@ export const Route = createFileRoute("/lovable/email/auth/preview")({
           )
         }
 
-        const EmailTemplate = EMAIL_TEMPLATES[type]
+        const renderPreview = EMAIL_TEMPLATES[type]
 
-        if (!EmailTemplate) {
+        if (!renderPreview) {
           return Response.json(
             { error: `Unknown email type: ${type}` },
             { status: 400 }
           )
         }
 
-        const sampleData = SAMPLE_DATA[type] || {}
-        const html = await render(React.createElement(EmailTemplate, sampleData))
+        const html = await render(renderPreview())
 
         return new Response(html, {
           status: 200,
